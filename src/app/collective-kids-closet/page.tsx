@@ -1,0 +1,94 @@
+import type { Metadata } from "next";
+import { Section } from "@/components/Section";
+import { PageHero, SectionHeading } from "@/components/PageHero";
+import { CollectMarquee } from "@/components/CollectMarquee";
+import { EmailCapture } from "@/components/EmailCapture";
+import { LinkButton } from "@/components/Button";
+import { Reveal } from "@/components/Reveal";
+import { ORG } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Collective Kids Closet",
+  description: `${ORG.flagshipProgram} — an affordable community resale program for quality kids' goods, launching ${ORG.flagshipLaunch} in ${ORG.flagshipCity}.`,
+  alternates: { canonical: "/collective-kids-closet" },
+};
+
+export default function ClosetPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow={`Launching ${ORG.flagshipLaunch} · ${ORG.flagshipCity}`}
+        title="Collective Kids Closet"
+        intro="An affordable community resale program for quality kids' goods — open to all, with every purchase funding local programs for children in care."
+      >
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <LinkButton href="/donate" size="lg">
+            Donate / Give Goods
+          </LinkButton>
+          <LinkButton href="#follow" variant="secondary" size="lg">
+            Get launch updates
+          </LinkButton>
+        </div>
+      </PageHero>
+
+      <Section background="white">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="measure space-y-5 text-lg leading-relaxed text-ink/90">
+            <p>
+              Collective Kids Closet is where community generosity becomes
+              everyday affordability. Families find quality strollers, cribs,
+              clothing, books, and more — at prices that respect every budget.
+            </p>
+            <p>
+              Nothing here is &ldquo;disposable surplus.&rdquo; Every item is
+              inspected, cleaned, and chosen with care. Shopping the Closet
+              isn&apos;t charity — it&apos;s a smart, dignified way to outfit a
+              growing kid while funding programs that serve children in foster
+              care, kinship homes, and crisis.
+            </p>
+          </div>
+          <Reveal>
+            <div
+              className="grid aspect-[4/3] place-items-center rounded-3xl border border-line bg-cream-dark p-8 text-center shadow-card"
+              role="img"
+              aria-label="Photograph placeholder: the Collective Kids Closet storefront and shelves"
+            >
+              <div>
+                <span className="font-serif text-2xl text-sage">
+                  Storefront photo
+                </span>
+                <p className="mt-2 text-sm text-muted">
+                  Real image of the Stuart location, coming this fall
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
+      <Section background="cream" className="overflow-hidden">
+        <SectionHeading
+          center
+          eyebrow="What you'll find"
+          title="Quality goods, ready for a second home"
+        />
+        <div className="mt-10">
+          <CollectMarquee />
+        </div>
+      </Section>
+
+      <Section background="white" id="follow">
+        <div className="rounded-3xl border border-line bg-cream p-8 sm:p-12">
+          <SectionHeading
+            eyebrow="Opening this fall"
+            title="Be there on day one"
+            intro={`We open in ${ORG.flagshipCity} this ${ORG.flagshipLaunch.toLowerCase()}. Leave your email and we'll tell you the moment the doors open.`}
+          />
+          <div className="mt-7">
+            <EmailCapture />
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}

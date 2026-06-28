@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/*
+  The Children's Collective of Florida — design system
+  Brand palette (brief §3):
+    sage/olive  #4F5D38 (primary) · #6F7D4D (secondary)
+    cream/paper #F7F5EF / #ECE9DF
+    ink         #23271D · muted #6B6F62
+  Type: Newsreader (editorial serif display) + Public Sans (humanist sans body)
+*/
+
+@theme {
+  /* Brand colors */
+  --color-sage: #4f5d38;
+  --color-sage-600: #44512f;
+  --color-sage-700: #3a4528;
+  --color-sage-light: #6f7d4d;
+  --color-cream: #f7f5ef;
+  --color-cream-dark: #ece9df;
+  --color-ink: #23271d;
+  --color-muted: #6b6f62;
+  --color-line: #ddd9cc;
+
+  /* Semantic aliases */
+  --color-background: #ffffff;
+  --color-foreground: #23271d;
+
+  /* Fonts (wired via next/font CSS variables in layout.tsx) */
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+
+  /* Editorial display scale */
+  --text-display: clamp(2.5rem, 5vw + 1rem, 4.25rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
+
+  /* Flat-panel shadows (replace dated torn-paper look, brief §5) */
+  --shadow-card: 0 1px 2px rgba(35, 39, 29, 0.04), 0 8px 24px rgba(35, 39, 29, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(35, 39, 29, 0.06), 0 16px 40px rgba(35, 39, 29, 0.1);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    color: var(--color-ink);
+    text-wrap: balance;
+    font-weight: 500;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, accessible focus ring (brief §7 — keyboard nav) */
+  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-sage-light);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* Respect reduced motion globally (brief §6/§7) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@layer utilities {
+  /* Scroll reveal: hidden until .is-visible toggled by IntersectionObserver */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s var(--ease-out-soft),
+      transform 0.6s var(--ease-out-soft);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ~65ch measure for long-form copy (brief §5) */
+  .measure {
+    max-width: 65ch;
+  }
+
+  /* Looping marquee of "what we collect" chips (brief §6) */
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .marquee-wrap:hover .marquee {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

@@ -1,0 +1,110 @@
+import Link from "next/link";
+import {
+  ORG,
+  NAV,
+  PRIMARY_CTA,
+  FL_DISCLOSURE,
+  TAX_NOTE,
+  SOCIAL,
+} from "@/lib/site";
+import { LinkButton } from "./Button";
+
+export function Footer() {
+  const year = 2026;
+  return (
+    <footer className="bg-ink text-cream/85">
+      <div className="mx-auto w-full max-w-6xl px-5 py-14 sm:px-8">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
+          {/* Brand + mission */}
+          <div>
+            <p className="font-serif text-xl font-semibold text-cream">
+              {ORG.name}
+            </p>
+            <p className="mt-2 max-w-sm text-sm leading-relaxed text-cream/70">
+              {ORG.tagline} Built in Martin County, FL — building for Florida.
+            </p>
+            <LinkButton href={PRIMARY_CTA.href} className="mt-5">
+              {PRIMARY_CTA.label}
+            </LinkButton>
+          </div>
+
+          {/* Explore */}
+          <nav aria-label="Footer">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-cream/60">
+              Explore
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {NAV.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-cream/80 transition-colors hover:text-cream"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href="/donate"
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  Donate / Give Goods
+                </Link>
+              </li>
+            </ul>
+          </nav>
+
+          {/* Contact + social */}
+          <div>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-cream/60">
+              Connect
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li>
+                <a
+                  href={`mailto:${ORG.email}`}
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  {ORG.email}
+                </a>
+              </li>
+              <li className="text-cream/70">{ORG.location}</li>
+              <li className="text-cream/70">Physical location coming soon</li>
+            </ul>
+            <ul className="mt-4 flex gap-4 text-sm">
+              {SOCIAL.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cream/80 underline-offset-4 transition-colors hover:text-cream hover:underline"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Transparency / legal block (brief §5, §1) */}
+        <div className="mt-12 space-y-3 border-t border-cream/15 pt-8 text-xs leading-relaxed text-cream/55">
+          <p className="flex flex-wrap gap-x-4 gap-y-1">
+            <span>501(c)(3) public charity</span>
+            <span aria-hidden>·</span>
+            <span>EIN {ORG.ein}</span>
+            <span aria-hidden>·</span>
+            <span>FL Charitable Registration No. {ORG.flReg}</span>
+          </p>
+          <p>{TAX_NOTE}</p>
+          <p className="max-w-3xl">{FL_DISCLOSURE}</p>
+          <p className="pt-2 text-cream/40">
+            © {year} {ORG.legalName}. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
