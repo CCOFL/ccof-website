@@ -132,6 +132,32 @@ export const IMPACT_STATS: {
 export const IMPACT_SOURCES =
   "Sources: U.S. Census; AFCARS/NCANDS FFY2022; FL Dept. of Health CHARTS; CCKids 2024 Annual Report.";
 
+/**
+ * "Why This Matters Here" — local-need framing for the About page (paste-ready
+ * from CCOF_AboutPage_PasteKit, June 2026). Forward-looking / scaling lines are
+ * intentionally omitted: the "What's Next" plan is undetermined.
+ */
+export const WHY_THIS_MATTERS = {
+  intro:
+    "Martin County is home to roughly 26,000 children — and to The Children's Collective of Florida. Our county's prosperity hides real need: about 1 in 9 local children lives in poverty, and behind every foster-care removal or kinship placement is a household scrambling for basics and a local program working to support them.",
+  dataIntro: "In a single year, our county sees:",
+  data: [
+    { figure: "1,319", label: "child-maltreatment reports" },
+    { figure: "115", label: "children served in foster care" },
+    {
+      figure: "~6 in 10",
+      label:
+        "removed children placed with relatives — kinship caregivers, the least-funded caregivers in the system",
+    },
+    {
+      figure: "15%",
+      label: "of children in care placed in group homes — nearly double the state rate",
+    },
+  ],
+  closing:
+    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work — through our flagship program, the Collective Kids Closet, opening Fall 2026.",
+} as const;
+
 /** Board of directors (brief §1). */
 export const BOARD: { name: string; role: string }[] = [
   { name: "Stephanie Haskins", role: "Founder & President" },
