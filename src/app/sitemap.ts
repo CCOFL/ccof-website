@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/collective-kids-closet", priority: 0.8 },
     { path: "/partner", priority: 0.7 },
     { path: "/donate", priority: 0.9 },
+    { path: "/where-it-goes", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
   ];
   const lastModified = new Date("2026-06-28");

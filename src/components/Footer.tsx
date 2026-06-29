@@ -52,6 +52,14 @@ export function Footer() {
                   Donate / Give Goods
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/where-it-goes"
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  Where It Goes
+                </Link>
+              </li>
             </ul>
           </nav>
 

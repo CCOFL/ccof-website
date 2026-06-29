@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container, Eyebrow } from "@/components/Section";
 import { DonationForm } from "@/components/DonationForm";
 import { ORG, FL_DISCLOSURE, TAX_NOTE } from "@/lib/site";
@@ -74,6 +75,16 @@ export default async function DonatePage({
                 <dd className="mt-1 text-muted">Processed by Stripe</dd>
               </div>
             </dl>
+
+            <p className="mt-6 text-sm text-body">
+              Want to see exactly where your support lands?{" "}
+              <Link
+                href="/where-it-goes"
+                className="font-semibold text-sage underline-offset-4 hover:underline"
+              >
+                Read our transparency promise →
+              </Link>
+            </p>
           </div>
 
           {/* Right: the working donation form */}

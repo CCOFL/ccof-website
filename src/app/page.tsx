@@ -173,11 +173,7 @@ export default function Home() {
               securing a space, and funding our first partner programs.
             </p>
             <div className="mt-6">
-              <LinkButton
-                href="/donate"
-                size="lg"
-                className="bg-cream text-sage-700 hover:bg-white"
-              >
+              <LinkButton href="/donate" size="lg" variant="inverse">
                 Fund the launch
               </LinkButton>
             </div>

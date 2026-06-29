@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost";
+type Variant = "primary" | "secondary" | "ghost" | "inverse";
 type Size = "md" | "lg";
 
 const base =
@@ -20,6 +20,10 @@ const variants: Record<Variant, string> = {
   secondary:
     "border border-sage/40 bg-transparent text-sage hover:border-sage hover:bg-sage/5",
   ghost: "bg-transparent text-ink hover:text-sage",
+  // Cream pill for use on sage / charcoal (dark) backgrounds; darker-sage
+  // label keeps the text AA-legible on the cream fill.
+  inverse:
+    "bg-cream text-sage-700 shadow-card hover:bg-white hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0",
 };
 
 function classes(variant: Variant, size: Size, className?: string) {

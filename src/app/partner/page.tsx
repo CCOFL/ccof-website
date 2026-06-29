@@ -65,11 +65,7 @@ export default function PartnerPage() {
             intro="If you run a program serving children in foster care, kinship homes, or crisis on the Treasure Coast, we'd like to hear from you."
           />
           <div className="shrink-0">
-            <LinkButton
-              href="/contact?intent=partner"
-              size="lg"
-              className="bg-cream text-sage-700 hover:bg-white"
-            >
+            <LinkButton href="/contact?intent=partner" size="lg" variant="inverse">
               Become a Partner
             </LinkButton>
           </div>

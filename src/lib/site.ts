@@ -174,6 +174,40 @@ export const FL_DISCLOSURE =
 export const TAX_NOTE =
   "The Children's Collective of Florida, Inc. is a 501(c)(3) public charity (EIN 42-2020310). Donations are tax-deductible to the fullest extent allowed under IRC §170. IRS determination letter dated May 12, 2026 (effective April 13, 2026).";
 
+/**
+ * "Where It Goes" — our transparency commitment. Paste-ready public copy from
+ * CCOF_Founders_Promise_and_Where_It_Goes (June 2026); the doc recommends it as
+ * its own page linked from the Donate button.
+ */
+export const WHERE_IT_GOES = {
+  intro:
+    "We're a new organization, and we believe trust is earned, not assumed. Until we have years of numbers to show you, here is what we promise — and what we will report the moment we open.",
+  pledges: [
+    {
+      title: "Every donation is honored.",
+      body: "Items are inspected, cleaned, and chosen with care — quality goods for the next family, never disposable surplus. We treat every donation as something a neighbor entrusted to us.",
+    },
+    {
+      title: "Local dollars stay local.",
+      body: "Every dollar The Collective Kids Closet earns in Martin County supports children right here on the Treasure Coast — those in foster care, crisis, mentoring, and families working to meet their children's essential needs.",
+    },
+    {
+      title: "We'll show you where it goes.",
+      body: "Starting with our very first season, we will publish a simple, public account of what we collected, what we provided, and where proceeds went. No fine print.",
+    },
+  ],
+  reportTitle: "What we'll report, starting with our first season",
+  reportItems: [
+    "Items collected and stewarded for Treasure Coast families.",
+    "Families served through affordable resale and direct support.",
+    "Local partners supported and the dollars directed to children in foster care, crisis, and mentoring.",
+    "Volunteer hours contributed by our community.",
+    "Financial transparency: our IRS Form 990 and Florida charitable registration are available to anyone who asks.",
+  ],
+  closing:
+    "These aren't aspirations we hope to grow into — they're commitments you can hold us to, and the scorecard we'll report against.",
+} as const;
+
 /** Ways visitors not ready to give can stay involved → correct CTA targets (brief priority #1). */
 export const PARTNER_ACTIONS: {
   title: string;
