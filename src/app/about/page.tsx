@@ -80,31 +80,11 @@ export default function AboutPage() {
       {/* Meet Our Founder — real bio + primary Founder's Promise */}
       <Section background="white">
         <SectionHeading eyebrow="Meet our founder" title={FOUNDER.name} />
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
-          {/* Founder photo placeholder */}
-          <Reveal>
-            <div
-              className="grid aspect-[4/5] place-items-center rounded-3xl border border-line bg-cream-dark p-8 text-center shadow-card"
-              role="img"
-              aria-label="Photograph placeholder: Stephanie Haskins, Founder & President"
-            >
-              <div>
-                <span className="font-serif text-xl text-sage-600">
-                  Founder photo
-                </span>
-                <p className="mt-2 text-sm text-muted">
-                  Stephanie Haskins, Founder &amp; President
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <div className="space-y-5 text-lg leading-relaxed text-body">
-            <p className="font-medium text-ink">{FOUNDER.intro}</p>
-            {FOUNDER.bio.map((para) => (
-              <p key={para.slice(0, 24)}>{para}</p>
-            ))}
-          </div>
+        <div className="measure mt-8 space-y-5 text-lg leading-relaxed text-body">
+          <p className="font-medium text-ink">{FOUNDER.intro}</p>
+          {FOUNDER.bio.map((para) => (
+            <p key={para.slice(0, 24)}>{para}</p>
+          ))}
         </div>
 
         {/* The Founder's Promise — primary version */}

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Section, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { FounderQuote } from "@/components/FounderQuote";
@@ -47,24 +48,16 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Hero visual placeholder — replace with a real photo of kids' goods / volunteers */}
             <Reveal>
-              <div
-                className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line bg-cream-dark shadow-card"
-                role="img"
-                aria-label="Photograph placeholder: quality children's goods being sorted by volunteers"
-              >
-                <div className="absolute inset-0 grid place-items-center p-8 text-center">
-                  <div>
-                    <span className="font-serif text-2xl text-sage">
-                      Photo goes here
-                    </span>
-                    <p className="mt-2 text-sm text-muted">
-                      Real image: volunteers inspecting &amp; sorting donated
-                      kids&apos; goods
-                    </p>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line shadow-card">
+                <Image
+                  src="/images/hero-children.jpg"
+                  alt="Children playing together outdoors on the Treasure Coast"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover"
+                />
               </div>
             </Reveal>
           </div>

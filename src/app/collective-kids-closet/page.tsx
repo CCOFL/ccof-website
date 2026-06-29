@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { CollectMarquee } from "@/components/CollectMarquee";
@@ -48,19 +49,14 @@ export default function ClosetPage() {
             </p>
           </div>
           <Reveal>
-            <div
-              className="grid aspect-[4/3] place-items-center rounded-3xl border border-line bg-cream-dark p-8 text-center shadow-card"
-              role="img"
-              aria-label="Photograph placeholder: the Collective Kids Closet storefront and shelves"
-            >
-              <div>
-                <span className="font-serif text-2xl text-sage">
-                  Storefront photo
-                </span>
-                <p className="mt-2 text-sm text-muted">
-                  Real image of the Stuart location, coming this fall
-                </p>
-              </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line shadow-card">
+              <Image
+                src="/images/closet-goods.jpg"
+                alt="Donated children's clothing, books, and toys sorted for the Collective Kids Closet"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
             </div>
           </Reveal>
         </div>

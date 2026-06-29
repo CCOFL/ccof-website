@@ -274,8 +274,13 @@ export const PARTNER_ACTIONS: {
   },
 ];
 
-export const SOCIAL: { label: string; href: string }[] = [
-  // Placeholders — update with real handles when available.
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Facebook", href: "https://facebook.com" },
+/**
+ * Social channels are not live yet (pages in development). Listed as
+ * "coming soon" — add an `href` to each as the accounts go live and the
+ * footer will render them as real links automatically.
+ */
+export const SOCIAL: { label: string; href?: string }[] = [
+  { label: "Instagram" },
+  { label: "Facebook" },
+  { label: "LinkedIn" },
 ];
