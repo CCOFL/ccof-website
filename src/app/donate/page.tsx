@@ -33,10 +33,9 @@ export default async function DonatePage({
               Fund the launch. Change a childhood.
             </h1>
             <p className="measure mt-5 text-lg leading-relaxed text-muted">
-              {ORG.flagshipProgram} opens {ORG.flagshipLaunch} in{" "}
-              {ORG.flagshipCity}. Every gift right now stocks the shelves,
-              secures the space, and seeds the fund for our first partner
-              programs.
+              {ORG.flagshipProgram} is coming to {ORG.flagshipCity} in{" "}
+              {ORG.flagshipLaunch}. Every gift right now helps stock the shelves,
+              secure a space, and seed the fund for our first partner programs.
             </p>
 
             <div className="mt-8 space-y-4 rounded-2xl border border-line bg-cream p-6 shadow-card">

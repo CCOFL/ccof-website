@@ -43,8 +43,8 @@ export default function Home() {
                 <strong className="font-semibold text-ink">
                   {ORG.flagshipProgram}
                 </strong>{" "}
-                launches {ORG.flagshipLaunch} in {ORG.flagshipCity} — your gift
-                now funds the opening.
+                is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch} — your
+                gift now helps fund the opening.
               </p>
             </div>
 
@@ -154,7 +154,7 @@ export default function Home() {
               onDark
               eyebrow="Stay close"
               title="Not ready to give? Follow our launch."
-              intro="Be the first to know when Collective Kids Closet opens its doors in Stuart this fall."
+              intro="Be the first to know when Collective Kids Closet opens its doors in Martin County."
             />
             <div className="mt-7">
               <EmailCapture onDark />
@@ -162,8 +162,8 @@ export default function Home() {
           </div>
           <div className="rounded-3xl bg-sage/15 p-8 ring-1 ring-sage/25 lg:p-10">
             <p className="text-2xl font-bold leading-snug text-cream">
-              Every dollar now goes toward opening day — stocking shelves,
-              securing a space, and funding our first partner programs.
+              Right now, your gift goes toward opening day — helping stock
+              shelves, secure a space, and fund our first partner programs.
             </p>
             <div className="mt-6">
               <LinkButton href="/donate" size="lg" variant="inverse">

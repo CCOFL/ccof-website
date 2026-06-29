@@ -16,8 +16,10 @@ export const ORG = {
   flDoc: "N26000005374",
   location: "Treasure Coast, FL",
   flagshipProgram: "Collective Kids Closet",
-  flagshipLaunch: "Fall 2026",
-  flagshipCity: "Stuart, FL",
+  // Location + timing are not yet finalized: Martin County (not pinned to a
+  // city), late 2026 (may shift with the donation pipeline). Keep copy soft.
+  flagshipLaunch: "late 2026",
+  flagshipCity: "Martin County",
 } as const;
 
 export const NAV: { label: string; href: string }[] = [
@@ -37,7 +39,7 @@ export const PRIMARY_CTA = { label: "Donate", href: "/donate" } as const;
  * tight (per CCOF_Founders_Promise_and_Where_It_Goes, June 2026).
  */
 export const FOUNDER_QUOTE = {
-  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. Every dollar we earn in Martin County stays here — supporting kids in foster care, crisis, and mentoring. And we'll show you exactly where it goes.",
+  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. The proceeds from our work are reinvested in our community — supporting kids in foster care, crisis, and mentoring. And we'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
@@ -54,7 +56,7 @@ export const FOUNDER = {
     "That realization inspired the creation of The Children's Collective of Florida and its first program, The Collective Kids Closet. Stephanie's vision is to create a clear, trusted place where families can donate gently used children's items, shop affordable quality goods, and support programs serving children throughout Florida.",
   ],
   promisePrimary:
-    "I started The Children's Collective of Florida as a mother, not an institution — so let me make you a promise you can hold me to. Every item that reaches a Treasure Coast family will be inspected, cleaned, and chosen the way I'd choose it for my own children — never disposable surplus. Every dollar The Collective Kids Closet earns in Martin County will stay in Martin County, supporting children in foster care, crisis, and mentoring right here at home. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
+    "I started The Children's Collective of Florida as a mother, not an institution — so let me make you a promise you can hold me to. Every item that reaches a Treasure Coast family will be inspected, cleaned, and chosen the way I'd choose it for my own children — never disposable surplus. The proceeds from The Collective Kids Closet are reinvested in our community — supporting local programs that serve children in foster care, crisis, and mentoring. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
 } as const;
 
 /**
@@ -156,7 +158,7 @@ export const WHY_THIS_MATTERS = {
     },
   ],
   closing:
-    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work — through our flagship program, the Collective Kids Closet, opening Fall 2026.",
+    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work — through our flagship program, the Collective Kids Closet, coming to Martin County in late 2026.",
 } as const;
 
 /** Board of directors (brief §1). */
@@ -216,7 +218,7 @@ export const WHERE_IT_GOES = {
     },
     {
       title: "Local dollars stay local.",
-      body: "Every dollar The Collective Kids Closet earns in Martin County supports children right here on the Treasure Coast — those in foster care, crisis, mentoring, and families working to meet their children's essential needs.",
+      body: "What The Collective Kids Closet earns is reinvested right here on the Treasure Coast — supporting children in foster care, crisis, and mentoring, and the families working to meet their children's essential needs.",
     },
     {
       title: "We'll show you where it goes.",

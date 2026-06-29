@@ -71,9 +71,10 @@ export default function AboutPage() {
           <strong className="font-semibold text-ink">
             {ORG.flagshipProgram}
           </strong>
-          , launches {ORG.flagshipLaunch} in {ORG.flagshipCity} — an affordable
-          community resale program for quality kids&apos; goods, open to everyone,
-          with proceeds funding local programs that serve children.
+          , is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch} — an
+          affordable community resale program for quality kids&apos; goods, open
+          to everyone, with proceeds reinvested in local programs that serve
+          children.
         </p>
       </Section>
 
