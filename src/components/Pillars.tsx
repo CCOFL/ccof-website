@@ -24,7 +24,7 @@ export function Pillars() {
                   {pillar.number}
                 </span>
                 {dev && (
-                  <span className="rounded-full border border-coral/40 bg-coral/10 px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-wide text-coral-600">
+                  <span className="rounded-full border border-coral/40 bg-coral/10 px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-wide text-coral-deep">
                     In Development
                   </span>
                 )}

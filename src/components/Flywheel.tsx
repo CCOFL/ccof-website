@@ -10,7 +10,7 @@ export function Flywheel() {
           <div className="relative h-full rounded-2xl border border-line bg-cream p-6 shadow-card">
             <span
               aria-hidden
-              className="text-xs font-bold uppercase tracking-[0.12em] text-coral"
+              className="text-xs font-bold uppercase tracking-[0.12em] text-coral-deep"
             >
               Step {i + 1}
             </span>

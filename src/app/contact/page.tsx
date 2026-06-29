@@ -46,7 +46,7 @@ export default async function ContactPage({
             </p>
 
             <div className="mt-8 rounded-2xl border border-line bg-cream p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-coral">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
                 We are currently welcoming inquiries for
               </h2>
               <ul className="mt-4 space-y-2.5 text-sm text-ink/90">

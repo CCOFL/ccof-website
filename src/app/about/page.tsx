@@ -89,7 +89,7 @@ export default function AboutPage() {
               key={item.term}
               className="rounded-2xl border border-line bg-cream p-6 shadow-card"
             >
-              <dt className="text-sm font-semibold uppercase tracking-wider text-coral">
+              <dt className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
                 {item.term}
               </dt>
               <dd className="mt-2 text-ink">{item.desc}</dd>

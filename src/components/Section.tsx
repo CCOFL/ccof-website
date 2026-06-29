@@ -60,7 +60,7 @@ export function Eyebrow({
   return (
     <p
       className={`mb-3 text-sm font-semibold uppercase tracking-[0.14em] ${
-        onDark ? "text-cream/85" : "text-coral"
+        onDark ? "text-cream/85" : "text-coral-deep"
       }`}
     >
       {children}

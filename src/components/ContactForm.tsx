@@ -180,7 +180,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
           htmlFor="message"
           className="mb-1.5 block text-sm font-medium text-ink"
         >
-          Message <span className="text-coral">*</span>
+          Message <span className="text-coral-deep">*</span>
         </label>
         <textarea
           id="message"
@@ -241,7 +241,7 @@ function Field({
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink">
         {label}{" "}
-        {required && <span className="text-coral">*</span>}
+        {required && <span className="text-coral-deep">*</span>}
         {optional && (
           <span className="font-normal text-muted">(optional)</span>
         )}

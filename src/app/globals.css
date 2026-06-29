@@ -19,8 +19,11 @@
   --color-sage-600: #5f7658;
   --color-sage-700: #4c6249;
   --color-sage-light: #88a081;
-  --color-coral: #ef7f6d;
+  --color-coral: #ef7f6d; /* LOCKED — borders + large/decorative accents */
   --color-coral-600: #df6a57;
+  /* Deepened coral for SMALL TEXT — same hue, darkened to pass WCAG AA
+     (≈5.1:1 on warm white). Used for eyebrows, tags, labels, markers. */
+  --color-coral-deep: #b5462f;
   --color-cream: #faf9f5;
   --color-cream-dark: #f1eee4;
   --color-charcoal: #1e2b24;

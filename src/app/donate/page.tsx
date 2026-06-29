@@ -39,7 +39,7 @@ export default async function DonatePage({
             </p>
 
             <div className="mt-8 space-y-4 rounded-2xl border border-line bg-cream p-6 shadow-card">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-coral">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
                 Prefer to give goods?
               </h2>
               <p className="text-sm leading-relaxed text-ink/90">
