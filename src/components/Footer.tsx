@@ -80,7 +80,7 @@ export function Footer() {
               <li className="text-cream/70">{ORG.location}</li>
               <li className="text-cream/70">Physical location coming soon</li>
             </ul>
-            <p className="mt-4 text-xs uppercase tracking-wider text-cream/45">
+            <p className="mt-4 text-xs uppercase tracking-wider text-cream/60">
               Social — coming soon
             </p>
             <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
@@ -97,7 +97,7 @@ export function Footer() {
                     </a>
                   </li>
                 ) : (
-                  <li key={s.label} className="text-cream/45">
+                  <li key={s.label} className="text-cream/60">
                     {s.label}
                   </li>
                 ),
