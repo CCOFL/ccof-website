@@ -31,15 +31,41 @@ export const NAV: { label: string; href: string }[] = [
 /** The single primary action sitewide (brief priority #5). */
 export const PRIMARY_CTA = { label: "Donate", href: "/donate" } as const;
 
-/** Founder promise — featured pull-quote (brief §1). */
+/**
+ * Founder's Promise — short version, for the Home pull-quote where space is
+ * tight (per CCOF_Founders_Promise_and_Where_It_Goes, June 2026).
+ */
 export const FOUNDER_QUOTE = {
-  text: "I started The Children's Collective of Florida as a mother, not an institution… Every item that moves through our hands is inspected, cleaned, and chosen the way I'd choose it for my own children — never disposable surplus.",
+  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. Every dollar we earn in Martin County stays here — supporting kids in foster care, crisis, and mentoring. And we'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
 
+/** Meet Our Founder — paste-ready bio + the primary (full) Founder's Promise. */
+export const FOUNDER = {
+  name: "Stephanie Haskins",
+  title: "Founder & President",
+  intro:
+    "Founded by Stephanie Haskins, The Children's Collective of Florida was born from faith, motherhood, and a belief that everyday generosity can create lasting opportunities for children.",
+  bio: [
+    "Stephanie Haskins is the Founder and President of The Children's Collective of Florida, a nonprofit created to connect community generosity with practical support for children and families in need.",
+    "Guided by her faith and a heart for children, Stephanie has spent years supporting organizations focused on foster care, family support, youth development, and community outreach. After becoming a mother to her daughter, Summer, she became even more aware of how quickly children outgrow clothing, toys, and essentials — and how many families could benefit from those same resources.",
+    "That realization inspired the creation of The Children's Collective of Florida and its first program, The Collective Kids Closet. Stephanie's vision is to create a clear, trusted place where families can donate gently used children's items, shop affordable quality goods, and support programs serving children throughout Florida.",
+  ],
+  promisePrimary:
+    "I started The Children's Collective of Florida as a mother, not an institution — so let me make you a promise you can hold me to. Every item that reaches a Treasure Coast family will be inspected, cleaned, and chosen the way I'd choose it for my own children — never disposable surplus. Every dollar The Collective Kids Closet earns in Martin County will stay in Martin County, supporting children in foster care, crisis, and mentoring right here at home. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
+} as const;
+
+/**
+ * Official extended mission statement (finalized June 2026, marked "use the
+ * extended version for the website"). Source: CCOF_Extended_Mission_Statement.
+ */
 export const MISSION =
-  "Channel community generosity into practical support for children and families — donated goods, an affordable community resale program, and grants to local programs serving kids in foster care, kinship homes, and crisis.";
+  "The Children's Collective of Florida supports children and families across Florida through donated goods, affordable community resale programs, and partnerships. We turn everyday generosity into real resources — clothing, essentials, and dignity — for children in foster care, kinship homes, and families navigating crisis. Powered by community, we meet families at their moment of greatest need and reinvest the proceeds of our work into the programs and services that support them.";
+
+/** Concise lead drawn from the mission, for the hero where space is tight. */
+export const MISSION_LEAD =
+  "We turn everyday community generosity into real resources — clothing, essentials, and dignity — for Florida children in foster care, kinship homes, and families navigating crisis.";
 
 /** Three Pillars + the in-development fourth (brief §1). */
 export const PILLARS: {

@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
-import { SectionHeading } from "@/components/PageHero";
-import { PageHero } from "@/components/PageHero";
-import { FounderQuote } from "@/components/FounderQuote";
+import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
-import { ORG, MISSION, BOARD } from "@/lib/site";
+import { ORG, MISSION, BOARD, FOUNDER } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The Children's Collective of Florida channels community generosity into practical support for children and families across the Treasure Coast.",
+    "The Children's Collective of Florida turns everyday community generosity into real resources for children in foster care, kinship homes, and families in crisis.",
   alternates: { canonical: "/about" },
 };
 
@@ -19,34 +17,83 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="A mother's promise, organized into a mission"
-        intro={MISSION}
+        title="About The Children's Collective of Florida"
+        intro="Currently serving Martin County and the Treasure Coast — built here, building for Florida."
       />
 
+      {/* Our Mission — official extended statement */}
       <Section background="white">
-        <div className="measure space-y-5 text-lg leading-relaxed text-ink/90">
-          <p>
-            {ORG.legalName} ({ORG.abbr}) was built in Martin County, Florida and
-            is building for Florida. We exist to turn everyday community
-            generosity into real, practical help for children — especially those
-            in foster care, kinship homes, and crisis.
-          </p>
-          <p>
-            Our flagship program,{" "}
-            <strong className="font-semibold">{ORG.flagshipProgram}</strong>,
-            launches {ORG.flagshipLaunch} in {ORG.flagshipCity}. It&apos;s an
-            affordable community resale program for quality kids&apos; goods —
-            open to everyone, with proceeds funding local programs that serve
-            children.
-          </p>
-        </div>
+        <SectionHeading eyebrow="Our mission" title="Why we exist" />
+        <p className="measure mt-6 text-lg leading-relaxed text-body">
+          {MISSION}
+        </p>
+        <p className="measure mt-5 text-lg leading-relaxed text-body">
+          Our flagship program,{" "}
+          <strong className="font-semibold text-ink">
+            {ORG.flagshipProgram}
+          </strong>
+          , launches {ORG.flagshipLaunch} in {ORG.flagshipCity} — an affordable
+          community resale program for quality kids&apos; goods, open to everyone,
+          with proceeds funding local programs that serve children.
+        </p>
       </Section>
 
+      {/* Meet Our Founder — real bio + primary Founder's Promise */}
       <Section background="cream">
-        <FounderQuote />
+        <SectionHeading eyebrow="Meet our founder" title={FOUNDER.name} />
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
+          {/* Founder photo placeholder */}
+          <Reveal>
+            <div
+              className="grid aspect-[4/5] place-items-center rounded-3xl border border-line bg-cream-dark p-8 text-center shadow-card"
+              role="img"
+              aria-label="Photograph placeholder: Stephanie Haskins, Founder & President"
+            >
+              <div>
+                <span className="font-serif text-xl text-sage">
+                  Founder photo
+                </span>
+                <p className="mt-2 text-sm text-muted">
+                  Stephanie Haskins, Founder &amp; President
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="space-y-5 text-lg leading-relaxed text-body">
+            <p className="font-medium text-ink">{FOUNDER.intro}</p>
+            {FOUNDER.bio.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+          </div>
+        </div>
+
+        {/* The Founder's Promise — primary version */}
+        <Reveal>
+          <figure className="mx-auto mt-12 max-w-3xl rounded-3xl border border-line bg-cream-dark/60 p-8 sm:p-10">
+            <span
+              aria-hidden
+              className="block font-serif text-6xl leading-none text-coral/50"
+            >
+              &ldquo;
+            </span>
+            <blockquote className="-mt-4 font-serif text-xl italic leading-relaxed text-charcoal">
+              {FOUNDER.promisePrimary}
+            </blockquote>
+            <figcaption className="mt-5 text-sm font-semibold uppercase tracking-wider text-muted">
+              {FOUNDER.name}
+              <span className="mx-2 text-line" aria-hidden>
+                |
+              </span>
+              <span className="font-medium normal-case tracking-normal">
+                {FOUNDER.title}
+              </span>
+            </figcaption>
+          </figure>
+        </Reveal>
       </Section>
 
-      {/* Board / governance — transparency (brief §5) */}
+      {/* Board / governance */}
       <Section background="white">
         <SectionHeading
           eyebrow="Governance"
@@ -56,10 +103,8 @@ export default function AboutPage() {
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {BOARD.map((member, i) => (
             <Reveal as="li" key={member.name} delay={i * 70}>
-              <div className="h-full rounded-2xl border border-line bg-cream/50 p-5">
-                <p className="font-serif text-lg font-semibold text-ink">
-                  {member.name}
-                </p>
+              <div className="h-full rounded-2xl border border-line bg-cream/60 p-5">
+                <p className="text-lg font-bold text-ink">{member.name}</p>
                 <p className="mt-1 text-sm text-muted">{member.role}</p>
               </div>
             </Reveal>
@@ -76,10 +121,7 @@ export default function AboutPage() {
         <dl className="mt-8 grid gap-6 sm:grid-cols-3">
           {[
             { term: "Federal EIN", desc: ORG.ein },
-            {
-              term: "FL Charitable Registration",
-              desc: `No. ${ORG.flReg}`,
-            },
+            { term: "FL Charitable Registration", desc: `No. ${ORG.flReg}` },
             {
               term: "IRS Determination",
               desc: "Letter dated May 12, 2026 (effective April 13, 2026)",

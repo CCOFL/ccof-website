@@ -1,28 +1,29 @@
 import Link from "next/link";
+import Image from "next/image";
 
 /**
- * Text wordmark placeholder. Replace the mark <span> with the real CCOF logo
- * (e.g. <Image src="/logo.svg" .../>) when the asset is available — keep the
- * accessible name on the Link.
+ * Header wordmark using the official CCOF icon mark (Brand Assets →
+ * 01_Master_Logos/02_icon_only, on-spec sage #6F8764 / coral #EF7F6D).
  */
 export function Logo({ compact = false }: { compact?: boolean }) {
+  const size = compact ? 36 : 46;
   return (
     <Link
       href="/"
       aria-label="The Children's Collective of Florida — home"
       className="group flex items-center gap-3"
     >
-      <span
-        aria-hidden
-        className={`grid place-items-center rounded-full bg-sage-600 font-extrabold text-cream transition-all duration-300 ${
-          compact ? "h-9 w-9 text-base" : "h-11 w-11 text-lg"
-        }`}
-      >
-        CC
-      </span>
+      <Image
+        src="/ccof-icon.svg"
+        alt=""
+        width={size}
+        height={size}
+        priority
+        className="transition-all duration-300"
+      />
       <span className="flex flex-col leading-tight">
         <span
-          className={`font-serif font-semibold tracking-tight text-ink transition-all duration-300 ${
+          className={`font-bold tracking-tight text-ink transition-all duration-300 ${
             compact ? "text-base" : "text-lg"
           }`}
         >

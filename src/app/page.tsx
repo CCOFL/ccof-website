@@ -8,7 +8,7 @@ import { CollectMarquee } from "@/components/CollectMarquee";
 import { EmailCapture } from "@/components/EmailCapture";
 import { SectionHeading } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { ORG, MISSION } from "@/lib/site";
+import { ORG, MISSION_LEAD } from "@/lib/site";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
                 <span className="text-sage">Supporting Kids.</span>
               </h1>
               <p className="measure mt-6 text-lg leading-relaxed text-muted">
-                {MISSION}
+                {MISSION_LEAD}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <LinkButton href="/donate" size="lg">
