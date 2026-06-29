@@ -36,7 +36,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
     return (
       <p
         className={`flex items-center gap-2 text-base font-medium ${
-          onDark ? "text-cream" : "text-sage"
+          onDark ? "text-cream" : "text-sage-600"
         }`}
         role="status"
       >

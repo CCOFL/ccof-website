@@ -56,8 +56,8 @@ export function Header() {
                 aria-current={active ? "page" : undefined}
                 className={`rounded-full px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
                   active
-                    ? "text-sage"
-                    : "text-ink/80 hover:text-sage"
+                    ? "text-sage-600"
+                    : "text-ink/80 hover:text-sage-600"
                 }`}
               >
                 {item.label}

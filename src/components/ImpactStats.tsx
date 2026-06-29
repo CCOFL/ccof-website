@@ -9,12 +9,13 @@ export function ImpactStats({ onDark = false }: { onDark?: boolean }) {
     <div>
       <dl className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4">
         {IMPACT_STATS.map((stat, i) => (
+          // Reveal renders the group <div>; each group holds one dt + dd.
           <Reveal key={stat.label} delay={i * 80}>
-            <div>
-              <dt className="sr-only">{stat.label}</dt>
-              <dd
-                className={`text-4xl font-extrabold sm:text-5xl ${
-                  onDark ? "text-cream" : "text-sage-600"
+            <dt className="sr-only">{stat.label}</dt>
+            <dd>
+              <span
+                className={`block font-serif text-4xl font-semibold sm:text-5xl ${
+                  onDark ? "text-cream" : "text-sage"
                 }`}
               >
                 <CountUp
@@ -22,26 +23,26 @@ export function ImpactStats({ onDark = false }: { onDark?: boolean }) {
                   prefix={stat.prefix}
                   suffix={stat.suffix}
                 />
-              </dd>
-              <p
-                className={`mt-2 text-sm leading-snug ${
+              </span>
+              <span
+                className={`mt-2 block text-sm leading-snug ${
                   onDark ? "text-cream/75" : "text-muted"
                 }`}
               >
                 {stat.label}
-              </p>
-            </div>
+              </span>
+            </dd>
           </Reveal>
         ))}
       </dl>
       <p
-        className={`mt-10 text-xs ${onDark ? "text-cream/50" : "text-muted/80"}`}
+        className={`mt-10 text-xs ${onDark ? "text-cream/75" : "text-muted"}`}
       >
         {IMPACT_SOURCES}{" "}
         <Link
           href="/sources"
           className={`underline underline-offset-2 ${
-            onDark ? "hover:text-cream" : "hover:text-sage"
+            onDark ? "hover:text-cream" : "hover:text-sage-600"
           }`}
         >
           See sources &amp; methodology →

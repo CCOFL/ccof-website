@@ -13,13 +13,14 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  // Single primary action sitewide: solid brand-green (brief priority #5)
+  // Single primary action sitewide: solid brand-green (brief priority #5).
+  // Uses the brand's darker sage so cream label text clears WCAG AA.
   primary:
-    "bg-sage text-cream shadow-card hover:bg-sage-600 hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0",
+    "bg-sage-600 text-cream shadow-card hover:bg-sage-700 hover:-translate-y-0.5 hover:shadow-card-hover active:translate-y-0",
   // Demoted partner/volunteer/goods actions: outline
   secondary:
-    "border border-sage/40 bg-transparent text-sage hover:border-sage hover:bg-sage/5",
-  ghost: "bg-transparent text-ink hover:text-sage",
+    "border border-sage/50 bg-transparent text-sage-700 hover:border-sage hover:bg-sage/5",
+  ghost: "bg-transparent text-ink hover:text-sage-600",
   // Cream pill for use on sage / charcoal (dark) backgrounds; darker-sage
   // label keeps the text AA-legible on the cream fill.
   inverse:

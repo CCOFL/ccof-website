@@ -131,7 +131,7 @@ export function Footer() {
           </p>
           <p>{TAX_NOTE}</p>
           <p className="max-w-3xl">{FL_DISCLOSURE}</p>
-          <p className="pt-2 text-cream/40">
+          <p className="pt-2 text-cream/60">
             © {year} {ORG.legalName}. All rights reserved.
           </p>
         </div>

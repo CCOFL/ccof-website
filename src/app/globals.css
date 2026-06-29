@@ -29,7 +29,9 @@
   --color-charcoal: #1e2b24;
   --color-ink: #1e2b24; /* headings / strong text = charcoal-sage */
   --color-body: #2c342e; /* body copy */
-  --color-muted: #6f7771;
+  /* Caption/metadata gray — deepened from the brand #6f7771 just enough to
+     clear WCAG AA (4.5:1) for small text on warm white. */
+  --color-muted: #656b5e;
   --color-line: #e4e1d6;
 
   /* Semantic aliases */
@@ -171,7 +173,7 @@
     margin-bottom: 0.5rem;
   }
   .prose-legal a {
-    color: var(--color-sage);
+    color: var(--color-sage-700);
     text-decoration: underline;
     text-underline-offset: 3px;
   }

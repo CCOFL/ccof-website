@@ -40,18 +40,20 @@ export default function AboutPage() {
         <p className="mt-10 text-sm font-semibold uppercase tracking-wider text-muted">
           {WHY_THIS_MATTERS.dataIntro}
         </p>
-        <dl className="mt-5 grid gap-5 sm:grid-cols-2">
+        <ul className="mt-5 grid gap-5 sm:grid-cols-2">
           {WHY_THIS_MATTERS.data.map((d, i) => (
-            <Reveal key={d.figure} delay={i * 70}>
+            <Reveal as="li" key={d.figure} delay={i * 70}>
               <div className="flex h-full gap-4 rounded-2xl border border-line bg-cream p-5">
-                <dd className="font-bold leading-none text-sage-600">
-                  <span className="text-3xl">{d.figure}</span>
-                </dd>
-                <dt className="text-sm leading-relaxed text-body">{d.label}</dt>
+                <span className="text-3xl font-bold leading-none text-sage-600">
+                  {d.figure}
+                </span>
+                <span className="text-sm leading-relaxed text-body">
+                  {d.label}
+                </span>
               </div>
             </Reveal>
           ))}
-        </dl>
+        </ul>
         <p className="mt-4 text-xs italic text-muted">{IMPACT_SOURCES}</p>
         <p className="measure mt-8 text-lg leading-relaxed text-body">
           {WHY_THIS_MATTERS.closing}
@@ -87,7 +89,7 @@ export default function AboutPage() {
               aria-label="Photograph placeholder: Stephanie Haskins, Founder & President"
             >
               <div>
-                <span className="font-serif text-xl text-sage">
+                <span className="font-serif text-xl text-sage-600">
                   Founder photo
                 </span>
                 <p className="mt-2 text-sm text-muted">

@@ -49,14 +49,14 @@ export default async function DonatePage({
                 home. Email{" "}
                 <a
                   href={`mailto:${ORG.email}`}
-                  className="text-sage underline-offset-4 hover:underline"
+                  className="text-sage-600 underline-offset-4 hover:underline"
                 >
                   {ORG.email}
                 </a>{" "}
                 or{" "}
                 <a
                   href="/contact?intent=donate"
-                  className="text-sage underline-offset-4 hover:underline"
+                  className="text-sage-600 underline-offset-4 hover:underline"
                 >
                   start a goods donation
                 </a>
@@ -80,7 +80,7 @@ export default async function DonatePage({
               Want to see exactly where your support lands?{" "}
               <Link
                 href="/where-it-goes"
-                className="font-semibold text-sage underline-offset-4 hover:underline"
+                className="font-semibold text-sage-600 underline-offset-4 hover:underline"
               >
                 Read our transparency promise →
               </Link>

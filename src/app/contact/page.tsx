@@ -66,7 +66,7 @@ export default async function ContactPage({
                 Email:{" "}
                 <a
                   href={`mailto:${ORG.email}`}
-                  className="text-sage underline-offset-4 hover:underline"
+                  className="text-sage-600 underline-offset-4 hover:underline"
                 >
                   {ORG.email}
                 </a>

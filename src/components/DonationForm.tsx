@@ -78,8 +78,8 @@ export function DonationForm() {
                 onClick={() => setFrequency(f)}
                 className={`rounded-full px-4 py-2.5 text-sm font-semibold transition-all duration-200 ${
                   active
-                    ? "bg-sage text-cream shadow-sm"
-                    : "text-ink/70 hover:text-sage"
+                    ? "bg-sage-600 text-cream shadow-sm"
+                    : "text-ink/70 hover:text-sage-600"
                 }`}
               >
                 {f === "one-time" ? "One-time" : "Monthly"}
@@ -105,7 +105,7 @@ export function DonationForm() {
                 onClick={() => setSelected(preset.amount)}
                 className={`min-h-[52px] rounded-xl border text-lg font-semibold transition-all duration-200 ${
                   active
-                    ? "border-sage bg-sage text-cream shadow-card"
+                    ? "border-sage-600 bg-sage-600 text-cream shadow-card"
                     : "border-line bg-cream text-ink hover:border-sage-light"
                 }`}
               >
@@ -160,7 +160,7 @@ export function DonationForm() {
       >
         {outcome && (
           <>
-            <strong className="font-semibold text-sage">
+            <strong className="font-semibold text-sage-600">
               ${selected as number}
             </strong>{" "}
             = {outcome}

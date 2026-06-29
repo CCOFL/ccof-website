@@ -98,7 +98,7 @@ export default async function ThankYouPage({
             Questions about your donation?{" "}
             <Link
               href="/contact"
-              className="text-sage underline-offset-4 hover:underline"
+              className="text-sage-600 underline-offset-4 hover:underline"
             >
               Contact us
             </Link>
