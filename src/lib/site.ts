@@ -128,7 +128,12 @@ export const IMPACT_STATS: {
 }[] = [
   { value: 1319, label: "child-maltreatment reports in Martin County last year" },
   { value: 3000, prefix: "~", label: "local children living in poverty" },
-  { value: 6, suffix: " in 10", label: "removed children placed with relatives (kinship)" },
+  {
+    value: 6,
+    suffix: " in 10",
+    label:
+      "removed children placed with relatives — kinship caregivers, the least-funded in the system",
+  },
   { value: 115, label: "children served in foster care" },
 ];
 

@@ -40,7 +40,7 @@ values
    'local children living in poverty',
    'U.S. Census Bureau (SAIPE)', 'CY2023', 2, '2026-06-04'),
   ('kinship_share', 6, null, ' in 10',
-   'removed children placed with relatives (kinship)',
+   'removed children placed with relatives — kinship caregivers, the least-funded in the system',
    'Federal AFCARS', 'FFY2022', 3, '2026-06-04'),
   ('foster_care_served', 115, null, null,
    'children served in foster care',
