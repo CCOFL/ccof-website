@@ -13,99 +13,92 @@ a different company. Blurring them together is what makes domains confusing.
 
 | Job | What it does | Think of it as… |
 |---|---|---|
-| **Registrar** | Holds our legal ownership of the name and renews it each year | The deed / title company for the address |
+| **Registrar** | Holds our ownership of the name and bills the annual renewal | The deed / title company for the address |
 | **DNS** | Points the name at whatever server should answer | The postal forwarding instructions |
-| **Hosting** | The actual computer that serves the website | The building the business operates in |
+| **Hosting** | The actual computer that serves the website | The building the org operates in |
 
-**Changing where the website is hosted does NOT require moving the registrar.**
-You only repoint **DNS**. This is the single most important thing to remember.
-
----
-
-## Where things stand
-
-**Today (the current live site):**
-- Registrar: **Wix** (the domain was bought at GoDaddy, then transferred to Wix)
-- DNS: **Wix**
-- Hosting: **Wix**
-
-Wix currently does all three jobs.
-
-**After this rebuild goes live:**
-- Registrar: **your choice** — stays at Wix, or later moves to GoDaddy / Cloudflare
-- DNS: **points at Netlify**
-- Hosting: **Netlify** (free hosting + free auto-renewing SSL certificate)
-
-Only **hosting** is required to move. DNS gets repointed. The registrar is an
-independent, optional decision.
+**Two things to remember:**
+1. **Changing where the site is hosted only requires repointing DNS — not moving the registrar.**
+2. **Hosting on Netlify does NOT make Netlify our registrar.** We always *renew and manage* the domain at the **registrar**, wherever that is.
 
 ---
 
-## Do we need to transfer the domain back to GoDaddy?
+## Current status (2026-06-29)
 
-**No — not to launch the new site.** To put the new site on
-`childrenscollectivefl.org`, we only repoint DNS to Netlify. That works no matter
-who the registrar is.
+| | Old Wix site | New site |
+|---|---|---|
+| Registrar | **Wix** (bought at GoDaddy, transferred to Wix) | *(decision below)* |
+| DNS | Wix | → repoint to **Netlify** at cutover |
+| Hosting | Wix | **Netlify** — live now at `ccof-website.netlify.app` |
+| Donations | Wix Payments | **Stripe** |
 
-Transferring the registrar is a **separate, optional** cleanup about where we
-*manage and renew* the domain long-term — not about hosting.
-
-**Recommendation:**
-- **For launch:** leave the domain at Wix and just repoint DNS to Netlify. Fastest, lowest risk.
-- **Long term:** once fully off Wix, move the registration to a registrar we control independently of the website host, so we're never locked to one platform.
-  - **GoDaddy** — perfectly fine and familiar.
-  - **Cloudflare** — cheaper (~$10/yr at cost) with excellent DNS; slightly more technical dashboard.
-- **Do not** register the domain *inside* Netlify — keep registrar and host separate so the site stays portable.
-
-### ⚠️ The 60-day transfer lock
-ICANN locks a domain from transferring for **60 days after any registrar
-transfer**. Because the domain recently moved **GoDaddy → Wix**, it likely
-**cannot be transferred out of Wix again until ~60 days after that move**.
-
-This does **not** block launch — repointing DNS to Netlify is not a transfer.
-The lock only affects the optional "move the registrar" step.
+The new site is built, deployed, and verified at `ccof-website.netlify.app`. The
+real domain has **not** been cut over yet — the Wix site is still what the public
+sees at `childrenscollectivefl.org`.
 
 ---
 
-## Who owns and manages the domain?
+## The decided plan: end fully off Wix, registrar at GoDaddy
 
-**The Children's Collective of Florida always owns it**, at whichever registrar
-holds the registration. The registrar is just the company that keeps the
-registration on file and bills the annual renewal.
+CCOF has no remaining use for Wix once the site is on Netlify and donations are on
+Stripe. So the goal is to leave Wix entirely. The target setup:
 
-**Continuity tips (important for a nonprofit):**
-- Keep the registrar account under the org inbox **info@childrenscollectivefl.org**, not a personal email — so the org never loses control if one person's access is lost.
-- Turn on **auto-renew** and keep a card on file so the domain never lapses.
-- Ideally a second trusted person has access (the same single-owner risk applies as with the GitHub org).
+- **Registrar: GoDaddy** — where we renew and manage the domain (familiar; ~$20/yr for `.org`).
+  *(Cloudflare is a cheaper alternative ~$10/yr with great DNS, if ever preferred.)*
+- **DNS + SSL: Netlify** — at GoDaddy we point the **nameservers to Netlify**, so DNS and the SSL certificate are automatic.
+- **Hosting: Netlify** · **Donations: Stripe**
+- **❌ Do NOT register the domain inside Netlify** — keep the registrar independent of the host so the site stays portable.
+
+### ⚠️ The 60-day transfer lock (why we can't move the registrar yet)
+ICANN blocks a domain from changing registrars for **60 days after any transfer**.
+The domain recently moved **GoDaddy → Wix**, so it likely **cannot be transferred
+out of Wix until ~60 days after that move** (check the transfer date in Wix →
+Domains). This does **not** block launch — repointing DNS is not a transfer.
 
 ---
 
-## Step-by-step: going live with no downtime
+## Step-by-step (no downtime, ends fully off Wix)
 
-The current Wix site stays up and untouched until the very last step.
+**Phase 1 — Go live now (no registrar change needed):**
+1. In **Netlify → ccof-website → Domain management → Add a domain** → `childrenscollectivefl.org` (and `www`).
+2. Netlify gives a target — either **its nameservers** (recommended) or **A record `75.2.60.5` + `www` CNAME → `ccof-website.netlify.app`**.
+3. In **Wix → Domains**, apply that target. (Wix may ask to "disconnect" the domain from the Wix site first — expected; the Wix site stays in the account but stops serving here.)
+4. Netlify auto-issues SSL; DNS propagates (minutes to ~48h).
+5. Switch Stripe to **live** keys (with the bank connected) so real donations work.
 
-1. **Build & deploy to Netlify** on a free temporary address (e.g. `ccof-website.netlify.app`).
-2. **Add keys in Netlify** — Stripe **test** keys + Supabase keys — and fully test on the temporary address: donations (test mode, no real charges), forms saving to Supabase, every page and CTA.
-3. **Decide the registrar** — keep at Wix for now, or plan a later move to GoDaddy/Cloudflare once the 60-day lock clears. *Not blocking.*
-4. **Cutover** when you're happy:
-   - In the registrar's DNS settings, repoint the domain to Netlify (Netlify gives the exact records/nameservers to use).
-   - Switch Stripe from test keys to **live** keys.
-   - Netlify automatically issues the SSL certificate (the padlock).
-5. **Confirm** the new site is solid for a few days, then:
-   - Cancel the Wix plan.
-   - If desired, transfer the registration to your preferred registrar (once the 60-day lock has cleared).
+➡️ At this point the public sees the new site. Registrar is still Wix temporarily.
+
+**Phase 2 — Move the registrar off Wix (after the 60-day lock clears):**
+6. In Wix: **unlock** the domain and request the **EPP / authorization code**.
+7. At **GoDaddy**: start a domain **transfer in**, enter the EPP code, pay the
+   transfer fee (includes +1 year renewal). Approve the transfer email.
+8. Before/after transfer, set GoDaddy's **nameservers to Netlify's** so the site
+   keeps serving throughout (DNS never goes dark if records are preserved).
+9. Once the transfer completes (a few days), **cancel Wix entirely.**
+
+**Important ordering:** never cancel Wix while the domain is still registered
+there — wait until it's safely at GoDaddy.
+
+---
+
+## Ongoing management (it's small)
+
+- **Renew:** once a year at **GoDaddy**. Turn on **auto-renew** with a card on file so it never lapses.
+- **Account owner:** keep the GoDaddy (and Netlify, GitHub, Stripe) accounts under the org inbox **info@childrenscollectivefl.org**, not a personal email — so CCOF never loses control if one person's access is lost. Ideally a second board member has access.
+- **DNS / SSL:** automatic at Netlify — nothing to do.
+- **Site updates:** changes are pushed to GitHub → Netlify rebuilds automatically. The domain is not involved.
 
 ---
 
 ## Quick glossary
 
-- **Registrar** — company that holds the domain registration (Wix / GoDaddy / Cloudflare).
+- **Registrar** — company that holds the domain registration and renews it (GoDaddy in the target setup).
 - **DNS records** — settings (A, CNAME, nameservers) that point the domain at a host.
-- **Nameservers** — the authoritative DNS servers for the domain; pointing these at a host lets it manage DNS for you.
-- **SSL / TLS certificate** — what gives the site `https://` and the padlock; Netlify provisions and renews this for free.
-- **Hosting** — the server running the website (Netlify here).
+- **Nameservers** — the authoritative DNS servers for the domain; pointing these at Netlify lets Netlify manage DNS for us.
+- **EPP / auth code** — the password needed to transfer a domain between registrars.
+- **SSL / TLS certificate** — gives the site `https://` and the padlock; Netlify provisions and renews it for free.
 - **Cutover** — the moment DNS is switched so the real domain shows the new site.
 
 ---
 
-*Last updated: 2026-06-28. Update this file whenever the registrar, DNS, or host changes.*
+*Last updated: 2026-06-29. Update this file whenever the registrar, DNS, or host changes.*
