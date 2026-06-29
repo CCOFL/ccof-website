@@ -60,7 +60,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
           aria-describedby={status === "error" ? "follow-error" : undefined}
-          className="min-h-[44px] flex-1 rounded-full border border-line bg-white px-5 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
+          className="min-h-[44px] flex-1 rounded-full border border-line bg-cream px-5 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
         />
         <Button type="submit" disabled={status === "submitting"}>
           {status === "submitting" ? "Joining…" : "Follow our launch"}

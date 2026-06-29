@@ -18,9 +18,9 @@ export default function Home() {
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <Eyebrow>Built in Martin County · Building for Florida</Eyebrow>
+              <Eyebrow>Built in Martin County. Building for Florida.</Eyebrow>
               <h1
-                className="font-serif font-semibold tracking-tight text-ink"
+                className="font-extrabold tracking-tight text-sage-600"
                 style={{ fontSize: "var(--text-display)", lineHeight: 1.04 }}
               >
                 Powered by Community.{" "}
@@ -140,7 +140,7 @@ export default function Home() {
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
           {[1, 2, 3].map((n) => (
             <Reveal key={n} delay={n * 80}>
-              <div className="grid h-28 place-items-center rounded-2xl border border-dashed border-line bg-white text-sm text-muted">
+              <div className="grid h-28 place-items-center rounded-2xl border border-dashed border-line bg-cream text-sm text-muted">
                 Partner logo — announcing soon
               </div>
             </Reveal>
@@ -154,7 +154,7 @@ export default function Home() {
       </Section>
 
       {/* FOLLOW OUR LAUNCH (brief §5) + closing donate CTA */}
-      <Section background="sage">
+      <Section background="charcoal">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
             <SectionHeading
@@ -167,8 +167,8 @@ export default function Home() {
               <EmailCapture onDark />
             </div>
           </div>
-          <div className="rounded-3xl bg-sage-700/40 p-8 lg:p-10">
-            <p className="font-serif text-2xl leading-snug text-cream">
+          <div className="rounded-3xl bg-sage/15 p-8 ring-1 ring-sage/25 lg:p-10">
+            <p className="text-2xl font-bold leading-snug text-cream">
               Every dollar now goes toward opening day — stocking shelves,
               securing a space, and funding our first partner programs.
             </p>
@@ -176,7 +176,7 @@ export default function Home() {
               <LinkButton
                 href="/donate"
                 size="lg"
-                className="bg-cream text-sage hover:bg-white"
+                className="bg-cream text-sage-700 hover:bg-white"
               >
                 Fund the launch
               </LinkButton>

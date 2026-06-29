@@ -2,41 +2,49 @@
 
 /*
   The Children's Collective of Florida — design system
-  Brand palette (brief §3):
-    sage/olive  #4F5D38 (primary) · #6F7D4D (secondary)
-    cream/paper #F7F5EF / #ECE9DF
-    ink         #23271D · muted #6B6F62
-  Type: Newsreader (editorial serif display) + Public Sans (humanist sans body)
+  LOCKED per CCOF Brand Standards Guide v1.1 (May 27, 2026). HEX is source of
+  truth; substitutes rejected. Ratio 80/10/10 = Sage / Coral / Charcoal.
+    Sage          #6F8764  primary/dominant · H2 (light bg) · primary CTAs
+    Darker Sage   #5F7658  H1 · hover · icon circles · stat figures
+    Coral         #EF7F6D  accent only (~10%) · eyebrows · in-development markers
+    Charcoal-Sage #1E2B24  H3 subheads · dark sections · footer
+    Warm White    #FAF9F5  page bg + card bodies (never pure white)
+    Body text     #2C342E  · Captions/metadata #6F7771
+  Font: Nunito Sans — LOCKED, used throughout ALL CCOF materials.
 */
 
 @theme {
   /* Brand colors */
-  --color-sage: #4f5d38;
-  --color-sage-600: #44512f;
-  --color-sage-700: #3a4528;
-  --color-sage-light: #6f7d4d;
-  --color-cream: #f7f5ef;
-  --color-cream-dark: #ece9df;
-  --color-ink: #23271d;
-  --color-muted: #6b6f62;
-  --color-line: #ddd9cc;
+  --color-sage: #6f8764;
+  --color-sage-600: #5f7658;
+  --color-sage-700: #4c6249;
+  --color-sage-light: #88a081;
+  --color-coral: #ef7f6d;
+  --color-coral-600: #df6a57;
+  --color-cream: #faf9f5;
+  --color-cream-dark: #f1eee4;
+  --color-charcoal: #1e2b24;
+  --color-ink: #1e2b24; /* headings / strong text = charcoal-sage */
+  --color-body: #2c342e; /* body copy */
+  --color-muted: #6f7771;
+  --color-line: #e4e1d6;
 
   /* Semantic aliases */
-  --color-background: #ffffff;
-  --color-foreground: #23271d;
+  --color-background: #faf9f5;
+  --color-foreground: #2c342e;
 
-  /* Fonts (wired via next/font CSS variables in layout.tsx) */
-  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  /* Single locked typeface (wired via next/font in layout.tsx) */
+  --font-sans: var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-nunito-sans), ui-sans-serif, system-ui, sans-serif;
 
-  /* Editorial display scale */
+  /* Display scale */
   --text-display: clamp(2.5rem, 5vw + 1rem, 4.25rem);
-  --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.02em;
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.015em;
 
-  /* Flat-panel shadows (replace dated torn-paper look, brief §5) */
-  --shadow-card: 0 1px 2px rgba(35, 39, 29, 0.04), 0 8px 24px rgba(35, 39, 29, 0.06);
-  --shadow-card-hover: 0 2px 4px rgba(35, 39, 29, 0.06), 0 16px 40px rgba(35, 39, 29, 0.1);
+  /* Flat-panel shadows */
+  --shadow-card: 0 1px 2px rgba(30, 43, 36, 0.04), 0 8px 24px rgba(30, 43, 36, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(30, 43, 36, 0.06), 0 16px 40px rgba(30, 43, 36, 0.1);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -48,35 +56,46 @@
 
   body {
     background: var(--color-background);
-    color: var(--color-ink);
+    color: var(--color-body);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  /* Headings — Nunito Sans, brand colour hierarchy (H1 darker sage, H2 sage,
+     H3/H4 charcoal). Component-level text-* utilities (e.g. text-cream on dark
+     sections) override these element rules where needed. */
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-serif);
-    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.01em;
     text-wrap: balance;
-    font-weight: 500;
+  }
+  h1 {
+    color: var(--color-sage-600);
+  }
+  h2 {
+    color: var(--color-sage);
+  }
+  h3,
+  h4 {
+    color: var(--color-charcoal);
   }
 
   p {
     text-wrap: pretty;
   }
 
-  /* Visible, accessible focus ring (brief §7 — keyboard nav) */
   :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-    outline: 3px solid var(--color-sage-light);
+    outline: 3px solid var(--color-sage);
     outline-offset: 2px;
     border-radius: 4px;
   }
 }
 
-/* Respect reduced motion globally (brief §6/§7) */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -91,7 +110,6 @@
 }
 
 @layer utilities {
-  /* Scroll reveal: hidden until .is-visible toggled by IntersectionObserver */
   .reveal {
     opacity: 0;
     transform: translateY(16px);
@@ -111,12 +129,10 @@
     }
   }
 
-  /* ~65ch measure for long-form copy (brief §5) */
   .measure {
     max-width: 65ch;
   }
 
-  /* Looping marquee of "what we collect" chips (brief §6) */
   .marquee {
     display: flex;
     width: max-content;

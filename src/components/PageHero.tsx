@@ -18,7 +18,7 @@ export function PageHero({
       <Container className="py-14 sm:py-16 lg:py-20">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h1
-          className="max-w-3xl font-serif font-semibold tracking-tight text-ink"
+          className="max-w-3xl font-extrabold tracking-tight text-sage-600"
           style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
         >
           {title}
@@ -51,8 +51,8 @@ export function SectionHeading({
     <div className={`${center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}`}>
       {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
       <h2
-        className={`text-3xl font-semibold tracking-tight sm:text-4xl ${
-          onDark ? "text-cream" : "text-ink"
+        className={`text-3xl font-bold tracking-tight sm:text-4xl ${
+          onDark ? "text-cream" : "text-sage"
         }`}
       >
         {title}

@@ -15,7 +15,7 @@ export function Card({
 }) {
   return (
     <div
-      className={`rounded-2xl border border-line bg-white p-6 shadow-card transition-all duration-300 ${
+      className={`rounded-2xl border border-line bg-cream p-6 shadow-card transition-all duration-300 ${
         interactive
           ? "hover:-translate-y-1 hover:border-sage-light/60 hover:shadow-card-hover"
           : ""

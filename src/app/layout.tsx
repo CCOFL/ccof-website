@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { Newsreader, Public_Sans } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { ORG } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
 
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
+// Nunito Sans — LOCKED CCOF brand typeface, used throughout.
+const nunitoSans = Nunito_Sans({
+  variable: "--font-nunito-sans",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "600", "700", "800"],
   style: ["normal", "italic"],
-});
-
-const publicSans = Public_Sans({
-  variable: "--font-public-sans",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -45,7 +39,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${publicSans.variable} h-full antialiased`}
+      className={`${nunitoSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background">
         <a

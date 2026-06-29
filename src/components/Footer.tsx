@@ -21,7 +21,7 @@ export function Footer() {
               {ORG.name}
             </p>
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-cream/70">
-              {ORG.tagline} Built in Martin County, FL — building for Florida.
+              {ORG.tagline} Built in Martin County. Building for Florida.
             </p>
             <LinkButton href={PRIMARY_CTA.href} className="mt-5">
               {PRIMARY_CTA.label}

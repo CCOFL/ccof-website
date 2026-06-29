@@ -165,7 +165,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
           id="intent"
           value={values.intent}
           onChange={(e) => update("intent", e.target.value)}
-          className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+          className="min-h-[44px] w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
         >
           {INTENTS.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -180,7 +180,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
           htmlFor="message"
           className="mb-1.5 block text-sm font-medium text-ink"
         >
-          Message <span className="text-sage-light">*</span>
+          Message <span className="text-coral">*</span>
         </label>
         <textarea
           id="message"
@@ -190,7 +190,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
           onChange={(e) => update("message", e.target.value)}
           aria-invalid={errors.message ? true : undefined}
           aria-describedby={errors.message ? "message-error" : undefined}
-          className="w-full rounded-xl border border-line bg-white px-4 py-3 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
+          className="w-full rounded-xl border border-line bg-cream px-4 py-3 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
         />
         {errors.message && (
           <p id="message-error" className="mt-1.5 text-sm text-red-700" role="alert">
@@ -241,7 +241,7 @@ function Field({
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink">
         {label}{" "}
-        {required && <span className="text-sage-light">*</span>}
+        {required && <span className="text-coral">*</span>}
         {optional && (
           <span className="font-normal text-muted">(optional)</span>
         )}
@@ -256,7 +256,7 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
+        className="min-h-[44px] w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
       />
       {error && (
         <p id={`${id}-error`} className="mt-1.5 text-sm text-red-700" role="alert">

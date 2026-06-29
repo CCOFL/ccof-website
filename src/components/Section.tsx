@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 
-type Background = "white" | "cream" | "cream-dark" | "sage";
+type Background = "white" | "cream" | "cream-dark" | "sage" | "charcoal";
 
 const backgrounds: Record<Background, string> = {
-  white: "bg-white text-ink",
-  cream: "bg-cream text-ink",
-  "cream-dark": "bg-cream-dark text-ink",
+  // Warm-white / warm-tint alternation — never stark pure white (Brand v1.1).
+  white: "bg-cream text-body",
+  cream: "bg-cream-dark text-body",
+  "cream-dark": "bg-cream-dark text-body",
   sage: "bg-sage text-cream",
+  charcoal: "bg-charcoal text-cream",
 };
 
 export function Container({
@@ -54,10 +56,11 @@ export function Eyebrow({
   children: ReactNode;
   onDark?: boolean;
 }) {
+  // Eyebrow tags render in coral — the brand's ~10% accent (Brand Standards v1.1).
   return (
     <p
       className={`mb-3 text-sm font-semibold uppercase tracking-[0.14em] ${
-        onDark ? "text-cream/80" : "text-sage-light"
+        onDark ? "text-cream/85" : "text-coral"
       }`}
     >
       {children}

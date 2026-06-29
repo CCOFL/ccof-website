@@ -8,7 +8,7 @@ export default function NotFound() {
         <div className="mx-auto max-w-xl">
           <Eyebrow>404</Eyebrow>
           <h1
-            className="font-serif font-semibold tracking-tight text-ink"
+            className="font-extrabold tracking-tight text-sage-600"
             style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
           >
             We couldn&apos;t find that page

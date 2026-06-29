@@ -8,11 +8,11 @@ export function FounderQuote() {
       <figure className="relative mx-auto max-w-3xl text-center">
         <span
           aria-hidden
-          className="pointer-events-none block font-serif text-7xl leading-none text-sage-light/40"
+          className="pointer-events-none block font-serif text-7xl leading-none text-coral/50"
         >
           &ldquo;
         </span>
-        <blockquote className="-mt-6 font-serif text-2xl italic leading-snug text-ink sm:text-[1.75rem]">
+        <blockquote className="-mt-6 font-serif text-2xl italic leading-snug text-charcoal sm:text-[1.75rem]">
           {FOUNDER_QUOTE.text}
         </blockquote>
         <figcaption className="mt-6 text-sm font-semibold uppercase tracking-wider text-muted">

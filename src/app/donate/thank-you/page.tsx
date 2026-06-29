@@ -57,7 +57,7 @@ export default async function ThankYouPage({
 
           <Eyebrow>Thank you</Eyebrow>
           <h1
-            className="font-serif font-semibold tracking-tight text-ink"
+            className="font-extrabold tracking-tight text-sage-600"
             style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
           >
             Your gift is on its way to a child

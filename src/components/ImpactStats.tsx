@@ -12,8 +12,8 @@ export function ImpactStats({ onDark = false }: { onDark?: boolean }) {
             <div>
               <dt className="sr-only">{stat.label}</dt>
               <dd
-                className={`font-serif text-4xl font-semibold sm:text-5xl ${
-                  onDark ? "text-cream" : "text-sage"
+                className={`text-4xl font-extrabold sm:text-5xl ${
+                  onDark ? "text-cream" : "text-sage-600"
                 }`}
               >
                 <CountUp

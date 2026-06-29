@@ -87,9 +87,9 @@ export default function AboutPage() {
           ].map((item) => (
             <div
               key={item.term}
-              className="rounded-2xl border border-line bg-white p-6 shadow-card"
+              className="rounded-2xl border border-line bg-cream p-6 shadow-card"
             >
-              <dt className="text-sm font-semibold uppercase tracking-wider text-sage-light">
+              <dt className="text-sm font-semibold uppercase tracking-wider text-coral">
                 {item.term}
               </dt>
               <dd className="mt-2 text-ink">{item.desc}</dd>

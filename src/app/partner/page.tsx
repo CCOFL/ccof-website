@@ -38,7 +38,7 @@ export default function PartnerPage() {
                 className={`flex h-full flex-col rounded-2xl border p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
                   action.variant === "primary"
                     ? "border-sage/30 bg-cream"
-                    : "border-line bg-white hover:border-sage-light/60"
+                    : "border-line bg-cream hover:border-sage-light/60"
                 }`}
               >
                 <h3 className="text-xl font-semibold">{action.title}</h3>
@@ -68,7 +68,7 @@ export default function PartnerPage() {
             <LinkButton
               href="/contact?intent=partner"
               size="lg"
-              className="bg-cream text-sage hover:bg-white"
+              className="bg-cream text-sage-700 hover:bg-white"
             >
               Become a Partner
             </LinkButton>

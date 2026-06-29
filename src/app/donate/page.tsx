@@ -26,7 +26,7 @@ export default async function DonatePage({
           <div>
             <Eyebrow>Donate / Give Goods</Eyebrow>
             <h1
-              className="font-serif font-semibold tracking-tight text-ink"
+              className="font-extrabold tracking-tight text-sage-600"
               style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
             >
               Fund the launch. Change a childhood.
@@ -38,8 +38,8 @@ export default async function DonatePage({
               programs.
             </p>
 
-            <div className="mt-8 space-y-4 rounded-2xl border border-line bg-white p-6 shadow-card">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-sage-light">
+            <div className="mt-8 space-y-4 rounded-2xl border border-line bg-cream p-6 shadow-card">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-coral">
                 Prefer to give goods?
               </h2>
               <p className="text-sm leading-relaxed text-ink/90">
@@ -65,11 +65,11 @@ export default async function DonatePage({
 
             {/* Trust signals */}
             <dl className="mt-8 grid grid-cols-2 gap-4 text-sm">
-              <div className="rounded-xl border border-line bg-white p-4">
+              <div className="rounded-xl border border-line bg-cream p-4">
                 <dt className="font-semibold text-ink">Tax-deductible</dt>
                 <dd className="mt-1 text-muted">501(c)(3) · EIN {ORG.ein}</dd>
               </div>
-              <div className="rounded-xl border border-line bg-white p-4">
+              <div className="rounded-xl border border-line bg-cream p-4">
                 <dt className="font-semibold text-ink">Secure</dt>
                 <dd className="mt-1 text-muted">Processed by Stripe</dd>
               </div>
@@ -78,7 +78,7 @@ export default async function DonatePage({
 
           {/* Right: the working donation form */}
           <div>
-            <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
+            <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
               {canceled && (
                 <p
                   className="mb-5 rounded-xl border border-line bg-cream px-4 py-3 text-sm text-ink"
@@ -88,7 +88,7 @@ export default async function DonatePage({
                   welcome to try again whenever you&apos;re ready.
                 </p>
               )}
-              <h2 className="font-serif text-2xl font-semibold text-ink">
+              <h2 className="text-2xl font-bold text-sage">
                 Make your gift
               </h2>
               <p className="mt-1 text-sm text-muted">

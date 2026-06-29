@@ -35,7 +35,7 @@ export default async function ContactPage({
           <div>
             <Eyebrow>Contact</Eyebrow>
             <h1
-              className="font-serif font-semibold tracking-tight text-ink"
+              className="font-extrabold tracking-tight text-sage-600"
               style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
             >
               Let&apos;s talk
@@ -45,8 +45,8 @@ export default async function ContactPage({
               we can help you — and we&apos;ll be in touch.
             </p>
 
-            <div className="mt-8 rounded-2xl border border-line bg-white p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-sage-light">
+            <div className="mt-8 rounded-2xl border border-line bg-cream p-6">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-coral">
                 We are currently welcoming inquiries for
               </h2>
               <ul className="mt-4 space-y-2.5 text-sm text-ink/90">
@@ -76,7 +76,7 @@ export default async function ContactPage({
           </div>
 
           {/* Right: form */}
-          <div className="rounded-3xl border border-line bg-white p-6 shadow-card sm:p-8">
+          <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
             <ContactForm initialIntent={intent} />
           </div>
         </div>

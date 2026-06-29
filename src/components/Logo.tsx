@@ -14,7 +14,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     >
       <span
         aria-hidden
-        className={`grid place-items-center rounded-full bg-sage font-serif font-semibold text-cream transition-all duration-300 ${
+        className={`grid place-items-center rounded-full bg-sage-600 font-extrabold text-cream transition-all duration-300 ${
           compact ? "h-9 w-9 text-base" : "h-11 w-11 text-lg"
         }`}
       >

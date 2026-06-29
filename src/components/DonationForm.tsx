@@ -106,7 +106,7 @@ export function DonationForm() {
                 className={`min-h-[52px] rounded-xl border text-lg font-semibold transition-all duration-200 ${
                   active
                     ? "border-sage bg-sage text-cream shadow-card"
-                    : "border-line bg-white text-ink hover:border-sage-light"
+                    : "border-line bg-cream text-ink hover:border-sage-light"
                 }`}
               >
                 ${preset.amount}
@@ -120,7 +120,7 @@ export function DonationForm() {
             className={`min-h-[52px] rounded-xl border text-base font-semibold transition-all duration-200 ${
               selected === "other"
                 ? "border-sage bg-sage text-cream shadow-card"
-                : "border-line bg-white text-ink hover:border-sage-light"
+                : "border-line bg-cream text-ink hover:border-sage-light"
             }`}
           >
             Other
@@ -145,7 +145,7 @@ export function DonationForm() {
                 value={custom}
                 onChange={(e) => setCustom(e.target.value)}
                 placeholder="75"
-                className="min-h-[48px] w-full rounded-xl border border-line bg-white pl-8 pr-4 text-lg text-ink focus:border-sage focus:outline-none"
+                className="min-h-[48px] w-full rounded-xl border border-line bg-cream pl-8 pr-4 text-lg text-ink focus:border-sage focus:outline-none"
                 autoFocus
               />
             </div>

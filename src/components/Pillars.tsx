@@ -13,23 +13,23 @@ export function Pillars() {
         return (
           <Reveal key={pillar.number} delay={i * 80}>
             <article
-              className={`group h-full rounded-2xl border p-6 shadow-card transition-all duration-300 ${
+              className={`group h-full rounded-2xl bg-cream p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover ${
                 dev
-                  ? "border-dashed border-line bg-cream/60"
-                  : "border-line bg-white hover:-translate-y-1 hover:border-sage-light/60 hover:shadow-card-hover"
+                  ? "border-2 border-dashed border-coral"
+                  : "border border-line hover:border-sage-light/60"
               }`}
             >
               <div className="flex items-center justify-between">
-                <span className="font-serif text-2xl font-semibold text-sage-light">
+                <span className="text-2xl font-extrabold text-sage-600">
                   {pillar.number}
                 </span>
                 {dev && (
-                  <span className="rounded-full bg-cream-dark px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wide text-muted">
-                    In development
+                  <span className="rounded-full border border-coral/40 bg-coral/10 px-2.5 py-1 text-[0.7rem] font-bold uppercase tracking-wide text-coral-600">
+                    In Development
                   </span>
                 )}
               </div>
-              <h3 className="mt-3 text-lg font-semibold">{pillar.title}</h3>
+              <h3 className="mt-3 text-lg font-bold">{pillar.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">
                 {pillar.body}
               </p>
