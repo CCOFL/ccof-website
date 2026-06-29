@@ -97,14 +97,37 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Legal links */}
+        <nav
+          aria-label="Legal"
+          className="mt-12 flex flex-wrap gap-x-6 gap-y-2 border-t border-cream/15 pt-8 text-sm"
+        >
+          {[
+            { label: "Privacy Policy", href: "/privacy" },
+            { label: "Terms of Use", href: "/terms" },
+            { label: "Donation & Refund Policy", href: "/donation-policy" },
+            { label: "Sources & Methodology", href: "/sources" },
+          ].map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="text-cream/75 transition-colors hover:text-cream"
+            >
+              {l.label}
+            </Link>
+          ))}
+        </nav>
+
         {/* Transparency / legal block (brief §5, §1) */}
-        <div className="mt-12 space-y-3 border-t border-cream/15 pt-8 text-xs leading-relaxed text-cream/55">
+        <div className="mt-6 space-y-3 text-xs leading-relaxed text-cream/55">
           <p className="flex flex-wrap gap-x-4 gap-y-1">
             <span>501(c)(3) public charity</span>
             <span aria-hidden>·</span>
             <span>EIN {ORG.ein}</span>
             <span aria-hidden>·</span>
             <span>FL Charitable Registration No. {ORG.flReg}</span>
+            <span aria-hidden>·</span>
+            <span>FL Doc. No. {ORG.flDoc}</span>
           </p>
           <p>{TAX_NOTE}</p>
           <p className="max-w-3xl">{FL_DISCLOSURE}</p>

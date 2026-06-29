@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IMPACT_STATS, IMPACT_SOURCES } from "@/lib/site";
 import { CountUp } from "./CountUp";
 import { Reveal } from "./Reveal";
@@ -36,7 +37,15 @@ export function ImpactStats({ onDark = false }: { onDark?: boolean }) {
       <p
         className={`mt-10 text-xs ${onDark ? "text-cream/50" : "text-muted/80"}`}
       >
-        {IMPACT_SOURCES}
+        {IMPACT_SOURCES}{" "}
+        <Link
+          href="/sources"
+          className={`underline underline-offset-2 ${
+            onDark ? "hover:text-cream" : "hover:text-sage"
+          }`}
+        >
+          See sources &amp; methodology →
+        </Link>
       </p>
     </div>
   );

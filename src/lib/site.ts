@@ -13,6 +13,7 @@ export const ORG = {
   email: "info@childrenscollectivefl.org",
   ein: "42-2020310",
   flReg: "CH83131",
+  flDoc: "N26000005374",
   location: "Treasure Coast, FL",
   flagshipProgram: "Collective Kids Closet",
   flagshipLaunch: "Fall 2026",

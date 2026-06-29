@@ -11,6 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/donate", priority: 0.9 },
     { path: "/where-it-goes", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
+    { path: "/sources", priority: 0.4 },
+    { path: "/privacy", priority: 0.3 },
+    { path: "/terms", priority: 0.3 },
+    { path: "/donation-policy", priority: 0.4 },
   ];
   const lastModified = new Date("2026-06-28");
   return routes.map((r) => ({
