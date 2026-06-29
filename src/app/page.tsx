@@ -10,8 +10,13 @@ import { EmailCapture } from "@/components/EmailCapture";
 import { SectionHeading } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { ORG, MISSION_LEAD } from "@/lib/site";
+import { getImpactStats } from "@/lib/impact";
 
-export default function Home() {
+// Re-fetch the impact figures from Supabase daily (data changes quarterly).
+export const revalidate = 86400;
+
+export default async function Home() {
+  const impactStats = await getImpactStats();
   return (
     <>
       {/* HERO — content starts in the first viewport; one primary + one secondary CTA (brief #4/#5) */}
@@ -77,7 +82,7 @@ export default function Home() {
           intro="Behind every number is a child on the Treasure Coast who needs the basics handled with care."
         />
         <div className="mt-12">
-          <ImpactStats />
+          <ImpactStats stats={impactStats} />
         </div>
       </Section>
 
