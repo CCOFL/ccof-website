@@ -20,7 +20,7 @@ export default function ClosetPage() {
       <PageHero
         eyebrow={`Coming to ${ORG.flagshipCity} · ${ORG.flagshipLaunch}`}
         title="Collective Kids Closet"
-        intro="An affordable community resale program for quality kids' goods — open to all, with every purchase funding local programs for children in care."
+        intro="The flagship program of The Children's Collective of Florida — an affordable community resale program for quality kids' goods, open to all, with every purchase reinvested in local programs for children in care."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <LinkButton href="/donate" size="lg">

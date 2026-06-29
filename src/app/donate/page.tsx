@@ -30,7 +30,7 @@ export default async function DonatePage({
               className="font-extrabold tracking-tight text-sage-600"
               style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
             >
-              Fund the launch. Change a childhood.
+              Change a childhood. Fund the launch.
             </h1>
             <p className="measure mt-5 text-lg leading-relaxed text-muted">
               {ORG.flagshipProgram} is coming to {ORG.flagshipCity} in{" "}
