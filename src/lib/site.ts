@@ -39,7 +39,7 @@ export const PRIMARY_CTA = { label: "Donate", href: "/donate" } as const;
  * tight (per CCOF_Founders_Promise_and_Where_It_Goes, June 2026).
  */
 export const FOUNDER_QUOTE = {
-  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. The proceeds from our work are reinvested in our community — supporting kids in foster care, crisis, and mentoring. And we'll show you exactly where it goes.",
+  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. The proceeds are reinvested right here in our community — supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
@@ -49,10 +49,10 @@ export const FOUNDER = {
   name: "Stephanie Haskins",
   title: "Founder & President",
   intro:
-    "Founded by Stephanie Haskins, The Children's Collective of Florida was born from faith, motherhood, and a belief that everyday generosity can create lasting opportunities for children.",
+    "Founded by Stephanie Haskins, The Children's Collective of Florida was born from Christian faith, motherhood, and a belief that everyday generosity can create lasting opportunities for children.",
   bio: [
     "Stephanie Haskins is the Founder and President of The Children's Collective of Florida, a nonprofit created to connect community generosity with practical support for children and families in need.",
-    "Guided by her faith and a heart for children, Stephanie has spent years supporting organizations focused on foster care, family support, youth development, and community outreach. After becoming a mother to her daughter, Summer, she became even more aware of how quickly children outgrow clothing, toys, and essentials — and how many families could benefit from those same resources.",
+    "Guided by her Christian faith and a heart for children, Stephanie has spent years supporting organizations focused on foster care, family support, youth development, and community outreach. After becoming a mother to her daughter, Summer, she became even more aware of how quickly children outgrow clothing, toys, and essentials — and how many families could benefit from those same resources.",
     "That realization inspired the creation of The Children's Collective of Florida and its first program, The Collective Kids Closet. Stephanie's vision is to create a clear, trusted place where families can donate gently used children's items, shop affordable quality goods, and support programs serving children throughout Florida.",
   ],
   promisePrimary:
