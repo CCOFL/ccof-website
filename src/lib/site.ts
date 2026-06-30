@@ -169,9 +169,20 @@ export const WHY_THIS_MATTERS = {
     "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work — through our flagship program, the Collective Kids Closet, coming to Martin County in late 2026.",
 } as const;
 
-/** Board of directors (brief §1). */
-export const BOARD: { name: string; role: string }[] = [
-  { name: "Stephanie Haskins", role: "Founder & President" },
+/**
+ * Board of directors / team (brief §1). Each member carries a short bio for the
+ * About "Our team" grid; an omitted `bio` renders a clearly-marked placeholder
+ * until the org supplies copy. Stephanie leads the grid as one equally-weighted
+ * member — not a full-width founder hero.
+ */
+export const BOARD: { name: string; role: string; bio?: string[] }[] = [
+  {
+    name: "Stephanie Haskins",
+    role: "Founder & President",
+    bio: [
+      "Stephanie, led by her Christian faith, has always had a heart for philanthropy, drawn to organizations that lift up children and families. Motherhood brought that calling into focus: she watched how fast her own children outgrew clothing and everyday essentials, and recognized how much those resources could mean to a family in need. From that insight, she founded The Children's Collective of Florida — channeling community generosity into clothing, essentials, and dignity for kids in foster care, kinship homes, and crisis — and launched its first program, the Collective Kids Closet.",
+    ],
+  },
   { name: "Amy Mendez", role: "Vice President" },
   { name: "Ashley Gregory", role: "Treasurer" },
   { name: "Isabel Rodas Torres", role: "Secretary" },
