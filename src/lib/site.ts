@@ -177,8 +177,7 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
     name: "Stephanie Haskins",
     role: "Founder & President",
     bio: [
-      "Guided by Stephanie's Christian faith, she has always had a heart for philanthropy, giving back, and supporting organizations doing great work toward this same cause and mission.",
-      "After becoming a mother, she saw firsthand how quickly children outgrow clothing and essentials — and how many families could use those same resources. That realization inspired The Children's Collective of Florida and its first program, the Collective Kids Closet.",
+      "Stephanie, led by her Christian faith, has always had a heart for philanthropy, drawn to organizations that lift up children and families. Motherhood brought that calling into focus: she watched how fast her own children outgrew clothing and everyday essentials, and recognized how much those resources could mean to a family in need. From that insight, she founded The Children's Collective of Florida — channeling community generosity into clothing, essentials, and dignity for kids in foster care, kinship homes, and crisis — and launched its first program, the Collective Kids Closet.",
     ],
   },
   { name: "Amy Mendez", role: "Vice President" },
