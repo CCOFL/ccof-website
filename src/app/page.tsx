@@ -7,6 +7,7 @@ import { ImpactStats } from "@/components/ImpactStats";
 import { Flywheel } from "@/components/Flywheel";
 import { Pillars } from "@/components/Pillars";
 import { CollectMarquee } from "@/components/CollectMarquee";
+import { WhereItGoesTeaser } from "@/components/WhereItGoesTeaser";
 import { EmailCapture } from "@/components/EmailCapture";
 import { SectionHeading } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -98,6 +99,11 @@ export default async function Home() {
         <div className="mt-12">
           <Flywheel />
         </div>
+      </Section>
+
+      {/* WHERE IT GOES teaser — surfaces the transparency page in the body (brief task 5) */}
+      <Section background="sage">
+        <WhereItGoesTeaser />
       </Section>
 
       {/* PILLARS */}
