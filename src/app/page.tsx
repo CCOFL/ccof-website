@@ -72,11 +72,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* FOUNDER PULL-QUOTE — promoted near the top (brief §5) */}
-      <Section background="white">
-        <FounderQuote />
-      </Section>
-
       {/* IMPACT — count-up stats (brief §6) */}
       <Section background="cream">
         <SectionHeading
@@ -169,6 +164,13 @@ export default async function Home() {
             </div>
           </Reveal>
         </div>
+      </Section>
+
+      {/* FOUNDER'S PROMISE — a personal guarantee at the decision point, just
+          above the closing CTA (brief task 6: lead with why, reinforce with the
+          founder's voice lower down). */}
+      <Section background="white">
+        <FounderQuote />
       </Section>
 
       {/* FOLLOW OUR LAUNCH (brief §5) + closing donate CTA */}
