@@ -135,19 +135,31 @@ export default async function Home() {
           title="Founding partners — announcing soon"
           intro="Resale proceeds fund local 501(c)(3) programs serving kids in foster care, kinship homes, and crisis. We're finalizing our founding partner programs now."
         />
-        <div className="mt-10 grid gap-6 sm:grid-cols-3">
-          {[1, 2, 3].map((n) => (
-            <Reveal key={n} delay={n * 80}>
-              <div className="grid h-28 place-items-center rounded-2xl border border-dashed border-line bg-cream text-sm text-muted">
-                Partner logo — announcing soon
+        <div className="mt-10">
+          <Reveal>
+            {/* Warm invitation in place of empty logo boxes (brief task 2). */}
+            <div className="group mx-auto max-w-2xl rounded-3xl border border-line bg-cream p-8 text-center shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-sage-light/60 hover:shadow-card-hover sm:p-10">
+              <h3 className="text-2xl font-bold text-sage-600">
+                Are you a local 501(c)(3)?
+              </h3>
+              <p className="measure mx-auto mt-3 text-base leading-relaxed text-muted">
+                Our founding partner programs are being finalized now. If your
+                organization serves children in foster care, kinship homes, or
+                crisis, we&apos;d love to fund your work from resale proceeds.
+              </p>
+              <div className="mt-6">
+                <LinkButton href="/partner">
+                  Become a founding partner
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-200 group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </LinkButton>
               </div>
-            </Reveal>
-          ))}
-        </div>
-        <div className="mt-8">
-          <LinkButton href="/partner" variant="secondary">
-            Partner with us
-          </LinkButton>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
