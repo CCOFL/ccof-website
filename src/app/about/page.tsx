@@ -7,7 +7,6 @@ import {
   ORG,
   MISSION,
   BOARD,
-  FOUNDER,
   WHY_THIS_MATTERS,
   IMPACT_SOURCES,
 } from "@/lib/site";
@@ -78,55 +77,35 @@ export default function AboutPage() {
         </p>
       </Section>
 
-      {/* Meet Our Founder — real bio + primary Founder's Promise */}
+      {/* Our team — the founder leads the grid as one equally-weighted member,
+          not a full-width hero. Her personal-promise quote now lives on the
+          homepage, so it is intentionally not duplicated here. */}
       <Section background="white">
-        <SectionHeading eyebrow="Meet our founder" title={FOUNDER.name} />
-        <div className="measure mt-8 space-y-5 text-lg leading-relaxed text-body">
-          <p className="font-medium text-ink">{FOUNDER.intro}</p>
-          {FOUNDER.bio.map((para) => (
-            <p key={para.slice(0, 24)}>{para}</p>
-          ))}
-        </div>
-
-        {/* The Founder's Promise — primary version */}
-        <Reveal>
-          <figure className="mx-auto mt-12 max-w-3xl rounded-3xl border border-line bg-cream-dark/60 p-8 sm:p-10">
-            <span
-              aria-hidden
-              className="block font-serif text-6xl leading-none text-coral/50"
-            >
-              &ldquo;
-            </span>
-            <blockquote className="-mt-4 font-serif text-xl italic leading-relaxed text-charcoal">
-              {FOUNDER.promisePrimary}
-            </blockquote>
-            <figcaption className="mt-5 text-sm font-semibold uppercase tracking-wider text-muted">
-              {FOUNDER.name}
-              <span className="mx-2 text-line" aria-hidden>
-                |
-              </span>
-              <span className="font-medium normal-case tracking-normal">
-                {FOUNDER.title}
-              </span>
-            </figcaption>
-          </figure>
-        </Reveal>
-      </Section>
-
-      {/* Board / governance */}
-      <Section background="cream">
         <SectionHeading
-          eyebrow="Governance"
-          title="Our board of directors"
-          intro="A volunteer board accountable to our mission and our community."
+          eyebrow="Our team"
+          title="Board of directors"
+          intro="A volunteer board accountable to our mission and our community — sharing the work of turning everyday generosity into real support for kids."
         />
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {BOARD.map((member, i) => (
             <Reveal as="li" key={member.name} delay={i * 70}>
-              <div className="h-full rounded-2xl border border-line bg-cream/60 p-5">
-                <p className="text-lg font-bold text-ink">{member.name}</p>
-                <p className="mt-1 text-sm text-muted">{member.role}</p>
-              </div>
+              <article className="flex h-full flex-col rounded-2xl border border-line bg-cream p-6 shadow-card">
+                <h3 className="text-lg font-bold text-ink">{member.name}</h3>
+                <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-coral-deep">
+                  {member.role}
+                </p>
+                {member.bio ? (
+                  <div className="mt-3 space-y-3 text-sm leading-relaxed text-body">
+                    {member.bio.map((para) => (
+                      <p key={para.slice(0, 24)}>{para}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mt-3 text-sm italic leading-relaxed text-muted">
+                    Bio coming soon — provided by {ORG.name}.
+                  </p>
+                )}
+              </article>
             </Reveal>
           ))}
         </ul>
