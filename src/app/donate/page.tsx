@@ -107,6 +107,15 @@ export default async function DonatePage({
               <div className="mt-6">
                 <DonationForm />
               </div>
+              {/* Transparency link right beside the amount selector (brief task 5) */}
+              <p className="mt-6 border-t border-line pt-5 text-center text-sm text-body">
+                <Link
+                  href="/where-it-goes"
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  See exactly where it goes →
+                </Link>
+              </p>
             </div>
 
             {/* Required legal disclosures (brief §1) */}
