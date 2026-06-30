@@ -1,4 +1,5 @@
 import Image from "next/image";
+import heroChildren from "../../public/images/hero-children.jpg";
 import { Section, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { FounderQuote } from "@/components/FounderQuote";
@@ -56,12 +57,13 @@ export default async function Home() {
             <Reveal>
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-line shadow-card">
                 <Image
-                  src="/images/hero-children.jpg"
+                  src={heroChildren}
                   alt="Children playing together outdoors on the Treasure Coast"
                   fill
                   priority
+                  placeholder="blur"
                   sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover"
+                  className="hero-fade object-cover"
                 />
               </div>
             </Reveal>

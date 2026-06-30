@@ -138,6 +138,26 @@
     max-width: 65ch;
   }
 
+  /* Gentle fade-in for the hero LCP image once it paints (brief task 3).
+     Pure CSS so it never depends on JS — a no-JS visitor still sees the image,
+     it simply fades to full opacity. Reduced motion gets the final state. */
+  .hero-fade {
+    animation: hero-fade 300ms var(--ease-out-soft) both;
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fade {
+      animation: none;
+    }
+  }
+
   /* Long-form styling for legal / sources pages (no typography plugin). */
   .prose-legal {
     max-width: 70ch;
