@@ -16,7 +16,7 @@ export function CollectMarquee() {
             key={`${chip}-${i}`}
             role="listitem"
             aria-hidden={i >= COLLECT_CHIPS.length ? true : undefined}
-            className="whitespace-nowrap rounded-full border border-line bg-cream px-4 py-2 text-sm font-medium text-ink/80"
+            className="whitespace-nowrap rounded-full border border-line bg-cream px-4 py-2 text-sm font-medium text-ink/80 transition-all duration-200 hover:-translate-y-0.5 hover:border-sage-light hover:text-ink"
           >
             {chip}
           </span>

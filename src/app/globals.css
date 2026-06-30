@@ -138,6 +138,31 @@
     max-width: 65ch;
   }
 
+  /* Primary nav links: underline that grows from the left on hover/focus
+     (brief task 4). The global reduced-motion guard above zeroes the
+     transition, so the underline simply snaps in for those users. */
+  .nav-underline {
+    position: relative;
+  }
+  .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 0.875rem;
+    right: 0.875rem;
+    bottom: 0.3rem;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s var(--ease-out-soft);
+  }
+  .nav-underline:hover::after,
+  .nav-underline:focus-visible::after,
+  .nav-underline[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+
   /* Gentle fade-in for the hero LCP image once it paints (brief task 3).
      Pure CSS so it never depends on JS — a no-JS visitor still sees the image,
      it simply fades to full opacity. Reduced motion gets the final state. */

@@ -7,7 +7,7 @@ export function Flywheel() {
     <ol className="grid gap-6 md:grid-cols-3">
       {FLYWHEEL.map((node, i) => (
         <Reveal as="li" key={node.step} delay={i * 90}>
-          <div className="relative h-full rounded-2xl border border-line bg-cream p-6 shadow-card">
+          <div className="relative h-full rounded-2xl border border-line bg-cream p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-sage-light/60 hover:shadow-card-hover">
             <span
               aria-hidden
               className="text-xs font-bold uppercase tracking-[0.12em] text-coral-deep"
