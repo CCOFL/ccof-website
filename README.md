@@ -1,6 +1,11 @@
 # The Children's Collective of Florida — website
 
+[![Deploys by Netlify](https://www.netlify.com/v3/img/components/netlify-color-accent.svg)](https://www.netlify.com)
+&nbsp;[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+
 A fast, accessible, conversion-optimized rebuild of [childrenscollectivefl.org](https://childrenscollectivefl.org), built to take the site from a 66/100 UX audit toward 100/100.
+
+This is the open-source codebase for The Children's Collective of Florida, Inc., a registered 501(c)(3) nonprofit — released under the MIT license for transparency and community reuse.
 
 **Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Stripe (donations) · Resend (form email) · deployed on Netlify.
 

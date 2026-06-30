@@ -142,6 +142,17 @@ export function Footer() {
           <p className="max-w-3xl">{FL_DISCLOSURE}</p>
           <p className="pt-2 text-cream/60">
             © {year} {ORG.legalName}. All rights reserved.
+            <span aria-hidden className="mx-2">
+              ·
+            </span>
+            <a
+              href="https://www.netlify.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-4 transition-colors hover:text-cream hover:underline"
+            >
+              Deploys by Netlify
+            </a>
           </p>
         </div>
       </div>
