@@ -127,7 +127,10 @@ export const IMPACT_STATS: {
   label: string;
 }[] = [
   { value: 1319, label: "child-maltreatment reports in Martin County last year" },
-  { value: 3000, prefix: "~", label: "local children living in poverty" },
+  // ~1 in 9 — matches the About page's "1 in 9 local children lives in poverty"
+  // so the two pages report the same figure (brief task 1). This is the
+  // Supabase fallback; the live value lives in the impact_stats table.
+  { value: 1, prefix: "~", suffix: " in 9", label: "local children live in poverty" },
   {
     value: 6,
     suffix: " in 10",
