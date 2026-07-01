@@ -84,12 +84,13 @@ export default async function Home() {
         </div>
       </Section>
 
-      {/* FLYWHEEL — You give → We steward → Programs get funded (brief §5) */}
+      {/* THE GIVING CYCLE — closed self-sustaining loop (You give → We steward →
+          Programs get funded → back to the community) */}
       <Section background="white">
         <SectionHeading
           eyebrow="The model"
-          title="A simple, transparent giving flywheel"
-          intro="Generosity in, stewardship in the middle, funded local programs out."
+          title="The giving cycle"
+          intro="Community generosity funds local programs — and the proceeds cycle right back into the community that gave."
         />
         <div className="mt-12">
           <Flywheel />
