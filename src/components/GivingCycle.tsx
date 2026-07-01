@@ -1,4 +1,4 @@
-import { FLYWHEEL } from "@/lib/site";
+import { GIVING_CYCLE } from "@/lib/site";
 import { Reveal } from "./Reveal";
 
 /**
@@ -25,7 +25,7 @@ const ARROWS = [
   { x: 61.4, y: 120, rot: 300 },
 ];
 
-export function Flywheel() {
+export function GivingCycle() {
   return (
     <div>
       {/* Desktop / tablet: circular cycle */}
@@ -67,7 +67,7 @@ export function Flywheel() {
 
         {/* Nodes */}
         <ol>
-          {FLYWHEEL.map((node, i) => (
+          {GIVING_CYCLE.map((node, i) => (
             <li
               key={node.step}
               className="absolute w-[11.5rem] -translate-x-1/2 -translate-y-1/2"
@@ -89,7 +89,7 @@ export function Flywheel() {
 
       {/* Mobile: vertical stack that closes the loop with a return note */}
       <ol className="mx-auto max-w-md space-y-3 md:hidden">
-        {FLYWHEEL.map((node, i) => (
+        {GIVING_CYCLE.map((node, i) => (
           <Reveal as="li" key={node.step} delay={i * 80}>
             <div className="relative rounded-2xl border border-line bg-cream p-5 shadow-card">
               <div className="flex items-start gap-3">
@@ -103,7 +103,7 @@ export function Flywheel() {
                   </p>
                 </div>
               </div>
-              {i < FLYWHEEL.length - 1 && (
+              {i < GIVING_CYCLE.length - 1 && (
                 <span
                   aria-hidden
                   className="absolute -bottom-3 left-[27px] text-lg leading-none text-sage"
