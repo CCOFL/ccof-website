@@ -63,7 +63,7 @@ export default async function Home() {
                   fill
                   priority
                   placeholder="blur"
-                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  sizes="(max-width: 1024px) 100vw, 480px"
                   className="hero-fade object-cover"
                 />
               </div>
