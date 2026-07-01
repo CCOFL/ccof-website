@@ -4,7 +4,7 @@ import { Section, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { FounderQuote } from "@/components/FounderQuote";
 import { ImpactStats } from "@/components/ImpactStats";
-import { Flywheel } from "@/components/Flywheel";
+import { GivingCycle } from "@/components/GivingCycle";
 import { Pillars } from "@/components/Pillars";
 import { CollectMarquee } from "@/components/CollectMarquee";
 import { WhereItGoesTeaser } from "@/components/WhereItGoesTeaser";
@@ -93,7 +93,7 @@ export default async function Home() {
           intro="Community generosity funds local programs — and the proceeds cycle right back into the community that gave."
         />
         <div className="mt-12">
-          <Flywheel />
+          <GivingCycle />
         </div>
       </Section>
 

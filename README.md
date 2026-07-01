@@ -112,7 +112,7 @@ Placeholders are labeled in the UI: hero photo, Collective Kids Closet storefron
 - [x] Accessibility: semantic landmarks, skip link, labeled fields + inline validation, visible focus rings, 44px targets, `prefers-reduced-motion` honored, alt text / `role="img"` on placeholders.
 - [x] Micro-interactions (<400ms): count-up stats, scroll reveals, card hover-lift, sticky condense, segmented amount control, form success checkmark, marquee.
 - [x] SEO: per-page titles/meta/OG, sitemap, robots, canonical URLs, NGO JSON-LD, no orphan/duplicate pages.
-- [x] Content preserved verbatim; founder pull-quote promoted; giving-flywheel diagram; "launch momentum" framing; Pillar 4 clearly marked "in development".
+- [x] Content preserved verbatim; founder pull-quote promoted; giving-cycle diagram; "launch momentum" framing; Pillar 4 clearly marked "in development".
 - [x] Transparency block (EIN, IRS letter, FL reg, board) + required FL Consumer Services disclosure on every donation context.
 - [x] Forms deliver to `info@childrenscollectivefl.org`; phone optional.
 - [x] Email-capture / "Follow our launch" module + social slots.

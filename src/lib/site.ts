@@ -100,8 +100,8 @@ export const PILLARS: {
   },
 ];
 
-/** Giving-flywheel steps (brief §5). */
-export const FLYWHEEL: { step: string; title: string; body: string }[] = [
+/** Giving-cycle steps (brief §5). */
+export const GIVING_CYCLE: { step: string; title: string; body: string }[] = [
   {
     step: "You give",
     title: "You give",

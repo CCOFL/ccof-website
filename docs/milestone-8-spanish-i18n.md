@@ -12,7 +12,7 @@ review — do not ship a raw machine translation of legal text.
 
 ## Current state
 
-- All UI copy already lives in one place: `src/lib/site.ts` (mission, pillars, flywheel,
+- All UI copy already lives in one place: `src/lib/site.ts` (mission, pillars, giving cycle,
   impact stats, founder copy, donation presets, legal disclosures, nav, etc.). This is a big
   head start — most strings are centralized, not scattered in JSX.
 - Some copy is still inline in page/component JSX (headings, intros, button labels, form
@@ -38,7 +38,7 @@ bloat). Default English stays at `/`; Spanish under `/es`.
 2. **Externalize copy into message catalogs.** Create `messages/en.json` and
    `messages/es.json`. Migrate `src/lib/site.ts` strings + the inline JSX copy into keyed
    messages (namespaces: `nav`, `home`, `about`, `donate`, `forms`, `legal`, `footer`, …).
-   Keep structured data (pillars, flywheel, impact stats) as arrays in the catalog or as
+   Keep structured data (pillars, giving cycle, impact stats) as arrays in the catalog or as
    typed config keyed by locale.
 3. **Translate.** Machine-translate the non-legal UI copy as a first pass, then human-edit.
    **Route the legal/tax strings to a human translator** and keep an English fallback until

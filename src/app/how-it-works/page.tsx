@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
-import { Flywheel } from "@/components/Flywheel";
+import { GivingCycle } from "@/components/GivingCycle";
 import { Pillars } from "@/components/Pillars";
 import { LinkButton } from "@/components/Button";
 
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "You give, we steward, local programs get funded. See the transparent giving flywheel behind The Children's Collective of Florida.",
+    "You give, we steward, local programs get funded. See the transparent giving cycle behind The Children's Collective of Florida.",
   alternates: { canonical: "/how-it-works" },
 };
 
@@ -22,7 +22,7 @@ export default function HowItWorksPage() {
       />
 
       <Section background="white">
-        <Flywheel />
+        <GivingCycle />
       </Section>
 
       <Section background="cream">
