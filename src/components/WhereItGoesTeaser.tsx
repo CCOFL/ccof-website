@@ -36,9 +36,9 @@ export function WhereItGoesTeaser() {
             <div className="h-full rounded-2xl bg-cream/10 p-5 ring-1 ring-cream/15">
               <span
                 aria-hidden
-                className="grid h-9 w-9 place-items-center rounded-full bg-cream/15 text-sm font-extrabold text-cream"
+                className="grid h-9 w-9 place-items-center rounded-full bg-cream/15 text-base font-bold text-cream"
               >
-                {i + 1}
+                ✓
               </span>
               <p className="mt-3 text-sm font-semibold leading-snug text-cream">
                 {pledge.title}
