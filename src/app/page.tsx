@@ -5,7 +5,6 @@ import { LinkButton } from "@/components/Button";
 import { FounderQuote } from "@/components/FounderQuote";
 import { ImpactStats } from "@/components/ImpactStats";
 import { GivingCycle } from "@/components/GivingCycle";
-import { Pillars } from "@/components/Pillars";
 import { CollectMarquee } from "@/components/CollectMarquee";
 import { WhereItGoesTeaser } from "@/components/WhereItGoesTeaser";
 import { EmailCapture } from "@/components/EmailCapture";
@@ -102,18 +101,6 @@ export default async function Home() {
         <WhereItGoesTeaser />
       </Section>
 
-      {/* PILLARS */}
-      <Section background="cream-dark">
-        <SectionHeading
-          eyebrow="How we work"
-          title="Three pillars — and a fourth on the way"
-          intro="Trusted Giving, Affordable Access, and Partner Programs work together. Volunteer Service is in development."
-        />
-        <div className="mt-12">
-          <Pillars />
-        </div>
-      </Section>
-
       {/* WHAT WE COLLECT — marquee (brief §6) */}
       <Section background="white" className="overflow-hidden">
         <SectionHeading
@@ -187,6 +174,10 @@ export default async function Home() {
             <div className="mt-7">
               <EmailCapture onDark />
             </div>
+            <p className="mt-4 text-sm text-cream/70">
+              Volunteer service is in development — follow our launch to hear
+              when it opens.
+            </p>
           </div>
           <div className="rounded-3xl bg-sage/15 p-8 ring-1 ring-sage/25 lg:p-10">
             <p className="text-2xl font-bold leading-snug text-cream">
