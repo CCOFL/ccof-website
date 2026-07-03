@@ -150,13 +150,14 @@ export function Footer() {
             <span aria-hidden className="mx-2">
               ·
             </span>
+            {/* Exact wording required by Netlify's Open Source plan. */}
             <a
               href="https://www.netlify.com"
               target="_blank"
               rel="noopener noreferrer"
               className="underline-offset-4 transition-colors hover:text-cream hover:underline"
             >
-              Deploys by Netlify
+              This site is powered by Netlify
             </a>
           </p>
         </div>
