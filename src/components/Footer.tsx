@@ -159,6 +159,19 @@ export function Footer() {
             >
               This site is powered by Netlify
             </a>
+            <span aria-hidden className="mx-2">
+              ·
+            </span>
+            {/* Public source repo — satisfies the Netlify Open Source plan's
+                requirement that the site link to its open-source repository. */}
+            <a
+              href="https://github.com/CCOFL/ccof-website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-4 transition-colors hover:text-cream hover:underline"
+            >
+              Open source on GitHub
+            </a>
           </p>
         </div>
       </div>
