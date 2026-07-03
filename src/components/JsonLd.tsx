@@ -1,10 +1,16 @@
 import { ORG } from "@/lib/site";
 
-/** Organization (NGO) structured data for richer search/AI results. */
+/**
+ * Structured data for richer search/AI results. Emits two linked nodes:
+ * - Organization (NGO) — the entity, using the full legal name.
+ * - WebSite — carries the site's display `name` (+ `alternateName`), which is
+ *   Google's primary signal for the site name shown next to the favicon in
+ *   search results. Using ORG.name (no ", Inc.") keeps that label clean.
+ */
 export function JsonLd() {
-  const data = {
-    "@context": "https://schema.org",
+  const org = {
     "@type": "NGO",
+    "@id": `${ORG.url}#organization`,
     name: ORG.legalName,
     alternateName: ORG.abbr,
     url: ORG.url,
@@ -22,6 +28,18 @@ export function JsonLd() {
       addressCountry: "US",
     },
   };
+
+  const website = {
+    "@type": "WebSite",
+    "@id": `${ORG.url}#website`,
+    name: ORG.name,
+    alternateName: ORG.abbr,
+    url: ORG.url,
+    publisher: { "@id": `${ORG.url}#organization` },
+  };
+
+  const data = { "@context": "https://schema.org", "@graph": [org, website] };
+
   return (
     <script
       type="application/ld+json"
