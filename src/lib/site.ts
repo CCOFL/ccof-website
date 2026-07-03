@@ -338,7 +338,7 @@ export const PARTNER_REQUESTS = {
     },
   ],
   stewardship:
-    "These goods aren't inventory we sell — they're the community's generosity, held in trust and directed to the children who need it most. In this channel nothing is sold; goods are provided at no cost through our partner organizations.",
+    "These goods are given by our community and entrusted to our care. As part of our charitable mission, we provide them — at no cost — to children in need through our partner nonprofit organizations. Nothing in this channel is sold.",
   // Sets honest expectations — we don't overpromise what we can't provide.
   expectation:
     "We match what we can from current stock, so the sooner and more specifically you tell us what's needed, the better we can help. We won't promise what we don't have on hand — but we'll always tell you what we can do.",
