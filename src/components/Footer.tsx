@@ -65,6 +65,14 @@ export function Footer() {
                   Where It Goes
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/partner-nonprofits"
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  For Partner Nonprofits
+                </Link>
+              </li>
             </ul>
           </nav>
 
