@@ -119,24 +119,27 @@ export default async function Home() {
         </div>
       </Section>
 
-      {/* PARTNER PROGRAMS placeholder (brief §5) */}
+      {/* FOUNDING PARTNERS — invite the early community builders/supporters
+          who help launch CCOF (businesses, congregations, schools, bin hosts).
+          The "programs we fund" invitation lives on the Partner page. */}
       <Section background="cream">
         <SectionHeading
-          eyebrow="Partner Programs"
-          title="Founding partners — announcing soon"
-          intro="Resale proceeds fund local 501(c)(3) programs serving kids in foster care, kinship homes, and crisis. We're finalizing our founding partner programs now."
+          eyebrow="Founding Partners"
+          title="Help us build the foundation"
+          intro="Every lasting effort starts with people who believe early. Founding partners are the businesses, schools, congregations, and neighbors helping launch The Children's Collective — and there's room for you."
         />
         <div className="mt-10">
           <Reveal>
-            {/* Warm invitation in place of empty logo boxes (brief task 2). */}
+            {/* Warm invitation in place of empty logo boxes. */}
             <div className="group mx-auto max-w-2xl rounded-3xl border border-line bg-cream p-8 text-center shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-sage-light/60 hover:shadow-card-hover sm:p-10">
               <h3 className="text-2xl font-bold text-sage-600">
-                Are you a local 501(c)(3)?
+                Want to help build this?
               </h3>
               <p className="measure mx-auto mt-3 text-base leading-relaxed text-muted">
-                Our founding partner programs are being finalized now. If your
-                organization serves children in foster care, kinship homes, or
-                crisis, we&apos;d love to fund your work from resale proceeds.
+                Founding partners get us off the ground — hosting a donation
+                bin, running a goods drive, sponsoring our first season, or
+                simply spreading the word. If you&apos;d like to help lay the
+                foundation, we&apos;d love to build alongside you.
               </p>
               <div className="mt-6">
                 <LinkButton href="/partner">
