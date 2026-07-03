@@ -31,13 +31,7 @@ export default function PartnerPage() {
           title="Pick the path that fits"
           intro="Each button below goes exactly where it should — no dead ends."
         />
-        <p className="measure mt-6 rounded-xl border border-sage/30 bg-sage/5 px-5 py-4 text-base leading-relaxed text-ink">
-          <span className="font-semibold">
-            Two ways to partner with us:
-          </span>{" "}
-          receive grant funding, or request goods for a child.
-        </p>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {PARTNER_ACTIONS.map((action, i) => (
             <Reveal key={action.title} delay={i * 70}>
               <div
