@@ -250,6 +250,7 @@ export const WHERE_IT_GOES = {
     "Items collected and stewarded for Treasure Coast families.",
     "Families served through affordable resale and direct support.",
     "Local partners supported and the dollars directed to children in foster care, crisis, and mentoring.",
+    "Goods provided directly to partner organizations for children in immediate need.",
     "Volunteer hours contributed by our community.",
     "Financial transparency: our IRS Form 990 and Florida charitable registration are available to anyone who asks.",
   ],
@@ -277,6 +278,12 @@ export const PARTNER_ACTIONS: {
     variant: "secondary",
   },
   {
+    title: "Request goods for a child in your care",
+    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs — provided directly, at no cost.",
+    cta: { label: "Make a Partner Request", href: "/partner-request" },
+    variant: "secondary",
+  },
+  {
     title: "Host a bin or drive",
     body: "Set up a donation bin or run a goods drive at your business, school, or place of worship.",
     cta: { label: "Host a Bin / Drive", href: "/contact?intent=host" },
@@ -295,6 +302,47 @@ export const PARTNER_ACTIONS: {
     variant: "secondary",
   },
 ];
+
+/**
+ * Partner Requests — the direct, in-kind provision channel, distinct from the
+ * resale-funds-grants (money) channel. Vetted, mission-aligned 501(c)(3)
+ * partners request specific goods for a child in immediate need; CCOF matches
+ * from donated inventory and provides the goods directly through the partner,
+ * at no cost. Framed as stewardship: donated goods are directed to the children
+ * who need them — nothing is sold in this channel. Copy lives here so the
+ * How-It-Works card and the /partner-request page stay in sync.
+ */
+export const PARTNER_REQUESTS = {
+  /** The "second path" card on How It Works. */
+  card: {
+    title: "Partner Requests — goods, directly",
+    body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them — at no cost, never resold.",
+  },
+  /** /partner-request page. */
+  eyebrow: "Partner Requests",
+  title: "When a child needs goods right now",
+  intro:
+    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly — and we provide the goods through them, at no cost, as an extension of the community's generosity.",
+  steps: [
+    {
+      title: "A partner reaches out",
+      body: "A vetted, mission-aligned 501(c)(3) serving children in foster care, kinship homes, or crisis tells us what a specific child needs — sizes, categories, and how soon.",
+    },
+    {
+      title: "We match the need",
+      body: "We check what the community has entrusted to us and set aside the right goods — inspected, clean, and ready.",
+    },
+    {
+      title: "Goods reach the child",
+      body: "We provide the items directly through the partner organization, so the child receives what they need from the people already caring for them.",
+    },
+  ],
+  stewardship:
+    "These goods aren't inventory we sell — they're the community's generosity, held in trust and directed to the children who need it most. In this channel nothing is sold; goods are provided at no cost through our partner organizations.",
+  eligibility:
+    "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New to us? Start a request and we'll confirm partner eligibility together.",
+  cta: { label: "Request goods for a child", href: "/partner-request" },
+} as const;
 
 /**
  * Social channels are not live yet (pages in development). Listed as

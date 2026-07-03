@@ -4,6 +4,7 @@ import { PageHero, SectionHeading } from "@/components/PageHero";
 import { GivingCycle } from "@/components/GivingCycle";
 import { Pillars } from "@/components/Pillars";
 import { LinkButton } from "@/components/Button";
+import { PARTNER_REQUESTS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "How It Works",
@@ -36,8 +37,52 @@ export default function HowItWorksPage() {
         </div>
       </Section>
 
-      {/* Where your money goes */}
+      {/* Two paths from the same donated goods */}
       <Section background="white">
+        <SectionHeading
+          eyebrow="Two paths, one promise"
+          title="Your donation reaches a child two ways"
+          intro="The same community generosity flows through two channels — one funds local programs, the other puts goods straight into the hands of a child who needs them now."
+        />
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="flex h-full flex-col rounded-2xl border border-line bg-cream p-7 shadow-card">
+            <span className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
+              Path 1 · Funding
+            </span>
+            <h3 className="mt-2 text-xl font-bold">
+              Resale that funds programs
+            </h3>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+              Donated goods are inspected and resold affordably through
+              Collective Kids Closet. The proceeds become grants to local
+              501(c)(3) programs serving kids in foster care, kinship homes, and
+              crisis.
+            </p>
+          </div>
+          <div className="flex h-full flex-col rounded-2xl border border-sage/30 bg-cream p-7 shadow-card">
+            <span className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
+              Path 2 · Direct goods
+            </span>
+            <h3 className="mt-2 text-xl font-bold">
+              {PARTNER_REQUESTS.card.title}
+            </h3>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+              {PARTNER_REQUESTS.card.body}
+            </p>
+            <div className="mt-5">
+              <LinkButton
+                href={PARTNER_REQUESTS.cta.href}
+                variant="secondary"
+              >
+                {PARTNER_REQUESTS.cta.label}
+              </LinkButton>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Where your money goes */}
+      <Section background="cream">
         <SectionHeading
           eyebrow="Where your money goes"
           title="Every gift compounds"

@@ -44,8 +44,9 @@ export default async function DonatePage({
               </h2>
               <p className="text-sm leading-relaxed text-ink/90">
                 We welcome quality kids&apos; items — strollers, cribs, clothing,
-                books, and more, inspected and cleaned before they find a second
-                home. Email{" "}
+                books, and more, inspected and cleaned, then either resold to
+                fund local programs or provided directly to a child in need
+                through our partner organizations. Email{" "}
                 <a
                   href={`mailto:${ORG.email}`}
                   className="text-sage-600 underline-offset-4 hover:underline"

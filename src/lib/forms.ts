@@ -60,6 +60,84 @@ export async function saveContactSubmission(sub: ContactSubmission) {
   return { stored };
 }
 
+export type PartnerRequest = {
+  orgName: string;
+  contactName: string;
+  email: string;
+  phone?: string;
+  is501c3: boolean;
+  childDetails?: string;
+  goodsNeeded: string;
+  urgency: string;
+  message?: string;
+};
+
+/**
+ * Persist a partner goods request (the direct, in-kind provision channel) to
+ * Supabase, and notify the inbox if Resend is configured. Mirrors
+ * saveContactSubmission, with one addition: if the `partner_requests` table
+ * doesn't exist yet (migration 0004 not run — Postgres error 42P01), we degrade
+ * to the log/notify path instead of throwing, so the form keeps working on a
+ * fresh deploy before the table is created.
+ */
+export async function savePartnerRequest(req: PartnerRequest) {
+  let stored = false;
+
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabase();
+    const { error } = await supabase!.from("partner_requests").insert({
+      org_name: req.orgName,
+      contact_name: req.contactName,
+      email: req.email,
+      phone: req.phone || null,
+      is_501c3: req.is501c3,
+      child_details: req.childDetails || null,
+      goods_needed: req.goodsNeeded,
+      urgency: req.urgency,
+      message: req.message || null,
+    });
+    // 42P01 = undefined_table: the migration hasn't been run yet. Fall through
+    // to the notify/log path rather than failing the submission.
+    if (error && error.code !== "42P01") {
+      throw new Error(`Supabase insert failed: ${error.message}`);
+    }
+    if (!error) stored = true;
+  }
+
+  if (isEmailConfigured()) {
+    await sendNotification({
+      subject: `Partner request — ${req.orgName} — ${req.urgency}`,
+      replyTo: req.email,
+      text: [
+        `New partner goods request`,
+        `Organization: ${req.orgName}`,
+        `501(c)(3) attested: ${req.is501c3 ? "yes" : "no / not confirmed"}`,
+        `Contact: ${req.contactName}`,
+        `Email: ${req.email}`,
+        `Phone: ${req.phone || "(not provided)"}`,
+        `Urgency: ${req.urgency}`,
+        ``,
+        `Child details: ${req.childDetails || "(none provided)"}`,
+        `Goods needed: ${req.goodsNeeded}`,
+        ``,
+        req.message || "(no additional message)",
+      ].join("\n"),
+    });
+    stored = true;
+  }
+
+  if (!stored) {
+    console.warn(
+      `[forms] Partner request not persisted (table missing or no storage) — logged only:\n${JSON.stringify(
+        req,
+        null,
+        2,
+      )}`,
+    );
+  }
+  return { stored };
+}
+
 /** Persist a launch-list email signup to Supabase (idempotent on email). */
 export async function saveLaunchSignup(email: string) {
   let stored = false;
