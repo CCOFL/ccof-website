@@ -250,6 +250,7 @@ export const WHERE_IT_GOES = {
     "Items collected and stewarded for Treasure Coast families.",
     "Families served through affordable resale and direct support.",
     "Local partners supported and the dollars directed to children in foster care, crisis, and mentoring.",
+    "Goods provided directly to partner organizations for children in immediate need.",
     "Volunteer hours contributed by our community.",
     "Financial transparency: our IRS Form 990 and Florida charitable registration are available to anyone who asks.",
   ],
@@ -277,6 +278,12 @@ export const PARTNER_ACTIONS: {
     variant: "secondary",
   },
   {
+    title: "Request goods for a child in your care",
+    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs — provided directly, at no cost.",
+    cta: { label: "For Partner Nonprofits", href: "/partner-nonprofits" },
+    variant: "secondary",
+  },
+  {
     title: "Host a bin or drive",
     body: "Set up a donation bin or run a goods drive at your business, school, or place of worship.",
     cta: { label: "Host a Bin / Drive", href: "/contact?intent=host" },
@@ -295,6 +302,56 @@ export const PARTNER_ACTIONS: {
     variant: "secondary",
   },
 ];
+
+/**
+ * Partner Requests — the direct, in-kind provision channel, distinct from the
+ * resale-funds-grants (money) channel. Vetted, mission-aligned 501(c)(3)
+ * partners request specific goods for a child in immediate need; CCOF matches
+ * from donated inventory and provides the goods directly through the partner,
+ * at no cost. Framed as stewardship: donated goods are directed to the children
+ * who need them — nothing is sold in this channel. Copy lives here so the
+ * How-It-Works card and the /partner-nonprofits page stay in sync.
+ */
+export const PARTNER_REQUESTS = {
+  /** The "second path" card on How It Works. */
+  card: {
+    title: "Partner Requests — goods, directly",
+    body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them — at no cost, never resold.",
+  },
+  /** /partner-nonprofits page. */
+  eyebrow: "For Partner Nonprofits",
+  title: "When a child needs goods right now",
+  intro:
+    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly — and we provide the goods through them, at no cost, as an extension of the community's generosity.",
+  steps: [
+    {
+      title: "A partner reaches out",
+      body: "A vetted, mission-aligned 501(c)(3) serving children in foster care, kinship homes, or crisis tells us what a specific child needs — sizes, categories, and how soon.",
+    },
+    {
+      title: "We match the need",
+      body: "We check what the community has entrusted to us and set aside the right goods — inspected, clean, and ready.",
+    },
+    {
+      title: "Goods reach the child",
+      body: "We provide the items directly through the partner organization, so the child receives what they need from the people already caring for them.",
+    },
+  ],
+  stewardship:
+    "These goods are given by our community and entrusted to our care. As part of our charitable mission, we provide them — at no cost — to children in need through our partner nonprofit organizations. Nothing in this channel is sold.",
+  // Sets honest expectations — we don't overpromise what we can't provide.
+  expectation:
+    "We match what we can from current stock, so the sooner and more specifically you tell us what's needed, the better we can help. We won't promise what we don't have on hand — but we'll always tell you what we can do.",
+  // Phase 1 gate: 501(c)(3) attestation + a promise to verify and onboard each
+  // partner before fulfilling. Formal partner approval is Phase 2.
+  eligibility:
+    "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New partners are welcome — we verify and onboard each partner before fulfilling requests, so your first request also starts that conversation.",
+  // Interim direct line for urgent needs, until the formal partner
+  // communications plan (and a published phone number) are in place.
+  urgentIntro:
+    "Have an urgent need right now? While we formalize our partner communications — a direct line and phone number are on the way — email us and we'll respond as fast as we can:",
+  cta: { label: "Request goods for a child", href: "/partner-nonprofits" },
+} as const;
 
 /**
  * Social channels are not live yet (pages in development). Listed as
