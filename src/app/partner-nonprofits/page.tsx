@@ -6,13 +6,13 @@ import { PartnerRequestForm } from "@/components/PartnerRequestForm";
 import { PARTNER_REQUESTS, ORG } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Partner Requests",
+  title: "For Partner Nonprofits",
   description:
     "Partner 501(c)(3)s serving children in foster care, kinship care, or crisis can request clothing, shoes, and essentials for a child in need — provided directly, at no cost.",
-  alternates: { canonical: "/partner-request" },
+  alternates: { canonical: "/partner-nonprofits" },
 };
 
-export default function PartnerRequestPage() {
+export default function PartnerNonprofitsPage() {
   return (
     <>
       <PageHero
@@ -55,24 +55,33 @@ export default function PartnerRequestPage() {
               eyebrow="Make a request"
               title="Tell us what a child needs"
             />
-            <p className="measure mt-5 text-base leading-relaxed text-muted">
-              {PARTNER_REQUESTS.eligibility}
-            </p>
-            <div className="mt-8 space-y-1 text-sm text-muted">
-              <p>
-                Questions first? Email{" "}
+
+            {/* Interim urgent-needs channel (direct line + phone are Phase 2) */}
+            <div className="mt-6 rounded-2xl border border-coral/30 bg-coral/5 p-5">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
+                Urgent need?
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink/90">
+                {PARTNER_REQUESTS.urgentIntro}{" "}
                 <a
                   href={`mailto:${ORG.email}`}
-                  className="text-sage-600 underline-offset-4 hover:underline"
+                  className="font-semibold text-coral-deep underline-offset-4 hover:underline"
                 >
                   {ORG.email}
                 </a>
               </p>
-              <p>
-                Please don&apos;t include a child&apos;s name or identifying
-                details — ages and sizes are all we need.
-              </p>
             </div>
+
+            <p className="measure mt-6 text-base leading-relaxed text-muted">
+              {PARTNER_REQUESTS.eligibility}
+            </p>
+            <p className="measure mt-4 text-base leading-relaxed text-muted">
+              {PARTNER_REQUESTS.expectation}
+            </p>
+            <p className="mt-6 text-sm text-muted">
+              Please don&apos;t include a child&apos;s name or identifying
+              details — ages and sizes are all we need.
+            </p>
           </div>
 
           <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">

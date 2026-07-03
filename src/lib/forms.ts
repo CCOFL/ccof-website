@@ -69,6 +69,7 @@ export type PartnerRequest = {
   childDetails?: string;
   goodsNeeded: string;
   urgency: string;
+  fulfillmentPref?: string;
   message?: string;
 };
 
@@ -94,6 +95,7 @@ export async function savePartnerRequest(req: PartnerRequest) {
       child_details: req.childDetails || null,
       goods_needed: req.goodsNeeded,
       urgency: req.urgency,
+      fulfillment_pref: req.fulfillmentPref || null,
       message: req.message || null,
     });
     // Migration 0004 not run yet → the table is missing. Postgres reports this
@@ -124,6 +126,7 @@ export async function savePartnerRequest(req: PartnerRequest) {
         `Email: ${req.email}`,
         `Phone: ${req.phone || "(not provided)"}`,
         `Urgency: ${req.urgency}`,
+        `Fulfillment preference: ${req.fulfillmentPref || "(not specified)"}`,
         ``,
         `Child details: ${req.childDetails || "(none provided)"}`,
         `Goods needed: ${req.goodsNeeded}`,

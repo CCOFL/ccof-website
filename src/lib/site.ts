@@ -280,7 +280,7 @@ export const PARTNER_ACTIONS: {
   {
     title: "Request goods for a child in your care",
     body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs — provided directly, at no cost.",
-    cta: { label: "Make a Partner Request", href: "/partner-request" },
+    cta: { label: "For Partner Nonprofits", href: "/partner-nonprofits" },
     variant: "secondary",
   },
   {
@@ -310,7 +310,7 @@ export const PARTNER_ACTIONS: {
  * from donated inventory and provides the goods directly through the partner,
  * at no cost. Framed as stewardship: donated goods are directed to the children
  * who need them — nothing is sold in this channel. Copy lives here so the
- * How-It-Works card and the /partner-request page stay in sync.
+ * How-It-Works card and the /partner-nonprofits page stay in sync.
  */
 export const PARTNER_REQUESTS = {
   /** The "second path" card on How It Works. */
@@ -318,8 +318,8 @@ export const PARTNER_REQUESTS = {
     title: "Partner Requests — goods, directly",
     body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them — at no cost, never resold.",
   },
-  /** /partner-request page. */
-  eyebrow: "Partner Requests",
+  /** /partner-nonprofits page. */
+  eyebrow: "For Partner Nonprofits",
   title: "When a child needs goods right now",
   intro:
     "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly — and we provide the goods through them, at no cost, as an extension of the community's generosity.",
@@ -339,9 +339,18 @@ export const PARTNER_REQUESTS = {
   ],
   stewardship:
     "These goods aren't inventory we sell — they're the community's generosity, held in trust and directed to the children who need it most. In this channel nothing is sold; goods are provided at no cost through our partner organizations.",
+  // Sets honest expectations — we don't overpromise what we can't provide.
+  expectation:
+    "We match what we can from current stock, so the sooner and more specifically you tell us what's needed, the better we can help. We won't promise what we don't have on hand — but we'll always tell you what we can do.",
+  // Phase 1 gate: 501(c)(3) attestation + a promise to verify and onboard each
+  // partner before fulfilling. Formal partner approval is Phase 2.
   eligibility:
-    "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New to us? Start a request and we'll confirm partner eligibility together.",
-  cta: { label: "Request goods for a child", href: "/partner-request" },
+    "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New partners are welcome — we verify and onboard each partner before fulfilling requests, so your first request also starts that conversation.",
+  // Interim direct line for urgent needs, until the formal partner
+  // communications plan (and a published phone number) are in place.
+  urgentIntro:
+    "Have an urgent need right now? While we formalize our partner communications — a direct line and phone number are on the way — email us and we'll respond as fast as we can:",
+  cta: { label: "Request goods for a child", href: "/partner-nonprofits" },
 } as const;
 
 /**

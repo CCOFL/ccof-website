@@ -22,7 +22,12 @@ create table if not exists public.partner_requests (
   child_details  text,           -- child's age / sizes, free text
   goods_needed   text not null,  -- categories / items requested
   urgency        text not null default 'flexible',
-  message        text
+  fulfillment_pref text,         -- partner-pickup | ccof-dropoff | either
+  message        text,
+  -- Phase 2 fulfillment trail (worked internally / in the CRM+POS system):
+  -- requested → matched → fulfilled | partial | declined. Defaults so every
+  -- row starts trackable even before the internal tooling exists.
+  status         text not null default 'requested'
 );
 
 alter table public.partner_requests enable row level security;

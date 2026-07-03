@@ -13,6 +13,7 @@ type Body = {
   childDetails?: string;
   goodsNeeded?: string;
   urgency?: string;
+  fulfillmentPref?: string;
   message?: string;
   // Honeypot — bots fill this; humans never see it.
   company?: string;
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
   const childDetails = (body.childDetails ?? "").trim();
   const message = (body.message ?? "").trim();
   const urgency = (body.urgency ?? "flexible").trim();
+  const fulfillmentPref = (body.fulfillmentPref ?? "").trim();
   const is501c3 = Boolean(body.is501c3);
 
   if (!orgName || !contactName || !email || !goodsNeeded || !isEmail(email)) {
@@ -60,6 +62,7 @@ export async function POST(request: Request) {
       childDetails,
       goodsNeeded,
       urgency,
+      fulfillmentPref,
       message,
     });
     return NextResponse.json({ ok: true });

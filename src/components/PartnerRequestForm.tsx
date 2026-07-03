@@ -10,6 +10,12 @@ const URGENCY = [
   { value: "flexible", label: "Flexible / planning ahead" },
 ] as const;
 
+const FULFILLMENT = [
+  { value: "partner-pickup", label: "Our organization will pick up from CCOF" },
+  { value: "ccof-dropoff", label: "We'd like CCOF to drop off with us" },
+  { value: "either", label: "Either works" },
+] as const;
+
 type Errors = Partial<
   Record<"orgName" | "contactName" | "email" | "goodsNeeded", string>
 >;
@@ -27,6 +33,7 @@ export function PartnerRequestForm() {
     phone: "",
     is501c3: false,
     urgency: "flexible",
+    fulfillmentPref: "either",
     goodsNeeded: "",
     childDetails: "",
     message: "",
@@ -251,6 +258,32 @@ export function PartnerRequestForm() {
           onChange={(e) => update("childDetails", e.target.value)}
           className="w-full rounded-xl border border-line bg-cream px-4 py-3 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
         />
+      </div>
+
+      {/* Fulfillment preference */}
+      <div>
+        <label
+          htmlFor="fulfillmentPref"
+          className="mb-1.5 block text-sm font-medium text-ink"
+        >
+          Getting the goods to the child
+        </label>
+        <select
+          id="fulfillmentPref"
+          value={values.fulfillmentPref}
+          onChange={(e) => update("fulfillmentPref", e.target.value)}
+          className="min-h-[44px] w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+        >
+          {FULFILLMENT.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <p className="mt-1.5 text-sm text-muted">
+          CCOF drop-off or delivery is available case by case, as capacity
+          allows.
+        </p>
       </div>
 
       {/* Anything else */}
