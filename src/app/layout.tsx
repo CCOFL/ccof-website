@@ -31,6 +31,15 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/" },
+  // Favicons / app icons from the Logo v3 encircled icon.
+  icons: {
+    icon: [
+      { url: "/brand/CCOF_Logo_v3_Icon.svg", type: "image/svg+xml" },
+      { url: "/brand/CCOF_Logo_v3_Favicon_32.png", sizes: "32x32", type: "image/png" },
+      { url: "/brand/CCOF_Logo_v3_Favicon_512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/CCOF_Logo_v3_Favicon_180.png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({

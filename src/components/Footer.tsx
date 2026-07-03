@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ORG,
   NAV,
@@ -17,10 +18,14 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
           {/* Brand + mission */}
           <div>
-            <p className="font-serif text-xl font-semibold text-cream">
-              {ORG.name}
-            </p>
-            <p className="mt-2 max-w-sm text-sm leading-relaxed text-cream/70">
+            <Image
+              src="/brand/CCOF_Logo_v3_Stacked_Reverse.svg"
+              alt="The Children's Collective of Florida logo"
+              width={160}
+              height={160}
+              className="h-auto w-40"
+            />
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
               {ORG.tagline} Built in Martin County. Building for Florida.
             </p>
             <LinkButton href={PRIMARY_CTA.href} className="mt-5">

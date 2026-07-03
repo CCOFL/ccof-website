@@ -190,10 +190,11 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
 ];
 
 /** "What we collect" marquee chips (brief §6). */
+// Note: car seats are intentionally NOT accepted (safety/liability — expiration
+// and crash history can't be verified). Do not add them to this collected list.
 export const COLLECT_CHIPS = [
   "Strollers",
   "Cribs & bassinets",
-  "Car seats (in-date)",
   "Kids' clothing",
   "Shoes",
   "Books",

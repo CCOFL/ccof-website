@@ -23,16 +23,24 @@ alongside the website so the design system has a single source of truth.
 > *deepened within the same hue* for small text and filled buttons so they clear
 > WCAG AA — the large/decorative uses keep the locked HEX. See `globals.css`.
 
-## Logos (`logos/`)
-- `01_primary_stacked.svg` — primary stacked lockup (icon + wordmark)
-- `02_icon_only.svg` — icon mark (used in the site header / favicon)
-- `04_horizontal_ccof.svg` — horizontal lockup
-- `*_warm_white_bg.svg` — variants placed on the warm-white background
-- `CCOF_Favicon_Simplified.svg` / `CCOF_Favicon_AppTile.svg` — favicons
-- `CCOF_Logo_System_Spec_Sheet.svg` — usage/spacing spec sheet
+## Logos — board-approved **Logo v3** (adopted 2026-07-03)
 
-SVGs only (scalable, on-spec `#6F8764` / `#EF7F6D`). High-res PNG exports are kept
-out of the repo to avoid bloat — regenerate from these SVGs as needed.
+The active logo system lives in [`public/brand/`](../public/brand/) (served to the site):
+- `CCOF_Logo_v3_Stacked.svg` — **primary** "Open Hands" stacked lockup (light backgrounds)
+- `CCOF_Logo_v3_Stacked_Reverse.svg` — reverse colorway (sage/dark backgrounds; used in the footer)
+- `CCOF_Logo_v3_Icon.svg` — encircled **icon** (header, favicons, any small/square placement)
+- `CCOF_Logo_v3_Icon_Reverse.svg` — reverse icon
+- `CCOF_Logo_v3_Stacked_1000.png` (schema.org logo) · `_2600.png` (OG source) · `_Reverse_1000.png` · `CCOF_Logo_v3_Icon_1000.png`
+- `CCOF_Logo_v3_Favicon_{512,180,64,32}.png` — pre-rendered favicons
 
-The website uses `public/ccof-icon.svg` (header mark), `public/ccof-logo-horizontal.svg`,
-and `src/app/icon.svg` (favicon), all derived from these sources.
+On-spec sage `#6F8764` / coral `#EF7F6D`; wordmark outlined (no font dependency). Do not use the
+stacked lockup below ~120px wide — switch to the icon.
+
+**Usage in the app:** header icon → `public/brand/CCOF_Logo_v3_Icon.svg`; footer →
+`CCOF_Logo_v3_Stacked_Reverse.svg`; favicons/app icons → `metadata.icons` in
+`src/app/layout.tsx`; OG image → `src/app/opengraph-image.png` (generated from the v3 2600 PNG on
+warm white); schema logo → `src/components/JsonLd.tsx`.
+
+The previous **v1** mark (and its source SVGs) is retired in
+[`archive/logo-v1/`](../archive/logo-v1/) — do not use. (The "v2 interim" redesign was never
+deployed, so there are no v2 files in the repo.)
