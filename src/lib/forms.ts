@@ -96,9 +96,17 @@ export async function savePartnerRequest(req: PartnerRequest) {
       urgency: req.urgency,
       message: req.message || null,
     });
-    // 42P01 = undefined_table: the migration hasn't been run yet. Fall through
-    // to the notify/log path rather than failing the submission.
-    if (error && error.code !== "42P01") {
+    // Migration 0004 not run yet → the table is missing. Postgres reports this
+    // as 42P01 (undefined_table); PostgREST reports PGRST205 ("not in the schema
+    // cache"). Treat either as a soft miss and fall through to the notify/log
+    // path rather than failing the submission.
+    const missingTable =
+      error?.code === "42P01" ||
+      error?.code === "PGRST205" ||
+      /schema cache|could not find the table|does not exist/i.test(
+        error?.message ?? "",
+      );
+    if (error && !missingTable) {
       throw new Error(`Supabase insert failed: ${error.message}`);
     }
     if (!error) stored = true;
