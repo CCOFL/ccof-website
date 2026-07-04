@@ -11,7 +11,7 @@ const MIN = 5;
 export function DonationForm() {
   const [frequency, setFrequency] = useState<Frequency>("one-time");
   const [selected, setSelected] = useState<number | "other">(
-    DONATION_PRESETS[1].amount,
+    DONATION_PRESETS[0].amount,
   );
   const [custom, setCustom] = useState("");
   const [loading, setLoading] = useState(false);
