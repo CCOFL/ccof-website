@@ -179,9 +179,13 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
   {
     name: "Stephanie Haskins",
     role: "Founder & President",
-    bio: [
-      "Stephanie, led by her Christian faith, has always had a heart for philanthropy, drawn to organizations that lift up children and families. Yet like many, she wanted to do more and didn't know how — with so many organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore. Motherhood sharpened that conviction: watching her own child — and the children closest to her heart — outgrow clothing and everyday essentials, she saw how much those resources could mean to a family in need. From that longing grew a vision: The Children's Collective of Florida — founded on a promise to connect community generosity with the children who need it most, beginning with its first program, the Collective Kids Closet.",
-    ],
+    // Bio held out as a placeholder (founder decision 2026-07-03) so the whole
+    // board grid stays uniform until all five bios arrive — then launch them
+    // together. This copy is APPROVED (2026-07-03); restore it verbatim by
+    // uncommenting when the other four are ready.
+    // bio: [
+    //   "Stephanie, led by her Christian faith, has always had a heart for philanthropy, drawn to organizations that lift up children and families. Yet like many, she wanted to do more and didn't know how — with so many organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore. Motherhood sharpened that conviction: watching her own child — and the children closest to her heart — outgrow clothing and everyday essentials, she saw how much those resources could mean to a family in need. From that longing grew a vision: The Children's Collective of Florida — founded on a promise to connect community generosity with the children who need it most, beginning with its first program, the Collective Kids Closet.",
+    // ],
   },
   { name: "Amy Mendez", role: "Vice President" },
   { name: "Ashley Gregory", role: "Treasurer" },
