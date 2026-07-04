@@ -71,7 +71,7 @@ export default async function ContactPage({
                   {ORG.email}
                 </a>
               </p>
-              <p>Treasure Coast, FL · physical location coming soon</p>
+              <p>Martin County, FL · physical location coming soon</p>
             </div>
           </div>
 
