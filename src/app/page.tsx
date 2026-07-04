@@ -133,7 +133,7 @@ export default async function Home() {
             {/* Warm invitation in place of empty logo boxes. */}
             <div className="group mx-auto max-w-2xl rounded-3xl border border-line bg-cream p-8 text-center shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-sage-light/60 hover:shadow-card-hover sm:p-10">
               <h3 className="text-2xl font-bold text-sage-600">
-                Want to help build this?
+                Want to help?
               </h3>
               <p className="measure mx-auto mt-3 text-base leading-relaxed text-muted">
                 Founding partners get us off the ground — hosting a donation
@@ -171,7 +171,7 @@ export default async function Home() {
             <SectionHeading
               onDark
               eyebrow="Stay close"
-              title="Not ready to give? Follow our launch."
+              title="Follow our launch."
               intro="Be the first to know when Collective Kids Closet opens its doors in Martin County."
             />
             <div className="mt-7">
