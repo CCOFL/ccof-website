@@ -6,7 +6,6 @@ import {
   PRIMARY_CTA,
   FL_DISCLOSURE,
   TAX_NOTE,
-  SOCIAL,
 } from "@/lib/site";
 import { LinkButton } from "./Button";
 
@@ -92,29 +91,6 @@ export function Footer() {
               </li>
               <li className="text-cream/70">{ORG.location}</li>
               <li className="text-cream/70">Physical location coming soon</li>
-            </ul>
-            <p className="mt-4 text-xs uppercase tracking-wider text-cream/60">
-              Social — coming soon
-            </p>
-            <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-              {SOCIAL.map((s) =>
-                s.href ? (
-                  <li key={s.label}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-cream/80 underline-offset-4 transition-colors hover:text-cream hover:underline"
-                    >
-                      {s.label}
-                    </a>
-                  </li>
-                ) : (
-                  <li key={s.label} className="text-cream/60">
-                    {s.label}
-                  </li>
-                ),
-              )}
             </ul>
           </div>
         </div>
