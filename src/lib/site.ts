@@ -212,9 +212,9 @@ export const COLLECT_CHIPS = [
 
 /** Donation presets with outcome framing (brief priority #2). */
 export const DONATION_PRESETS: { amount: number; outcome: string }[] = [
-  { amount: 25, outcome: "a stocked welcome bag for a child entering care" },
-  { amount: 50, outcome: "a week of school supplies" },
-  { amount: 100, outcome: "a season of clothing for a growing kid" },
+  { amount: 25, outcome: "a welcome bag of essentials for a child entering care" },
+  { amount: 50, outcome: "a backpack and school supplies for the school year" },
+  { amount: 100, outcome: "a season of clothing for a growing child" },
 ];
 
 /**
