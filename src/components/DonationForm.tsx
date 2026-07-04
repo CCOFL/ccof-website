@@ -163,7 +163,7 @@ export function DonationForm() {
             <strong className="font-semibold text-sage-600">
               ${selected as number}
             </strong>{" "}
-            = {outcome}
+            helps provide {outcome}
             {frequency === "monthly" ? ", every month" : ""}.
           </>
         )}
