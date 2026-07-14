@@ -31,12 +31,13 @@ export default async function DonatePage({
               className="font-extrabold tracking-tight text-sage-600"
               style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
             >
-              Change a childhood. Fund the launch.
+              Change a childhood.
             </h1>
             <p className="measure mt-5 text-lg leading-relaxed text-muted">
-              {ORG.flagshipProgram} is coming to {ORG.flagshipCity} in{" "}
-              {ORG.flagshipLaunch}. Every gift right now helps stock the shelves,
-              secure a space, and seed the fund for our first partner programs.
+              Every child deserves clothing that fits, the essentials to grow,
+              toys that spark joy, and the dignity of not going without. Your
+              gift builds the local programs and the {ORG.flagshipProgram} that
+              bring these to children across {ORG.flagshipCity}.
             </p>
 
             <div className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6 shadow-card">
