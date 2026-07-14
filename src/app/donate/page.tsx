@@ -49,9 +49,10 @@ export default async function DonatePage({
                 give, that&apos;s the most direct way to help a child today. We
                 come to you across Martin County.
               </p>
-              <div className="mt-4">
-                <LinkButton href="/give-goods" variant="secondary">
-                  Give goods instead →
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <LinkButton href="/give-goods">Give Goods</LinkButton>
+                <LinkButton href="#give-funds" variant="secondary">
+                  Give Funds
                 </LinkButton>
               </div>
             </div>
@@ -81,7 +82,10 @@ export default async function DonatePage({
 
           {/* Right: the working donation form */}
           <div>
-            <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
+            <div
+              id="give-funds"
+              className="scroll-mt-24 rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8"
+            >
               {canceled && (
                 <p
                   className="mb-5 rounded-xl border border-line bg-cream px-4 py-3 text-sm text-ink"
