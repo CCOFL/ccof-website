@@ -303,15 +303,15 @@ export const TAX_NOTE =
  */
 export const WHERE_IT_GOES = {
   intro:
-    "We're a new organization, and we believe trust is earned, not assumed. Until we have years of numbers to show you, here is what we promise — and what we will report the moment we open.",
+    "We're a new organization, and we believe trust is earned, not assumed. Until we have years of numbers to show you, here is what we promise, and what we will report the moment we open.",
   pledges: [
     {
-      title: "Every donation is honored.",
-      body: "Items are inspected, cleaned, and chosen with care — quality goods for the next family, never disposable surplus. We treat every donation as something a neighbor entrusted to us.",
+      title: "We honor what you give.",
+      body: "Items are inspected, cleaned, and chosen with care: quality goods for the next family, never disposable surplus. We treat every donation as something a neighbor entrusted to us.",
     },
     {
       title: "Local dollars stay local.",
-      body: "What The Collective Kids Closet earns is reinvested right here on the Treasure Coast — supporting children in foster care, crisis, and mentoring, and the families working to meet their children's essential needs.",
+      body: "What The Collective Kids Closet earns is reinvested right here on the Treasure Coast, supporting children in foster care, crisis, and mentoring, and the families working to meet their children's essential needs.",
     },
     {
       title: "We'll show you where it goes.",
@@ -328,7 +328,7 @@ export const WHERE_IT_GOES = {
     "Financial transparency: our IRS Form 990 and Florida charitable registration are available to anyone who asks.",
   ],
   closing:
-    "These aren't aspirations we hope to grow into — they're commitments you can hold us to, and the scorecard we'll report against.",
+    "These aren't aspirations we hope to grow into. They're commitments you can hold us to, and the scorecard we'll report against.",
 } as const;
 
 /** Ways visitors not ready to give can stay involved → correct CTA targets (brief priority #1). */

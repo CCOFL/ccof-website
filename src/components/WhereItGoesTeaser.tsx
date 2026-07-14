@@ -15,11 +15,11 @@ export function WhereItGoesTeaser() {
           Trust, in writing
         </p>
         <h2 className="text-3xl font-bold text-cream sm:text-4xl">
-          Where your gift goes
+          Where everything you give goes
         </h2>
         <p className="measure mt-4 text-base leading-relaxed text-cream/80">
           We&apos;re a new organization, so we put our commitments in writing
-          from day one — and we&apos;ll report against them starting with our
+          from day one, and we&apos;ll report against them starting with our
           first season.
         </p>
         <Link
