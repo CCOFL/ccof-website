@@ -8,7 +8,7 @@ import { WHERE_IT_GOES, FL_DISCLOSURE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Where It Goes",
   description:
-    "Our transparency commitment. Every donation honored, local dollars kept local, and a public account of what we collect and where proceeds go — starting with our first season.",
+    "Our transparency commitment. Every donation honored, local dollars kept local, and a public account of what we collect and where proceeds go, starting with our first season.",
   alternates: { canonical: "/where-it-goes" },
 };
 
@@ -26,7 +26,7 @@ export default function WhereItGoesPage() {
         <SectionHeading
           eyebrow="Our pledges"
           title="What we promise you"
-          intro="Three commitments you can hold us to — in writing, from day one."
+          intro="Three commitments you can hold us to, in writing, from day one."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {WHERE_IT_GOES.pledges.map((pledge, i) => (
