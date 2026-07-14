@@ -36,8 +36,9 @@ export default async function DonatePage({
             <p className="measure mt-5 text-lg leading-relaxed text-muted">
               Every child deserves clothing that fits, the essentials to grow,
               toys that spark joy, and the dignity of not going without. Your
-              gift builds the local programs and the {ORG.flagshipProgram} that
-              bring these to children across {ORG.flagshipCity}.
+              gift helps our community build the local programs and the{" "}
+              {ORG.flagshipProgram} that bring these to children across{" "}
+              {ORG.flagshipCity}.
             </p>
 
             <div className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6 shadow-card">

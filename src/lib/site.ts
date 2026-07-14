@@ -241,7 +241,7 @@ export const GIVE_GOODS = {
   eyebrow: "Give Goods",
   title: "Your child outgrew it. Another child needs it.",
   intro:
-    "Building our pipeline of donated goods is the heart of what we do right now. The quality kids' items your family has outgrown can become clothing, essentials, and dignity for a child who needs them. It's the simplest, most direct way to make a difference today.",
+    "Building our pipeline of donated goods is the heart of what we do right now. The quality kids' items your family has outgrown can become clothing, essentials, and dignity for a child in our community who needs them. It's the simplest, most direct way to help a neighbor today.",
   // Two ways every donated item helps (mirrors the How It Works "two paths").
   impact: [
     {

@@ -98,7 +98,7 @@ export default async function Home() {
         <SectionHeading
           eyebrow="The model"
           title="The giving cycle"
-          intro="Community generosity funds local programs, and the proceeds cycle right back into the community that gave."
+          intro="Our community's generosity funds local programs, and the proceeds cycle right back to the neighbors who gave."
         />
         <div className="mt-12">
           <GivingCycle />
@@ -145,10 +145,11 @@ export default async function Home() {
                 Want to help?
               </h3>
               <p className="measure mx-auto mt-3 text-base leading-relaxed text-muted">
-                Founding partners get us off the ground by hosting a donation
-                bin, running a goods drive, sponsoring our first season, or
-                simply spreading the word. If you&apos;d like to help lay the
-                foundation, we&apos;d love to build alongside you.
+                This is powered by neighbors, businesses, schools, and
+                congregations choosing to show up for local kids, collectively.
+                Host a donation bin, run a goods drive, sponsor our first season,
+                or simply spread the word. There&apos;s a place for you in the
+                collective.
               </p>
               <div className="mt-6">
                 <LinkButton href="/partner">
