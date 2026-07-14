@@ -8,7 +8,7 @@ import { WHERE_IT_GOES, FL_DISCLOSURE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Where It Goes",
   description:
-    "Our transparency commitment. Every donation honored, local dollars kept local, and a public account of what we collect and where proceeds go, starting with our first season.",
+    "Our transparency commitment. What you give is honored, local dollars kept local, and a public account of what we collect and where proceeds go, starting with our first season.",
   alternates: { canonical: "/where-it-goes" },
 };
 

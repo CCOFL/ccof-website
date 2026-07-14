@@ -306,7 +306,7 @@ export const WHERE_IT_GOES = {
     "We're a new organization, and we believe trust is earned, not assumed. Until we have years of numbers to show you, here is what we promise, and what we will report the moment we open.",
   pledges: [
     {
-      title: "Every donation is honored.",
+      title: "We honor what you give.",
       body: "Items are inspected, cleaned, and chosen with care: quality goods for the next family, never disposable surplus. We treat every donation as something a neighbor entrusted to us.",
     },
     {
