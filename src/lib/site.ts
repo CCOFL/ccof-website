@@ -64,11 +64,11 @@ export const FOUNDER = {
  * extended version for the website"). Source: CCOF_Extended_Mission_Statement.
  */
 export const MISSION =
-  "The Children's Collective of Florida supports children and families across Florida through donated goods, affordable community resale programs, and partnerships. We turn everyday generosity into real resources — clothing, essentials, and dignity — for children in foster care, kinship homes, and families navigating crisis. Powered by community, we meet families at their moment of greatest need and reinvest the proceeds of our work into the programs and services that support them.";
+  "The Children's Collective of Florida supports children and families across Florida through donated goods, affordable community resale programs, and partnerships. We turn everyday generosity into real resources like clothing, essentials, and dignity for children in foster care, kinship homes, and families navigating crisis. Powered by community, we meet families at their moment of greatest need and reinvest the proceeds of our work into the programs and services that support them.";
 
 /** Concise lead drawn from the mission, for the hero where space is tight. */
 export const MISSION_LEAD =
-  "We turn everyday community generosity into real resources — clothing, essentials, and dignity — for Florida children in foster care, kinship homes, and families navigating crisis.";
+  "We turn everyday community generosity into clothing, essentials, and dignity for Florida children in foster care, kinship homes, and families navigating crisis.";
 
 /** Three Pillars + the in-development fourth (brief §1). */
 export const PILLARS: {

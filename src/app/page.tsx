@@ -105,13 +105,8 @@ export default async function Home() {
         </div>
       </Section>
 
-      {/* WHERE IT GOES teaser — surfaces the transparency page in the body (brief task 5) */}
-      <Section background="sage">
-        <WhereItGoesTeaser />
-      </Section>
-
       {/* WHAT WE COLLECT — marquee (brief §6) */}
-      <Section background="white" className="overflow-hidden">
+      <Section background="cream" className="overflow-hidden">
         <SectionHeading
           center
           eyebrow="Trusted Giving"
@@ -131,7 +126,7 @@ export default async function Home() {
       {/* FOUNDING PARTNERS — invite the early community builders/supporters
           who help launch CCOF (businesses, congregations, schools, bin hosts).
           The "programs we fund" invitation lives on the Partner page. */}
-      <Section background="cream">
+      <Section background="white">
         <SectionHeading
           eyebrow="Founding Partners"
           title="Help us build the foundation"
@@ -170,8 +165,16 @@ export default async function Home() {
       {/* FOUNDER'S PROMISE — a personal guarantee at the decision point, just
           above the closing CTA (brief task 6: lead with why, reinforce with the
           founder's voice lower down). */}
-      <Section background="white">
+      <Section background="cream">
         <FounderQuote />
+      </Section>
+
+      {/* WHERE IT GOES teaser — transparency/trust reassurance, placed low (just
+          above the closing CTA) so it rewards an already-interested reader
+          instead of burying the more critical goods, community, and founder
+          content above it. */}
+      <Section background="sage">
+        <WhereItGoesTeaser />
       </Section>
 
       {/* FOLLOW OUR LAUNCH (brief §5) + closing donate CTA */}
