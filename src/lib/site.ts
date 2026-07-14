@@ -179,18 +179,38 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
   {
     name: "Stephanie Haskins",
     role: "Founder & President",
-    // Bio held out as a placeholder (founder decision 2026-07-03) so the whole
-    // board grid stays uniform until all five bios arrive — then launch them
-    // together. This copy is APPROVED (2026-07-03); restore it verbatim by
-    // uncommenting when the other four are ready.
-    // bio: [
-    //   "Stephanie, led by her Christian faith, has always had a heart for philanthropy, drawn to organizations that lift up children and families. Yet like many, she wanted to do more and didn't know how — with so many organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore. Motherhood sharpened that conviction: watching her own child — and the children closest to her heart — outgrow clothing and everyday essentials, she saw how much those resources could mean to a family in need. From that longing grew a vision: The Children's Collective of Florida — founded on a promise to connect community generosity with the children who need it most, beginning with its first program, the Collective Kids Closet.",
-    // ],
+    bio: [
+      "Led by her Christian faith, Stephanie has always had a heart for philanthropy, drawn to organizations that lift up children and families. Yet like many, she wanted to do more and didn't know how. With so many worthy organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore. Motherhood sharpened that conviction. Watching her own child, and the children closest to her heart, outgrow clothing and everyday essentials, she saw how much those resources could mean to a family in need. From that longing grew a vision: The Children's Collective of Florida, founded on a promise to connect community generosity with the children who need it most, beginning with its first program, the Collective Kids Closet.",
+    ],
   },
-  { name: "Amy Mendez", role: "Vice President" },
-  { name: "Ashley Gregory", role: "Treasurer" },
-  { name: "Isabel Rodas Torres", role: "Secretary" },
-  { name: "Tracie Mallett", role: "Director at Large" },
+  {
+    name: "Amy Harris",
+    role: "Vice President",
+    bio: [
+      "Amy is a founding board member of The Children's Collective of Florida. Her Christian faith calls her to love her neighbors through service, and she believes even the smallest act of generosity can remind a child they are deeply valued. Amy has long held that gently used things deserve a second purpose, becoming meaningful resources for families who truly need them. As an interior and custom closet designer, she believes every child deserves to open a closet filled with things they love, and the dignity of belongings all their own. A South Florida native, Amy calls Stuart home, where she and her husband are raising their youngest daughter, cheering on two sons in college, and soaking up Florida life on the water.",
+    ],
+  },
+  {
+    name: "Ashley Gregory",
+    role: "Treasurer",
+    bio: [
+      "Ashley is a founding board member of The Children's Collective of Florida, inspired by the belief that every child deserves to experience love, hope, and the opportunity to flourish. She is passionate about bringing people together to build meaningful support for children and families facing hardship. With a background in law, education, nonprofit leadership, and mission-driven communications, she has spent her career advancing initiatives that strengthen communities and expand opportunities for the next generation. A proud Treasure Coast resident, Ashley is honored to carry the Collective's mission forward in the community she loves, where she and her husband are raising their young son in Stuart, investing daily in the future they hope every child can share.",
+    ],
+  },
+  {
+    name: "Isabel Rodas Torres",
+    role: "Secretary",
+    bio: [
+      "Isabel is a founding board member of The Children's Collective of Florida. Growing up in Ecuador and immigrating to the United States, she experienced firsthand how a supportive community and a helping hand can change the course of a life. That lesson shaped her passion for creating opportunity for children and families. Isabel brings experience in branding, marketing strategy, sales, and communications, which she uses to expand the Collective's reach and deepen its connection to the community it serves. She joined the board to help create that same sense of belonging here: neighbors coming together for meaningful, lasting impact. Outside of work, Isabel loves to travel and dance, because nothing brings people together like great music.",
+    ],
+  },
+  {
+    name: "Tracie Mallett",
+    role: "Director at Large",
+    bio: [
+      "Tracie is a founding board member of The Children's Collective of Florida. She and her husband became parents at a young age, a season that taught her a lasting truth: a strong home, a strong family, and the basic necessities every child deserves give children the foundation they need to thrive. For Tracie, a mission built on faith and family, and so close to her own story, is the opportunity of a lifetime. As the owner of a salon studio that rents space to women entrepreneurs building their own businesses, she brings that same builder's energy to the board. Midwest-raised and devoted to the cause, Tracie spends her free time with her husband and two daughters, self-proclaimed foodies who travel for local flavors, architecture, and artistry.",
+    ],
+  },
 ];
 
 /** "What we collect" marquee chips (brief §6). */
