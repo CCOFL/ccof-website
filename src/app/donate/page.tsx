@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, Eyebrow } from "@/components/Section";
+import { LinkButton } from "@/components/Button";
 import { DonationForm } from "@/components/DonationForm";
 import { ORG, FL_DISCLOSURE, TAX_NOTE } from "@/lib/site";
 
@@ -25,43 +26,36 @@ export default async function DonatePage({
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr]">
           {/* Left: the ask */}
           <div>
-            <Eyebrow>Donate / Give Goods</Eyebrow>
+            <Eyebrow>How to Help</Eyebrow>
             <h1
               className="font-extrabold tracking-tight text-sage-600"
               style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
             >
-              Change a childhood. Fund the launch.
+              Change a childhood.
             </h1>
             <p className="measure mt-5 text-lg leading-relaxed text-muted">
-              {ORG.flagshipProgram} is coming to {ORG.flagshipCity} in{" "}
-              {ORG.flagshipLaunch}. Every gift right now helps stock the shelves,
-              secure a space, and seed the fund for our first partner programs.
+              Every child deserves clothing that fits, the essentials to grow,
+              toys that spark joy, and the dignity of not going without. Your
+              gift builds the local programs and the {ORG.flagshipProgram} that
+              bring these to children across {ORG.flagshipCity}.
             </p>
 
-            <div className="mt-8 space-y-4 rounded-2xl border border-line bg-cream p-6 shadow-card">
+            <div className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6 shadow-card">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
-                Prefer to give goods?
+                Local kids need clothing, gear, and more
               </h2>
-              <p className="text-sm leading-relaxed text-ink/90">
-                We welcome quality kids&apos; items — strollers, cribs, clothing,
-                books, and more, inspected and cleaned, then either resold to
-                fund local programs or provided directly to a child in need
-                through our partner organizations. Email{" "}
-                <a
-                  href={`mailto:${ORG.email}`}
-                  className="text-sage-600 underline-offset-4 hover:underline"
-                >
-                  {ORG.email}
-                </a>{" "}
-                or{" "}
-                <a
-                  href="/contact?intent=donate"
-                  className="text-sage-600 underline-offset-4 hover:underline"
-                >
-                  start a goods donation
-                </a>
-                .
+              <p className="mt-3 text-sm leading-relaxed text-ink/90">
+                Across Martin County, families are working to meet their
+                children&apos;s basic needs. If you have quality strollers,
+                clothing, books, or gear to give, that&apos;s the most direct way
+                to help a child today. We come to you.
               </p>
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <LinkButton href="/give-goods">Give Goods</LinkButton>
+                <LinkButton href="#give-funds" variant="secondary">
+                  Give Funds
+                </LinkButton>
+              </div>
             </div>
 
             {/* Trust signals */}
@@ -89,14 +83,17 @@ export default async function DonatePage({
 
           {/* Right: the working donation form */}
           <div>
-            <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
+            <div
+              id="give-funds"
+              className="scroll-mt-24 rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8"
+            >
               {canceled && (
                 <p
                   className="mb-5 rounded-xl border border-line bg-cream px-4 py-3 text-sm text-ink"
                   role="status"
                 >
-                  No charge was made — your checkout was canceled. You&apos;re
-                  welcome to try again whenever you&apos;re ready.
+                  No charge was made. Your checkout was canceled, and
+                  you&apos;re welcome to try again whenever you&apos;re ready.
                 </p>
               )}
               <h2 className="text-2xl font-bold text-sage">
