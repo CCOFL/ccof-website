@@ -230,6 +230,55 @@ export const COLLECT_CHIPS = [
   "Coats & outerwear",
 ];
 
+/**
+ * "Give Goods" — the goods-donation experience. Building the pipeline of donated
+ * goods is CCOF's #1 priority for the launch phase, so goods leads over funds.
+ * Three intake channels reflect current reality (2026-07): pickup is available
+ * now in Martin County; bins are finalizing production (host-a-bin); drives are
+ * open. Dual impact mirrors the How-It-Works "two paths."
+ */
+export const GIVE_GOODS = {
+  eyebrow: "Give Goods",
+  title: "Your child outgrew it. Another child needs it.",
+  intro:
+    "Building our pipeline of donated goods is the heart of what we do right now. The quality kids' items your family has outgrown can become clothing, essentials, and dignity for a child who needs them. It's the simplest, most direct way to make a difference today.",
+  // Two ways every donated item helps (mirrors the How It Works "two paths").
+  impact: [
+    {
+      title: "Resold to fund local programs",
+      body: "Quality items are cleaned, inspected, and sold affordably through the Collective Kids Closet. The proceeds fund local programs for children in foster care, kinship homes, and crisis.",
+    },
+    {
+      title: "Given directly to a child in need",
+      body: "When a partner nonprofit has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them, at no cost.",
+    },
+  ],
+  // How to give, current channels. Pickup is featured (available now).
+  ways: [
+    {
+      title: "Schedule a pickup",
+      body: "Available now across Martin County. Have a bag or a carload of quality kids' items? Tell us what you have and we'll arrange to come to you.",
+      cta: { label: "Schedule a pickup", href: "/contact?intent=pickup" },
+      featured: true,
+    },
+    {
+      title: "Host a donation bin",
+      body: "Our donation bins are rolling out across Martin County soon. Host one at your business, school, or place of worship and become a neighborhood drop-off point.",
+      cta: { label: "Host a bin", href: "/contact?intent=host" },
+    },
+    {
+      title: "Run a goods drive",
+      body: "Rally your workplace, school, team, or congregation to collect kids' essentials together. We'll help you set it up and make it easy.",
+      cta: { label: "Start a drive", href: "/contact?intent=host" },
+    },
+  ],
+  // What we can't accept + the quality bar.
+  notAccepted:
+    "For safety and liability, we can't accept car seats, because their expiration and crash history can't be verified. Please give items that are clean, complete, and in good, gently-used condition.",
+  taxNote:
+    "In-kind donations are tax-deductible. We'll acknowledge what you give; you determine its value for your records.",
+} as const;
+
 /** Donation presets with outcome framing (brief priority #2). */
 export const DONATION_PRESETS: { amount: number; outcome: string }[] = [
   { amount: 25, outcome: "a welcome bag of essentials for a child entering care" },

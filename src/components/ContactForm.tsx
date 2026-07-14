@@ -7,6 +7,7 @@ import { ORG } from "@/lib/site";
 const INTENTS = [
   { value: "general", label: "General question" },
   { value: "donate", label: "Donating goods" },
+  { value: "pickup", label: "Schedule a goods pickup" },
   { value: "host", label: "Host a bin / drive" },
   { value: "partner", label: "Become a partner program" },
   { value: "volunteer", label: "Volunteer" },
