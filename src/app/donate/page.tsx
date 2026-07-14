@@ -26,7 +26,7 @@ export default async function DonatePage({
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr]">
           {/* Left: the ask */}
           <div>
-            <Eyebrow>Give Funds</Eyebrow>
+            <Eyebrow>How to Help</Eyebrow>
             <h1
               className="font-extrabold tracking-tight text-sage-600"
               style={{ fontSize: "var(--text-display)", lineHeight: 1.05 }}
@@ -42,7 +42,7 @@ export default async function DonatePage({
 
             <div className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6 shadow-card">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
-                Right now, local children need everyday essentials
+                Local kids need clothing, gear, and more
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-ink/90">
                 Across Martin County, families are working to meet their
