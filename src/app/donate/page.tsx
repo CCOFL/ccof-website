@@ -41,13 +41,13 @@ export default async function DonatePage({
 
             <div className="mt-8 rounded-2xl border border-sage/30 bg-sage/5 p-6 shadow-card">
               <h2 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
-                Our biggest need right now is goods
+                Right now, local children need everyday essentials
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-ink/90">
-                Donated kids&apos; goods are the heart of what we do right now.
-                If your family has quality strollers, clothing, books, or gear to
-                give, that&apos;s the most direct way to help a child today. We
-                come to you across Martin County.
+                Across Martin County, families are working to meet their
+                children&apos;s basic needs. If you have quality strollers,
+                clothing, books, or gear to give, that&apos;s the most direct way
+                to help a child today. We come to you.
               </p>
               <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <LinkButton href="/give-goods">Give Goods</LinkButton>
