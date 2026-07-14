@@ -50,10 +50,18 @@ export function Footer() {
               ))}
               <li>
                 <Link
+                  href="/give-goods"
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  Give Goods
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/donate"
                   className="text-cream/80 transition-colors hover:text-cream"
                 >
-                  Donate / Give Goods
+                  Give Funds
                 </Link>
               </li>
               <li>

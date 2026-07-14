@@ -32,7 +32,7 @@ export const NAV: { label: string; href: string }[] = [
 ];
 
 /** The single primary action sitewide (brief priority #5). */
-export const PRIMARY_CTA = { label: "Donate", href: "/donate" } as const;
+export const PRIMARY_CTA = { label: "Give Goods", href: "/give-goods" } as const;
 
 /**
  * Founder's Promise — short version, for the Home pull-quote where space is

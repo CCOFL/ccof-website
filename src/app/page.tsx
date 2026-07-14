@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import heroChildren from "../../public/images/hero-children.jpg";
 import { Section, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
@@ -37,20 +38,28 @@ export default async function Home() {
                 {MISSION_LEAD}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <LinkButton href="/donate" size="lg">
-                  Donate
+                <LinkButton href="/give-goods" size="lg">
+                  Donate Goods
                 </LinkButton>
-                <LinkButton href="/how-it-works" variant="secondary" size="lg">
-                  See how it works
+                <LinkButton href="/donate" variant="secondary" size="lg">
+                  Give Funds
                 </LinkButton>
               </div>
+              <p className="mt-4 text-sm">
+                <Link
+                  href="/how-it-works"
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  Or see how it works →
+                </Link>
+              </p>
               <p className="mt-6 text-sm text-muted">
                 Flagship program{" "}
                 <strong className="font-semibold text-ink">
                   {ORG.flagshipProgram}
                 </strong>{" "}
-                is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch} — your
-                gift now helps fund the opening.
+                is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch}. The
+                goods you give now are what will fill its shelves.
               </p>
             </div>
 
@@ -89,7 +98,7 @@ export default async function Home() {
         <SectionHeading
           eyebrow="The model"
           title="The giving cycle"
-          intro="Community generosity funds local programs — and the proceeds cycle right back into the community that gave."
+          intro="Community generosity funds local programs, and the proceeds cycle right back into the community that gave."
         />
         <div className="mt-12">
           <GivingCycle />
@@ -107,14 +116,14 @@ export default async function Home() {
           center
           eyebrow="Trusted Giving"
           title="What we collect"
-          intro="Quality kids' goods — inspected, cleaned, and ready for a second home."
+          intro="Quality kids' goods, inspected, cleaned, and ready for a second home."
         />
         <div className="mt-10">
           <CollectMarquee />
         </div>
         <div className="mt-10 text-center">
-          <LinkButton href="/donate" variant="secondary">
-            Donate / Give Goods
+          <LinkButton href="/give-goods">
+            Donate these goods
           </LinkButton>
         </div>
       </Section>
@@ -126,7 +135,7 @@ export default async function Home() {
         <SectionHeading
           eyebrow="Founding Partners"
           title="Help us build the foundation"
-          intro="Every lasting effort starts with people who believe early. Founding partners are the businesses, schools, congregations, and neighbors helping launch The Children's Collective — and there's room for you."
+          intro="Every lasting effort starts with people who believe early. Founding partners are the businesses, schools, congregations, and neighbors helping launch The Children's Collective, and there's room for you."
         />
         <div className="mt-10">
           <Reveal>
@@ -136,7 +145,7 @@ export default async function Home() {
                 Want to help?
               </h3>
               <p className="measure mx-auto mt-3 text-base leading-relaxed text-muted">
-                Founding partners get us off the ground — hosting a donation
+                Founding partners get us off the ground by hosting a donation
                 bin, running a goods drive, sponsoring our first season, or
                 simply spreading the word. If you&apos;d like to help lay the
                 foundation, we&apos;d love to build alongside you.
@@ -178,19 +187,25 @@ export default async function Home() {
               <EmailCapture onDark />
             </div>
             <p className="mt-4 text-sm text-cream/70">
-              Volunteer service is in development — follow our launch to hear
+              Volunteer service is in development. Follow our launch to hear
               when it opens.
             </p>
           </div>
           <div className="rounded-3xl bg-sage/15 p-8 ring-1 ring-sage/25 lg:p-10">
             <p className="text-2xl font-bold leading-snug text-cream">
-              Right now, your gift goes toward opening day — helping stock
-              shelves, secure a space, and fund our first partner programs.
+              Right now, the fastest way to help is to fill our shelves. Donate
+              the quality kids&apos; items your family has outgrown.
             </p>
-            <div className="mt-6">
-              <LinkButton href="/donate" size="lg" variant="inverse">
-                Fund the launch
+            <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <LinkButton href="/give-goods" size="lg" variant="inverse">
+                Donate goods
               </LinkButton>
+              <Link
+                href="/donate"
+                className="text-sm font-semibold text-cream/80 underline-offset-4 hover:text-cream hover:underline"
+              >
+                or give funds →
+              </Link>
             </div>
           </div>
         </div>
