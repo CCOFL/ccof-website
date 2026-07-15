@@ -135,7 +135,7 @@ export const IMPACT_STATS: {
     value: 6,
     suffix: " in 10",
     label:
-      "removed children placed with relatives — kinship caregivers, the least-funded in the system",
+      "removed children placed with relatives (kinship caregivers), the least-funded in the system",
   },
   { value: 115, label: "children served in foster care" },
 ];
@@ -158,7 +158,7 @@ export const WHY_THIS_MATTERS = {
     {
       figure: "~6 in 10",
       label:
-        "removed children placed with relatives — kinship caregivers, the least-funded caregivers in the system",
+        "removed children placed with relatives (kinship caregivers), the least-funded caregivers in the system",
     },
     {
       figure: "15%",

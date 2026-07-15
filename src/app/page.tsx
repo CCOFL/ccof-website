@@ -85,7 +85,7 @@ export default async function Home() {
         <SectionHeading
           eyebrow="Why it matters"
           title="The need is local, and it is real"
-          intro="Behind every number is a child on the Treasure Coast who needs the basics handled with care."
+          intro="Behind every number is a child in Martin County who needs the basics handled with care."
         />
         <div className="mt-12">
           <ImpactStats stats={impactStats} />
