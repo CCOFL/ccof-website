@@ -82,9 +82,9 @@ export default function AboutPage() {
           homepage, so it is intentionally not duplicated here. */}
       <Section background="white">
         <SectionHeading
-          eyebrow="Our team"
-          title="Board of directors"
-          intro="A volunteer board accountable to our mission and our community — sharing the work of turning everyday generosity into real support for kids."
+          eyebrow="Our Founding Board"
+          title="Board of Directors"
+          intro="Every member here helped found The Children's Collective of Florida. Together, they're a volunteer board accountable to our mission and our community, sharing the work of turning everyday generosity into real support for kids."
         />
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {BOARD.map((member, i) => (
