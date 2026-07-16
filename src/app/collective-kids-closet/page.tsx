@@ -39,14 +39,15 @@ export default function ClosetPage() {
             <p>
               Collective Kids Closet is where community generosity becomes
               everyday affordability. Families find quality strollers, cribs,
-              clothing, books, and more — at prices that respect every budget.
+              clothing, books, and more, at prices that respect every budget.
             </p>
             <p>
               Nothing here is &ldquo;disposable surplus.&rdquo; Every item is
               inspected, cleaned, and chosen with care. Shopping the Closet
-              isn&apos;t charity — it&apos;s a smart, dignified way to outfit a
-              growing kid while funding programs that serve children in foster
-              care, kinship homes, and crisis.
+              isn&apos;t charity. It&apos;s a smart, dignified way to find
+              quality clothes a growing kid is proud to wear, while funding
+              programs that serve children in foster care, kinship homes, and
+              crisis.
             </p>
           </div>
           <Reveal>
