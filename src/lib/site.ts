@@ -242,19 +242,26 @@ export const COLLECT_CHIPS = [
  */
 export const SUSTAINABILITY = {
   eyebrow: "Good for kids, good for the planet",
-  shop: {
-    stat: "~700 gallons",
-    statCaption: "of water it takes to make one new cotton T-shirt",
-    body: "Every item bought secondhand is one that didn't have to be made new. That's good for a child and lighter on the planet.",
-    source: "Water Footprint Network (Mekonnen & Hoekstra).",
-  },
-  give: {
-    stat: "11 million tons",
-    statCaption:
-      "of clothing and textiles Americans landfill each year, with only about 15% recycled",
-    body: "The quality kids' items your family has outgrown stay in use for another child instead of adding to that pile.",
-    source: "U.S. EPA, Facts and Figures about Materials, Waste and Recycling.",
-  },
+  // Featured impact = landfill diversion (bigger, universal, and it celebrates
+  // reuse without implying new textile production is bad — no dig at the
+  // businesses/entrepreneurs who make goods for commerce).
+  stat: "11 million tons",
+  statCaption:
+    "of clothing and textiles Americans send to landfills every year, with only about 15% recycled",
+  // Per-page lead line.
+  shop: "Every item you buy secondhand stays in use instead of adding to that pile.",
+  give: "The quality kids' items your family has outgrown stay in use for another child instead of adding to that pile.",
+  // Secondary, positive conservation note (water saved, not production shamed).
+  waterNote:
+    "Reuse conserves resources, too: making one new cotton T-shirt takes about 700 gallons of water.",
+  // Clickable sources for verifiable transparency.
+  sources: [
+    {
+      label: "U.S. EPA (textiles)",
+      url: "https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data",
+    },
+    { label: "Water Footprint Network", url: "https://www.waterfootprint.org" },
+  ],
 } as const;
 
 /**
