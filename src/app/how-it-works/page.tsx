@@ -19,7 +19,7 @@ export default function HowItWorksPage() {
       <PageHero
         eyebrow="How it works"
         title="Generosity in. Stewardship in the middle. Funded programs out."
-        intro="We keep the path from your donation to a child's bedroom short, transparent, and local."
+        intro="We keep the path from your donation to a child's hands short, transparent, and local."
       />
 
       <Section background="white">
