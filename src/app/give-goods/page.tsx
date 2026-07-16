@@ -40,7 +40,7 @@ export default function GiveGoodsPage() {
         <SectionHeading
           eyebrow="What we collect"
           title="Quality kids' goods, ready for a second home"
-          intro="If your children have outgrown it and it's clean and complete, chances are we'd love it."
+          intro="If your children have outgrown it, another child can grow into it. We welcome the quality kids' items your family is ready to pass on and treat each one as a gift entrusted to our care."
         />
         <ul className="mt-8 flex flex-wrap gap-3">
           {COLLECT_CHIPS.map((chip) => (
