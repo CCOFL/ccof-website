@@ -4,6 +4,7 @@ import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
+import { SustainabilityCallout } from "@/components/SustainabilityCallout";
 import { GIVE_GOODS, COLLECT_CHIPS } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -83,6 +84,7 @@ export default function GiveGoodsPage() {
             See how the whole model works →
           </Link>
         </p>
+        <SustainabilityCallout variant="give" />
       </Section>
 
       {/* Three ways to give */}

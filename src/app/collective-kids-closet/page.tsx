@@ -6,6 +6,7 @@ import { CollectMarquee } from "@/components/CollectMarquee";
 import { EmailCapture } from "@/components/EmailCapture";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
+import { SustainabilityCallout } from "@/components/SustainabilityCallout";
 import { ORG } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -71,6 +72,7 @@ export default function ClosetPage() {
         <div className="mt-10">
           <CollectMarquee />
         </div>
+        <SustainabilityCallout variant="shop" />
       </Section>
 
       <Section background="white" id="follow">

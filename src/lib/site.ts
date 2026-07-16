@@ -231,6 +231,33 @@ export const COLLECT_CHIPS = [
 ];
 
 /**
+ * Sustainability co-benefit — a SECONDARY thread to the kids-first mission
+ * (harmony, not the melody). Uses only sourced, general industry facts, never
+ * CCOF's own operational numbers (we have none pre-launch). The measured
+ * "your purchase saved X" impact is deferred to the Where It Goes report once
+ * real resale/diversion data exists. Any specific quantified green claim should
+ * be reviewed against the FTC Green Guides before publishing.
+ * Sources: U.S. EPA Facts & Figures (textiles, 2018, most recent comprehensive
+ * data); Water Footprint Network (Mekonnen & Hoekstra), popularized by WWF.
+ */
+export const SUSTAINABILITY = {
+  eyebrow: "Good for kids, good for the planet",
+  shop: {
+    stat: "~700 gallons",
+    statCaption: "of water it takes to make one new cotton T-shirt",
+    body: "Every item bought secondhand is one that didn't have to be made new. That's good for a child and lighter on the planet.",
+    source: "Water Footprint Network (Mekonnen & Hoekstra).",
+  },
+  give: {
+    stat: "11 million tons",
+    statCaption:
+      "of clothing and textiles Americans landfill each year, with only about 15% recycled",
+    body: "The quality kids' items your family has outgrown stay in use for another child instead of adding to that pile.",
+    source: "U.S. EPA, Facts and Figures about Materials, Waste and Recycling.",
+  },
+} as const;
+
+/**
  * "Give Goods" — the goods-donation experience. Building the pipeline of donated
  * goods is CCOF's #1 priority for the launch phase, so goods leads over funds.
  * Three intake channels reflect current reality (2026-07): pickup is available
