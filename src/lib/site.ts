@@ -252,15 +252,20 @@ export const SUSTAINABILITY = {
   shop: "Every item you buy secondhand stays in use instead of adding to that pile.",
   give: "The quality kids' items your family has outgrown stay in use for another child instead of adding to that pile.",
   // Secondary, positive conservation note (water saved, not production shamed).
+  // Jeans figure (~7,500 L ≈ 2,000 gal) is stated directly by the UN — bigger
+  // impact than a T-shirt AND a gold-standard, verifiable source.
   waterNote:
-    "Reuse conserves resources, too: making one new cotton T-shirt takes about 700 gallons of water.",
+    "Reuse conserves resources, too: making one new pair of jeans takes about 2,000 gallons of water.",
   // Clickable sources for verifiable transparency.
   sources: [
     {
       label: "U.S. EPA (textiles)",
       url: "https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data",
     },
-    { label: "Water Footprint Network", url: "https://www.waterfootprint.org" },
+    {
+      label: "United Nations",
+      url: "https://www.un.org/en/actnow/facts-and-figures",
+    },
   ],
 } as const;
 
