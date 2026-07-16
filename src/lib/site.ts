@@ -255,7 +255,7 @@ export const SUSTAINABILITY = {
   // Jeans figure (~7,500 L ≈ 2,000 gal) is stated directly by the UN — bigger
   // impact than a T-shirt AND a gold-standard, verifiable source.
   waterNote:
-    "Reuse also saves precious resources. Making one new pair of jeans takes about 2,000 gallons of water.",
+    "Reuse also saves precious resources; making one new pair of jeans takes about 2,000 gallons of water.",
   // Clickable sources for verifiable transparency.
   sources: [
     {
