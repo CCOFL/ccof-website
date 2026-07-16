@@ -39,7 +39,7 @@ export default function ClosetPage() {
             <p>
               Collective Kids Closet is where community generosity becomes
               everyday affordability. Families find quality strollers, cribs,
-              clothing, books, and more, at prices that respect every budget.
+              clothing, books, toys, and more at prices that respect every budget.
             </p>
             <p>
               Nothing here is &ldquo;disposable surplus.&rdquo; Every item is
