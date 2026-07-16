@@ -4,6 +4,7 @@ import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
+import { SustainabilityCallout } from "@/components/SustainabilityCallout";
 import { GIVE_GOODS, COLLECT_CHIPS } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -39,7 +40,7 @@ export default function GiveGoodsPage() {
         <SectionHeading
           eyebrow="What we collect"
           title="Quality kids' goods, ready for a second home"
-          intro="If your children have outgrown it and it's clean and complete, chances are we'd love it."
+          intro="If your children have outgrown it, another child can grow into it. We welcome the quality kids' items your family is ready to pass on and treat each one as a gift entrusted to our care."
         />
         <ul className="mt-8 flex flex-wrap gap-3">
           {COLLECT_CHIPS.map((chip) => (
@@ -83,6 +84,7 @@ export default function GiveGoodsPage() {
             See how the whole model works →
           </Link>
         </p>
+        <SustainabilityCallout variant="give" />
       </Section>
 
       {/* Three ways to give */}

@@ -231,6 +231,45 @@ export const COLLECT_CHIPS = [
 ];
 
 /**
+ * Sustainability co-benefit — a SECONDARY thread to the kids-first mission
+ * (harmony, not the melody). Uses only sourced, general industry facts, never
+ * CCOF's own operational numbers (we have none pre-launch). The measured
+ * "your purchase saved X" impact is deferred to the Where It Goes report once
+ * real resale/diversion data exists. Any specific quantified green claim should
+ * be reviewed against the FTC Green Guides before publishing.
+ * Sources: U.S. EPA Facts & Figures (textiles, 2018, most recent comprehensive
+ * data); Water Footprint Network (Mekonnen & Hoekstra), popularized by WWF.
+ */
+export const SUSTAINABILITY = {
+  eyebrow: "Good for kids, good for the planet",
+  // Featured impact = landfill diversion (bigger, universal, and it celebrates
+  // reuse without implying new textile production is bad — no dig at the
+  // businesses/entrepreneurs who make goods for commerce).
+  stat: "11 million tons",
+  statCaption:
+    "of clothing and textiles Americans send to landfills every year, with only about 15% recycled",
+  // Per-page lead line.
+  shop: "Every item you buy secondhand stays in use instead of adding to that pile.",
+  give: "The quality kids' items your family has outgrown stay in use for another child instead of adding to that pile.",
+  // Secondary, positive conservation note (water saved, not production shamed).
+  // Jeans figure (~7,500 L ≈ 2,000 gal) is stated directly by the UN — bigger
+  // impact than a T-shirt AND a gold-standard, verifiable source.
+  waterNote:
+    "Reuse also saves precious resources; making one new pair of jeans takes about 2,000 gallons of water.",
+  // Clickable sources for verifiable transparency.
+  sources: [
+    {
+      label: "U.S. EPA (textiles)",
+      url: "https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data",
+    },
+    {
+      label: "United Nations",
+      url: "https://www.un.org/en/actnow/facts-and-figures",
+    },
+  ],
+} as const;
+
+/**
  * "Give Goods" — the goods-donation experience. Building the pipeline of donated
  * goods is CCOF's #1 priority for the launch phase, so goods leads over funds.
  * Three intake channels reflect current reality (2026-07): pickup is available
