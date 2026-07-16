@@ -11,7 +11,7 @@ import { ORG } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collective Kids Closet",
-  description: `${ORG.flagshipProgram} — an affordable community resale program for quality kids' goods, coming to ${ORG.flagshipCity} in ${ORG.flagshipLaunch}.`,
+  description: `${ORG.flagshipProgram}, an affordable community resale program for quality kids' goods, coming to ${ORG.flagshipCity} in ${ORG.flagshipLaunch}.`,
   alternates: { canonical: "/collective-kids-closet" },
 };
 
@@ -21,7 +21,7 @@ export default function ClosetPage() {
       <PageHero
         eyebrow={`Coming to ${ORG.flagshipCity} · ${ORG.flagshipLaunch}`}
         title="Collective Kids Closet"
-        intro="The flagship program of The Children's Collective of Florida — an affordable community resale program for quality kids' goods, open to all, with every purchase reinvested in local programs for children in care."
+        intro="The flagship program of The Children's Collective of Florida, an affordable community resale program for quality kids' goods, open to all, with every purchase reinvested in local programs for children in care."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <LinkButton href="/donate" size="lg">
