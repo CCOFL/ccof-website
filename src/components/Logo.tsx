@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 /**
- * Header lockup using the board-approved Logo v3 encircled icon mark
- * (public/brand/CCOF_Logo_v3_Icon.svg, on-spec sage #6F8764 / coral #EF7F6D).
+ * Header lockup using the v1 "Y-pose child / community circle" icon mark
+ * (public/brand/CCOF_Logo_v1_Icon.svg, on-spec sage #6F8764 / coral #EF7F6D).
  * The icon is decorative here — the adjacent text provides the accessible name.
  */
 export function Logo({ compact = false }: { compact?: boolean }) {
@@ -15,7 +15,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       className="group flex items-center gap-3"
     >
       <Image
-        src="/brand/CCOF_Logo_v3_Icon.svg"
+        src="/brand/CCOF_Logo_v1_Icon.svg"
         alt=""
         width={size}
         height={size}

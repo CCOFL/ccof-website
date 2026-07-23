@@ -14,7 +14,7 @@ export function JsonLd() {
     name: ORG.legalName,
     alternateName: ORG.abbr,
     url: ORG.url,
-    logo: `${ORG.url}/brand/CCOF_Logo_v3_Stacked_1000.png`,
+    logo: `${ORG.url}/brand/CCOF_Logo_v1_Stacked_1000.png`,
     email: ORG.email,
     slogan: ORG.tagline,
     description:

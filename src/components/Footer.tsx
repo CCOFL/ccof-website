@@ -18,7 +18,7 @@ export function Footer() {
           {/* Brand + mission */}
           <div>
             <Image
-              src="/brand/CCOF_Logo_v3_Stacked_Reverse.svg"
+              src="/brand/CCOF_Logo_v1_Reverse.svg"
               alt="The Children's Collective of Florida logo"
               width={160}
               height={160}
