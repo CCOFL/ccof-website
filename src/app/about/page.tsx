@@ -24,7 +24,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="About The Children's Collective of Florida"
-        intro="Currently serving Martin County and the Treasure Coast — built here, building for Florida."
+        intro="Currently serving Martin County and the Treasure Coast. Built here, building for Florida."
       />
 
       {/* Why This Matters Here — local need (scaling/What's-Next omitted) */}
@@ -70,7 +70,7 @@ export default function AboutPage() {
           <strong className="font-semibold text-ink">
             {ORG.flagshipProgram}
           </strong>
-          , is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch} — an
+          , is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch}, an
           affordable community resale program for quality kids&apos; goods, open
           to everyone, with proceeds reinvested in local programs that serve
           children.
@@ -108,6 +108,47 @@ export default function AboutPage() {
               </article>
             </Reveal>
           ))}
+          {/* Sixth tile: expression-of-interest invitation (fills the 3x2 grid).
+              Compliance: invites interest ONLY, promises nothing. Board seats
+              are filled per Bylaws Art. III (3-9 directors, currently 5;
+              annual-meeting election / majority vote on vacancies); committees
+              per Art. VI (established by the Board); service is unpaid per
+              Art. VIII. Not a solicitation of contributions, so it does not
+              trigger the FL 496.411 disclosure (footer carries it sitewide). */}
+          <Reveal as="li" delay={BOARD.length * 70}>
+            {/* Coral dashed border + chip mirror the Volunteer Service pillar's
+                "in development" treatment (Pillars.tsx) — future-tense signal. */}
+            <article className="flex h-full flex-col rounded-2xl border-2 border-dashed border-coral bg-cream p-6 shadow-card">
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="text-lg font-bold text-ink">An Open Seat</h3>
+                <span className="shrink-0 rounded-full border border-coral/40 bg-coral/10 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-coral-deep">
+                  Growing Soon
+                </span>
+              </div>
+              <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-coral-deep">
+                Could this be you?
+              </p>
+              <div className="mt-3 flex-1 space-y-3 text-sm leading-relaxed text-body">
+                <p>
+                  Everything we build for local kids is powered by people who
+                  said yes. As we grow, we will welcome future board members
+                  with a heart for governance; committee members in areas like
+                  finance, fundraising, and partnership building; and
+                  hands-on volunteers for launch season.
+                </p>
+                <p>
+                  Board and committee service is voluntary, guided by our
+                  bylaws, and it starts with a simple hello. If our mission
+                  speaks to you, we would love to meet you.
+                </p>
+              </div>
+              <div className="mt-4">
+                <LinkButton href="/contact?intent=volunteer" variant="secondary">
+                  Start the conversation
+                </LinkButton>
+              </div>
+            </article>
+          </Reveal>
         </ul>
       </Section>
 
