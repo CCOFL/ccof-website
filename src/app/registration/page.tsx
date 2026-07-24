@@ -28,7 +28,15 @@ const STATUTORY_STATEMENT =
 const DETAILS: { label: string; value: string }[] = [
   { label: "Legal name", value: ORG.legalName },
   { label: "Florida charitable registration number", value: ORG.flReg },
-  { label: "Principal place of business", value: "Martin County, Florida" },
+  {
+    label: "Business address",
+    value: `${ORG.streetAddress}, ${ORG.cityStateZip}`,
+  },
+  { label: "Serving", value: "Martin County, Florida" },
+  {
+    label: "Administrative contact",
+    value: ORG.adminEmail,
+  },
   {
     label: "Contact for our most recent financial statement",
     value: ORG.email,
@@ -57,7 +65,7 @@ export default function RegistrationPage() {
                   {item.label}
                 </dt>
                 <dd className="mt-1 text-base text-ink">
-                  {item.label.startsWith("Contact") ? (
+                  {item.value.includes("@") ? (
                     <a
                       href={`mailto:${item.value}`}
                       className="text-sage-600 underline-offset-4 hover:underline"

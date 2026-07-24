@@ -71,7 +71,19 @@ export default async function ContactPage({
                   {ORG.email}
                 </a>
               </p>
-              <p>Martin County, FL · physical location coming soon</p>
+              <p>
+                Administrator:{" "}
+                <a
+                  href={`mailto:${ORG.adminEmail}`}
+                  className="text-sage-600 underline-offset-4 hover:underline"
+                >
+                  {ORG.adminEmail}
+                </a>
+              </p>
+              <p>
+                {ORG.streetAddress}, {ORG.cityStateZip}
+              </p>
+              <p>Serving Martin County, FL · program location coming soon</p>
             </div>
           </div>
 
