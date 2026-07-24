@@ -8,9 +8,13 @@ export const ORG = {
   legalName: "The Children's Collective of Florida, Inc.",
   abbr: "CCOF",
   tagline: "Powered by Community. Supporting Kids.",
-  domain: "childrenscollectivefl.org",
+  // Display forms capitalize FL so the state stands out and mistypes drop
+  // (childrenscollective.org belongs to someone else). Domains are
+  // case-insensitive, so links/mailto still resolve identically; ORG.url
+  // stays lowercase for machine URLs (canonical, OG, sitemap, JSON-LD @id).
+  domain: "ChildrensCollectiveFL.org",
   url: "https://childrenscollectivefl.org",
-  email: "info@childrenscollectivefl.org",
+  email: "info@ChildrensCollectiveFL.org",
   ein: "42-2020310",
   flReg: "CH83131",
   flDoc: "N26000005374",
