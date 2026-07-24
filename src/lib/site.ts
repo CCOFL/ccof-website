@@ -19,6 +19,14 @@ export const ORG = {
   flReg: "CH83131",
   flDoc: "N26000005374",
   location: "Martin County, FL",
+  // Workspace Super Admin contact — published per Google for Nonprofits
+  // verification requirements (admin email must be visible on the site).
+  adminEmail: "stephanie@ChildrensCollectiveFL.org",
+  // Public mailing/business address (The Space Connect, registered agent /
+  // virtual address with mail service). Published instead of the founder's
+  // home address, per standing privacy rule. Sunbiz update pending.
+  streetAddress: "311 Golf Rd, Ste 1000",
+  cityStateZip: "West Palm Beach, FL 33407",
   flagshipProgram: "Collective Kids Closet",
   // Location + timing are not yet finalized: Martin County (not pinned to a
   // city), late 2026 (may shift with the donation pipeline). Keep copy soft.

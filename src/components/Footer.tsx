@@ -97,8 +97,20 @@ export function Footer() {
                   {ORG.email}
                 </a>
               </li>
-              <li className="text-cream/70">{ORG.location}</li>
-              <li className="text-cream/70">Physical location coming soon</li>
+              <li>
+                <a
+                  href={`mailto:${ORG.adminEmail}`}
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  {ORG.adminEmail}
+                </a>
+              </li>
+              <li className="text-cream/70">
+                {ORG.streetAddress}, {ORG.cityStateZip}
+              </li>
+              <li className="text-cream/70">
+                Serving {ORG.location} · program location coming soon
+              </li>
             </ul>
           </div>
         </div>
