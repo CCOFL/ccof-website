@@ -335,8 +335,18 @@ export const DONATION_PRESETS: { amount: number; outcome: string }[] = [
  * Required Florida Division of Consumer Services disclosure (brief §1).
  * Must appear wherever donations are solicited.
  */
+/**
+ * The FL 496.411 statement EXACTLY as prescribed in FDACS's registration
+ * letter for CCOF (Reg #CH83131): capital letters, no website clause. Do not
+ * add "OR AT WWW.FDACS.GOV" or anything else inside this string; a general
+ * fdacs.gov link may appear elsewhere on a page but never inside the
+ * statement. The registration number renders adjacent via FL_REG_LINE.
+ */
 export const FL_DISCLOSURE =
-  "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE WITHIN THE STATE (1-800-435-7352) OR AT www.FDACS.gov. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE. FLORIDA REGISTRATION #CH83131.";
+  "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE.";
+
+/** Rendered as its own line near the statement, never inside it. */
+export const FL_REG_LINE = "Florida Registration #CH83131.";
 
 export const TAX_NOTE =
   "The Children's Collective of Florida, Inc. is a 501(c)(3) public charity (EIN 42-2020310). Donations are tax-deductible to the fullest extent allowed under IRC §170. IRS determination letter dated May 12, 2026 (effective April 13, 2026).";

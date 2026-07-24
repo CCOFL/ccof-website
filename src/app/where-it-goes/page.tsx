@@ -3,7 +3,7 @@ import { Section, Eyebrow } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
-import { WHERE_IT_GOES, FL_DISCLOSURE } from "@/lib/site";
+import { WHERE_IT_GOES, FL_DISCLOSURE, FL_REG_LINE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Where It Goes",
@@ -103,9 +103,10 @@ export default function WhereItGoesPage() {
 
       {/* Required FL solicitation disclosure */}
       <Section background="cream-dark" className="py-10">
-        <p className="mx-auto max-w-3xl text-xs leading-relaxed text-muted">
-          {FL_DISCLOSURE}
-        </p>
+        <div className="mx-auto max-w-3xl space-y-2 text-xs leading-relaxed text-muted">
+          <p>{FL_DISCLOSURE}</p>
+          <p>{FL_REG_LINE}</p>
+        </div>
       </Section>
     </>
   );
