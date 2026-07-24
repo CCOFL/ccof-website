@@ -116,8 +116,15 @@ export default function AboutPage() {
               Art. VIII. Not a solicitation of contributions, so it does not
               trigger the FL 496.411 disclosure (footer carries it sitewide). */}
           <Reveal as="li" delay={BOARD.length * 70}>
-            <article className="flex h-full flex-col rounded-2xl border border-sage/40 bg-sage/5 p-6 shadow-card">
-              <h3 className="text-lg font-bold text-ink">An Open Seat</h3>
+            {/* Coral dashed border + chip mirror the Volunteer Service pillar's
+                "in development" treatment (Pillars.tsx) — future-tense signal. */}
+            <article className="flex h-full flex-col rounded-2xl border-2 border-dashed border-coral bg-cream p-6 shadow-card">
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="text-lg font-bold text-ink">An Open Seat</h3>
+                <span className="shrink-0 rounded-full border border-coral/40 bg-coral/10 px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wide text-coral-deep">
+                  Growing Soon
+                </span>
+              </div>
               <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-coral-deep">
                 Could this be you?
               </p>
