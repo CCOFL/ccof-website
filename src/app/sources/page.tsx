@@ -17,9 +17,11 @@ const FIGURES: { figure: string; statement: string; source: string }[] = [
     source: "FL Dept. of Health, FLHealthCHARTS; NCANDS (FFY2022).",
   },
   {
-    figure: "~3,000",
-    statement: "local children living in poverty.",
-    source: "U.S. Census Bureau (Small Area Income & Poverty Estimates).",
+    figure: "nearly 1 in 6",
+    statement:
+      "local children (children under 18) living in poverty, approximately 17%.",
+    source:
+      "U.S. Census Bureau, American Community Survey (ACS) 5-Year Estimates, 2020-2024.",
   },
   {
     figure: "~6 in 10",

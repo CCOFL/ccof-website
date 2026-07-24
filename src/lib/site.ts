@@ -131,10 +131,12 @@ export const IMPACT_STATS: {
   label: string;
 }[] = [
   { value: 1319, label: "child-maltreatment reports in Martin County last year" },
-  // ~1 in 9 — matches the About page's "1 in 9 local children lives in poverty"
-  // so the two pages report the same figure (brief task 1). This is the
-  // Supabase fallback; the live value lives in the impact_stats table.
-  { value: 1, prefix: "~", suffix: " in 9", label: "local children live in poverty" },
+  // Nearly 1 in 6 (children under 18) — U.S. Census Bureau American Community
+  // Survey (ACS) 5-year estimates, ~17%. Standardized 2026-07 (retired the
+  // older SAIPE-based "~1 in 9"); matches the About page prose so the two
+  // pages report the same figure. This is the Supabase fallback; the live
+  // value lives in the impact_stats table (see migration 0005).
+  { value: 1, prefix: "nearly ", suffix: " in 6", label: "local children (under 18) live in poverty" },
   {
     value: 6,
     suffix: " in 10",
@@ -145,7 +147,7 @@ export const IMPACT_STATS: {
 ];
 
 export const IMPACT_SOURCES =
-  "Sources: U.S. Census; AFCARS/NCANDS FFY2022; FL Dept. of Health CHARTS; CCKids 2024 Annual Report.";
+  "Sources: U.S. Census Bureau American Community Survey (ACS); AFCARS/NCANDS FFY2022; FL Dept. of Health CHARTS; CCKids 2024 Annual Report.";
 
 /**
  * "Why This Matters Here" — local-need framing for the About page (paste-ready
@@ -154,7 +156,7 @@ export const IMPACT_SOURCES =
  */
 export const WHY_THIS_MATTERS = {
   intro:
-    "Martin County is home to roughly 26,000 children — and to The Children's Collective of Florida. Our county's prosperity hides real need: about 1 in 9 local children lives in poverty, and behind every foster-care removal or kinship placement is a household scrambling for basics and a local program working to support them.",
+    "Martin County is home to roughly 26,000 children, and to The Children's Collective of Florida. Our county's prosperity hides real need: nearly 1 in 6 local children (children under 18) lives in poverty, per the U.S. Census Bureau's American Community Survey, and behind every foster-care removal or kinship placement is a household scrambling for basics and a local program working to support them.",
   dataIntro: "In a single year, our county sees:",
   data: [
     { figure: "1,319", label: "child-maltreatment reports" },
