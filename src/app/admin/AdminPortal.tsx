@@ -101,7 +101,13 @@ export function AdminPortal() {
   }, [supabase]);
 
   useEffect(() => {
-    if (session) void loadData();
+    if (!session) return;
+    // Defer so the fetch (and its setState) runs outside the effect body,
+    // per react-hooks guidance on cascading renders.
+    const id = setTimeout(() => {
+      void loadData();
+    }, 0);
+    return () => clearTimeout(id);
   }, [session, loadData]);
 
   async function handleSignIn(e: React.FormEvent) {
