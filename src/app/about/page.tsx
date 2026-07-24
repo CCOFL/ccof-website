@@ -24,7 +24,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="About The Children's Collective of Florida"
-        intro="Currently serving Martin County and the Treasure Coast — built here, building for Florida."
+        intro="Currently serving Martin County and the Treasure Coast. Built here, building for Florida."
       />
 
       {/* Why This Matters Here — local need (scaling/What's-Next omitted) */}
@@ -70,7 +70,7 @@ export default function AboutPage() {
           <strong className="font-semibold text-ink">
             {ORG.flagshipProgram}
           </strong>
-          , is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch} — an
+          , is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch}, an
           affordable community resale program for quality kids&apos; goods, open
           to everyone, with proceeds reinvested in local programs that serve
           children.
