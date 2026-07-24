@@ -33,6 +33,10 @@ export default function GiveGoodsPage() {
             Prefer to give funds? →
           </Link>
         </div>
+        <p className="mt-5 text-sm text-muted">
+          Donation bins are on their way, too. As they arrive across Martin
+          County, we&apos;ll list drop-off locations right here.
+        </p>
       </PageHero>
 
       {/* What we collect */}
