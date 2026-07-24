@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/where-it-goes", priority: 0.7 },
     { path: "/contact", priority: 0.6 },
     { path: "/sources", priority: 0.4 },
+    { path: "/registration", priority: 0.4 },
     { path: "/privacy", priority: 0.3 },
     { path: "/terms", priority: 0.3 },
     { path: "/donation-policy", priority: 0.4 },
