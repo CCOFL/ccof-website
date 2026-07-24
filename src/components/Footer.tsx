@@ -131,7 +131,12 @@ export function Footer() {
             <span aria-hidden>·</span>
             <span>EIN {ORG.ein}</span>
             <span aria-hidden>·</span>
-            <span>FL Charitable Registration No. {ORG.flReg}</span>
+            <Link
+              href="/registration"
+              className="underline-offset-4 transition-colors hover:text-cream hover:underline"
+            >
+              FL Charitable Reg. #{ORG.flReg}
+            </Link>
             <span aria-hidden>·</span>
             <span>FL Doc. No. {ORG.flDoc}</span>
           </p>
