@@ -13,16 +13,16 @@ create policy "admin can read contact submissions"
   on public.contact_submissions
   for select
   to authenticated
-  using ((auth.jwt() ->> 'email') = 'stephanie@childrenscollectivefl.org');
+  using ((auth.jwt() ->> 'email') = 'haskins1207@gmail.com');
 
 create policy "admin can read launch signups"
   on public.launch_signups
   for select
   to authenticated
-  using ((auth.jwt() ->> 'email') = 'stephanie@childrenscollectivefl.org');
+  using ((auth.jwt() ->> 'email') = 'haskins1207@gmail.com');
 
 create policy "admin can read partner requests"
   on public.partner_requests
   for select
   to authenticated
-  using ((auth.jwt() ->> 'email') = 'stephanie@childrenscollectivefl.org');
+  using ((auth.jwt() ->> 'email') = 'haskins1207@gmail.com');
