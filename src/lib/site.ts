@@ -147,7 +147,7 @@ export const IMPACT_STATS: {
 ];
 
 export const IMPACT_SOURCES =
-  "Sources: U.S. Census Bureau American Community Survey (ACS); AFCARS/NCANDS FFY2022; FL Dept. of Health CHARTS; CCKids 2024 Annual Report.";
+  "Sources: U.S. Census Bureau, American Community Survey (ACS); AFCARS/NCANDS FFY2022; FL Dept. of Health CHARTS; CCKids 2024 Annual Report.";
 
 /**
  * "Why This Matters Here" — local-need framing for the About page (paste-ready
