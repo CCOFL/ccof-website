@@ -133,8 +133,8 @@ export default function AboutPage() {
                   Everything we build for local kids is powered by people who
                   said yes. As we grow, we will welcome future board members
                   with a heart for governance, committee members in areas like
-                  finance and fundraising, and hands-on volunteers for launch
-                  season.
+                  finance, fundraising, and building partnerships, and
+                  hands-on volunteers for launch season.
                 </p>
                 <p>
                   Board and committee service is volunteer, guided by our
