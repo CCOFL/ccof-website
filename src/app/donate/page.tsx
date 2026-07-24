@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { DonationForm } from "@/components/DonationForm";
-import { ORG, FL_DISCLOSURE, TAX_NOTE } from "@/lib/site";
+import { ORG, FL_DISCLOSURE, FL_REG_LINE, TAX_NOTE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Donate",
@@ -121,6 +121,7 @@ export default async function DonatePage({
             <div className="mt-6 space-y-3 text-xs leading-relaxed text-muted">
               <p>{TAX_NOTE}</p>
               <p>{FL_DISCLOSURE}</p>
+              <p>{FL_REG_LINE}</p>
             </div>
           </div>
         </div>

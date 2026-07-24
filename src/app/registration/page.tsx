@@ -19,13 +19,11 @@ export const metadata: Metadata = {
  * conspicuously set off. Principal place of business is intentionally listed
  * as Martin County, Florida (never the founder's home address).
  */
-const STATUTORY_STATEMENT_PARTS = {
-  before:
-    "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE OR AT ",
-  link: "WWW.FDACS.GOV",
-  after:
-    ". REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE.",
-} as const;
+// The statement below must match FDACS's registration letter for CCOF
+// verbatim: capital letters, no website clause, nothing added inside it.
+// (A general fdacs.gov link is fine elsewhere on the page, never in here.)
+const STATUTORY_STATEMENT =
+  "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE.";
 
 const DETAILS: { label: string; value: string }[] = [
   { label: "Legal name", value: ORG.legalName },
@@ -74,21 +72,26 @@ export default function RegistrationPage() {
             ))}
           </dl>
 
-          {/* Required Florida statutory statement, set off conspicuously */}
+          {/* Required Florida statutory statement, set off conspicuously.
+              Verbatim per the FDACS letter; no link or extra text inside. */}
           <div className="mt-10 rounded-2xl border-2 border-sage/50 bg-sage/5 p-6 sm:p-8">
             <p className="text-sm font-semibold leading-relaxed tracking-wide text-ink">
-              {STATUTORY_STATEMENT_PARTS.before}
-              <a
-                href="https://www.fdacs.gov"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4"
-              >
-                {STATUTORY_STATEMENT_PARTS.link}
-              </a>
-              {STATUTORY_STATEMENT_PARTS.after}
+              {STATUTORY_STATEMENT}
             </p>
           </div>
+
+          {/* General reference, outside the statutory statement */}
+          <p className="mt-4 text-center text-sm text-muted">
+            Florida Registration #{ORG.flReg} · Division of Consumer Services:{" "}
+            <a
+              href="https://www.fdacs.gov"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sage-600 underline-offset-4 hover:underline"
+            >
+              www.fdacs.gov
+            </a>
+          </p>
 
           {/* Closing line */}
           <p className="mt-10 text-center text-lg text-body">
