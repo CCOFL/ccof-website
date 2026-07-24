@@ -108,6 +108,40 @@ export default function AboutPage() {
               </article>
             </Reveal>
           ))}
+          {/* Sixth tile: expression-of-interest invitation (fills the 3x2 grid).
+              Compliance: invites interest ONLY, promises nothing. Board seats
+              are filled per Bylaws Art. III (3-9 directors, currently 5;
+              annual-meeting election / majority vote on vacancies); committees
+              per Art. VI (established by the Board); service is unpaid per
+              Art. VIII. Not a solicitation of contributions, so it does not
+              trigger the FL 496.411 disclosure (footer carries it sitewide). */}
+          <Reveal as="li" delay={BOARD.length * 70}>
+            <article className="flex h-full flex-col rounded-2xl border border-sage/40 bg-sage/5 p-6 shadow-card">
+              <h3 className="text-lg font-bold text-ink">An Open Seat</h3>
+              <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-coral-deep">
+                Could this be you?
+              </p>
+              <div className="mt-3 flex-1 space-y-3 text-sm leading-relaxed text-body">
+                <p>
+                  Everything we build for local kids is powered by people who
+                  said yes. As we grow, we will welcome future board members
+                  with a heart for governance, committee members in areas like
+                  finance and fundraising, and hands-on volunteers for launch
+                  season.
+                </p>
+                <p>
+                  Board and committee service is volunteer, guided by our
+                  bylaws, and it starts with a simple hello. If our mission
+                  speaks to you, we would love to meet you.
+                </p>
+              </div>
+              <div className="mt-4">
+                <LinkButton href="/contact?intent=volunteer" variant="secondary">
+                  Start the conversation
+                </LinkButton>
+              </div>
+            </article>
+          </Reveal>
         </ul>
       </Section>
 
