@@ -11,6 +11,21 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Canonicalize the defensive .com domains onto the primary .org.
+# Netlify serves domain aliases directly (no automatic cross-domain
+# redirect), so these host-based rules do the 301 explicitly.
+[[redirects]]
+  from = "https://childrenscollectivefl.com/*"
+  to = "https://childrenscollectivefl.org/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.childrenscollectivefl.com/*"
+  to = "https://childrenscollectivefl.org/:splat"
+  status = 301
+  force = true
+
 # Security headers (complements WCAG/best-practices goals).
 [[headers]]
   for = "/*"
