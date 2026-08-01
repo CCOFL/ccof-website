@@ -2,28 +2,31 @@
 
 /*
   The Children's Collective of Florida — design system
-  LOCKED per CCOF Brand Standards Guide v1.1 (May 27, 2026). HEX is source of
-  truth; substitutes rejected. Ratio 80/10/10 = Sage / Coral / Charcoal.
-    Sage          #6F8764  primary/dominant · H2 (light bg) · primary CTAs
-    Darker Sage   #5F7658  H1 · hover · icon circles · stat figures
-    Coral         #EF7F6D  accent only (~10%) · eyebrows · in-development markers
+  LOCKED per CCOF Brand Standards v4 (July 31, 2026, founder decision). HEX is
+  source of truth; substitutes rejected. Ratio 80/10/10 = Sage / Coral / Charcoal.
+  Two-color logo: all greens Warm Sage; child Muted Coral; white heart knockout.
+    Warm Sage     #748865  primary/dominant · H2 (light bg) · primary CTAs
+    Deep Sage     #667859  H1 · hover · small text on warm white (WCAG AA 4.53:1)
+    Muted Coral   #E68B71  accent only (~10%) · the child · borders · markers
+    Coral Deep    #B25034  small coral text (eyebrows/labels, WCAG AA 4.87:1)
     Charcoal-Sage #1E2B24  H3 subheads · dark sections · footer
     Warm White    #FAF9F5  page bg + card bodies (never pure white)
-    Body text     #2C342E  · Captions/metadata #6F7771
-  Font: Nunito Sans — LOCKED, used throughout ALL CCOF materials.
+    Body text     #2C342E  · Captions/metadata #656B5E
+  Font: Nunito Sans — LOCKED for all typeset materials (logo wordmark is
+  outlined vector art; typeface confirmation pending from designer).
 */
 
 @theme {
   /* Brand colors */
-  --color-sage: #6f8764;
-  --color-sage-600: #5f7658;
-  --color-sage-700: #4c6249;
-  --color-sage-light: #88a081;
-  --color-coral: #ef7f6d; /* LOCKED — borders + large/decorative accents */
-  --color-coral-600: #df6a57;
+  --color-sage: #748865;
+  --color-sage-600: #667859;
+  --color-sage-700: #536249;
+  --color-sage-light: #8fa182;
+  --color-coral: #e68b71; /* LOCKED — borders + large/decorative accents */
+  --color-coral-600: #dc7659;
   /* Deepened coral for SMALL TEXT — same hue, darkened to pass WCAG AA
-     (≈5.1:1 on warm white). Used for eyebrows, tags, labels, markers. */
-  --color-coral-deep: #b5462f;
+     (4.87:1 on warm white). Used for eyebrows, tags, labels, markers. */
+  --color-coral-deep: #b25034;
   --color-cream: #faf9f5;
   --color-cream-dark: #f1eee4;
   --color-charcoal: #1e2b24;
