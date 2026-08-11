@@ -37,6 +37,7 @@ const DETAILS: { label: string; value: string }[] = [
     label: "Administrative contact",
     value: ORG.adminEmail,
   },
+  { label: "Phone", value: ORG.phone },
   {
     label: "Contact for our most recent financial statement",
     value: ORG.email,
@@ -68,6 +69,13 @@ export default function RegistrationPage() {
                   {item.value.includes("@") ? (
                     <a
                       href={`mailto:${item.value}`}
+                      className="text-sage-600 underline-offset-4 hover:underline"
+                    >
+                      {item.value}
+                    </a>
+                  ) : item.value === ORG.phone ? (
+                    <a
+                      href={ORG.phoneHref}
                       className="text-sage-600 underline-offset-4 hover:underline"
                     >
                       {item.value}

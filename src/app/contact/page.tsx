@@ -81,6 +81,15 @@ export default async function ContactPage({
                 </a>
               </p>
               <p>
+                Phone:{" "}
+                <a
+                  href={ORG.phoneHref}
+                  className="text-sage-600 underline-offset-4 hover:underline"
+                >
+                  {ORG.phone}
+                </a>
+              </p>
+              <p>
                 {ORG.streetAddress}, {ORG.cityStateZip}
               </p>
               <p>Serving Martin County, FL · program location coming soon</p>
