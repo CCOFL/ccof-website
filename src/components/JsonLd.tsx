@@ -16,6 +16,7 @@ export function JsonLd() {
     url: ORG.url,
     logo: `${ORG.url}/brand/CCOF_Logo_v4_Stacked_1000.png`,
     email: ORG.email,
+    telephone: "+1-772-202-0554",
     slogan: ORG.tagline,
     description:
       "A Florida 501(c)(3) public charity channeling community generosity into practical support for children in foster care, kinship homes, and crisis.",

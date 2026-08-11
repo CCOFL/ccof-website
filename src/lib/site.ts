@@ -22,6 +22,9 @@ export const ORG = {
   // Workspace Super Admin contact — published per Google for Nonprofits
   // verification requirements (admin email must be visible on the site).
   adminEmail: "stephanie@ChildrensCollectiveFL.org",
+  // Official public line (Google Voice), secured 2026-07-31.
+  phone: "(772) 202-0554",
+  phoneHref: "tel:+17722020554",
   // Public business address (W Executive Suites, Stuart — locked 2026-07-28;
   // The Space Connect remains registered agent only). Published instead of the
   // founder's home address, per standing privacy rule.
@@ -482,10 +485,9 @@ export const PARTNER_REQUESTS = {
   // partner before fulfilling. Formal partner approval is Phase 2.
   eligibility:
     "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New partners are welcome — we verify and onboard each partner before fulfilling requests, so your first request also starts that conversation.",
-  // Interim direct line for urgent needs, until the formal partner
-  // communications plan (and a published phone number) are in place.
+  // Urgent-need channel: the official line plus email.
   urgentIntro:
-    "Have an urgent need right now? While we formalize our partner communications — a direct line and phone number are on the way — email us and we'll respond as fast as we can:",
+    "Have an urgent need right now? Call us at (772) 202-0554, or email us and we'll respond as fast as we can:",
   cta: { label: "Request goods for a child", href: "/partner-nonprofits" },
 } as const;
 

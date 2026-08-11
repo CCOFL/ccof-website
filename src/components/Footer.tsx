@@ -105,6 +105,14 @@ export function Footer() {
                   {ORG.adminEmail}
                 </a>
               </li>
+              <li>
+                <a
+                  href={ORG.phoneHref}
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  {ORG.phone}
+                </a>
+              </li>
               <li className="text-cream/70">
                 {ORG.streetAddress}, {ORG.cityStateZip}
               </li>
