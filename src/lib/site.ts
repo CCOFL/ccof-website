@@ -314,13 +314,13 @@ export const GIVE_GOODS = {
     {
       title: "Schedule a pickup",
       body: "Available now across Martin County. Have a bag or a carload of quality kids' items? Tell us what you have and we'll arrange to come to you.",
-      cta: { label: "Schedule a pickup", href: "/contact?intent=pickup" },
+      cta: { label: "Schedule a pickup", href: "/pickup" },
       featured: true,
     },
     {
       title: "Host a donation bin",
       body: "Our donation bins are rolling out across Martin County soon. Host one at your business, school, or place of worship and become a neighborhood drop-off point.",
-      cta: { label: "Host a bin", href: "/contact?intent=host" },
+      cta: { label: "Host a bin", href: "/host-a-bin" },
     },
     {
       title: "Run a goods drive",
@@ -425,13 +425,13 @@ export const PARTNER_ACTIONS: {
   {
     title: "Host a bin or drive",
     body: "Set up a donation bin or run a goods drive at your business, school, or place of worship.",
-    cta: { label: "Host a Bin / Drive", href: "/contact?intent=host" },
+    cta: { label: "Host a Bin / Drive", href: "/host-a-bin" },
     variant: "secondary",
   },
   {
     title: "Volunteer",
     body: "Volunteer Service is in development — tell us how you'd like to help and we'll be in touch as it launches.",
-    cta: { label: "Volunteer", href: "/contact?intent=volunteer" },
+    cta: { label: "Volunteer", href: "/volunteer" },
     variant: "secondary",
   },
   {

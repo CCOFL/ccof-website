@@ -25,6 +25,59 @@ type PartnerRequest = {
   urgency: string;
   status: string;
 };
+type PartnerApplication = {
+  id: string;
+  created_at: string;
+  org_legal_name: string;
+  ein: string;
+  counties: string;
+  contact_name: string;
+  contact_title: string;
+  email: string;
+  status: string;
+};
+type BinHost = {
+  id: string;
+  created_at: string;
+  org_name: string;
+  org_type: string;
+  contact_name: string;
+  email: string;
+  location: string;
+  indoor_ok: boolean;
+  status: string;
+};
+type Pickup = {
+  id: string;
+  created_at: string;
+  name: string;
+  email: string;
+  pickup_area: string;
+  items: string;
+  windows: string | null;
+  status: string;
+};
+type Volunteer = {
+  id: string;
+  created_at: string;
+  name: string;
+  email: string;
+  interests: string;
+  availability: string;
+  status: string;
+};
+
+/** Missing-table errors (migration 0007 not run yet) render as empty lists,
+ *  not failures — matching the forms' graceful-degrade behavior. */
+function isMissingTable(err: { code?: string; message?: string } | null) {
+  return (
+    err?.code === "42P01" ||
+    err?.code === "PGRST205" ||
+    /schema cache|could not find the table|does not exist/i.test(
+      err?.message ?? "",
+    )
+  );
+}
 
 function fmt(ts: string) {
   return new Date(ts).toLocaleString("en-US", {
@@ -50,6 +103,11 @@ export function AdminPortal() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [signups, setSignups] = useState<Signup[]>([]);
   const [partners, setPartners] = useState<PartnerRequest[]>([]);
+  const [applications, setApplications] = useState<PartnerApplication[]>([]);
+  const [binHosts, setBinHosts] = useState<BinHost[]>([]);
+  const [pickups, setPickups] = useState<Pickup[]>([]);
+  const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
+  const [migrationNote, setMigrationNote] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
   const [loadingData, setLoadingData] = useState(false);
 
@@ -69,7 +127,7 @@ export function AdminPortal() {
     if (!supabase) return;
     setLoadingData(true);
     setDataError(null);
-    const [c, s, p] = await Promise.all([
+    const results = await Promise.all([
       supabase
         .from("contact_submissions")
         .select("id, created_at, name, email, phone, intent, message")
@@ -87,16 +145,58 @@ export function AdminPortal() {
         )
         .order("created_at", { ascending: false })
         .limit(50),
+      supabase
+        .from("partner_applications")
+        .select(
+          "id, created_at, org_legal_name, ein, counties, contact_name, contact_title, email, status"
+        )
+        .order("created_at", { ascending: false })
+        .limit(50),
+      supabase
+        .from("bin_host_requests")
+        .select(
+          "id, created_at, org_name, org_type, contact_name, email, location, indoor_ok, status"
+        )
+        .order("created_at", { ascending: false })
+        .limit(50),
+      supabase
+        .from("pickup_requests")
+        .select(
+          "id, created_at, name, email, pickup_area, items, windows, status"
+        )
+        .order("created_at", { ascending: false })
+        .limit(50),
+      supabase
+        .from("volunteer_signups")
+        .select(
+          "id, created_at, name, email, interests, availability, status"
+        )
+        .order("created_at", { ascending: false })
+        .limit(50),
     ]);
-    const firstError = c.error || s.error || p.error;
-    if (firstError) {
+    const [c, s, p, a, b, k, v] = results;
+    // New (0007) tables degrade to empty lists until the migration runs.
+    const newTableMissing = [a, b, k, v].some(
+      (r) => r.error && isMissingTable(r.error)
+    );
+    setMigrationNote(newTableMissing);
+    const hardError =
+      c.error ||
+      s.error ||
+      p.error ||
+      [a, b, k, v].find((r) => r.error && !isMissingTable(r.error))?.error;
+    if (hardError) {
       setDataError(
-        `Could not load submissions (${firstError.message}). If this is a permissions error, confirm migration 0006 has been run and you are signed in as the admin email.`
+        `Could not load submissions (${hardError.message}). If this is a permissions error, confirm migrations 0006/0007 have been run and you are signed in as the admin email.`
       );
     }
     setContacts((c.data as Contact[]) ?? []);
     setSignups((s.data as Signup[]) ?? []);
     setPartners((p.data as PartnerRequest[]) ?? []);
+    setApplications((a.data as PartnerApplication[]) ?? []);
+    setBinHosts((b.data as BinHost[]) ?? []);
+    setPickups((k.data as Pickup[]) ?? []);
+    setVolunteers((v.data as Volunteer[]) ?? []);
     setLoadingData(false);
   }, [supabase]);
 
@@ -129,6 +229,10 @@ export function AdminPortal() {
     setContacts([]);
     setSignups([]);
     setPartners([]);
+    setApplications([]);
+    setBinHosts([]);
+    setPickups([]);
+    setVolunteers([]);
   }
 
   if (!supabase) {
@@ -234,6 +338,193 @@ export function AdminPortal() {
           {dataError}
         </p>
       )}
+      {migrationNote && (
+        <p className="mt-6 rounded-xl border border-line bg-cream p-4 text-sm text-muted">
+          Some newer tables aren&apos;t set up yet — run migration
+          0007_growth_forms.sql in the Supabase SQL editor to enable the
+          applications, bin host, pickup, and volunteer lists.
+        </p>
+      )}
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-ink">
+          Partnership applications ({applications.length})
+        </h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[720px] text-left text-sm">
+            <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
+              <tr>
+                <th className="px-4 py-3">Received</th>
+                <th className="px-4 py-3">Organization</th>
+                <th className="px-4 py-3">EIN</th>
+                <th className="px-4 py-3">Counties</th>
+                <th className="px-4 py-3">Contact</th>
+                <th className="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {applications.map((r) => (
+                <tr key={r.id} className="border-t border-line align-top">
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {fmt(r.created_at)}
+                  </td>
+                  <td className="px-4 py-3 font-medium">{r.org_legal_name}</td>
+                  <td className="whitespace-nowrap px-4 py-3">{r.ein}</td>
+                  <td className="px-4 py-3">{r.counties}</td>
+                  <td className="px-4 py-3">
+                    {r.contact_name} ({r.contact_title})
+                    <br />
+                    <span className="text-muted">{r.email}</span>
+                  </td>
+                  <td className="px-4 py-3">{r.status}</td>
+                </tr>
+              ))}
+              {applications.length === 0 && (
+                <tr>
+                  <td className="px-4 py-4 text-muted" colSpan={6}>
+                    No applications yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-ink">
+          Bin host requests ({binHosts.length})
+        </h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[720px] text-left text-sm">
+            <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
+              <tr>
+                <th className="px-4 py-3">Received</th>
+                <th className="px-4 py-3">Organization</th>
+                <th className="px-4 py-3">Type</th>
+                <th className="px-4 py-3">Location</th>
+                <th className="px-4 py-3">Indoor</th>
+                <th className="px-4 py-3">Contact</th>
+                <th className="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {binHosts.map((r) => (
+                <tr key={r.id} className="border-t border-line align-top">
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {fmt(r.created_at)}
+                  </td>
+                  <td className="px-4 py-3 font-medium">{r.org_name}</td>
+                  <td className="px-4 py-3">{r.org_type}</td>
+                  <td className="px-4 py-3">{r.location}</td>
+                  <td className="px-4 py-3">{r.indoor_ok ? "yes" : "no"}</td>
+                  <td className="px-4 py-3">
+                    {r.contact_name}
+                    <br />
+                    <span className="text-muted">{r.email}</span>
+                  </td>
+                  <td className="px-4 py-3">{r.status}</td>
+                </tr>
+              ))}
+              {binHosts.length === 0 && (
+                <tr>
+                  <td className="px-4 py-4 text-muted" colSpan={7}>
+                    No bin host requests yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-ink">
+          Pickup requests ({pickups.length})
+        </h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[720px] text-left text-sm">
+            <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
+              <tr>
+                <th className="px-4 py-3">Received</th>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Area</th>
+                <th className="px-4 py-3">Items</th>
+                <th className="px-4 py-3">Windows</th>
+                <th className="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {pickups.map((r) => (
+                <tr key={r.id} className="border-t border-line align-top">
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {fmt(r.created_at)}
+                  </td>
+                  <td className="px-4 py-3 font-medium">
+                    {r.name}
+                    <br />
+                    <span className="text-muted">{r.email}</span>
+                  </td>
+                  <td className="px-4 py-3">{r.pickup_area}</td>
+                  <td className="max-w-md px-4 py-3">{r.items}</td>
+                  <td className="px-4 py-3">{r.windows}</td>
+                  <td className="px-4 py-3">{r.status}</td>
+                </tr>
+              ))}
+              {pickups.length === 0 && (
+                <tr>
+                  <td className="px-4 py-4 text-muted" colSpan={6}>
+                    No pickup requests yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-ink">
+          Volunteer interest ({volunteers.length})
+        </h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[640px] text-left text-sm">
+            <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
+              <tr>
+                <th className="px-4 py-3">Received</th>
+                <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">Interests</th>
+                <th className="px-4 py-3">Availability</th>
+                <th className="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {volunteers.map((r) => (
+                <tr key={r.id} className="border-t border-line align-top">
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {fmt(r.created_at)}
+                  </td>
+                  <td className="px-4 py-3 font-medium">
+                    {r.name}
+                    <br />
+                    <span className="text-muted">{r.email}</span>
+                  </td>
+                  <td className="px-4 py-3">{r.interests}</td>
+                  <td className="px-4 py-3">{r.availability}</td>
+                  <td className="px-4 py-3">{r.status}</td>
+                </tr>
+              ))}
+              {volunteers.length === 0 && (
+                <tr>
+                  <td className="px-4 py-4 text-muted" colSpan={5}>
+                    No volunteer signups yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-lg font-bold text-ink">
