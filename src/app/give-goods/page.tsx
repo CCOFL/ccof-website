@@ -23,7 +23,7 @@ export default function GiveGoodsPage() {
         intro={GIVE_GOODS.intro}
       >
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-          <LinkButton href="/contact?intent=pickup" size="lg">
+          <LinkButton href="/pickup" size="lg">
             Schedule a pickup
           </LinkButton>
           <Link

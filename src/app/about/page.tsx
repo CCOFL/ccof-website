@@ -143,7 +143,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="mt-4">
-                <LinkButton href="/contact?intent=volunteer" variant="secondary">
+                <LinkButton href="/volunteer" variant="secondary">
                   Start the conversation
                 </LinkButton>
               </div>

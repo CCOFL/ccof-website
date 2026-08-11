@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -78,6 +79,22 @@ export default function PartnerNonprofitsPage() {
             <p className="measure mt-4 text-base leading-relaxed text-muted">
               {PARTNER_REQUESTS.expectation}
             </p>
+
+            <div className="mt-6 rounded-2xl border border-sage/40 bg-sage/5 p-5">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-sage-600">
+                Ready to make it official?
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink/90">
+                Organizations planning to request goods regularly can{" "}
+                <Link
+                  href="/partner-apply"
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  apply to become a vetted partner
+                </Link>{" "}
+                — one application starts the verification conversation.
+              </p>
+            </div>
             <p className="mt-6 text-sm text-muted">
               Please don&apos;t include a child&apos;s name or identifying
               details — ages and sizes are all we need.
