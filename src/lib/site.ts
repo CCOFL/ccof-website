@@ -22,11 +22,11 @@ export const ORG = {
   // Workspace Super Admin contact — published per Google for Nonprofits
   // verification requirements (admin email must be visible on the site).
   adminEmail: "stephanie@ChildrensCollectiveFL.org",
-  // Public mailing/business address (The Space Connect, registered agent /
-  // virtual address with mail service). Published instead of the founder's
-  // home address, per standing privacy rule. Sunbiz update pending.
-  streetAddress: "311 Golf Rd, Ste 1000",
-  cityStateZip: "West Palm Beach, FL 33407",
+  // Public business address (W Executive Suites, Stuart — locked 2026-07-28;
+  // The Space Connect remains registered agent only). Published instead of the
+  // founder's home address, per standing privacy rule.
+  streetAddress: "770 SE Indian St",
+  cityStateZip: "Stuart, FL 34997",
   flagshipProgram: "Collective Kids Closet",
   // Location + timing are not yet finalized: Martin County (not pinned to a
   // city), late 2026 (may shift with the donation pipeline). Keep copy soft.
