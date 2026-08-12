@@ -7,7 +7,7 @@ import { ORG } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with The Children's Collective of Florida — donate goods, host a drive, partner with us, volunteer, or request support.",
+    "Get in touch with The Children's Collective of Florida: donate goods, host a drive, partner with us, volunteer, or request support.",
   alternates: { canonical: "/contact" },
 };
 
@@ -41,8 +41,8 @@ export default async function ContactPage({
               Let&apos;s talk
             </h1>
             <p className="measure mt-5 text-lg leading-relaxed text-muted">
-              We read every message. Tell us how you&apos;d like to help — or how
-              we can help you — and we&apos;ll be in touch.
+              We read every message. Tell us how you&apos;d like to help, or how
+              we can help you, and we&apos;ll be in touch.
             </p>
 
             <div className="mt-8 rounded-2xl border border-line bg-cream p-6">

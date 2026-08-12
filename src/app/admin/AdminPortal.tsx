@@ -340,7 +340,7 @@ export function AdminPortal() {
       )}
       {migrationNote && (
         <p className="mt-6 rounded-xl border border-line bg-cream p-4 text-sm text-muted">
-          Some newer tables aren&apos;t set up yet — run migration
+          Some newer tables aren&apos;t set up yet. Run migration
           0007_growth_forms.sql in the Supabase SQL editor to enable the
           applications, bin host, pickup, and volunteer lists.
         </p>

@@ -37,7 +37,7 @@ const FIGURES: { figure: string; statement: string; source: string }[] = [
   {
     figure: "15%",
     statement:
-      "of children in care placed in group homes — nearly double the state rate.",
+      "of children in care placed in group homes, nearly double the state rate.",
     source: "Federal AFCARS (FFY2022); FL Dept. of Children & Families.",
   },
 ];
@@ -62,7 +62,7 @@ export default function SourcesPage() {
           <ul>
             {FIGURES.map((f) => (
               <li key={f.figure}>
-                <strong>{f.figure}</strong> — {f.statement}{" "}
+                <strong>{f.figure}</strong>: {f.statement}{" "}
                 <span className="text-muted">Source: {f.source}</span>
               </li>
             ))}
@@ -76,7 +76,7 @@ export default function SourcesPage() {
               (AFCARS) and National Child Abuse &amp; Neglect Data System
               (NCANDS), FFY2022
             </li>
-            <li>Florida Department of Health — FLHealthCHARTS</li>
+            <li>Florida Department of Health, FLHealthCHARTS</li>
             <li>Communities Connected for Kids (CCKids) 2024 Annual Report</li>
           </ul>
 
@@ -85,8 +85,9 @@ export default function SourcesPage() {
             Figures reflect the most recent data available at the time of
             publication and are used to describe local need, not to represent
             outcomes of {ORG.abbr}&apos;s own programs (we are pre-launch). As
-            newer data is released — and once {ORG.flagshipProgram} is operating
-            — we will update these numbers and publish our own program results
+            newer data is released, and once {ORG.flagshipProgram} is
+            operating, we will update these numbers and publish our own
+            program results
             on our{" "}
             <a href="/where-it-goes">Where It Goes</a> page.
           </p>

@@ -18,7 +18,7 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(ORG.url),
   title: {
-    default: `${ORG.name} — ${ORG.tagline}`,
+    default: `${ORG.name} · ${ORG.tagline}`,
     template: `%s · ${ORG.name}`,
   },
   description: `${ORG.tagline} ${ORG.legalName}, a Florida 501(c)(3) channeling community generosity into practical support for children and families.`,
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: ORG.name,
     locale: "en_US",
     url: ORG.url,
-    title: `${ORG.name} — ${ORG.tagline}`,
+    title: `${ORG.name} · ${ORG.tagline}`,
   },
   twitter: { card: "summary_large_image" },
   alternates: { canonical: "/" },

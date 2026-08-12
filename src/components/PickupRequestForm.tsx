@@ -15,7 +15,7 @@ import {
 const VOLUME = [
   { value: "few-bags", label: "A few bags or boxes" },
   { value: "carload", label: "A carload" },
-  { value: "large", label: "Larger — furniture or many boxes" },
+  { value: "large", label: "Larger: furniture or many boxes" },
   { value: "unsure", label: "Not sure yet" },
 ] as const;
 
@@ -23,7 +23,7 @@ const WINDOWS = [
   { value: "weekday-day", label: "Weekdays, daytime" },
   { value: "weekday-evening", label: "Weekdays, evening" },
   { value: "weekend", label: "Weekends" },
-  { value: "any", label: "Flexible — any of these" },
+  { value: "any", label: "Flexible, any of these" },
 ] as const;
 
 type Errors = Partial<Record<"name" | "email" | "pickupArea" | "items", string>>;
@@ -130,7 +130,7 @@ export function PickupRequestForm() {
         error={errors.pickupArea}
         value={values.pickupArea}
         onChange={(v) => update("pickupArea", v)}
-        placeholder="City or neighborhood — e.g. Palm City"
+        placeholder="City or neighborhood, e.g. Palm City"
       />
       <TextArea
         id="items"
@@ -140,7 +140,7 @@ export function PickupRequestForm() {
         rows={4}
         value={values.items}
         onChange={(v) => update("items", v)}
-        placeholder="e.g. Kids' clothes (sizes 4–8), a stroller, and two boxes of books."
+        placeholder="e.g. Kids' clothes (sizes 4-8), a stroller, and two boxes of books."
       />
       <Select
         id="volume"

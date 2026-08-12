@@ -12,7 +12,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <Link
       href="/"
-      title="The Children's Collective of Florida — home"
+      title="The Children's Collective of Florida: home"
       className="group flex items-center gap-3"
     >
       <Image

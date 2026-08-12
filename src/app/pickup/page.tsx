@@ -24,7 +24,7 @@ export default function PickupPage() {
             <PickupRequestForm />
           </div>
           <p className="mt-6 text-center text-sm text-muted">
-            Pickups run as volunteer capacity allows — for a few bags, our
+            Pickups run as volunteer capacity allows. For a few bags, our
             donation bins and drop-offs are often fastest.
           </p>
         </div>

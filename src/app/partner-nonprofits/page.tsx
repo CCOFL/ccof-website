@@ -9,7 +9,7 @@ import { PARTNER_REQUESTS, ORG } from "@/lib/site";
 export const metadata: Metadata = {
   title: "For Partner Nonprofits",
   description:
-    "Partner 501(c)(3)s serving children in foster care, kinship care, or crisis can request clothing, shoes, and essentials for a child in need — provided directly, at no cost.",
+    "Partner 501(c)(3)s serving children in foster care, kinship care, or crisis can request clothing, shoes, and essentials for a child in need, provided directly, at no cost.",
   alternates: { canonical: "/partner-nonprofits" },
 };
 
@@ -91,13 +91,13 @@ export default function PartnerNonprofitsPage() {
                   className="font-semibold text-sage-600 underline-offset-4 hover:underline"
                 >
                   apply to become a vetted partner
-                </Link>{" "}
-                — one application starts the verification conversation.
+                </Link>
+                . One application starts the verification conversation.
               </p>
             </div>
             <p className="mt-6 text-sm text-muted">
               Please don&apos;t include a child&apos;s name or identifying
-              details — ages and sizes are all we need.
+              details. Ages and sizes are all we need.
             </p>
           </div>
 

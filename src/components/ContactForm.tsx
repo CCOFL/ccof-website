@@ -92,7 +92,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
             />
           </svg>
         </span>
-        <h3 className="mt-4 text-xl font-semibold">Message sent — thank you.</h3>
+        <h3 className="mt-4 text-xl font-semibold">Message sent. Thank you!</h3>
         <p className="mt-2 text-muted">
           We&apos;ve received your note and will reply to your email soon.
         </p>
