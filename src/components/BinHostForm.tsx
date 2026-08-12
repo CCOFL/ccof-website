@@ -154,7 +154,7 @@ export function BinHostForm() {
         checked={values.indoorOk}
         onChange={(v) => update("indoorOk", v)}
       >
-        We have an <strong>indoor spot</strong> available for the bin (our
+        We have an <strong>indoor spot</strong>{" "}available for the bin (our
         collection bins live indoors, out of the weather, roughly 2&times;2
         feet of floor space).
       </CheckboxRow>
