@@ -16,7 +16,7 @@ export default function HostABinPage() {
       <PageHero
         eyebrow="Host a Bin"
         title="Put your foot traffic to work for local kids."
-        intro="Our indoor donation bins let your customers, students, or congregation give quality kids' goods right where they already are. We handle the bin, the pickups, and the thank-yous — you provide the spot."
+        intro="Our indoor donation bins let your customers, students, or congregation give quality kids' goods right where they already are. We handle the bin, the pickups, and the thank-yous. You provide the spot."
       />
       <Section background="white">
         <div className="mx-auto max-w-3xl">

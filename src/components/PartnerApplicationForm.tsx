@@ -110,7 +110,7 @@ export function PartnerApplicationForm() {
 
   if (status === "success") {
     return (
-      <SuccessCard title="Application received — thank you.">
+      <SuccessCard title="Application received. Thank you!">
         We&apos;ll review it and reach out to begin the verification
         conversation. We&apos;re grateful for the work you do for kids, and
         we&apos;ll always be straight with you about what we can provide.
@@ -147,7 +147,7 @@ export function PartnerApplicationForm() {
         error={undefined}
         value={values.fdacsReg}
         onChange={(v) => update("fdacsReg", v)}
-        placeholder="CHxxxxx — if your organization solicits donations in Florida"
+        placeholder="CHxxxxx, if your organization solicits donations in Florida"
       />
       <Field
         id="website"
@@ -254,7 +254,7 @@ export function PartnerApplicationForm() {
       >
         I understand CCOF verifies every partner (including IRS status) before
         fulfilling requests, and that partnership doesn&apos;t guarantee
-        specific goods — CCOF matches what the community has given.
+        specific goods; CCOF matches what the community has given.
       </CheckboxRow>
 
       <TextArea

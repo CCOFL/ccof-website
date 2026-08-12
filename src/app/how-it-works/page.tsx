@@ -30,7 +30,7 @@ export default function HowItWorksPage() {
         <SectionHeading
           eyebrow="The model"
           title="Four pillars, working together"
-          intro="Three are live and one is in development — here's how each plays its part."
+          intro="Three are live and one is in development. Here's how each plays its part."
         />
         <div className="mt-12">
           <Pillars />
@@ -42,7 +42,7 @@ export default function HowItWorksPage() {
         <SectionHeading
           eyebrow="Two paths, one promise"
           title="Your donation reaches a child two ways"
-          intro="The same community generosity flows through two channels — one funds local programs, the other puts goods straight into the hands of a child who needs them now."
+          intro="The same community generosity flows through two channels: one funds local programs, the other puts goods straight into the hands of a child who needs them now."
         />
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="flex h-full flex-col rounded-2xl border border-line bg-cream p-7 shadow-card">
@@ -86,7 +86,7 @@ export default function HowItWorksPage() {
         <SectionHeading
           eyebrow="Where your money goes"
           title="Every gift compounds"
-          intro="During launch, your donation does double duty — it stocks the shelves and seeds the fund that supports our partner programs."
+          intro="During launch, your donation does double duty: it stocks the shelves and seeds the fund that supports our partner programs."
         />
         <ol className="measure mt-8 space-y-5 text-lg leading-relaxed text-ink/90">
           <li>

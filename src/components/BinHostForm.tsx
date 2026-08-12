@@ -87,7 +87,7 @@ export function BinHostForm() {
 
   if (status === "success") {
     return (
-      <SuccessCard title="Request received — thank you.">
+      <SuccessCard title="Request received. Thank you!">
         We&apos;ll reach out to schedule a conversation about hosting. Thank you
         for opening your doors for local kids.
       </SuccessCard>
@@ -148,14 +148,14 @@ export function BinHostForm() {
         error={errors.location}
         value={values.location}
         onChange={(v) => update("location", v)}
-        placeholder="City or address — e.g. Stuart, near US-1"
+        placeholder="City or address, e.g. Stuart near US-1"
       />
       <CheckboxRow
         checked={values.indoorOk}
         onChange={(v) => update("indoorOk", v)}
       >
         We have an <strong>indoor spot</strong> available for the bin (our
-        collection bins live indoors, out of the weather — roughly 2&times;2
+        collection bins live indoors, out of the weather, roughly 2&times;2
         feet of floor space).
       </CheckboxRow>
       <Field

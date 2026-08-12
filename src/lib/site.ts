@@ -54,7 +54,7 @@ export const PRIMARY_CTA = { label: "Give Goods", href: "/give-goods" } as const
  * tight (per CCOF_Founders_Promise_and_Where_It_Goes, June 2026).
  */
 export const FOUNDER_QUOTE = {
-  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. The proceeds are reinvested right here in our community — supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
+  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. The proceeds are reinvested right here in our community, supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
@@ -67,11 +67,11 @@ export const FOUNDER = {
     "Founded by Stephanie Haskins, The Children's Collective of Florida was born from Christian faith, motherhood, and a belief that everyday generosity can create lasting opportunities for children.",
   bio: [
     "Stephanie Haskins is the Founder and President of The Children's Collective of Florida, a nonprofit created to connect community generosity with practical support for children and families in need.",
-    "Guided by her Christian faith and a heart for children, Stephanie has spent years supporting organizations focused on foster care, family support, youth development, and community outreach. After becoming a mother to her daughter, Summer, she became even more aware of how quickly children outgrow clothing, toys, and essentials — and how many families could benefit from those same resources.",
+    "Guided by her Christian faith and a heart for children, Stephanie has spent years supporting organizations focused on foster care, family support, youth development, and community outreach. After becoming a mother to her daughter, Summer, she became even more aware of how quickly children outgrow clothing, toys, and essentials, and how many families could benefit from those same resources.",
     "That realization inspired the creation of The Children's Collective of Florida and its first program, The Collective Kids Closet. Stephanie's vision is to create a clear, trusted place where families can donate gently used children's items, shop affordable quality goods, and support programs serving children throughout Florida.",
   ],
   promisePrimary:
-    "I started The Children's Collective of Florida as a mother, not an institution — so let me make you a promise you can hold me to. Every item that reaches a Treasure Coast family will be inspected, cleaned, and chosen the way I'd choose it for my own children — never disposable surplus. The proceeds from The Collective Kids Closet are reinvested in our community — supporting local programs that serve children in foster care, crisis, and mentoring. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
+    "I started The Children's Collective of Florida as a mother, not an institution. So let me make you a promise you can hold me to. Every item that reaches a Treasure Coast family will be inspected, cleaned, and chosen the way I'd choose it for my own children, never disposable surplus. The proceeds from The Collective Kids Closet are reinvested in our community, supporting local programs that serve children in foster care, crisis, and mentoring. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
 } as const;
 
 /**
@@ -95,12 +95,12 @@ export const PILLARS: {
   {
     number: "01",
     title: "Trusted Giving",
-    body: "Donate goods & funds through a transparent local channel — every item inspected, cleaned, and accounted for.",
+    body: "Donate goods & funds through a transparent local channel: every item inspected, cleaned, and accounted for.",
   },
   {
     number: "02",
     title: "Affordable Access",
-    body: "Collective Kids Closet resells quality kids' goods affordably, open to all — dignity-first, never a handout line.",
+    body: "Collective Kids Closet resells quality kids' goods affordably, open to all. Dignity-first, never a handout line.",
   },
   {
     number: "03",
@@ -179,11 +179,11 @@ export const WHY_THIS_MATTERS = {
     },
     {
       figure: "15%",
-      label: "of children in care placed in group homes — nearly double the state rate",
+      label: "of children in care placed in group homes, nearly double the state rate",
     },
   ],
   closing:
-    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work — through our flagship program, the Collective Kids Closet, coming to Martin County in late 2026.",
+    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work through our flagship program, the Collective Kids Closet, coming to Martin County in late 2026.",
 } as const;
 
 /**
@@ -418,7 +418,7 @@ export const PARTNER_ACTIONS: {
   },
   {
     title: "Request goods for a child in your care",
-    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs — provided directly, at no cost.",
+    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs, provided directly at no cost.",
     cta: { label: "For Partner Nonprofits", href: "/partner-nonprofits" },
     variant: "secondary",
   },
@@ -430,7 +430,7 @@ export const PARTNER_ACTIONS: {
   },
   {
     title: "Volunteer",
-    body: "Volunteer Service is in development — tell us how you'd like to help and we'll be in touch as it launches.",
+    body: "Volunteer Service is in development. Tell us how you'd like to help and we'll be in touch as it launches.",
     cta: { label: "Volunteer", href: "/volunteer" },
     variant: "secondary",
   },
@@ -454,22 +454,22 @@ export const PARTNER_ACTIONS: {
 export const PARTNER_REQUESTS = {
   /** The "second path" card on How It Works. */
   card: {
-    title: "Partner Requests — goods, directly",
-    body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them — at no cost, never resold.",
+    title: "Partner Requests: goods, directly",
+    body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them, at no cost, never resold.",
   },
   /** /partner-nonprofits page. */
   eyebrow: "For Partner Nonprofits",
   title: "When a child needs goods right now",
   intro:
-    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly — and we provide the goods through them, at no cost, as an extension of the community's generosity.",
+    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly, and we provide the goods through them at no cost, as an extension of the community's generosity.",
   steps: [
     {
       title: "A partner reaches out",
-      body: "A vetted, mission-aligned 501(c)(3) serving children in foster care, kinship homes, or crisis tells us what a specific child needs — sizes, categories, and how soon.",
+      body: "A vetted, mission-aligned 501(c)(3) serving children in foster care, kinship homes, or crisis tells us what a specific child needs: sizes, categories, and how soon.",
     },
     {
       title: "We match the need",
-      body: "We check what the community has entrusted to us and set aside the right goods — inspected, clean, and ready.",
+      body: "We check what the community has entrusted to us and set aside the right goods: inspected, clean, and ready.",
     },
     {
       title: "Goods reach the child",
@@ -477,14 +477,14 @@ export const PARTNER_REQUESTS = {
     },
   ],
   stewardship:
-    "These goods are given by our community and entrusted to our care. As part of our charitable mission, we provide them — at no cost — to children in need through our partner nonprofit organizations. Nothing in this channel is sold.",
+    "These goods are given by our community and entrusted to our care. As part of our charitable mission, we provide them, at no cost, to children in need through our partner nonprofit organizations. Nothing in this channel is sold.",
   // Sets honest expectations — we don't overpromise what we can't provide.
   expectation:
-    "We match what we can from current stock, so the sooner and more specifically you tell us what's needed, the better we can help. We won't promise what we don't have on hand — but we'll always tell you what we can do.",
+    "We match what we can from current stock, so the sooner and more specifically you tell us what's needed, the better we can help. We won't promise what we don't have on hand, but we'll always tell you what we can do.",
   // Phase 1 gate: 501(c)(3) attestation + a promise to verify and onboard each
   // partner before fulfilling. Formal partner approval is Phase 2.
   eligibility:
-    "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New partners are welcome — we verify and onboard each partner before fulfilling requests, so your first request also starts that conversation.",
+    "Partner Requests are for vetted 501(c)(3) organizations serving children in foster care, kinship care, or crisis. New partners are welcome. We verify and onboard each partner before fulfilling requests, so your first request also starts that conversation.",
   // Urgent-need channel: the official line plus email.
   urgentIntro:
     "Have an urgent need right now? Call us at (772) 202-0554, or email us and we'll respond as fast as we can:",

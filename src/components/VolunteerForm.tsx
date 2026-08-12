@@ -51,7 +51,7 @@ export function VolunteerForm() {
       next.email = "That email doesn't look right.";
     if (!adult)
       next.adult =
-        "Volunteer signups are for adults 18+ for now — thank you for understanding.";
+        "Volunteer signups are for adults 18+ for now. Thank you for understanding.";
     return next;
   }
 

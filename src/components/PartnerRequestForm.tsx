@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { ORG } from "@/lib/site";
 
 const URGENCY = [
-  { value: "immediate", label: "Immediate — within 24–48 hours" },
+  { value: "immediate", label: "Immediate: within 24-48 hours" },
   { value: "week", label: "Within a week" },
   { value: "flexible", label: "Flexible / planning ahead" },
 ] as const;
@@ -101,7 +101,7 @@ export function PartnerRequestForm() {
         </span>
         <h3 className="mt-4 text-xl font-semibold">Request received.</h3>
         <p className="mt-2 text-muted">
-          Thank you — we&apos;ll review what&apos;s needed and reply to your
+          Thank you! We&apos;ll review what&apos;s needed and reply to your
           email as soon as we can.
         </p>
         <style>{`
@@ -182,7 +182,7 @@ export function PartnerRequestForm() {
         />
         <span className="text-sm leading-relaxed text-ink/90">
           Our organization is a registered 501(c)(3) serving children in foster
-          care, kinship care, or crisis. (New partners welcome — we&apos;ll
+          care, kinship care, or crisis. (New partners welcome; we&apos;ll
           confirm eligibility together.)
         </span>
       </label>

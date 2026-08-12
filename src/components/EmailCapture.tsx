@@ -22,7 +22,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
-      setMessage("You're on the list — we'll share launch news soon.");
+      setMessage("You're on the list. We'll share launch news soon.");
       setEmail("");
     } catch {
       setStatus("error");

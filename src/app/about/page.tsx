@@ -102,7 +102,7 @@ export default function AboutPage() {
                   </div>
                 ) : (
                   <p className="mt-3 text-sm italic leading-relaxed text-muted">
-                    Bio coming soon — provided by {ORG.name}.
+                    Bio coming soon, provided by {ORG.name}.
                   </p>
                 )}
               </article>

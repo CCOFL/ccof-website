@@ -18,7 +18,7 @@ export default function PartnerPage() {
       <PageHero
         eyebrow="Partner with us"
         title="Find your way to help"
-        intro="Whether you give goods, host a drive, fund a child's week of school supplies, or run a program that serves kids — there's a place for you here."
+        intro="Whether you give goods, host a drive, fund a child's week of school supplies, or run a program that serves kids, there's a place for you here."
       >
         <LinkButton href="/donate" size="lg">
           Donate / Give Goods
@@ -29,7 +29,7 @@ export default function PartnerPage() {
         <SectionHeading
           eyebrow="Ways to get involved"
           title="Pick the path that fits"
-          intro="Each button below goes exactly where it should — no dead ends."
+          intro="Each button below goes exactly where it should. No dead ends."
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {PARTNER_ACTIONS.map((action, i) => (

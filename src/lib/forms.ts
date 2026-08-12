@@ -33,7 +33,7 @@ export async function saveContactSubmission(sub: ContactSubmission) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Website contact — ${sub.intent} — ${sub.name}`,
+      subject: `Website contact · ${sub.intent} · ${sub.name}`,
       replyTo: sub.email,
       text: [
         `New contact form submission`,
@@ -116,7 +116,7 @@ export async function savePartnerRequest(req: PartnerRequest) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Partner request — ${req.orgName} — ${req.urgency}`,
+      subject: `Partner request · ${req.orgName} · ${req.urgency}`,
       replyTo: req.email,
       text: [
         `New partner goods request`,
@@ -200,7 +200,7 @@ export async function saveBinHostRequest(req: BinHostRequest) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Bin host request — ${req.orgName} (${req.orgType})`,
+      subject: `Bin host request · ${req.orgName} (${req.orgType})`,
       replyTo: req.email,
       text: [
         `New host-a-bin request`,
@@ -262,7 +262,7 @@ export async function savePickupRequest(req: PickupRequest) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Pickup request — ${req.name} — ${req.pickupArea}`,
+      subject: `Pickup request · ${req.name} · ${req.pickupArea}`,
       replyTo: req.email,
       text: [
         `New goods pickup request`,
@@ -321,7 +321,7 @@ export async function saveVolunteerSignup(req: VolunteerSignup) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Volunteer interest — ${req.name}`,
+      subject: `Volunteer interest · ${req.name}`,
       replyTo: req.email,
       text: [
         `New volunteer interest signup`,
@@ -330,7 +330,7 @@ export async function saveVolunteerSignup(req: VolunteerSignup) {
         `Phone: ${req.phone || "(not provided)"}`,
         `Interests: ${req.interests.join(", ") || "(none selected)"}`,
         `Availability: ${req.availability}`,
-        `18 or older: ${req.adult ? "yes" : "NO — follow up required"}`,
+        `18 or older: ${req.adult ? "yes" : "NO (follow up required)"}`,
         ``,
         req.message || "(no additional message)",
       ].join("\n"),
@@ -395,7 +395,7 @@ export async function savePartnerApplication(req: PartnerApplication) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Partnership APPLICATION — ${req.orgLegalName}`,
+      subject: `Partnership APPLICATION · ${req.orgLegalName}`,
       replyTo: req.email,
       text: [
         `New 501(c)(3) partnership application`,
