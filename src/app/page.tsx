@@ -45,12 +45,20 @@ export default async function Home() {
                   Give Funds
                 </LinkButton>
               </div>
-              <p className="mt-4 text-sm">
+              <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
                 <Link
                   href="/how-it-works"
                   className="font-semibold text-sage-600 underline-offset-4 hover:underline"
                 >
                   Or see how it works →
+                </Link>
+                {/* Bin artwork promises pickups and its QR lands here, so the
+                    offer must be visible in the first viewport. */}
+                <Link
+                  href="/pickup"
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  Too much to carry? We pick up →
                 </Link>
               </p>
               <p className="mt-6 text-sm text-muted">

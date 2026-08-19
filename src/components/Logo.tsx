@@ -36,7 +36,8 @@ export function Logo({ compact = false }: { compact?: boolean }) {
             compact ? "text-[0.7rem]" : "text-xs"
           }`}
         >
-          of Florida
+          of Florida ·{" "}
+          <span className="whitespace-nowrap">501(c)(3) nonprofit</span>
         </span>
       </span>
     </Link>
