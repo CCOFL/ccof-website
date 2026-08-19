@@ -24,6 +24,20 @@ export default async function Home() {
       {/* HERO — content starts in the first viewport; one primary + one secondary CTA (brief #4/#5) */}
       <section className="relative overflow-hidden bg-cream">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-28">
+          {/* Bin-donor fast path: the printed bin QR codes land on this page,
+              so the receipt route must be visible without scrolling. */}
+          <Link
+            href="/donated"
+            className="mb-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-2xl border-2 border-coral bg-coral/5 px-5 py-3.5 transition-colors hover:bg-coral/10"
+          >
+            <span className="text-sm font-medium leading-snug text-ink sm:text-base">
+              Just dropped something in one of our bins? Tell us what you gave
+              and we will send your receipt.
+            </span>
+            <span className="whitespace-nowrap text-sm font-bold text-coral-deep sm:text-base">
+              Get my receipt →
+            </span>
+          </Link>
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <Eyebrow>Built in Martin County. Building for Florida.</Eyebrow>

@@ -1,5 +1,6 @@
 import { getSupabase, isSupabaseConfigured } from "./supabase";
-import { sendNotification, isEmailConfigured } from "./email";
+import { sendNotification, sendEmailTo, isEmailConfigured } from "./email";
+import { ORG, FL_DISCLOSURE, FL_REG_LINE } from "./site";
 
 export type ContactSubmission = {
   name: string;
@@ -480,4 +481,193 @@ export async function saveLaunchSignup(email: string) {
     console.warn(`[forms] No storage configured — signup logged only: ${email}`);
   }
   return { stored };
+}
+
+export const GOODS_CATEGORIES = [
+  { value: "clothing", label: "Children's clothing" },
+  { value: "shoes", label: "Shoes" },
+  { value: "toys-games", label: "Toys and games" },
+  { value: "books", label: "Books" },
+  { value: "baby-gear", label: "Baby gear" },
+  { value: "school-supplies", label: "School supplies" },
+  { value: "other", label: "Other" },
+] as const;
+
+export const GOODS_QUANTITY_BANDS = [
+  { value: "few-items", label: "A few items" },
+  { value: "one-bag", label: "About one bag" },
+  { value: "two-three-bags", label: "Two or three bags" },
+  { value: "more", label: "More than three bags" },
+] as const;
+
+export type GoodsDonation = {
+  firstName: string;
+  lastName?: string;
+  email: string;
+  categories: string[];
+  otherDescription?: string;
+  quantityBand?: string;
+  binSlug?: string;
+  zip?: string;
+  emailOptIn: boolean;
+};
+
+function goodsCategoryLabel(value: string) {
+  return GOODS_CATEGORIES.find((c) => c.value === value)?.label ?? value;
+}
+
+function goodsQuantityLabel(value: string) {
+  return GOODS_QUANTITY_BANDS.find((q) => q.value === value)?.label ?? value;
+}
+
+/** Plain-text in-kind receipt. NEVER states or implies a dollar value: for
+ *  non-cash gifts the donor determines fair market value, not the charity. */
+function buildGoodsReceipt(d: GoodsDonation, receiptNumber: string) {
+  const date = new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "America/New_York",
+  });
+  const donor = [d.firstName, d.lastName].filter(Boolean).join(" ");
+  const lines = [
+    ORG.legalName,
+    "DBA The Collective Kids Closet",
+    `EIN ${ORG.ein}`,
+    `${ORG.streetAddress}, ${ORG.cityStateZip}`,
+    FL_REG_LINE,
+    ``,
+    `DONATION RECEIPT`,
+    `Receipt number: ${receiptNumber}`,
+    `Date received: ${date}`,
+    `Donor: ${donor}`,
+    ``,
+    `Description of donated goods, as reported by the donor:`,
+    ...d.categories.map((c) =>
+      c === "other" && d.otherDescription
+        ? `- Other: ${d.otherDescription}`
+        : `- ${goodsCategoryLabel(c)}`,
+    ),
+  ];
+  if (d.quantityBand) {
+    lines.push(`Approximate quantity: ${goodsQuantityLabel(d.quantityBand)}`);
+  }
+  if (d.binSlug) {
+    lines.push(`Donation bin: ${d.binSlug}`);
+  }
+  lines.push(
+    ``,
+    `No goods or services were provided in exchange for this contribution.`,
+    ``,
+    `The IRS requires donors to determine the value of donated goods. Please keep this receipt for your records. For donations valued over $500 you may need IRS Form 8283, and over $5,000 a qualified appraisal may be required. We are glad to answer questions about what you gave, but we cannot assign it a value.`,
+    ``,
+    `Thank you for giving with such generosity. Your donation supports Florida children in foster care, kinship homes, and families navigating crisis, through direct provision with our partner nonprofits and our community resale program that funds local children's causes.`,
+    ``,
+    FL_DISCLOSURE,
+    ``,
+    `The Children's Collective of Florida`,
+    `ChildrensCollectiveFL.org | (772) 202-0554 | ${ORG.email}`,
+  );
+  return lines.join("\n");
+}
+
+/**
+ * Full goods-donation intake: sequential receipt number (RPC), donor receipt
+ * email, durable row (receipt_sent_at reflects the send outcome), optional
+ * email-list capture, internal notification. Every step degrades softly so a
+ * donor standing at a bin never sees a failure the org can absorb.
+ */
+export async function saveGoodsDonation(d: GoodsDonation) {
+  let stored = false;
+  let receiptNumber = "";
+
+  const supabase = isSupabaseConfigured() ? getSupabase() : null;
+
+  if (supabase) {
+    const { data, error } = await supabase.rpc("next_receipt_number");
+    if (!error && typeof data === "string") receiptNumber = data;
+  }
+  if (!receiptNumber) {
+    // Provisional fallback (pre-migration or RPC failure): unique enough to
+    // answer a donor question, visibly not part of the sequential series.
+    receiptNumber = `CCOF-${new Date().getFullYear()}-P${Date.now()
+      .toString(36)
+      .slice(-5)
+      .toUpperCase()}`;
+  }
+
+  const receipt = await sendEmailTo({
+    to: d.email,
+    subject: "Your donation receipt from The Children's Collective of Florida",
+    replyTo: ORG.email,
+    text: buildGoodsReceipt(d, receiptNumber),
+  });
+
+  if (supabase) {
+    const { error } = await supabase.from("goods_donations").insert({
+      first_name: d.firstName,
+      last_name: d.lastName || null,
+      email: d.email,
+      categories: d.categories,
+      other_description: d.otherDescription || null,
+      quantity_band: d.quantityBand || null,
+      bin_slug: d.binSlug || null,
+      zip: d.zip || null,
+      email_opt_in: d.emailOptIn,
+      receipt_number: receiptNumber,
+      receipt_sent_at: receipt.delivered ? new Date().toISOString() : null,
+    });
+    if (error && !isMissingTable(error)) {
+      throw new Error(`Supabase insert failed: ${error.message}`);
+    }
+    if (!error) stored = true;
+
+    // Email-list capture (quiet: no extra notification; duplicates are fine).
+    if (d.emailOptIn) {
+      const { error: signupError } = await supabase
+        .from("launch_signups")
+        .insert({ email: d.email });
+      if (
+        signupError &&
+        signupError.code !== "23505" &&
+        !isMissingTable(signupError)
+      ) {
+        console.warn(`[forms] goods donor list capture failed: ${signupError.message}`);
+      }
+    }
+  }
+
+  if (isEmailConfigured()) {
+    await sendNotification({
+      subject: `Goods donation · ${d.firstName} ${d.lastName || ""} · ${d.binSlug || "no bin"}`.trim(),
+      replyTo: d.email,
+      text: [
+        `New goods donation recorded`,
+        `Receipt: ${receiptNumber} (receipt email ${receipt.delivered ? "sent" : "NOT sent"})`,
+        `Donor: ${[d.firstName, d.lastName].filter(Boolean).join(" ")}`,
+        `Email: ${d.email} (updates opt-in: ${d.emailOptIn ? "yes" : "no"})`,
+        `Categories: ${d.categories.map(goodsCategoryLabel).join(", ")}`,
+        d.categories.includes("other") && d.otherDescription
+          ? `Other description: ${d.otherDescription}`
+          : ``,
+        `Quantity: ${d.quantityBand ? goodsQuantityLabel(d.quantityBand) : "(not provided)"}`,
+        `Bin: ${d.binSlug || "(not provided)"}`,
+        `ZIP: ${d.zip || "(not provided)"}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    });
+    stored = true;
+  }
+
+  if (!stored) {
+    console.warn(
+      `[forms] Goods donation not persisted — logged only:\n${JSON.stringify(
+        { ...d, receiptNumber },
+        null,
+        2,
+      )}`,
+    );
+  }
+  return { stored, receiptNumber, receiptSent: receipt.delivered };
 }

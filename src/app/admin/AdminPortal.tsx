@@ -115,6 +115,18 @@ type Pickup = {
   windows: string | null;
   status: string;
 };
+type GoodsDonation = {
+  id: string;
+  created_at: string;
+  first_name: string;
+  last_name: string | null;
+  email: string;
+  categories: string[];
+  quantity_band: string | null;
+  bin_slug: string | null;
+  receipt_number: string;
+  receipt_sent_at: string | null;
+};
 type Volunteer = {
   id: string;
   created_at: string;
@@ -165,6 +177,8 @@ export function AdminPortal() {
   const [binHosts, setBinHosts] = useState<BinHost[]>([]);
   const [pickups, setPickups] = useState<Pickup[]>([]);
   const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
+  const [goods, setGoods] = useState<GoodsDonation[]>([]);
+  const [goodsSortAsc, setGoodsSortAsc] = useState(false);
   const [migrationNote, setMigrationNote] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
   const [loadingData, setLoadingData] = useState(false);
@@ -231,10 +245,17 @@ export function AdminPortal() {
         )
         .order("created_at", { ascending: false })
         .limit(50),
+      supabase
+        .from("goods_donations")
+        .select(
+          "id, created_at, first_name, last_name, email, categories, quantity_band, bin_slug, receipt_number, receipt_sent_at"
+        )
+        .order("created_at", { ascending: false })
+        .limit(100),
     ]);
-    const [c, s, p, a, b, k, v] = results;
-    // New (0007) tables degrade to empty lists until the migration runs.
-    const newTableMissing = [a, b, k, v].some(
+    const [c, s, p, a, b, k, v, g] = results;
+    // Newer tables/columns degrade to empty lists until migrations run.
+    const newTableMissing = [a, b, k, v, g].some(
       (r) => r.error && isMissingTable(r.error)
     );
     setMigrationNote(newTableMissing);
@@ -242,7 +263,7 @@ export function AdminPortal() {
       c.error ||
       s.error ||
       p.error ||
-      [a, b, k, v].find((r) => r.error && !isMissingTable(r.error))?.error;
+      [a, b, k, v, g].find((r) => r.error && !isMissingTable(r.error))?.error;
     if (hardError) {
       setDataError(
         `Could not load submissions (${hardError.message}). If this is a permissions error, confirm migrations 0006/0007 have been run and you are signed in as the admin email.`
@@ -255,6 +276,7 @@ export function AdminPortal() {
     setBinHosts((b.data as BinHost[]) ?? []);
     setPickups((k.data as Pickup[]) ?? []);
     setVolunteers((v.data as Volunteer[]) ?? []);
+    setGoods((g.data as GoodsDonation[]) ?? []);
     setLoadingData(false);
   }, [supabase]);
 
@@ -291,6 +313,7 @@ export function AdminPortal() {
     setBinHosts([]);
     setPickups([]);
     setVolunteers([]);
+    setGoods([]);
   }
 
   if (!supabase) {
@@ -399,10 +422,85 @@ export function AdminPortal() {
       {migrationNote && (
         <p className="mt-6 rounded-xl border border-line bg-cream p-4 text-sm text-muted">
           Some newer tables or columns aren&apos;t set up yet. Run the latest
-          migrations (0007_growth_forms.sql, then 0008_partner_publicity_consent.sql)
+          migrations (0007, 0008, then 0009_goods_donations.sql)
           in the Supabase SQL editor to enable every list here.
         </p>
       )}
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-ink">
+          Goods donations ({goods.length})
+        </h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[900px] text-left text-sm">
+            <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
+              <tr>
+                <th className="px-4 py-3">
+                  <button
+                    type="button"
+                    onClick={() => setGoodsSortAsc((s) => !s)}
+                    className="uppercase tracking-wider underline-offset-4 hover:underline"
+                  >
+                    Received {goodsSortAsc ? "(oldest first)" : "(newest first)"}
+                  </button>
+                </th>
+                <th className="px-4 py-3">Bin</th>
+                <th className="px-4 py-3">Donor</th>
+                <th className="px-4 py-3">Categories</th>
+                <th className="px-4 py-3">Quantity</th>
+                <th className="px-4 py-3">Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...goods]
+                .sort((x, y) =>
+                  goodsSortAsc
+                    ? x.created_at.localeCompare(y.created_at)
+                    : y.created_at.localeCompare(x.created_at)
+                )
+                .map((r) => (
+                <tr key={r.id} className="border-t border-line align-top">
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {fmt(r.created_at)}
+                  </td>
+                  <td className="px-4 py-3">
+                    <span
+                      className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+                        r.bin_slug
+                          ? "bg-sage/15 text-sage-700"
+                          : "bg-cream-dark text-muted"
+                      }`}
+                    >
+                      {r.bin_slug || "no bin"}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 font-medium">
+                    {r.first_name} {r.last_name || ""}
+                    <br />
+                    <span className="font-normal text-muted">{r.email}</span>
+                  </td>
+                  <td className="px-4 py-3">{r.categories.join(", ")}</td>
+                  <td className="px-4 py-3">{r.quantity_band || ""}</td>
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {r.receipt_number}
+                    <br />
+                    <span className={r.receipt_sent_at ? "text-sage-700" : "text-coral-deep"}>
+                      {r.receipt_sent_at ? "receipt sent" : "receipt NOT sent"}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+              {goods.length === 0 && (
+                <tr>
+                  <td className="px-4 py-4 text-muted" colSpan={6}>
+                    No goods donations yet.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-lg font-bold text-ink">
