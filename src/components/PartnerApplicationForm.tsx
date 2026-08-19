@@ -23,7 +23,10 @@ type Errors = Partial<
     | "email"
     | "needs"
     | "is501c3"
-    | "vettingAck",
+    | "vettingAck"
+    | "publicityPreference"
+    | "mediaContactName"
+    | "mediaContactEmail",
     string
   >
 >;
@@ -32,6 +35,23 @@ type Status = "idle" | "submitting" | "success" | "error";
 function isEin(v: string) {
   return /^\d{2}-?\d{7}$/.test(v);
 }
+
+const PUBLICITY_OPTIONS = [
+  {
+    value: "may_name",
+    label:
+      "Yes, you may name our organization in your website, social media, newsletters, and donor materials.",
+  },
+  {
+    value: "may_name_with_review",
+    label:
+      "Yes, but we would like to review materials that name us before they are published.",
+  },
+  {
+    value: "do_not_name",
+    label: "We prefer not to be named publicly at this time.",
+  },
+] as const;
 
 export function PartnerApplicationForm() {
   const [values, setValues] = useState({
@@ -48,10 +68,17 @@ export function PartnerApplicationForm() {
     needs: "",
     volumeEstimate: "",
     message: "",
+    mediaContactName: "",
+    mediaContactEmail: "",
     company: "", // honeypot — kept empty by humans
   });
   const [is501c3, setIs501c3] = useState(false);
   const [vettingAck, setVettingAck] = useState(false);
+  const [publicityPreference, setPublicityPreference] = useState("");
+  const [logoUsePermitted, setLogoUsePermitted] = useState(false);
+  const mayName =
+    publicityPreference === "may_name" ||
+    publicityPreference === "may_name_with_review";
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
 
@@ -78,6 +105,22 @@ export function PartnerApplicationForm() {
       next.is501c3 = "Partnership is for 501(c)(3) organizations.";
     if (!vettingAck)
       next.vettingAck = "Please acknowledge the verification step.";
+    if (!publicityPreference)
+      next.publicityPreference =
+        "Please choose how we may recognize your organization.";
+    if (mayName) {
+      if (!values.mediaContactName.trim())
+        next.mediaContactName = "Who should we reach about media materials?";
+      if (!values.mediaContactEmail.trim())
+        next.mediaContactEmail = "An email for media questions.";
+      else if (!isValidEmail(values.mediaContactEmail))
+        next.mediaContactEmail = "That email doesn't look right.";
+    } else if (
+      values.mediaContactEmail.trim() &&
+      !isValidEmail(values.mediaContactEmail)
+    ) {
+      next.mediaContactEmail = "That email doesn't look right.";
+    }
     return next;
   }
 
@@ -99,7 +142,14 @@ export function PartnerApplicationForm() {
       const res = await fetch("/api/partner-application", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, is501c3, vettingAck }),
+        body: JSON.stringify({
+          ...values,
+          is501c3,
+          vettingAck,
+          publicityPreference,
+          // do_not_name always submits logo permission as false.
+          logoUsePermitted: mayName ? logoUsePermitted : false,
+        }),
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
@@ -231,6 +281,108 @@ export function PartnerApplicationForm() {
         onChange={(v) => update("volumeEstimate", v)}
         placeholder="A rough estimate is perfect"
       />
+
+      {/* Recognition and media consent (migration 0008). Copy is founder-
+          approved verbatim; do not reword without sign-off. */}
+      <div className="border-t border-line pt-5">
+        <h3 className="text-base font-bold text-ink">Recognition and media</h3>
+        <p className="mt-1.5 text-sm text-muted">
+          We want our community to know which organizations their generosity
+          supports, and we want you in full control of how your organization is
+          represented.
+        </p>
+      </div>
+
+      <fieldset>
+        <legend className="mb-1.5 block text-sm font-medium text-ink">
+          May we name your organization publicly?{" "}
+          <span className="text-coral-deep">*</span>
+        </legend>
+        <div className="space-y-2">
+          {PUBLICITY_OPTIONS.map((opt) => (
+            <label
+              key={opt.value}
+              className="flex items-start gap-3 rounded-xl border border-line bg-cream px-4 py-3"
+            >
+              <input
+                type="radio"
+                name="publicityPreference"
+                value={opt.value}
+                checked={publicityPreference === opt.value}
+                onChange={() => {
+                  setPublicityPreference(opt.value);
+                  if (opt.value === "do_not_name") setLogoUsePermitted(false);
+                  if (errors.publicityPreference)
+                    setErrors((e) => ({ ...e, publicityPreference: undefined }));
+                }}
+                className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
+              />
+              <span className="text-sm leading-relaxed text-ink/90">
+                {opt.label}
+              </span>
+            </label>
+          ))}
+        </div>
+        {errors.publicityPreference && (
+          <p className="mt-1.5 text-sm text-red-700" role="alert">
+            {errors.publicityPreference}
+          </p>
+        )}
+        <p className="mt-1.5 text-sm text-muted">
+          You can change this at any time by contacting us.
+        </p>
+      </fieldset>
+
+      <CheckboxRow
+        checked={mayName ? logoUsePermitted : false}
+        onChange={(v) => setLogoUsePermitted(v)}
+        disabled={!mayName}
+      >
+        You may also use our organization&apos;s logo in those materials.
+      </CheckboxRow>
+
+      <div aria-live="polite" className="space-y-5">
+        {mayName && (
+          <>
+            <Field
+              id="mediaContactName"
+              label="Media contact name"
+              required
+              error={errors.mediaContactName}
+              value={values.mediaContactName}
+              onChange={(v) => update("mediaContactName", v)}
+              autoComplete="name"
+            />
+            <Field
+              id="mediaContactEmail"
+              label="Media contact email"
+              type="email"
+              required
+              error={errors.mediaContactEmail}
+              value={values.mediaContactEmail}
+              onChange={(v) => update("mediaContactEmail", v)}
+              autoComplete="email"
+            />
+          </>
+        )}
+      </div>
+
+      <div className="space-y-3 rounded-xl border border-line bg-cream p-4 text-sm leading-relaxed text-muted">
+        <p>
+          <strong className="text-ink/90">Images of children.</strong>{" "}The
+          Children&apos;s Collective of Florida does not photograph, film, or
+          publish images of children served by our partner organizations, or of
+          partner facility interiors, without that organization&apos;s prior
+          written permission. If your organization ever wishes to share
+          approved images, we will handle that separately and in writing.
+        </p>
+        <p>
+          <strong className="text-ink/90">Using our name.</strong>{" "}You are
+          welcome to name The Children&apos;s Collective of Florida as a
+          partner in your own communications. Please contact us before using
+          our logo so we can send you current brand files.
+        </p>
+      </div>
 
       <CheckboxRow
         checked={is501c3}

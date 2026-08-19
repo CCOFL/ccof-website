@@ -20,9 +20,15 @@ type Body = {
   volumeEstimate?: string;
   vettingAck?: boolean;
   message?: string;
+  publicityPreference?: string;
+  logoUsePermitted?: boolean;
+  mediaContactName?: string;
+  mediaContactEmail?: string;
   // Honeypot — bots fill this; humans never see it.
   company?: string;
 };
+
+const PUBLICITY_PREFS = ["may_name", "may_name_with_review", "do_not_name"];
 
 function isEmail(v: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
@@ -51,6 +57,28 @@ export async function POST(request: Request) {
   const contactTitle = (body.contactTitle ?? "").trim();
   const email = (body.email ?? "").trim();
   const needs = (body.needs ?? "").trim();
+
+  // Publicity/media consent. Preference is required; naming permission makes
+  // the media contact required; do_not_name forces logo permission to false.
+  const publicityPreference = (body.publicityPreference ?? "").trim();
+  const mediaContactName = (body.mediaContactName ?? "").trim();
+  const mediaContactEmail = (body.mediaContactEmail ?? "").trim();
+  const mayName =
+    publicityPreference === "may_name" ||
+    publicityPreference === "may_name_with_review";
+  const logoUsePermitted = mayName ? Boolean(body.logoUsePermitted) : false;
+
+  if (
+    !PUBLICITY_PREFS.includes(publicityPreference) ||
+    (mayName &&
+      (!mediaContactName || !mediaContactEmail || !isEmail(mediaContactEmail))) ||
+    (!mayName && mediaContactEmail !== "" && !isEmail(mediaContactEmail))
+  ) {
+    return NextResponse.json(
+      { error: "Please complete the recognition and media section." },
+      { status: 400 },
+    );
+  }
 
   if (
     !orgLegalName ||
@@ -89,6 +117,10 @@ export async function POST(request: Request) {
       volumeEstimate: (body.volumeEstimate ?? "").trim(),
       vettingAck: true,
       message: (body.message ?? "").trim(),
+      publicityPreference,
+      logoUsePermitted,
+      mediaContactName,
+      mediaContactEmail,
     });
     return NextResponse.json({ ok: true });
   } catch (err) {

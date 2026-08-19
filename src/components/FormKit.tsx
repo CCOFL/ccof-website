@@ -172,20 +172,27 @@ export function CheckboxRow({
   children,
   error,
   id,
+  disabled,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
   children: React.ReactNode;
   error?: string;
   id?: string;
+  disabled?: boolean;
 }) {
   return (
     <div>
-      <label className="flex items-start gap-3 rounded-xl border border-line bg-cream p-4">
+      <label
+        className={`flex items-start gap-3 rounded-xl border border-line bg-cream p-4 ${
+          disabled ? "opacity-60" : ""
+        }`}
+      >
         <input
           id={id}
           type="checkbox"
           checked={checked}
+          disabled={disabled}
           onChange={(e) => onChange(e.target.checked)}
           aria-invalid={error ? true : undefined}
           className="mt-0.5 h-5 w-5 shrink-0 rounded border-line text-sage focus:ring-sage"
