@@ -58,6 +58,14 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/pickup"
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  Schedule a Pickup
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/donate"
                   className="text-cream/80 transition-colors hover:text-cream"
                 >

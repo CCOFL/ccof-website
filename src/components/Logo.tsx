@@ -29,14 +29,14 @@ export function Logo({ compact = false }: { compact?: boolean }) {
             compact ? "text-base" : "text-lg"
           }`}
         >
-          The Children&apos;s Collective
+          The Children&apos;s Collective of Florida
         </span>
         <span
           className={`text-muted transition-all duration-300 ${
             compact ? "text-[0.7rem]" : "text-xs"
           }`}
         >
-          of Florida
+          501(c)(3) nonprofit
         </span>
       </span>
     </Link>
