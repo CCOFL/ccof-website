@@ -362,6 +362,18 @@ export type PartnerApplication = {
   volumeEstimate?: string;
   vettingAck: boolean;
   message?: string;
+  // Publicity/media consent (migration 0008). Preference is one of
+  // may_name | may_name_with_review | do_not_name.
+  publicityPreference: string;
+  logoUsePermitted: boolean;
+  mediaContactName?: string;
+  mediaContactEmail?: string;
+};
+
+const PUBLICITY_LABELS: Record<string, string> = {
+  may_name: "Yes, may name publicly",
+  may_name_with_review: "Yes, with review before publishing",
+  do_not_name: "Do NOT name publicly",
 };
 
 /** Persist a formal 501(c)(3) partnership application; degrades pre-migration. */
@@ -386,6 +398,10 @@ export async function savePartnerApplication(req: PartnerApplication) {
       volume_estimate: req.volumeEstimate || null,
       vetting_ack: req.vettingAck,
       message: req.message || null,
+      publicity_preference: req.publicityPreference,
+      logo_use_permitted: req.logoUsePermitted,
+      media_contact_name: req.mediaContactName || null,
+      media_contact_email: req.mediaContactEmail || null,
     });
     if (error && !isMissingTable(error)) {
       throw new Error(`Supabase insert failed: ${error.message}`);
@@ -410,6 +426,14 @@ export async function savePartnerApplication(req: PartnerApplication) {
         `501(c)(3) attested: ${req.is501c3 ? "yes" : "no / not confirmed"}`,
         `Vetting acknowledged: ${req.vettingAck ? "yes" : "no"}`,
         `Volume estimate: ${req.volumeEstimate || "(not provided)"}`,
+        ``,
+        `Publicity: ${PUBLICITY_LABELS[req.publicityPreference] || req.publicityPreference}`,
+        `Logo use permitted: ${req.logoUsePermitted ? "yes" : "no"}`,
+        `Media contact: ${
+          req.mediaContactName || req.mediaContactEmail
+            ? `${req.mediaContactName || "(no name)"} <${req.mediaContactEmail || "(no email)"}>`
+            : "(not provided)"
+        }`,
         ``,
         `Mission & population: ${req.mission}`,
         ``,

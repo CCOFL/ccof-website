@@ -35,7 +35,65 @@ type PartnerApplication = {
   contact_title: string;
   email: string;
   status: string;
+  publicity_preference: string | null;
+  logo_use_permitted: boolean | null;
+  media_contact_name: string | null;
+  media_contact_email: string | null;
 };
+
+const PUBLICITY_CHIP: Record<
+  string,
+  { label: string; className: string }
+> = {
+  may_name: {
+    label: "Named OK",
+    className: "bg-sage/15 text-sage-700",
+  },
+  may_name_with_review: {
+    label: "Named, review first",
+    className: "bg-coral/15 text-coral-deep",
+  },
+  do_not_name: {
+    label: "Do not name",
+    className: "bg-charcoal text-cream",
+  },
+};
+
+function PublicityCell({ r }: { r: PartnerApplication }) {
+  const chip = r.publicity_preference
+    ? PUBLICITY_CHIP[r.publicity_preference]
+    : undefined;
+  return (
+    <div className="space-y-1">
+      <span
+        className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold ${
+          chip ? chip.className : "bg-cream-dark text-muted"
+        }`}
+      >
+        {chip ? chip.label : "Not specified"}
+      </span>
+      <div className="text-xs text-muted">
+        Logo:{" "}
+        {r.logo_use_permitted === null || r.logo_use_permitted === undefined
+          ? "not specified"
+          : r.logo_use_permitted
+            ? "yes"
+            : "no"}
+      </div>
+      {(r.media_contact_name || r.media_contact_email) && (
+        <div className="text-xs text-muted">
+          {r.media_contact_name}
+          {r.media_contact_email && (
+            <>
+              <br />
+              {r.media_contact_email}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 type BinHost = {
   id: string;
   created_at: string;
@@ -148,7 +206,7 @@ export function AdminPortal() {
       supabase
         .from("partner_applications")
         .select(
-          "id, created_at, org_legal_name, ein, counties, contact_name, contact_title, email, status"
+          "id, created_at, org_legal_name, ein, counties, contact_name, contact_title, email, status, publicity_preference, logo_use_permitted, media_contact_name, media_contact_email"
         )
         .order("created_at", { ascending: false })
         .limit(50),
@@ -340,9 +398,9 @@ export function AdminPortal() {
       )}
       {migrationNote && (
         <p className="mt-6 rounded-xl border border-line bg-cream p-4 text-sm text-muted">
-          Some newer tables aren&apos;t set up yet. Run migration
-          0007_growth_forms.sql in the Supabase SQL editor to enable the
-          applications, bin host, pickup, and volunteer lists.
+          Some newer tables or columns aren&apos;t set up yet. Run the latest
+          migrations (0007_growth_forms.sql, then 0008_partner_publicity_consent.sql)
+          in the Supabase SQL editor to enable every list here.
         </p>
       )}
 
@@ -351,7 +409,7 @@ export function AdminPortal() {
           Partnership applications ({applications.length})
         </h2>
         <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
-          <table className="w-full min-w-[720px] text-left text-sm">
+          <table className="w-full min-w-[880px] text-left text-sm">
             <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
               <tr>
                 <th className="px-4 py-3">Received</th>
@@ -359,6 +417,7 @@ export function AdminPortal() {
                 <th className="px-4 py-3">EIN</th>
                 <th className="px-4 py-3">Counties</th>
                 <th className="px-4 py-3">Contact</th>
+                <th className="px-4 py-3">Publicity</th>
                 <th className="px-4 py-3">Status</th>
               </tr>
             </thead>
@@ -376,12 +435,15 @@ export function AdminPortal() {
                     <br />
                     <span className="text-muted">{r.email}</span>
                   </td>
+                  <td className="px-4 py-3">
+                    <PublicityCell r={r} />
+                  </td>
                   <td className="px-4 py-3">{r.status}</td>
                 </tr>
               ))}
               {applications.length === 0 && (
                 <tr>
-                  <td className="px-4 py-4 text-muted" colSpan={6}>
+                  <td className="px-4 py-4 text-muted" colSpan={7}>
                     No applications yet.
                   </td>
                 </tr>
