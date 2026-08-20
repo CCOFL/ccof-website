@@ -30,7 +30,7 @@ export default function PickupPage() {
           <SectionHeading
             eyebrow="Our full list"
             title="What we accept"
-            intro="Quality kids' goods, ready for a second home with another child."
+            intro="Especially helpful for strollers, highchairs, and large baby gear. Quality kids' goods, ready for a second home with another child."
           />
           <ul className="mt-8 flex flex-wrap gap-3">
             {COLLECT_CHIPS.map((chip) => (
