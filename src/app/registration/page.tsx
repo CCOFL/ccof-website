@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
-import { ORG } from "@/lib/site";
+import { ORG, FDACS_DISCLOSURE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Registration & Financial Information",
@@ -19,11 +19,9 @@ export const metadata: Metadata = {
  * conspicuously set off. Principal place of business is intentionally listed
  * as Martin County, Florida (never the founder's home address).
  */
-// The statement below must match FDACS's registration letter for CCOF
-// verbatim: capital letters, no website clause, nothing added inside it.
-// (A general fdacs.gov link is fine elsewhere on the page, never in here.)
-const STATUTORY_STATEMENT =
-  "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE.";
+// The statutory statement renders from the single sitewide constant in
+// lib/site.ts (FDACS_DISCLOSURE). Never define a local copy here again.
+const STATUTORY_STATEMENT = FDACS_DISCLOSURE;
 
 const DETAILS: { label: string; value: string }[] = [
   { label: "Legal name", value: ORG.legalName },

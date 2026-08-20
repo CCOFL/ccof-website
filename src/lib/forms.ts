@@ -1,6 +1,6 @@
 import { getSupabase, isSupabaseConfigured } from "./supabase";
 import { sendNotification, sendEmailTo, isEmailConfigured } from "./email";
-import { ORG, FL_DISCLOSURE, FL_REG_LINE } from "./site";
+import { ORG, FDACS_DISCLOSURE, FL_REG_LINE } from "./site";
 
 export type ContactSubmission = {
   name: string;
@@ -563,7 +563,7 @@ function buildGoodsReceipt(d: GoodsDonation, receiptNumber: string) {
     ``,
     `Thank you for giving with such generosity. Your donation supports Florida children in foster care, kinship homes, and families navigating crisis, through direct provision with our partner nonprofits and our community resale program that funds local children's causes.`,
     ``,
-    FL_DISCLOSURE,
+    FDACS_DISCLOSURE,
     ``,
     `The Children's Collective of Florida`,
     `ChildrensCollectiveFL.org | (772) 202-0554 | ${ORG.email}`,

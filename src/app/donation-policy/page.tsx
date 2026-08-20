@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
-import { ORG, FL_DISCLOSURE, FL_REG_LINE } from "@/lib/site";
+import { ORG, FDACS_DISCLOSURE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Donation & Refund Policy",
@@ -67,8 +67,7 @@ export default function DonationPolicyPage() {
           </p>
 
           <h2>Required state disclosure</h2>
-          <p className="text-sm text-muted">{FL_DISCLOSURE}</p>
-          <p className="text-sm text-muted">{FL_REG_LINE}</p>
+          <p className="text-sm text-muted">{FDACS_DISCLOSURE}</p>
         </div>
       </Section>
     </>
