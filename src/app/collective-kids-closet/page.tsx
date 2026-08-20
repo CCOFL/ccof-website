@@ -38,7 +38,7 @@ export default function ClosetPage() {
           <div className="measure space-y-5 text-lg leading-relaxed text-ink/90">
             <p>
               Collective Kids Closet is where community generosity becomes
-              everyday affordability. Families find quality strollers, cribs,
+              everyday affordability. Families find quality strollers,
               clothing, books, toys, and more at prices that respect every budget.
             </p>
             <p>
