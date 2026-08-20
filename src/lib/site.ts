@@ -32,8 +32,9 @@ export const ORG = {
   cityStateZip: "Stuart, FL 34997",
   flagshipProgram: "Collective Kids Closet",
   // Location + timing are not yet finalized: Martin County (not pinned to a
-  // city), late 2026 (may shift with the donation pipeline). Keep copy soft.
-  flagshipLaunch: "late 2026",
+  // city), early 2027 storefront opening (date corrected 2026-08-19; may shift
+  // with the donation pipeline). Keep copy soft.
+  flagshipLaunch: "early 2027",
   flagshipCity: "Martin County",
 } as const;
 
@@ -116,7 +117,15 @@ export const PILLARS: {
 ];
 
 /** Giving-cycle steps (brief §5). */
-export const GIVING_CYCLE: { step: string; title: string; body: string }[] = [
+export const GIVING_CYCLE: {
+  step: string;
+  title: string;
+  body: string;
+  /** Optional fork: after `body`, the step splits into parallel, equally
+   *  legitimate paths. Rendered as a nested list in DOM order so the
+   *  either/or is carried by text, never by color or position alone. */
+  paths?: { title: string; body: string }[];
+}[] = [
   {
     step: "You give",
     title: "You give",
@@ -125,7 +134,22 @@ export const GIVING_CYCLE: { step: string; title: string; body: string }[] = [
   {
     step: "We steward",
     title: "We steward",
-    body: "Every item is inspected, cleaned, and resold affordably through Collective Kids Closet.",
+    body: "Every item is inspected and cleaned. Then one of two things happens.",
+    // Founder wording standards (2026-08-19), not suggestions: the partner
+    // path reads as a contribution ("contributed directly to them"), never
+    // "free"/"at no cost"; the resale path stays unqualified ("for all
+    // families throughout the community"), never "open to everyone" or
+    // "no income requirements". Both paths are equally legitimate outcomes.
+    paths: [
+      {
+        title: "Straight to a partner.",
+        body: "When one of our 501(c)(3) partners has a child who needs something now, the goods are contributed directly to them.",
+      },
+      {
+        title: "Onto the shelves.",
+        body: "Everything else stocks Collective Kids Closet, providing affordable goods for all families throughout the community.",
+      },
+    ],
   },
   {
     step: "Programs get funded",
@@ -183,7 +207,7 @@ export const WHY_THIS_MATTERS = {
     },
   ],
   closing:
-    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work through our flagship program, the Collective Kids Closet, coming to Martin County in late 2026.",
+    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work through our flagship program, the Collective Kids Closet, coming to Martin County in early 2027.",
 } as const;
 
 /**
@@ -233,9 +257,13 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
 /** "What we collect" marquee chips (brief §6). */
 // Note: car seats are intentionally NOT accepted (safety/liability — expiration
 // and crash history can't be verified). Do not add them to this collected list.
+// Cribs, bassinets, pack-and-plays, and all infant sleep products are also NOT
+// accepted (donated-goods safety policy adopted 2026-08-18; CPSIA §104(c)
+// prohibits distributing noncompliant cribs). Do not re-add them here or to any
+// other solicited-items list. The public accept/decline list lives on /pickup:
+// see PICKUP_DECLINED_LINE below.
 export const COLLECT_CHIPS = [
   "Strollers",
-  "Cribs & bassinets",
   "Kids' clothing",
   "Shoes",
   "Books",
@@ -246,6 +274,19 @@ export const COLLECT_CHIPS = [
   "School supplies",
   "Coats & outerwear",
 ];
+
+/**
+ * The authoritative PUBLIC accept/decline list renders on /pickup, deliberately
+ * NOT in the printed bin/decal artwork: the decals (permanent vinyl, printed
+ * 2026-08-19) read "Scan the code above for our full list" and their QR points
+ * to /pickup. When outside counsel answers the broader CPSIA durable-infant-
+ * product question, the list changes here for free instead of costing a decal
+ * reprint. Declined items are stated plainly, with no legal citation and no
+ * explanation of why (founder decision, 2026-08-19). The accept side of the
+ * list is COLLECT_CHIPS above; keep the two in sync.
+ */
+export const PICKUP_DECLINED_LINE =
+  "We cannot accept cribs, bassinets, pack-and-plays, infant sleep products, or car seats.";
 
 /**
  * Sustainability co-benefit — a SECONDARY thread to the kids-first mission

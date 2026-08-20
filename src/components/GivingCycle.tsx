@@ -70,7 +70,9 @@ export function GivingCycle() {
           {GIVING_CYCLE.map((node, i) => (
             <li
               key={node.step}
-              className="absolute w-[11.5rem] -translate-x-1/2 -translate-y-1/2"
+              className={`absolute -translate-x-1/2 -translate-y-1/2 ${
+                node.paths ? "w-[13.5rem]" : "w-[11.5rem]"
+              }`}
               style={{ left: NODE_POS[i].left, top: NODE_POS[i].top }}
             >
               <div className="rounded-2xl border border-line bg-cream p-4 text-center shadow-card">
@@ -81,6 +83,21 @@ export function GivingCycle() {
                 <p className="mt-1 text-xs leading-relaxed text-muted">
                   {node.body}
                 </p>
+                {/* Fork: two parallel paths, either/or carried by the intro
+                    sentence + titles (text), never color/position alone. */}
+                {node.paths && (
+                  <ul className="mt-2 space-y-1.5 text-left">
+                    {node.paths.map((p) => (
+                      <li
+                        key={p.title}
+                        className="rounded-lg bg-sage/5 px-2.5 py-1.5 text-[0.7rem] leading-snug text-muted"
+                      >
+                        <span className="font-bold text-ink">{p.title}</span>{" "}
+                        {p.body}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </li>
           ))}
@@ -101,6 +118,19 @@ export function GivingCycle() {
                   <p className="mt-1 text-sm leading-relaxed text-muted">
                     {node.body}
                   </p>
+                  {node.paths && (
+                    <ul className="mt-3 space-y-2">
+                      {node.paths.map((p) => (
+                        <li
+                          key={p.title}
+                          className="rounded-xl bg-sage/5 px-3.5 py-2.5 text-sm leading-relaxed text-muted"
+                        >
+                          <span className="font-bold text-ink">{p.title}</span>{" "}
+                          {p.body}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </div>
               {i < GIVING_CYCLE.length - 1 && (
