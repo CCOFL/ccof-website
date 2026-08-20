@@ -384,20 +384,32 @@ export const DONATION_PRESETS: { amount: number; outcome: string }[] = [
 ];
 
 /**
- * Required Florida Division of Consumer Services disclosure (brief §1).
- * Must appear wherever donations are solicited.
+ * THE single sitewide FDACS disclosure (F.S. §496.411; registration number
+ * embedded per §496.411(6)). Must appear wherever funds or goods are
+ * solicited, and, per FDACS's written answer of 2026-08-19, in emailed
+ * donation receipts and acknowledgment messages.
+ *
+ * Provenance: this exact wording was submitted to FDACS and reviewed twice by
+ * a Division of Consumer Services Regulatory Consultant without objection
+ * (2026-08-17, 2026-08-19). WWW.FDACS.GOV was functionally verified
+ * 2026-08-19: Check-A-Charity there serves CH83131 with the linked DBA and
+ * financial info, and www.floridaconsumerhelp.com 301-redirects into
+ * fdacs.gov, so both candidate URLs land on the same department.
+ *
+ * USE VERBATIM. Do not re-punctuate, move the registration number, shorten
+ * "OR ONLINE AT", or "improve" it. Render as plain readable text everywhere;
+ * NEVER wrap the URL in a tracking redirect, shortener, or click-analytics
+ * wrapper (June 2026 outreach emails shipped with a google.com/url?q= link
+ * inside the statutory disclosure; never repeat that). If you find yourself
+ * typing the disclosure's opening words anywhere other than this definition,
+ * stop and import this constant instead.
  */
-/**
- * The FL 496.411 statement EXACTLY as prescribed in FDACS's registration
- * letter for CCOF (Reg #CH83131): capital letters, no website clause. Do not
- * add "OR AT WWW.FDACS.GOV" or anything else inside this string; a general
- * fdacs.gov link may appear elsewhere on a page but never inside the
- * statement. The registration number renders adjacent via FL_REG_LINE.
- */
-export const FL_DISCLOSURE =
-  "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE (800-435-7352) WITHIN THE STATE. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE.";
+export const FDACS_DISCLOSURE =
+  "A COPY OF THE OFFICIAL REGISTRATION AND FINANCIAL INFORMATION MAY BE OBTAINED FROM THE DIVISION OF CONSUMER SERVICES BY CALLING TOLL-FREE 1-800-HELP-FLA (1-800-435-7352) WITHIN THE STATE OR ONLINE AT WWW.FDACS.GOV. REGISTRATION DOES NOT IMPLY ENDORSEMENT, APPROVAL, OR RECOMMENDATION BY THE STATE. FL REGISTRATION #CH83131";
 
-/** Rendered as its own line near the statement, never inside it. */
+/** Org-identity line for letterheads and detail lists. The FDACS statement
+ *  above already ends with the registration number; never render this line
+ *  directly after it. */
 export const FL_REG_LINE = "Florida Registration #CH83131.";
 
 export const TAX_NOTE =

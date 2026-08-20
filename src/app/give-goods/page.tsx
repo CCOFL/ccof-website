@@ -5,7 +5,7 @@ import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { SustainabilityCallout } from "@/components/SustainabilityCallout";
-import { GIVE_GOODS, COLLECT_CHIPS } from "@/lib/site";
+import { GIVE_GOODS, COLLECT_CHIPS, FDACS_DISCLOSURE } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Give Goods",
@@ -134,6 +134,10 @@ export default function GiveGoodsPage() {
         </div>
         <p className="measure mt-8 text-sm leading-relaxed text-muted">
           {GIVE_GOODS.taxNote}
+        </p>
+        {/* Required FL solicitation disclosure: this page solicits goods. */}
+        <p className="mt-4 max-w-3xl text-xs leading-relaxed text-muted">
+          {FDACS_DISCLOSURE}
         </p>
       </Section>
     </>

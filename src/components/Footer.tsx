@@ -4,7 +4,7 @@ import {
   ORG,
   NAV,
   PRIMARY_CTA,
-  FL_DISCLOSURE,
+  FDACS_DISCLOSURE,
   TAX_NOTE,
 } from "@/lib/site";
 import { LinkButton } from "./Button";
@@ -169,7 +169,7 @@ export function Footer() {
             <span>FL Doc. No. {ORG.flDoc}</span>
           </p>
           <p>{TAX_NOTE}</p>
-          <p className="max-w-3xl">{FL_DISCLOSURE}</p>
+          <p className="max-w-3xl">{FDACS_DISCLOSURE}</p>
           <p className="pt-2 text-cream/60">
             © {year} {ORG.legalName}. All rights reserved.
             <span aria-hidden className="mx-2">
