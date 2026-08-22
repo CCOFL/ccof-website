@@ -21,7 +21,7 @@ export default function ClosetPage() {
       <PageHero
         eyebrow={`Coming to ${ORG.flagshipCity} · ${ORG.flagshipLaunch}`}
         title="Collective Kids Closet"
-        intro="The flagship program of The Children's Collective of Florida, an affordable community resale program providing quality kids' goods for all families throughout the community, with every purchase reinvested in local programs for children in care."
+        intro="The flagship program of The Children's Collective of Florida, an affordable community resale program providing quality kids' goods for all families throughout the community, with proceeds reinvested in local programs for children in care."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <LinkButton href="/donate" size="lg">
@@ -44,7 +44,7 @@ export default function ClosetPage() {
             <p>
               Nothing here is &ldquo;disposable surplus.&rdquo; Every item is
               inspected, cleaned, and chosen with care. Shopping the Closet
-              isn&apos;t charity. It&apos;s a smart, dignified way to find
+              is a smart way to find
               quality clothes a growing kid is proud to wear, while funding
               programs that serve children in foster care, kinship homes, and
               crisis.
@@ -71,7 +71,9 @@ export default function ClosetPage() {
           title="Quality goods, ready for a second home"
         />
         <div className="mt-10">
-          <CollectMarquee />
+          {/* Store-appropriate subset: no sealed consumables (see
+              storeMarqueeGoods in lib/site.ts for the reasoning). */}
+          <CollectMarquee variant="store" />
         </div>
         <SustainabilityCallout variant="shop" />
       </Section>

@@ -25,6 +25,10 @@ const BANNED = [
     why: "resale path stays unqualified: 'for all families throughout the community' (founder rulings 2026-08-19, 2026-08-22)",
   },
   {
+    re: /every (purchase|dollar|gift|cent) (is |goes |gets )?(reinvested|funds|to local)/i,
+    why: "no pass-through overclaims: proceeds are reinvested, never 'every purchase/dollar' (locked guardrail; founder ruling 2026-08-22)",
+  },
+  {
     re: /late 2026|fall 2026|this fall/i,
     why: "the storefront opens early 2027 (corrected 2026-08-19)",
   },
