@@ -101,7 +101,7 @@ export const PILLARS: {
   {
     number: "02",
     title: "Affordable Access",
-    body: "Collective Kids Closet resells quality kids' goods affordably, open to all. Dignity-first, never a handout line.",
+    body: "Collective Kids Closet resells quality kids' goods at affordable prices for all families throughout the community.",
   },
   {
     number: "03",
@@ -468,7 +468,7 @@ export const GIVE_GOODS = {
     },
     {
       title: "Given directly to a child in need",
-      body: "When a partner nonprofit has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them, at no cost.",
+      body: "When a partner nonprofit has a child in crisis who needs clothing, shoes, or essentials now, the goods are contributed directly to them.",
     },
   ],
   // How to give, current channels. Pickup is featured (available now).
@@ -481,7 +481,7 @@ export const GIVE_GOODS = {
     },
     {
       title: "Host a donation bin",
-      body: "Our donation bins are rolling out across Martin County soon. Host one at your business, school, or place of worship and become a neighborhood drop-off point.",
+      body: "Host one at your business, school, or place of worship and become a neighborhood drop-off point.",
       cta: { label: "Host a bin", href: "/host-a-bin" },
     },
     {
@@ -590,7 +590,7 @@ export const PARTNER_ACTIONS: {
   },
   {
     title: "Request goods for a child in your care",
-    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs, provided directly at no cost.",
+    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs, contributed directly to your organization.",
     cta: { label: "For Partner Nonprofits", href: "/partner-nonprofits" },
     variant: "secondary",
   },
@@ -627,13 +627,13 @@ export const PARTNER_REQUESTS = {
   /** The "second path" card on How It Works. */
   card: {
     title: "Partner Requests: goods, directly",
-    body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, we provide the goods directly through them, at no cost, never resold.",
+    body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, the goods are contributed directly to them, never resold.",
   },
   /** /partner-nonprofits page. */
   eyebrow: "For Partner Nonprofits",
   title: "When a child needs goods right now",
   intro:
-    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly, and we provide the goods through them at no cost, as an extension of the community's generosity.",
+    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly, and the goods are contributed to them as an extension of the community's generosity.",
   steps: [
     {
       title: "A partner reaches out",
@@ -649,7 +649,7 @@ export const PARTNER_REQUESTS = {
     },
   ],
   stewardship:
-    "These goods are given by our community and entrusted to our care. As part of our charitable mission, we provide them, at no cost, to children in need through our partner nonprofit organizations. Nothing in this channel is sold.",
+    "These goods are given by our community and entrusted to our care. As part of our charitable mission, we contribute them to our partner nonprofit organizations, which directly serve children in need. Nothing in this channel is sold.",
   // Sets honest expectations — we don't overpromise what we can't provide.
   expectation:
     "We match what we can from current stock, so the sooner and more specifically you tell us what's needed, the better we can help. We won't promise what we don't have on hand, but we'll always tell you what we can do.",
