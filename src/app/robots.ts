@@ -6,7 +6,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/donate/thank-you", "/admin"],
+      // /recall-check is an internal-use redirect (volunteer intake card QR).
+      disallow: ["/api/", "/donate/thank-you", "/admin", "/recall-check"],
     },
     sitemap: `${ORG.url}/sitemap.xml`,
     host: ORG.url,

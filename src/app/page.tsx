@@ -17,6 +17,12 @@ import { getImpactStats } from "@/lib/impact";
 // Re-fetch the impact figures from Supabase daily (data changes quarterly).
 export const revalidate = 86400;
 
+// The bin-receipt banner is gated on the bin program actually being live
+// (zero placed bins as of 2026-08-21, so it would be a false claim today).
+// Flip: set NEXT_PUBLIC_BIN_PROGRAM_LIVE=true in Netlify and redeploy. Do
+// not delete the banner: the printed bin decal's left QR lands on this page.
+const BIN_PROGRAM_LIVE = process.env.NEXT_PUBLIC_BIN_PROGRAM_LIVE === "true";
+
 export default async function Home() {
   const impactStats = await getImpactStats();
   return (
@@ -25,19 +31,22 @@ export default async function Home() {
       <section className="relative overflow-hidden bg-cream">
         <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8 sm:py-20 lg:py-28">
           {/* Bin-donor fast path: the printed bin QR codes land on this page,
-              so the receipt route must be visible without scrolling. */}
-          <Link
-            href="/donated"
-            className="mb-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-2xl border-2 border-coral bg-coral/5 px-5 py-3.5 transition-colors hover:bg-coral/10"
-          >
-            <span className="text-sm font-medium leading-snug text-ink sm:text-base">
-              Just dropped something in one of our bins? Tell us what you gave
-              and we will send your receipt.
-            </span>
-            <span className="whitespace-nowrap text-sm font-bold text-coral-deep sm:text-base">
-              Get my receipt →
-            </span>
-          </Link>
+              so the receipt route must be visible without scrolling once bins
+              exist. Hidden until NEXT_PUBLIC_BIN_PROGRAM_LIVE is set. */}
+          {BIN_PROGRAM_LIVE && (
+            <Link
+              href="/donated"
+              className="mb-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-2xl border-2 border-coral bg-coral/5 px-5 py-3.5 transition-colors hover:bg-coral/10"
+            >
+              <span className="text-sm font-medium leading-snug text-ink sm:text-base">
+                Just dropped something in one of our bins? Tell us what you
+                gave and we will send your receipt.
+              </span>
+              <span className="whitespace-nowrap text-sm font-bold text-coral-deep sm:text-base">
+                Get my receipt →
+              </span>
+            </Link>
+          )}
           <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <Eyebrow>Built in Martin County. Building for Florida.</Eyebrow>
