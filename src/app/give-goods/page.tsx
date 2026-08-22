@@ -5,7 +5,15 @@ import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { SustainabilityCallout } from "@/components/SustainabilityCallout";
-import { GIVE_GOODS, COLLECT_CHIPS, FDACS_DISCLOSURE } from "@/lib/site";
+import { GoodsList } from "@/components/GoodsList";
+import {
+  GIVE_GOODS,
+  FDACS_DISCLOSURE,
+  GOODS_LEAD_INS,
+  binDroppableGoods,
+  controlledChannelGoods,
+  declinedSentence,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Give Goods",
@@ -33,10 +41,6 @@ export default function GiveGoodsPage() {
             Prefer to give funds? →
           </Link>
         </div>
-        <p className="mt-5 text-sm text-muted">
-          Donation bins are on their way, too. As they arrive across Martin
-          County, we&apos;ll list drop-off locations right here.
-        </p>
       </PageHero>
 
       {/* What we collect */}
@@ -46,18 +50,21 @@ export default function GiveGoodsPage() {
           title="Quality kids' goods, ready for a second home"
           intro="If your children have outgrown it, another child can grow into it. We welcome the quality kids' items your family is ready to pass on and treat each one as a gift entrusted to our care."
         />
-        <ul className="mt-8 flex flex-wrap gap-3">
-          {COLLECT_CHIPS.map((chip) => (
-            <li
-              key={chip}
-              className="rounded-full border border-sage/30 bg-sage/5 px-4 py-2 text-sm font-medium text-ink"
-            >
-              {chip}
-            </li>
-          ))}
-        </ul>
+        {/* Channel-aware lists from ACCEPTED_GOODS: bin-droppable first (the
+            most common donations), then the handed-in-person group. */}
+        <GoodsList
+          className="mt-8"
+          leadIn={GOODS_LEAD_INS.giveGoods.bin}
+          group={binDroppableGoods()}
+        />
+        <GoodsList
+          className="mt-8"
+          leadIn={GOODS_LEAD_INS.giveGoods.controlled}
+          group={controlledChannelGoods()}
+          link={{ href: "/pickup", label: GOODS_LEAD_INS.controlledLink }}
+        />
         <p className="measure mt-6 text-sm leading-relaxed text-muted">
-          {GIVE_GOODS.notAccepted}
+          {declinedSentence()}
         </p>
       </Section>
 

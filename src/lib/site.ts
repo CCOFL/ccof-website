@@ -254,39 +254,160 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
   },
 ];
 
-/** "What we collect" marquee chips (brief §6). */
-// Note: car seats are intentionally NOT accepted (safety/liability — expiration
-// and crash history can't be verified). Do not add them to this collected list.
-// Cribs, bassinets, pack-and-plays, and all infant sleep products are also NOT
-// accepted (donated-goods safety policy adopted 2026-08-18; CPSIA §104(c)
-// prohibits distributing noncompliant cribs). Do not re-add them here or to any
-// other solicited-items list. The public accept/decline list lives on /pickup:
-// see PICKUP_DECLINED_LINE below.
-export const COLLECT_CHIPS = [
-  "Strollers",
-  "Kids' clothing",
-  "Shoes",
-  "Books",
-  "Toys & games",
-  "Diapers & wipes",
-  "Highchairs",
-  "Baby carriers",
-  "School supplies",
-  "Coats & outerwear",
-];
-
 /**
- * The authoritative PUBLIC accept/decline list renders on /pickup, deliberately
- * NOT in the printed bin/decal artwork: the decals (permanent vinyl, printed
- * 2026-08-19) read "Scan the code above for our full list" and their QR points
- * to /pickup. When outside counsel answers the broader CPSIA durable-infant-
- * product question, the list changes here for free instead of costing a decal
- * reprint. Declined items are stated plainly, with no legal citation and no
- * explanation of why (founder decision, 2026-08-19). The accept side of the
- * list is COLLECT_CHIPS above; keep the two in sync.
+ * ★ ACCEPTED_GOODS: THE MASTER accepted/declined goods list (brief §6; Donated
+ * Goods Safety Policy 2026-08-18, channel amendment 2026-08-21).
+ *
+ * One constant, imported everywhere, transformed at render time where needed,
+ * never re-stored. The homepage marquee, /give-goods, and /pickup all render
+ * from it, and every future artifact (laminated intake card, volunteer
+ * training, partner comms, Good360 SOP) must be generated from it too, never
+ * typed from a screenshot. Fifteen variants of the FDACS disclosure drifted
+ * into existence that way; do not let this list repeat it.
+ *
+ * Channels (the axis that governs risk is unattended vs. controlled):
+ * - binEligible: small, soft, no mechanism. Suitable for an unattended bin drop.
+ * - pickupOnly: bulky or mechanical. Scheduled handoff only; never shown as
+ *   bin-droppable (a stroller left beside a bin overnight is an item CCOF owns
+ *   without ever having seen it).
+ * - sealedOnly: new, sealed, unopened, unexpired. `controlledChannel: true`
+ *   (infant food, OTC drug products) is NEVER shown as bin-droppable; it
+ *   renders only in the handed-in-person group.
+ * - declined: never accepted, any channel. DISPLAY terms only; the policy file
+ *   keeps the full legal enumeration. "Large baby gear" is a catch-all that
+ *   only works beside the decline sentence, so the homepage omits it.
+ *
+ * Car seats, cribs, bassinets, pack-and-plays, and all infant sleep products
+ * are declined (CPSIA §104(c); Safe Sleep for Babies Act). Never re-add them
+ * to any accepted group. No public rationale is published (founder decision
+ * 2026-08-19, pending counsel).
+ *
+ * Permitted render-time transforms, all pure functions of this object:
+ *   1. lowercasing inside the running decline sentence
+ *   2. "&" -> "and" inside the running decline sentence only
+ *   3. stripping a label's parenthetical sub-list on the homepage marquee only
+ *   4. omitting "Large baby gear" on the homepage marquee only
+ * Nothing else. If wording reads awkwardly somewhere, flag it; do not fork it.
  */
-export const PICKUP_DECLINED_LINE =
-  "We cannot accept cribs, bassinets, pack-and-plays, infant sleep products, or car seats.";
+export const ACCEPTED_GOODS = {
+  binEligible: [
+    "Kids' clothing",
+    "Shoes",
+    "Coats & outerwear",
+    "Books",
+    "Toys & games",
+    "School supplies",
+    "Backpacks & duffel bags",
+  ],
+  pickupOnly: [
+    "Strollers",
+    "Highchairs",
+    "Baby carriers",
+    "Bouncers",
+    "Large baby gear",
+  ],
+  sealedOnly: [
+    { label: "Diapers & wipes", condition: "new, sealed packages", controlledChannel: false },
+    { label: "Formula", condition: "new, sealed, unexpired", controlledChannel: true },
+    { label: "Bottles & nipples", condition: "new, sealed", controlledChannel: false },
+    { label: "Toiletries", condition: "new, sealed", controlledChannel: false },
+    {
+      label: "Youth undergarments (underwear & socks)",
+      condition: "new, unopened packages",
+      controlledChannel: false,
+    },
+    {
+      label: "Baby ointment & infant medical supplies (diaper rash cream, antibiotic ointment)",
+      condition: "new, sealed, unexpired",
+      controlledChannel: true,
+    },
+  ],
+  declined: [
+    "Cribs",
+    "Bassinets",
+    "Pack-and-plays",
+    "Crib mattresses & bumpers",
+    "Infant sleep products",
+    "Car seats",
+  ],
+} as const;
+
+export type SealedGood = (typeof ACCEPTED_GOODS.sealedOnly)[number];
+
+/** A renderable channel group: plain labels become pills, conditioned entries
+ *  become lines ("label: condition"). One rule, split by one property. */
+export type GoodsGroup = {
+  pills: readonly string[];
+  lines: readonly SealedGood[];
+};
+
+/** Bin-droppable group: binEligible + sealed items not restricted to a
+ *  controlled channel. */
+export function binDroppableGoods(): GoodsGroup {
+  return {
+    pills: ACCEPTED_GOODS.binEligible,
+    lines: ACCEPTED_GOODS.sealedOnly.filter((g) => !g.controlledChannel),
+  };
+}
+
+/** Handed-in-person group: pickupOnly + sealed items restricted to a
+ *  controlled channel (infant food, OTC drug products). */
+export function controlledChannelGoods(): GoodsGroup {
+  return {
+    pills: ACCEPTED_GOODS.pickupOnly,
+    lines: ACCEPTED_GOODS.sealedOnly.filter((g) => g.controlledChannel),
+  };
+}
+
+/** Transform 3 (marquee only): drop a label's parenthetical sub-list. */
+function stripParenthetical(label: string): string {
+  return label.replace(/\s*\([^)]*\)/g, "").trim();
+}
+
+/** Homepage marquee chips, in order: bin-eligible, then all sealed items with
+ *  a short "(sealed)" marker (transform 3 applied), then pickup-only with
+ *  "Large baby gear" omitted (transform 4). Labels only: the marquee is a
+ *  glance surface and makes no channel distinction. */
+export function marqueeGoods(): string[] {
+  return [
+    ...ACCEPTED_GOODS.binEligible,
+    ...ACCEPTED_GOODS.sealedOnly.map((g) => `${stripParenthetical(g.label)} (sealed)`),
+    ...ACCEPTED_GOODS.pickupOnly.filter((label) => label !== "Large baby gear"),
+  ];
+}
+
+/** The single decline sentence, rendered from ACCEPTED_GOODS.declined with
+ *  transforms 1 and 2. Byte-identical wherever it appears. "Please give" is
+ *  deliberate: this is the one sentence that tells someone no, and it should
+ *  still sound like a person. No rationale is published. */
+export function declinedSentence(): string {
+  const items = ACCEPTED_GOODS.declined.map((d) =>
+    d.toLowerCase().replace(/ & /g, " and "),
+  );
+  const list = `${items.slice(0, -1).join(", ")}, or ${items[items.length - 1]}`;
+  return `We cannot accept ${list}. Please give used items that are clean, complete, and in good condition.`;
+}
+
+/** Approved lead-ins (eight words max, no headings). They describe the goods
+ *  or the handoff, never the existence of bins: CCOF has none placed yet.
+ *  /pickup's bin lead-in adds "Also welcome" because a pickup takes
+ *  everything and a bare "small enough for a bin" could read as bin-only. */
+export const GOODS_LEAD_INS = {
+  pickup: {
+    bin: "Also welcome, and small enough for a bin:",
+    controlled: "Handed to us in person.",
+  },
+  giveGoods: {
+    bin: "Small enough for a bin:",
+    controlled: "Handed to us in person.",
+  },
+  controlledLink: "Schedule a pickup →",
+} as const;
+
+// /pickup is the variable surface behind the bin decal QR: the decals
+// (permanent vinyl) read "Scan the code above for our full list" and point
+// there, so when counsel answers the broader CPSIA durable-infant-product
+// question, ACCEPTED_GOODS changes here for free instead of costing a reprint.
 
 /**
  * Sustainability co-benefit — a SECONDARY thread to the kids-first mission
@@ -370,8 +491,6 @@ export const GIVE_GOODS = {
     },
   ],
   // What we can't accept + the quality bar.
-  notAccepted:
-    "For safety and liability, we can't accept car seats, because their expiration and crash history can't be verified. Please give items that are clean, complete, and in good, gently-used condition.",
   taxNote:
     "In-kind donations are tax-deductible. We'll acknowledge what you give; you determine its value for your records.",
 } as const;
