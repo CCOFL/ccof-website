@@ -376,6 +376,21 @@ export function marqueeGoods(): string[] {
   ];
 }
 
+/** Collective Kids Closet "What you'll find" chips: the store-appropriate
+ *  subset of the same master list. Sealed consumables (formula, diapers,
+ *  OTC ointments) are deliberately OMITTED, not declined: whether they can
+ *  be resold depends on their source (community-donated goods may be
+ *  eligible; goods from an intermediary such as Good360 must be contributed
+ *  to partners, never sold), and the site makes no claim either way until
+ *  that is settled (founder ruling 2026-08-22). "Large baby gear" is
+ *  omitted for the same reason as the homepage: no decline sentence nearby. */
+export function storeMarqueeGoods(): string[] {
+  return [
+    ...ACCEPTED_GOODS.binEligible,
+    ...ACCEPTED_GOODS.pickupOnly.filter((label) => label !== "Large baby gear"),
+  ];
+}
+
 /** The single decline sentence, rendered from ACCEPTED_GOODS.declined with
  *  transforms 1 and 2. Byte-identical wherever it appears. "Please give" is
  *  deliberate: this is the one sentence that tells someone no, and it should

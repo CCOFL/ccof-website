@@ -1,10 +1,16 @@
-import { marqueeGoods } from "@/lib/site";
+import { marqueeGoods, storeMarqueeGoods } from "@/lib/site";
 
 /** Looping marquee of items we collect (brief §6). Pauses on hover; static under reduced motion.
- *  Chips come from ACCEPTED_GOODS via marqueeGoods(): labels only, sealed
- *  items marked "(sealed)", no channel distinction (glance surface). */
-export function CollectMarquee() {
-  const base = marqueeGoods();
+ *  Chips come from ACCEPTED_GOODS: the "donate" variant (homepage) shows
+ *  labels only with sealed items marked "(sealed)", no channel distinction;
+ *  the "store" variant (Collective Kids Closet page) shows the resale-
+ *  appropriate subset and omits sealed consumables entirely. */
+export function CollectMarquee({
+  variant = "donate",
+}: {
+  variant?: "donate" | "store";
+}) {
+  const base = variant === "store" ? storeMarqueeGoods() : marqueeGoods();
   // Duplicate the list so the -50% translate loops seamlessly.
   const chips = [...base, ...base];
   return (
