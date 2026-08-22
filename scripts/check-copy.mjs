@@ -21,8 +21,8 @@ const BANNED = [
     why: "partner path reads as a contribution between peers: use 'contributed directly to' (founder ruling 2026-08-19)",
   },
   {
-    re: /open to everyone|any family can shop|no income requirements/i,
-    why: "resale path stays unqualified: 'for all families throughout the community' (founder ruling 2026-08-19)",
+    re: /open to everyone|open to all|open to anyone|any family can shop|no income requirements/i,
+    why: "resale path stays unqualified: 'for all families throughout the community' (founder rulings 2026-08-19, 2026-08-22)",
   },
   {
     re: /late 2026|fall 2026|this fall/i,

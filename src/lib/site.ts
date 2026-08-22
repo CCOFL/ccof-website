@@ -101,7 +101,7 @@ export const PILLARS: {
   {
     number: "02",
     title: "Affordable Access",
-    body: "Collective Kids Closet resells quality kids' goods affordably, open to all. Dignity-first, never a handout line.",
+    body: "Collective Kids Closet resells quality kids' goods at affordable prices for all families throughout the community.",
   },
   {
     number: "03",
