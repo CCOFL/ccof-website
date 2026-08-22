@@ -17,7 +17,7 @@ export default function PartnerApplyPage() {
       <PageHero
         eyebrow="Partner With Us"
         title="Apply to become a partner nonprofit."
-        intro="CCOF provides donated goods, at no cost, to children through vetted 501(c)(3) partners. This application starts the verification conversation. Once approved, your organization can request goods for the specific children and families you serve."
+        intro="CCOF contributes donated goods to children through vetted 501(c)(3) partners. This application starts the verification conversation. Once approved, your organization can request goods for the specific children and families you serve."
       />
       <Section background="white">
         <div className="mx-auto max-w-3xl">

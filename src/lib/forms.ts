@@ -51,7 +51,7 @@ export async function saveContactSubmission(sub: ContactSubmission) {
 
   if (!stored) {
     console.warn(
-      `[forms] No storage configured — contact submission logged only:\n${JSON.stringify(
+      `[forms] No storage configured: contact submission logged only:\n${JSON.stringify(
         sub,
         null,
         2,
@@ -140,7 +140,7 @@ export async function savePartnerRequest(req: PartnerRequest) {
 
   if (!stored) {
     console.warn(
-      `[forms] Partner request not persisted (table missing or no storage) — logged only:\n${JSON.stringify(
+      `[forms] Partner request not persisted (table missing or no storage): logged only:\n${JSON.stringify(
         req,
         null,
         2,
@@ -222,7 +222,7 @@ export async function saveBinHostRequest(req: BinHostRequest) {
 
   if (!stored) {
     console.warn(
-      `[forms] Bin host request not persisted — logged only:\n${JSON.stringify(req, null, 2)}`,
+      `[forms] Bin host request not persisted: logged only:\n${JSON.stringify(req, null, 2)}`,
     );
   }
   return { stored };
@@ -283,7 +283,7 @@ export async function savePickupRequest(req: PickupRequest) {
 
   if (!stored) {
     console.warn(
-      `[forms] Pickup request not persisted — logged only:\n${JSON.stringify(req, null, 2)}`,
+      `[forms] Pickup request not persisted: logged only:\n${JSON.stringify(req, null, 2)}`,
     );
   }
   return { stored };
@@ -341,7 +341,7 @@ export async function saveVolunteerSignup(req: VolunteerSignup) {
 
   if (!stored) {
     console.warn(
-      `[forms] Volunteer signup not persisted — logged only:\n${JSON.stringify(req, null, 2)}`,
+      `[forms] Volunteer signup not persisted: logged only:\n${JSON.stringify(req, null, 2)}`,
     );
   }
   return { stored };
@@ -448,7 +448,7 @@ export async function savePartnerApplication(req: PartnerApplication) {
 
   if (!stored) {
     console.warn(
-      `[forms] Partner application not persisted — logged only:\n${JSON.stringify(req, null, 2)}`,
+      `[forms] Partner application not persisted: logged only:\n${JSON.stringify(req, null, 2)}`,
     );
   }
   return { stored };
@@ -478,7 +478,7 @@ export async function saveLaunchSignup(email: string) {
   }
 
   if (!stored) {
-    console.warn(`[forms] No storage configured — signup logged only: ${email}`);
+    console.warn(`[forms] No storage configured: signup logged only: ${email}`);
   }
   return { stored };
 }
@@ -662,7 +662,7 @@ export async function saveGoodsDonation(d: GoodsDonation) {
 
   if (!stored) {
     console.warn(
-      `[forms] Goods donation not persisted — logged only:\n${JSON.stringify(
+      `[forms] Goods donation not persisted: logged only:\n${JSON.stringify(
         { ...d, receiptNumber },
         null,
         2,

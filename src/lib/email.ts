@@ -25,7 +25,7 @@ type SendToArgs = SendArgs & { to: string };
 export async function sendEmailTo({ to, subject, text, replyTo }: SendToArgs) {
   if (!isEmailConfigured()) {
     console.warn(
-      `[email] RESEND_API_KEY not set — outbound email logged, not delivered.\nTo: ${to}\nSubject: ${subject}\n${text}`,
+      `[email] RESEND_API_KEY not set: outbound email logged, not delivered.\nTo: ${to}\nSubject: ${subject}\n${text}`,
     );
     return { delivered: false as const };
   }
@@ -55,7 +55,7 @@ export async function sendEmailTo({ to, subject, text, replyTo }: SendToArgs) {
 export async function sendNotification({ subject, text, replyTo }: SendArgs) {
   if (!isEmailConfigured()) {
     console.warn(
-      `[email] RESEND_API_KEY not set — submission logged, not delivered.\nTo: ${TO}\nSubject: ${subject}\n${text}`,
+      `[email] RESEND_API_KEY not set: submission logged, not delivered.\nTo: ${TO}\nSubject: ${subject}\n${text}`,
     );
     return { delivered: false as const };
   }
