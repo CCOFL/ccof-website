@@ -39,8 +39,8 @@ export default async function Home() {
               className="mb-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-2xl border-2 border-coral bg-coral/5 px-5 py-3.5 transition-colors hover:bg-coral/10"
             >
               <span className="text-sm font-medium leading-snug text-ink sm:text-base">
-                Just dropped something in one of our bins? Tell us what you
-                gave and we will send your receipt.
+                Recently donated goods? Tell us what you gave and we will send
+                your receipt.
               </span>
               <span className="whitespace-nowrap text-sm font-bold text-coral-deep sm:text-base">
                 Get my receipt →
