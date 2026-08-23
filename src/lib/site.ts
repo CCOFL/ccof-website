@@ -165,7 +165,11 @@ export const IMPACT_STATS: {
   suffix?: string;
   label: string;
 }[] = [
-  { value: 1319, label: "child-maltreatment reports in Martin County last year" },
+  // "in a single year", not "last year": the cited source is FFY2022 (stated
+  // beneath the tiles and on /sources), so the label must not claim currency.
+  // Live value/label come from the impact_stats table (migration 0010 aligns
+  // the row); this is the fallback. Data refresh tracked in Cowork.
+  { value: 1319, label: "child-maltreatment reports in Martin County in a single year" },
   // Nearly 1 in 6 (children under 18) — U.S. Census Bureau American Community
   // Survey (ACS) 5-year estimates, ~17%. Standardized 2026-07 (retired the
   // older SAIPE-based "~1 in 9"); matches the About page prose so the two
