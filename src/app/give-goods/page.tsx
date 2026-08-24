@@ -18,7 +18,7 @@ import {
 export const metadata: Metadata = {
   title: "Give Goods",
   description:
-    "Donate quality kids' goods to The Children's Collective of Florida. Schedule a Martin County pickup, host a donation bin, or run a drive. Your items fund local programs or go directly to a child in crisis.",
+    "Donate quality kids' goods to The Children's Collective of Florida. Schedule a Martin County pickup, host a donation bin, or run a drive. Your items fund local programs or reach a child in crisis through a partner.",
   alternates: { canonical: "/give-goods" },
 };
 

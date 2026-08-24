@@ -125,7 +125,7 @@ export function Footer() {
                 {ORG.streetAddress}, {ORG.cityStateZip}
               </li>
               <li className="text-cream/70">
-                Serving {ORG.location} · program location coming soon
+                {ORG.serviceArea}
               </li>
             </ul>
           </div>
