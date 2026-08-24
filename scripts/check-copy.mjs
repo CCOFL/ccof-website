@@ -25,6 +25,10 @@ const BANNED = [
     why: "resale path stays unqualified: 'for all families throughout the community' (founder rulings 2026-08-19, 2026-08-22)",
   },
   {
+    re: /directly to (children|a child|kids|a kid)/i,
+    why: "CCOF's chain of custody ends at the partner: goods reach children through partners; 'directly' attaches to the partner, never the child (founder ruling 2026-08-23)",
+  },
+  {
     re: /every (purchase|dollar|gift|cent) (is |goes |gets )?(reinvested|funds|to local)/i,
     why: "no pass-through overclaims: proceeds are reinvested, never 'every purchase/dollar' (locked guardrail; founder ruling 2026-08-22)",
   },

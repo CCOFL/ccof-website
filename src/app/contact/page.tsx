@@ -92,7 +92,7 @@ export default async function ContactPage({
               <p>
                 {ORG.streetAddress}, {ORG.cityStateZip}
               </p>
-              <p>Serving Martin County, FL · program location coming soon</p>
+              <p>{ORG.serviceArea}</p>
             </div>
           </div>
 

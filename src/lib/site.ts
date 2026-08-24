@@ -19,6 +19,13 @@ export const ORG = {
   flReg: "CH83131",
   flDoc: "N26000005374",
   location: "Martin County, FL",
+  // Geography is a site-level fact: the service area appears in the footer,
+  // /contact, and /registration ONLY, all rendered from this one string
+  // (founder ruling 2026-08-23). "Based in Stuart" is a permanent fact;
+  // "neighboring communities" is anchored to it and absorbs partners outside
+  // Martin County (Hannah's Home is in Tequesta, Palm Beach County) without
+  // an edit. Body copy never names a service-area county.
+  serviceArea: "Based in Stuart, serving Martin County and neighboring communities",
   // Workspace Super Admin contact — published per Google for Nonprofits
   // verification requirements (admin email must be visible on the site).
   adminEmail: "stephanie@ChildrensCollectiveFL.org",
@@ -486,7 +493,7 @@ export const GIVE_GOODS = {
       body: "Quality items are cleaned, inspected, and sold affordably through the Collective Kids Closet. The proceeds fund local programs for children in foster care, kinship homes, and crisis.",
     },
     {
-      title: "Given directly to a child in need",
+      title: "Given to a child in need through a partner",
       body: "When a partner nonprofit has a child in crisis who needs clothing, shoes, or essentials now, the goods are contributed directly to them.",
     },
   ],
