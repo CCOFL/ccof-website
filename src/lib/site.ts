@@ -67,7 +67,7 @@ export const FOUNDER_QUOTE = {
   // certifies no outcome (insurance binding condition; see the quality-
   // warranty ticket of 2026-08-24). Do not reintroduce process verbs
   // (inspected/cleaned/checked) here or anywhere on the site.
-  text: "I hold everything we're given to one standard: my own child and those closest to my heart. If I wouldn't give it to them, we won't pass it along. The proceeds are reinvested right here in our community, supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
+  text: "If I wouldn't give it to my child, or the children closest to my heart, we won't pass it along. The proceeds are reinvested right here in our community, supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
