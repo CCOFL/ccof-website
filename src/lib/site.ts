@@ -340,6 +340,11 @@ export const ACCEPTED_GOODS = {
     "Crib mattresses & bumpers",
     "Infant sleep products",
     "Car seats",
+    // Insurance-driven (2026-08-24): the carrier's Designated Products
+    // Exclusion (USLI L 727) removes products coverage for bunk beds, so an
+    // accepted bunk bed would be uninsured for bodily injury, contributed or
+    // sold. Displayed here; the policy file carries the legal enumeration.
+    "Bunk beds",
   ],
 } as const;
 
