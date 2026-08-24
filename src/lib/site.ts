@@ -62,7 +62,12 @@ export const PRIMARY_CTA = { label: "Give Goods", href: "/give-goods" } as const
  * tight (per CCOF_Founders_Promise_and_Where_It_Goes, June 2026).
  */
 export const FOUNDER_QUOTE = {
-  text: "Every item we place in a family's hands is inspected, cleaned, and chosen as if for my own children. The proceeds are reinvested right here in our community, supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
+  // Rewritten 2026-08-24 (founder's wording) under the refuse-never-certify
+  // principle: states her standard and her refusal, promises no process and
+  // certifies no outcome (insurance binding condition; see the quality-
+  // warranty ticket of 2026-08-24). Do not reintroduce process verbs
+  // (inspected/cleaned/checked) here or anywhere on the site.
+  text: "I hold everything we're given to one standard: my own child and those closest to my heart. If I wouldn't give it to them, we won't pass it along. The proceeds are reinvested right here in our community, supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
