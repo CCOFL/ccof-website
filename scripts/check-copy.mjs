@@ -48,6 +48,35 @@ const BANNED = [
     re: /by inspection|ensure(s|d)? safety|certif(y|ied) (as )?safe|clear(s|ed)? (it|them|items) as safe/i,
     why: "never state or imply that CCOF inspects, verifies, or certifies items as safe (decal error caught 2026-08-19)",
   },
+  // Quality-warranty vocabulary (insurance binding conditions, USLI Q19a/b/c;
+  // founder ruling 2026-08-24): describing an action CCOF performs on an item
+  // reads as a warranty of quality. Say what CCOF refuses, never what it
+  // certifies.
+  {
+    re: /inspect(s|ed|ing|ion)?\b/i,
+    why: "no process claims on items: 'inspected/inspection' reads as a quality warranty (insurance ruling 2026-08-24)",
+  },
+  {
+    re: /clean(ed|ing)\b|saniti[sz]|launder|\bwashed\b/i,
+    why: "no process claims: 'cleaned/cleaning' reads as modifying items and as a quality warranty ('clean' as a donor-request adjective is fine)",
+  },
+  {
+    re: /refurbish|recondition|\brestored\b|\brepaired\b|safety.checked|quality.checked|hand.selected/i,
+    why: "no refurbish/repair/safety-check/hand-select claims (insurance ruling 2026-08-24; 'safety-checked' is the decal error class)",
+  },
+  {
+    re: /\bguaranteed?\b|warrant(y|ies|ed)/i,
+    why: "no warranty or guarantee language; disclaimers of warranties/guarantees are the opposite and are exempted where they live",
+    exempt: ["app/terms/", "app/privacy/", "PartnerApplicationForm"],
+  },
+  {
+    re: /like new|perfect condition/i,
+    why: "no condition-outcome claims (insurance ruling 2026-08-24)",
+  },
+  {
+    re: /vetted (items|goods|donations)/i,
+    why: "'vetted' applies to partner organizations only, never to goods",
+  },
   {
     re: /—/,
     why: "no em dashes anywhere on the site (PR #77); use commas, colons, or restructure",
@@ -94,6 +123,7 @@ for (const file of walk(ROOT)) {
   const source = readFileSync(file, "utf8");
   for (const [line, text] of codeLines(source)) {
     for (const rule of BANNED) {
+      if (rule.exempt && rule.exempt.some((frag) => file.includes(frag))) continue;
       if (rule.re.test(text)) {
         hits.push({ file: relative(process.cwd(), file), line, text: text.trim(), why: rule.why });
       }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
-import { ORG, FDACS_DISCLOSURE } from "@/lib/site";
+import { ORG, FDACS_DISCLOSURE, DONOR_CONDITION_REQUEST } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Donation & Refund Policy",
@@ -50,8 +50,8 @@ export default function DonationPolicyPage() {
 
           <h2>Donations of goods</h2>
           <p>
-            We welcome quality children&apos;s items, inspected and cleaned
-            before they reach another family. We can provide a written
+            We welcome quality children&apos;s items. {DONOR_CONDITION_REQUEST}{" "}
+            We can provide a written
             acknowledgment of your in-kind donation; the IRS leaves it to the
             donor to determine the fair-market value of donated goods. To arrange
             a goods donation, reach us at{" "}

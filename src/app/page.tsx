@@ -142,7 +142,7 @@ export default async function Home() {
           center
           eyebrow="Trusted Giving"
           title="What we collect"
-          intro="Quality kids' goods, inspected, cleaned, and ready for a second home."
+          intro="Quality kids' goods, ready for a second home."
         />
         <div className="mt-10">
           <CollectMarquee />
