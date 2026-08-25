@@ -84,7 +84,7 @@ export const FOUNDER = {
     "That realization inspired the creation of The Children's Collective of Florida and its first program, The Collective Kids Closet. Stephanie's vision is to create a clear, trusted place where families can donate gently used children's items, shop affordable quality goods, and support programs serving children throughout Florida.",
   ],
   promisePrimary:
-    "I started The Children's Collective of Florida as a mother, not an institution. So let me make you a promise you can hold me to. Every item that reaches a Treasure Coast family will be inspected, cleaned, and chosen the way I'd choose it for my own children, never disposable surplus. The proceeds from The Collective Kids Closet are reinvested in our community, supporting local programs that serve children in foster care, crisis, and mentoring. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
+    "I started The Children's Collective of Florida as a mother, not an institution. So let me make you a promise you can hold me to. If I wouldn't give it to my child, or the children closest to my heart, we won't pass it along, and nothing that reaches a Treasure Coast family will be disposable surplus. The proceeds from The Collective Kids Closet are reinvested in our community, supporting local programs that serve children in foster care, crisis, and mentoring. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
 } as const;
 
 /**
@@ -108,7 +108,7 @@ export const PILLARS: {
   {
     number: "01",
     title: "Trusted Giving",
-    body: "Donate goods & funds through a transparent local channel: every item inspected, cleaned, and accounted for.",
+    body: "Donate goods & funds through a transparent local channel: every donation honored and accounted for.",
   },
   {
     number: "02",
@@ -146,7 +146,7 @@ export const GIVING_CYCLE: {
   {
     step: "We steward",
     title: "We steward",
-    body: "Every item is inspected and cleaned. Then one of two things happens.",
+    body: "Everything you give is held to one standard. Then one of two things happens.",
     // Founder wording standards (2026-08-19), not suggestions: the partner
     // path reads as a contribution ("contributed directly to them"), never
     // "free"/"at no cost"; the resale path stays unqualified ("for all
@@ -421,8 +421,15 @@ export function declinedSentence(): string {
     d.toLowerCase().replace(/ & /g, " and "),
   );
   const list = `${items.slice(0, -1).join(", ")}, or ${items[items.length - 1]}`;
-  return `We cannot accept ${list}. Please give used items that are clean, complete, and in good condition.`;
+  return `We cannot accept ${list}. ${DONOR_CONDITION_REQUEST}`;
 }
+
+/** The single donor condition request: a request CCOF makes of donors, never
+ *  a promise CCOF makes about outcomes (that distinction is the entire point
+ *  under the insurance binding conditions). Rendered by declinedSentence()
+ *  and the donation policy. One constant, no variants. */
+export const DONOR_CONDITION_REQUEST =
+  "Please give used items that are clean, complete, and in good condition.";
 
 /** Approved lead-ins (eight words max, no headings). They describe the goods
  *  or the handoff, never the existence of bins: CCOF has none placed yet.
@@ -500,7 +507,7 @@ export const GIVE_GOODS = {
   impact: [
     {
       title: "Resold to fund local programs",
-      body: "Quality items are cleaned, inspected, and sold affordably through the Collective Kids Closet. The proceeds fund local programs for children in foster care, kinship homes, and crisis.",
+      body: "Quality items are sold affordably through the Collective Kids Closet. The proceeds fund local programs for children in foster care, kinship homes, and crisis.",
     },
     {
       title: "Given to a child in need through a partner",
@@ -581,7 +588,7 @@ export const WHERE_IT_GOES = {
   pledges: [
     {
       title: "We honor what you give.",
-      body: "Items are inspected, cleaned, and chosen with care: quality goods for the next family, never disposable surplus. We treat every donation as something a neighbor entrusted to us.",
+      body: "Everything given is held to one standard: quality goods for the next family, never disposable surplus. We treat every donation as something a neighbor entrusted to us.",
     },
     {
       title: "Local dollars stay local.",
@@ -677,7 +684,7 @@ export const PARTNER_REQUESTS = {
     },
     {
       title: "We match the need",
-      body: "We check what the community has entrusted to us and set aside the right goods: inspected, clean, and ready.",
+      body: "We set aside the right goods from what the community has entrusted to us, ready for the child who needs them.",
     },
     {
       title: "Goods reach the child",

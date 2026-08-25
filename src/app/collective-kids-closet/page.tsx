@@ -43,7 +43,7 @@ export default function ClosetPage() {
             </p>
             <p>
               Nothing here is &ldquo;disposable surplus.&rdquo; Every item is
-              inspected, cleaned, and chosen with care. Shopping the Closet
+              held to one standard. Shopping the Closet
               is a smart way to find
               quality clothes a growing kid is proud to wear, while funding
               programs that serve children in foster care, kinship homes, and

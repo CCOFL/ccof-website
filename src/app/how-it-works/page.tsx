@@ -53,7 +53,7 @@ export default function HowItWorksPage() {
               Resale that funds programs
             </h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-              Donated goods are inspected and resold affordably through
+              Donated goods are resold affordably through
               Collective Kids Closet. The proceeds become grants to local
               501(c)(3) programs serving kids in foster care, kinship homes, and
               crisis.
@@ -90,8 +90,9 @@ export default function HowItWorksPage() {
         />
         <ol className="measure mt-8 space-y-5 text-lg leading-relaxed text-ink/90">
           <li>
-            <strong className="font-semibold">Goods are inspected.</strong>{" "}
-            Donated items are cleaned, safety-checked, and priced affordably.
+            <strong className="font-semibold">Goods are held to our standard.</strong>{" "}
+            If we wouldn&apos;t pass it along, it doesn&apos;t reach the
+            shelves. What does is priced affordably.
           </li>
           <li>
             <strong className="font-semibold">Sales fund the mission.</strong>{" "}
