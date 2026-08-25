@@ -521,9 +521,16 @@ function goodsQuantityLabel(value: string) {
 }
 
 /** Plain-text in-kind receipt. NEVER states or implies a dollar value: for
- *  non-cash gifts the donor determines fair market value, not the charity. */
-function buildGoodsReceipt(d: GoodsDonation, receiptNumber: string) {
-  const date = new Date().toLocaleDateString("en-US", {
+ *  non-cash gifts the donor determines fair market value, not the charity.
+ *  Exported for the /admin backfill route, which resends receipts that the
+ *  interim email mode declined; `receivedAt` keeps the receipt dated to the
+ *  original donation, not the resend. */
+export function buildGoodsReceipt(
+  d: GoodsDonation,
+  receiptNumber: string,
+  receivedAt: Date = new Date(),
+) {
+  const date = receivedAt.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",

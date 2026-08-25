@@ -179,6 +179,42 @@ export function AdminPortal() {
   const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
   const [goods, setGoods] = useState<GoodsDonation[]>([]);
   const [goodsSortAsc, setGoodsSortAsc] = useState(false);
+  // Backfill: resend an in-kind receipt whose original send was declined
+  // (pre-cutover interim mode). Server route re-verifies the admin JWT and
+  // RLS enforces it again; see /api/admin/resend-receipt + migration 0011.
+  const [resendingId, setResendingId] = useState<string | null>(null);
+
+  async function resendReceipt(id: string) {
+    if (!session) return;
+    setResendingId(id);
+    try {
+      const res = await fetch("/api/admin/resend-receipt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const payload = (await res.json().catch(() => null)) as
+        | { sent?: boolean; warning?: string; error?: string }
+        | null;
+      if (res.ok && payload?.sent) {
+        setGoods((rows) =>
+          rows.map((row) =>
+            row.id === id
+              ? { ...row, receipt_sent_at: new Date().toISOString() }
+              : row,
+          ),
+        );
+        if (payload.warning) alert(payload.warning);
+      } else {
+        alert(payload?.error ?? "Could not send the receipt. Try again.");
+      }
+    } finally {
+      setResendingId(null);
+    }
+  }
   const [migrationNote, setMigrationNote] = useState(false);
   const [dataError, setDataError] = useState<string | null>(null);
   const [loadingData, setLoadingData] = useState(false);
@@ -487,6 +523,19 @@ export function AdminPortal() {
                     <span className={r.receipt_sent_at ? "text-sage-700" : "text-coral-deep"}>
                       {r.receipt_sent_at ? "receipt sent" : "receipt NOT sent"}
                     </span>
+                    {!r.receipt_sent_at && (
+                      <>
+                        <br />
+                        <button
+                          type="button"
+                          onClick={() => resendReceipt(r.id)}
+                          disabled={resendingId === r.id}
+                          className="mt-1 rounded-lg border border-sage/40 px-2 py-0.5 text-xs font-semibold text-sage-700 hover:bg-sage/10 disabled:opacity-50"
+                        >
+                          {resendingId === r.id ? "Sending…" : "Send receipt"}
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
