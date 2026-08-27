@@ -152,52 +152,78 @@ export function Footer() {
           ))}
         </nav>
 
-        {/* Transparency / legal block (brief §5, §1) */}
-        <div className="mt-6 space-y-3 text-xs leading-relaxed text-cream/55">
-          <p className="flex flex-wrap gap-x-4 gap-y-1">
-            <span>501(c)(3) public charity</span>
-            <span aria-hidden>·</span>
-            <span>EIN {ORG.ein}</span>
-            <span aria-hidden>·</span>
-            <Link
-              href="/registration"
-              className="underline-offset-4 transition-colors hover:text-cream hover:underline"
-            >
-              FL Charitable Reg. #{ORG.flReg}
-            </Link>
-            <span aria-hidden>·</span>
-            <span>FL Doc. No. {ORG.flDoc}</span>
-          </p>
-          <p>{TAX_NOTE}</p>
-          <p className="max-w-3xl">{FDACS_DISCLOSURE}</p>
-          <p className="pt-2 text-cream/60">
-            © {year} {ORG.legalName}. All rights reserved.
-            <span aria-hidden className="mx-2">
-              ·
-            </span>
-            {/* Exact wording required by Netlify's Open Source plan. */}
-            <a
-              href="https://www.netlify.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline-offset-4 transition-colors hover:text-cream hover:underline"
-            >
-              This site is powered by Netlify
-            </a>
-            <span aria-hidden className="mx-2">
-              ·
-            </span>
-            {/* Public source repo — satisfies the Netlify Open Source plan's
-                requirement that the site link to its open-source repository. */}
-            <a
-              href="https://github.com/CCOFL/ccof-website"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline-offset-4 transition-colors hover:text-cream hover:underline"
-            >
-              Open source on GitHub
-            </a>
-          </p>
+        {/* Transparency / legal block (brief §5, §1). The Candid seal sits
+            beside it as the one third-party credential in the cluster. */}
+        <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+          {/* Candid Seal of Transparency. Image is served dynamically by Candid
+              and updates automatically when a new Seal is earned. However,
+              Seals expire annually: the profile must be reviewed and refreshed
+              each calendar year to keep the Seal current. Renewal reminder:
+              January. Profile: https://app.candid.org/profile/16616338/edit */}
+          <a
+            href="https://app.candid.org/profile/16616338/the-childrens-collective-of-florida-42-2020310/?pkId=9fd7c9a1-d88f-4e41-a8f4-dff9801a3d51"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Candid Seal of Transparency: view our full Candid profile"
+            className="shrink-0 self-start rounded-sm transition-opacity hover:opacity-85 focus-visible:outline-3 focus-visible:outline-offset-2"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- Candid's
+                terms require their hosted image; next/image adds nothing for a
+                third-party SVG. */}
+            <img
+              src="https://widgets.guidestar.org/prod/v1/pdp/transparency-seal/16616338/svg"
+              alt=""
+              width={108}
+              height={108}
+              className="h-auto w-[108px]"
+            />
+          </a>
+          <div className="space-y-3 text-xs leading-relaxed text-cream/55">
+            <p className="flex flex-wrap gap-x-4 gap-y-1">
+              <span>501(c)(3) public charity</span>
+              <span aria-hidden>·</span>
+              <span>EIN {ORG.ein}</span>
+              <span aria-hidden>·</span>
+              <Link
+                href="/registration"
+                className="underline-offset-4 transition-colors hover:text-cream hover:underline"
+              >
+                FL Charitable Reg. #{ORG.flReg}
+              </Link>
+              <span aria-hidden>·</span>
+              <span>FL Doc. No. {ORG.flDoc}</span>
+            </p>
+            <p>{TAX_NOTE}</p>
+            <p className="max-w-3xl">{FDACS_DISCLOSURE}</p>
+            <p className="pt-2 text-cream/60">
+              © {year} {ORG.legalName}. All rights reserved.
+              <span aria-hidden className="mx-2">
+                ·
+              </span>
+              {/* Exact wording required by Netlify's Open Source plan. */}
+              <a
+                href="https://www.netlify.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4 transition-colors hover:text-cream hover:underline"
+              >
+                This site is powered by Netlify
+              </a>
+              <span aria-hidden className="mx-2">
+                ·
+              </span>
+              {/* Public source repo — satisfies the Netlify Open Source plan's
+                  requirement that the site link to its open-source repository. */}
+              <a
+                href="https://github.com/CCOFL/ccof-website"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline-offset-4 transition-colors hover:text-cream hover:underline"
+              >
+                Open source on GitHub
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
