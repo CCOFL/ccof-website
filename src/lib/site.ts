@@ -237,9 +237,8 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
     name: "Stephanie Haskins",
     role: "Founder & President",
     bio: [
-      "Led by her Christian faith, Stephanie has always had a heart for philanthropy, drawn to organizations that lift up children and families. For nearly a decade she built a career in corporate leadership, then stepped away by choice to be present for her daughter's earliest years, intending to return once her daughter started preschool.",
-      "Yet like many, she wanted to do more and didn't know how. With so many worthy organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore.",
-      "In that quieter season, motherhood sharpened the conviction. Watching her own child, and the children closest to her heart, outgrow clothing and everyday essentials, she saw how much those resources could mean to a family a few streets away.",
+      "Led by her Christian faith, Stephanie has always had a heart for philanthropy, drawn to organizations that lift up children and families. Yet like many, she wanted to do more and didn't know how. With so many worthy organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore.",
+      "After nearly a decade in corporate leadership, she paused her career to be present for her daughter's earliest years. In that quieter season, motherhood sharpened that conviction. Watching her own child, and the children closest to her heart, outgrow clothing and everyday essentials, she saw how much those resources could mean to a family a few streets away.",
       "From that longing grew a vision: The Children's Collective of Florida, founded on a promise to connect community generosity with the children who need it most, beginning with its first program, the Collective Kids Closet.",
       "What began as a pause became a purpose.",
     ],
