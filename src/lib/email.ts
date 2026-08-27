@@ -1,6 +1,16 @@
 import { Resend } from "resend";
+import { ORG } from "@/lib/site";
 
-const FROM = process.env.CONTACT_FROM_EMAIL || "forms@childrenscollectivefl.org";
+const FROM_ADDRESS =
+  process.env.CONTACT_FROM_EMAIL || "forms@childrenscollectivefl.org";
+/**
+ * Netlify rejects the RFC 5322 `Name <addr>` form as an env value, so the
+ * display name is attached here. An env value that already carries a display
+ * name is used verbatim.
+ */
+const FROM = FROM_ADDRESS.includes("<")
+  ? FROM_ADDRESS
+  : `"${ORG.name}" <${FROM_ADDRESS}>`;
 const TO = process.env.CONTACT_TO_EMAIL || "info@childrenscollectivefl.org";
 
 export function isEmailConfigured(): boolean {
@@ -17,9 +27,8 @@ type SendToArgs = SendArgs & { to: string };
 
 /**
  * Sends an email to an arbitrary recipient (e.g. a donor receipt). Same
- * configuration guard as sendNotification. NOTE: until the sending domain is
- * verified in Resend (blocked on the Wix→Cloudflare DNS migration), Resend
- * rejects recipients other than the account owner; callers must treat a
+ * configuration guard as sendNotification. The sending domain is verified in
+ * Resend (2026-08-25), so any recipient is deliverable; callers still treat a
  * failed send as non-fatal.
  */
 export async function sendEmailTo({ to, subject, text, replyTo }: SendToArgs) {
