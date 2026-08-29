@@ -1,6 +1,6 @@
 import { getSupabase, isSupabaseConfigured } from "./supabase";
 import { sendNotification, sendEmailTo, isEmailConfigured } from "./email";
-import { ORG, FDACS_DISCLOSURE, FL_REG_LINE } from "./site";
+import { ORG, FDACS_DISCLOSURE, FL_REG_LINE, TAX_NOTE } from "./site";
 
 export type ContactSubmission = {
   name: string;
@@ -677,4 +677,233 @@ export async function saveGoodsDonation(d: GoodsDonation) {
     );
   }
   return { stored, receiptNumber, receiptSent: receipt.delivered };
+}
+
+// ---------------------------------------------------------------------------
+// Money donations (Stripe webhook + admin offline entry)
+// ---------------------------------------------------------------------------
+
+export type MoneyDonation = {
+  donorName?: string;
+  donorEmail: string;
+  amountCents: number;
+  currency?: string; // ISO code, default usd
+  method: "card" | "cash" | "check" | "other";
+  frequency?: "one-time" | "monthly";
+  receivedAt?: Date;
+  stripeSessionId?: string;
+  stripePaymentIntent?: string;
+  stripeInvoiceId?: string;
+};
+
+export const MONEY_METHOD_LABELS: Record<MoneyDonation["method"], string> = {
+  card: "Card payment through our secure online checkout",
+  cash: "Cash",
+  check: "Check",
+  other: "Other",
+};
+
+export function formatMoneyAmount(amountCents: number, currency = "usd") {
+  const amount = (amountCents / 100).toFixed(2);
+  return currency.toLowerCase() === "usd"
+    ? `$${amount} (USD)`
+    : `${amount} ${currency.toUpperCase()}`;
+}
+
+/**
+ * Monetary receipt. Two deliberate differences from the goods receipt: it
+ * STATES the amount (IRS Pub 1771 requires the amount of a cash contribution
+ * in the written acknowledgment; goods receipts must never carry values), and
+ * it names the payment method. Everything else mirrors the goods receipt:
+ * no-goods-or-services statement, tax-deductibility note, and the FDACS
+ * disclosure verbatim.
+ */
+export function buildMoneyReceipt(
+  d: MoneyDonation,
+  receiptNumber: string,
+  receivedAt: Date = new Date(),
+) {
+  const date = receivedAt.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "America/New_York",
+  });
+  const lines = [
+    ORG.legalName,
+    "DBA The Collective Kids Closet",
+    `EIN ${ORG.ein}`,
+    `${ORG.streetAddress}, ${ORG.cityStateZip}`,
+    FL_REG_LINE,
+    ``,
+    `DONATION RECEIPT`,
+    `Receipt number: ${receiptNumber}`,
+    `Date received: ${date}`,
+    `Donor: ${d.donorName || d.donorEmail}`,
+    ``,
+    `Amount received: ${formatMoneyAmount(d.amountCents, d.currency)}`,
+    `Method: ${MONEY_METHOD_LABELS[d.method]}`,
+  ];
+  if (d.frequency === "monthly") {
+    lines.push(
+      `This receipt covers the monthly gift payment received on the date above.`,
+    );
+  }
+  lines.push(
+    ``,
+    `No goods or services were provided in exchange for this contribution.`,
+    ``,
+    `${TAX_NOTE} Please keep this receipt for your records.`,
+    ``,
+    `Thank you for giving with such generosity. Your donation supports Florida children in foster care, kinship homes, and families navigating crisis, through direct provision with our partner nonprofits and our community resale program that funds local children's causes.`,
+    ``,
+    FDACS_DISCLOSURE,
+    ``,
+    `The Children's Collective of Florida`,
+    `ChildrensCollectiveFL.org | (772) 202-0554 | ${ORG.email}`,
+  );
+  return lines.join("\n");
+}
+
+/**
+ * Full money-donation intake: webhook-safe idempotency (Stripe retries must
+ * not double-record or double-email), sequential CCOF-M receipt number (RPC),
+ * donor receipt email, durable row (receipt_sent_at reflects the send
+ * outcome), internal notification. Soft-degrades like the goods flow: a
+ * payment is never lost over a bookkeeping failure the org can absorb.
+ */
+export async function saveMoneyDonation(
+  d: MoneyDonation,
+  opts: { emailReceipt?: boolean } = {},
+) {
+  // emailReceipt false records the gift WITHOUT the receipt email, for gifts
+  // the founder has already acknowledged personally (receipt_sent_at stays
+  // null, honestly: no system receipt went out; the /admin button remains).
+  const emailReceipt = opts.emailReceipt !== false;
+  const receivedAt = d.receivedAt ?? new Date();
+  const supabase = isSupabaseConfigured() ? getSupabase() : null;
+
+  if (supabase && (d.stripeSessionId || d.stripeInvoiceId)) {
+    const { data: dup, error: dupError } = await supabase.rpc(
+      "money_donation_exists",
+      {
+        p_session_id: d.stripeSessionId ?? null,
+        p_invoice_id: d.stripeInvoiceId ?? null,
+      },
+    );
+    if (!dupError && dup === true) {
+      return {
+        stored: false,
+        duplicate: true as const,
+        receiptNumber: "",
+        receiptSent: false,
+      };
+    }
+  }
+
+  let receiptNumber = "";
+  if (supabase) {
+    const { data, error } = await supabase.rpc("next_money_receipt_number");
+    if (!error && typeof data === "string") receiptNumber = data;
+  }
+  if (!receiptNumber) {
+    // Provisional fallback (pre-migration or RPC failure): unique enough to
+    // answer a donor question, visibly not part of the sequential series.
+    receiptNumber = `CCOF-M-${new Date().getFullYear()}-P${Date.now()
+      .toString(36)
+      .slice(-5)
+      .toUpperCase()}`;
+  }
+
+  const receipt = emailReceipt
+    ? await sendEmailTo({
+        to: d.donorEmail,
+        subject:
+          "Your donation receipt from The Children's Collective of Florida",
+        replyTo: ORG.email,
+        text: buildMoneyReceipt(d, receiptNumber, receivedAt),
+      })
+    : { delivered: false as const };
+
+  let stored = false;
+  if (supabase) {
+    const { error } = await supabase.from("money_donations").insert({
+      received_at: receivedAt.toISOString(),
+      donor_name: d.donorName || null,
+      donor_email: d.donorEmail,
+      amount_cents: d.amountCents,
+      currency: (d.currency || "usd").toLowerCase(),
+      method: d.method,
+      frequency: d.frequency || "one-time",
+      stripe_session_id: d.stripeSessionId || null,
+      stripe_payment_intent: d.stripePaymentIntent || null,
+      stripe_invoice_id: d.stripeInvoiceId || null,
+      receipt_number: receiptNumber,
+      receipt_sent_at: receipt.delivered ? new Date().toISOString() : null,
+    });
+    if (error && error.code === "23505") {
+      // Lost a race with a concurrent webhook retry: the payment is already
+      // recorded under an earlier receipt number.
+      return {
+        stored: false,
+        duplicate: true as const,
+        receiptNumber,
+        receiptSent: receipt.delivered,
+      };
+    }
+    if (error && !isMissingTable(error)) {
+      throw new Error(`Supabase insert failed: ${error.message}`);
+    }
+    if (!error) stored = true;
+  }
+
+  // Internal notification is best-effort: the receipt and the row are the
+  // critical path, and the row is already visible at /admin.
+  if (isEmailConfigured()) {
+    try {
+      await sendNotification({
+        subject: `Money donation: ${formatMoneyAmount(d.amountCents, d.currency)} from ${d.donorName || d.donorEmail}`,
+        text: [
+          `New money donation recorded`,
+          ``,
+          `Receipt: ${receiptNumber} (${
+            receipt.delivered
+              ? "receipt email sent"
+              : emailReceipt
+                ? "receipt email NOT sent, use the /admin Send receipt button"
+                : "receipt email skipped by choice (acknowledged manually)"
+          })`,
+          `Donor: ${d.donorName || "(no name)"}`,
+          `Email: ${d.donorEmail}`,
+          `Amount: ${formatMoneyAmount(d.amountCents, d.currency)}`,
+          `Method: ${MONEY_METHOD_LABELS[d.method]}`,
+          `Frequency: ${d.frequency || "one-time"}`,
+          `Date received: ${receivedAt.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "America/New_York" })}`,
+          d.stripeSessionId ? `Stripe session: ${d.stripeSessionId}` : ``,
+          ``,
+          `Stored in Supabase: ${stored ? "yes" : "NO, see server logs"}`,
+        ]
+          .filter((line, i, arr) => line !== `` || arr[i - 1] !== ``)
+          .join("\n"),
+      });
+    } catch (err) {
+      console.error("[forms] Money donation notification failed:", err);
+    }
+  }
+
+  if (!stored) {
+    console.warn(
+      `[forms] Money donation not persisted: logged only:\n${JSON.stringify(
+        { ...d, receiptNumber },
+        null,
+        2,
+      )}`,
+    );
+  }
+  return {
+    stored,
+    duplicate: false as const,
+    receiptNumber,
+    receiptSent: receipt.delivered,
+  };
 }
