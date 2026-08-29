@@ -211,6 +211,7 @@ export function AdminPortal() {
   const [giftAmount, setGiftAmount] = useState("");
   const [giftMethod, setGiftMethod] = useState("cash");
   const [giftDate, setGiftDate] = useState("");
+  const [giftEmailReceipt, setGiftEmailReceipt] = useState(true);
   const [recordingGift, setRecordingGift] = useState(false);
   const [giftNote, setGiftNote] = useState<string | null>(null);
   const [moneyResendingId, setMoneyResendingId] = useState<string | null>(
@@ -267,6 +268,7 @@ export function AdminPortal() {
           amount: Number(giftAmount),
           method: giftMethod,
           receivedAt: giftDate || undefined,
+          emailReceipt: giftEmailReceipt,
         }),
       });
       const payload = (await res.json().catch(() => null)) as
@@ -280,7 +282,11 @@ export function AdminPortal() {
       if (res.ok && payload?.receiptNumber) {
         setGiftNote(
           `Recorded as ${payload.receiptNumber}. Receipt ${
-            payload.receiptSent ? "emailed to the donor" : "NOT emailed, use Send receipt below"
+            payload.receiptSent
+              ? "emailed to the donor"
+              : giftEmailReceipt
+                ? "NOT emailed, use Send receipt below"
+                : "not emailed (your choice); the Send receipt button stays available"
           }.`,
         );
         setGiftName("");
@@ -757,11 +763,23 @@ export function AdminPortal() {
                 className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
               />
             </div>
-            <div className="flex items-end">
+            <div className="flex flex-col justify-end gap-3">
+              <label className="flex items-center gap-2 text-sm text-ink">
+                <input
+                  type="checkbox"
+                  checked={giftEmailReceipt}
+                  onChange={(e) => setGiftEmailReceipt(e.target.checked)}
+                  className="h-4 w-4 accent-sage"
+                />
+                Email the branded receipt to the donor (uncheck when you have
+                already acknowledged the gift yourself)
+              </label>
               <Button type="submit" disabled={recordingGift}>
                 {recordingGift
                   ? "Recording…"
-                  : "Record gift & email receipt"}
+                  : giftEmailReceipt
+                    ? "Record gift & email receipt"
+                    : "Record gift (no email)"}
               </Button>
             </div>
             {giftNote && (

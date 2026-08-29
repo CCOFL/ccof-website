@@ -54,6 +54,7 @@ export async function POST(request: Request) {
     amount?: unknown;
     method?: unknown;
     receivedAt?: unknown;
+    emailReceipt?: unknown;
   };
   try {
     body = (await request.json()) as typeof body;
@@ -123,12 +124,17 @@ export async function POST(request: Request) {
     receivedAt,
   };
 
+  // Unchecked when the founder has already acknowledged the gift personally:
+  // the row and receipt number are still recorded, no system receipt goes out.
+  const emailReceipt = body.emailReceipt !== false;
+
   try {
-    const result = await saveMoneyDonation(gift);
+    const result = await saveMoneyDonation(gift, { emailReceipt });
     return NextResponse.json({
       recorded: result.stored,
       receiptNumber: result.receiptNumber,
       receiptSent: result.receiptSent,
+      emailReceipt,
     });
   } catch (err) {
     console.error("record-gift failed:", err);

@@ -772,7 +772,14 @@ export function buildMoneyReceipt(
  * outcome), internal notification. Soft-degrades like the goods flow: a
  * payment is never lost over a bookkeeping failure the org can absorb.
  */
-export async function saveMoneyDonation(d: MoneyDonation) {
+export async function saveMoneyDonation(
+  d: MoneyDonation,
+  opts: { emailReceipt?: boolean } = {},
+) {
+  // emailReceipt false records the gift WITHOUT the receipt email, for gifts
+  // the founder has already acknowledged personally (receipt_sent_at stays
+  // null, honestly: no system receipt went out; the /admin button remains).
+  const emailReceipt = opts.emailReceipt !== false;
   const receivedAt = d.receivedAt ?? new Date();
   const supabase = isSupabaseConfigured() ? getSupabase() : null;
 
@@ -808,12 +815,15 @@ export async function saveMoneyDonation(d: MoneyDonation) {
       .toUpperCase()}`;
   }
 
-  const receipt = await sendEmailTo({
-    to: d.donorEmail,
-    subject: "Your donation receipt from The Children's Collective of Florida",
-    replyTo: ORG.email,
-    text: buildMoneyReceipt(d, receiptNumber, receivedAt),
-  });
+  const receipt = emailReceipt
+    ? await sendEmailTo({
+        to: d.donorEmail,
+        subject:
+          "Your donation receipt from The Children's Collective of Florida",
+        replyTo: ORG.email,
+        text: buildMoneyReceipt(d, receiptNumber, receivedAt),
+      })
+    : { delivered: false as const };
 
   let stored = false;
   if (supabase) {
@@ -856,7 +866,13 @@ export async function saveMoneyDonation(d: MoneyDonation) {
         text: [
           `New money donation recorded`,
           ``,
-          `Receipt: ${receiptNumber} (${receipt.delivered ? "receipt email sent" : "receipt email NOT sent, use the /admin Send receipt button"})`,
+          `Receipt: ${receiptNumber} (${
+            receipt.delivered
+              ? "receipt email sent"
+              : emailReceipt
+                ? "receipt email NOT sent, use the /admin Send receipt button"
+                : "receipt email skipped by choice (acknowledged manually)"
+          })`,
           `Donor: ${d.donorName || "(no name)"}`,
           `Email: ${d.donorEmail}`,
           `Amount: ${formatMoneyAmount(d.amountCents, d.currency)}`,
