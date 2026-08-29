@@ -127,6 +127,18 @@ type GoodsDonation = {
   receipt_number: string;
   receipt_sent_at: string | null;
 };
+type MoneyDonationRow = {
+  id: string;
+  received_at: string;
+  donor_name: string | null;
+  donor_email: string;
+  amount_cents: number;
+  currency: string;
+  method: string;
+  frequency: string;
+  receipt_number: string;
+  receipt_sent_at: string | null;
+};
 type Volunteer = {
   id: string;
   created_at: string;
@@ -156,6 +168,18 @@ function fmt(ts: string) {
   });
 }
 
+function fmtDate(ts: string) {
+  return new Date(ts).toLocaleDateString("en-US", {
+    dateStyle: "medium",
+    timeZone: "America/New_York",
+  });
+}
+
+function fmtAmount(cents: number, currency: string) {
+  const amount = (cents / 100).toFixed(2);
+  return currency === "usd" ? `$${amount}` : `${amount} ${currency.toUpperCase()}`;
+}
+
 const CONFIGURED = Boolean(
   process.env.NEXT_PUBLIC_SUPABASE_URL &&
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -179,6 +203,98 @@ export function AdminPortal() {
   const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
   const [goods, setGoods] = useState<GoodsDonation[]>([]);
   const [goodsSortAsc, setGoodsSortAsc] = useState(false);
+  const [money, setMoney] = useState<MoneyDonationRow[]>([]);
+  // "Record an offline gift" form (cash/check, or a card payment that
+  // predates the webhook). Server route re-verifies the admin JWT.
+  const [giftName, setGiftName] = useState("");
+  const [giftEmail, setGiftEmail] = useState("");
+  const [giftAmount, setGiftAmount] = useState("");
+  const [giftMethod, setGiftMethod] = useState("cash");
+  const [giftDate, setGiftDate] = useState("");
+  const [recordingGift, setRecordingGift] = useState(false);
+  const [giftNote, setGiftNote] = useState<string | null>(null);
+  const [moneyResendingId, setMoneyResendingId] = useState<string | null>(
+    null,
+  );
+
+  async function resendMoneyReceipt(id: string) {
+    if (!session) return;
+    setMoneyResendingId(id);
+    try {
+      const res = await fetch("/api/admin/money-receipt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const payload = (await res.json().catch(() => null)) as
+        | { sent?: boolean; warning?: string; error?: string }
+        | null;
+      if (res.ok && payload?.sent) {
+        setMoney((rows) =>
+          rows.map((row) =>
+            row.id === id
+              ? { ...row, receipt_sent_at: new Date().toISOString() }
+              : row,
+          ),
+        );
+        if (payload.warning) alert(payload.warning);
+      } else {
+        alert(payload?.error ?? "Could not send the receipt. Try again.");
+      }
+    } finally {
+      setMoneyResendingId(null);
+    }
+  }
+
+  async function recordGift(e: React.FormEvent) {
+    e.preventDefault();
+    if (!session) return;
+    setRecordingGift(true);
+    setGiftNote(null);
+    try {
+      const res = await fetch("/api/admin/record-gift", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify({
+          donorName: giftName,
+          donorEmail: giftEmail,
+          amount: Number(giftAmount),
+          method: giftMethod,
+          receivedAt: giftDate || undefined,
+        }),
+      });
+      const payload = (await res.json().catch(() => null)) as
+        | {
+            recorded?: boolean;
+            receiptNumber?: string;
+            receiptSent?: boolean;
+            error?: string;
+          }
+        | null;
+      if (res.ok && payload?.receiptNumber) {
+        setGiftNote(
+          `Recorded as ${payload.receiptNumber}. Receipt ${
+            payload.receiptSent ? "emailed to the donor" : "NOT emailed, use Send receipt below"
+          }.`,
+        );
+        setGiftName("");
+        setGiftEmail("");
+        setGiftAmount("");
+        setGiftDate("");
+        void loadData();
+      } else {
+        setGiftNote(payload?.error ?? "Could not record the gift. Try again.");
+      }
+    } finally {
+      setRecordingGift(false);
+    }
+  }
   // Backfill: resend an in-kind receipt whose original send was declined
   // (pre-cutover interim mode). Server route re-verifies the admin JWT and
   // RLS enforces it again; see /api/admin/resend-receipt + migration 0011.
@@ -288,10 +404,17 @@ export function AdminPortal() {
         )
         .order("created_at", { ascending: false })
         .limit(100),
+      supabase
+        .from("money_donations")
+        .select(
+          "id, received_at, donor_name, donor_email, amount_cents, currency, method, frequency, receipt_number, receipt_sent_at"
+        )
+        .order("received_at", { ascending: false })
+        .limit(100),
     ]);
-    const [c, s, p, a, b, k, v, g] = results;
+    const [c, s, p, a, b, k, v, g, m] = results;
     // Newer tables/columns degrade to empty lists until migrations run.
-    const newTableMissing = [a, b, k, v, g].some(
+    const newTableMissing = [a, b, k, v, g, m].some(
       (r) => r.error && isMissingTable(r.error)
     );
     setMigrationNote(newTableMissing);
@@ -299,7 +422,7 @@ export function AdminPortal() {
       c.error ||
       s.error ||
       p.error ||
-      [a, b, k, v, g].find((r) => r.error && !isMissingTable(r.error))?.error;
+      [a, b, k, v, g, m].find((r) => r.error && !isMissingTable(r.error))?.error;
     if (hardError) {
       setDataError(
         `Could not load submissions (${hardError.message}). If this is a permissions error, confirm migrations 0006/0007 have been run and you are signed in as the admin email.`
@@ -313,6 +436,7 @@ export function AdminPortal() {
     setPickups((k.data as Pickup[]) ?? []);
     setVolunteers((v.data as Volunteer[]) ?? []);
     setGoods((g.data as GoodsDonation[]) ?? []);
+    setMoney((m.data as MoneyDonationRow[]) ?? []);
     setLoadingData(false);
   }, [supabase]);
 
@@ -458,10 +582,196 @@ export function AdminPortal() {
       {migrationNote && (
         <p className="mt-6 rounded-xl border border-line bg-cream p-4 text-sm text-muted">
           Some newer tables or columns aren&apos;t set up yet. Run the latest
-          migrations (0007, 0008, then 0009_goods_donations.sql)
+          migrations (0007, 0008, 0009, then 0012_money_donations.sql)
           in the Supabase SQL editor to enable every list here.
         </p>
       )}
+
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-ink">
+          Money donations ({money.length})
+        </h2>
+        <div className="mt-3 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[900px] text-left text-sm">
+            <thead className="bg-cream text-xs uppercase tracking-wider text-muted">
+              <tr>
+                <th className="px-4 py-3">Received</th>
+                <th className="px-4 py-3">Donor</th>
+                <th className="px-4 py-3">Amount</th>
+                <th className="px-4 py-3">Method</th>
+                <th className="px-4 py-3">Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {money.map((r) => (
+                <tr key={r.id} className="border-t border-line align-top">
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {fmtDate(r.received_at)}
+                  </td>
+                  <td className="px-4 py-3 font-medium">
+                    {r.donor_name || "(no name)"}
+                    <br />
+                    <span className="font-normal text-muted">
+                      {r.donor_email}
+                    </span>
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 font-semibold">
+                    {fmtAmount(r.amount_cents, r.currency)}
+                    {r.frequency === "monthly" && (
+                      <span className="ml-2 inline-block rounded-full bg-sage/15 px-2.5 py-0.5 text-xs font-semibold text-sage-700">
+                        monthly
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 capitalize">{r.method}</td>
+                  <td className="whitespace-nowrap px-4 py-3">
+                    {r.receipt_number}
+                    <br />
+                    <span
+                      className={
+                        r.receipt_sent_at ? "text-sage-700" : "text-coral-deep"
+                      }
+                    >
+                      {r.receipt_sent_at ? "receipt sent" : "receipt NOT sent"}
+                    </span>
+                    {!r.receipt_sent_at && (
+                      <>
+                        <br />
+                        <button
+                          type="button"
+                          onClick={() => resendMoneyReceipt(r.id)}
+                          disabled={moneyResendingId === r.id}
+                          className="mt-1 rounded-lg border border-sage/40 px-2 py-0.5 text-xs font-semibold text-sage-700 hover:bg-sage/10 disabled:opacity-50"
+                        >
+                          {moneyResendingId === r.id
+                            ? "Sending…"
+                            : "Send receipt"}
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              ))}
+              {money.length === 0 && (
+                <tr>
+                  <td className="px-4 py-4 text-muted" colSpan={5}>
+                    No money donations recorded yet. Card payments appear here
+                    automatically once the Stripe webhook is connected.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <details className="mt-4 rounded-2xl border border-line bg-cream p-5">
+          <summary className="cursor-pointer text-sm font-semibold text-ink">
+            Record an offline gift (cash, check, or a card payment made before
+            the webhook)
+          </summary>
+          <form
+            onSubmit={recordGift}
+            className="mt-4 grid gap-4 sm:grid-cols-2"
+          >
+            <div>
+              <label
+                htmlFor="gift-name"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Donor name
+              </label>
+              <input
+                id="gift-name"
+                type="text"
+                value={giftName}
+                onChange={(e) => setGiftName(e.target.value)}
+                className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="gift-email"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Donor email (receives the receipt)
+              </label>
+              <input
+                id="gift-email"
+                type="email"
+                required
+                value={giftEmail}
+                onChange={(e) => setGiftEmail(e.target.value)}
+                className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="gift-amount"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Amount (USD)
+              </label>
+              <input
+                id="gift-amount"
+                type="number"
+                required
+                min="0.01"
+                step="0.01"
+                inputMode="decimal"
+                value={giftAmount}
+                onChange={(e) => setGiftAmount(e.target.value)}
+                className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="gift-method"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Method
+              </label>
+              <select
+                id="gift-method"
+                value={giftMethod}
+                onChange={(e) => setGiftMethod(e.target.value)}
+                className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+              >
+                <option value="cash">Cash</option>
+                <option value="check">Check</option>
+                <option value="card">Card</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="gift-date"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Date received
+              </label>
+              <input
+                id="gift-date"
+                type="date"
+                value={giftDate}
+                onChange={(e) => setGiftDate(e.target.value)}
+                className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+              />
+            </div>
+            <div className="flex items-end">
+              <Button type="submit" disabled={recordingGift}>
+                {recordingGift
+                  ? "Recording…"
+                  : "Record gift & email receipt"}
+              </Button>
+            </div>
+            {giftNote && (
+              <p className="sm:col-span-2 text-sm text-ink" role="status">
+                {giftNote}
+              </p>
+            )}
+          </form>
+        </details>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-lg font-bold text-ink">
