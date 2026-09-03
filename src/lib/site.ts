@@ -37,12 +37,15 @@ export const ORG = {
   // founder's home address, per standing privacy rule.
   streetAddress: "770 SE Indian St",
   cityStateZip: "Stuart, FL 34997",
-  flagshipProgram: "Collective Kids Closet",
-  // Location + timing are not yet finalized: Martin County (not pinned to a
-  // city), early 2027 storefront opening (date corrected 2026-08-19; may shift
-  // with the donation pipeline). Keep copy soft.
-  flagshipLaunch: "early 2027",
-  flagshipCity: "Martin County",
+  storefrontProgram: "Collective Kids Closet",
+  // Founder rulings 2026-09-03: the year is "2027" (never "early 2027"), the
+  // location is "Martin County" until a specific city is chosen (candidates
+  // include Hobe Sound, Palm City, Stuart, Jensen Beach; supersedes the
+  // canonical file's "opens in Stuart"), and "flagship" is retired: the
+  // Closet is the STOREFRONT program, one of two sibling programs beside
+  // direct-to-partner distribution.
+  storefrontLaunch: "2027",
+  storefrontCity: "Martin County",
 } as const;
 
 export const NAV: { label: string; href: string }[] = [
@@ -223,7 +226,7 @@ export const WHY_THIS_MATTERS = {
     },
   ],
   closing:
-    "No single organization can meet all of this alone. CCOF strengthens the local network already doing the work through our flagship program, the Collective Kids Closet, coming to Martin County in early 2027.",
+    "No single organization can meet all of this alone. The Children's Collective of Florida strengthens the local network already doing the work: goods and grant funding contributed directly to our 501(c)(3) partners, and the Collective Kids Closet, our storefront program coming to Martin County in 2027.",
 } as const;
 
 /**
@@ -239,7 +242,7 @@ export const BOARD: { name: string; role: string; bio?: string[] }[] = [
     bio: [
       "Led by her Christian faith, Stephanie has always had a heart for philanthropy, drawn to organizations that lift up children and families. Yet like many, she wanted to do more and didn't know how. With so many worthy organizations, it was never clear where a donation landed, where volunteer hours mattered most, or what fruit those efforts bore.",
       "After nearly a decade in corporate leadership, she paused her career to be present for her daughter's earliest years. In that quieter season, motherhood sharpened that conviction. She watched her own child, and the children closest to her heart, outgrow clothing and everyday essentials. She saw what those things could mean to a family a few streets away.",
-      "From that longing grew a vision: The Children's Collective of Florida, founded on a promise to connect community generosity with the children who need it most, beginning with its first program, the Collective Kids Closet.",
+      "From that longing grew a vision: The Children's Collective of Florida, founded on a promise to connect community generosity with the children who need it most. That promise is already at work through our 501(c)(3) partners, and it will grow further when the Collective Kids Closet opens in Martin County in 2027.",
       "What began as a pause became a purpose.",
     ],
   },
@@ -507,14 +510,15 @@ export const GIVE_GOODS = {
   intro:
     "Building our pipeline of donated goods is the heart of what we do right now. The quality kids' items your family has outgrown can become clothing, essentials, and dignity for a child in our community who needs them. It's the simplest, most direct way to help a neighbor today.",
   // Two ways every donated item helps (mirrors the How It Works "two paths").
+  // Partner path listed FIRST (partners-first framing, founder ruling 9/3).
   impact: [
-    {
-      title: "Resold to fund local programs",
-      body: "Quality items are sold affordably through the Collective Kids Closet. The proceeds fund local programs for children in foster care, kinship homes, and crisis.",
-    },
     {
       title: "Given to a child in need through a partner",
       body: "When a partner nonprofit has a child in crisis who needs clothing, shoes, or essentials now, the goods are contributed directly to them.",
+    },
+    {
+      title: "Resold to fund local programs",
+      body: "Quality items are sold affordably through the Collective Kids Closet. The proceeds fund local programs for children in foster care, kinship homes, and crisis.",
     },
   ],
   // How to give, current channels. Pickup is featured (available now).
@@ -631,7 +635,10 @@ export const PARTNER_ACTIONS: {
   {
     title: "Become a partner program",
     body: "Local 501(c)(3) programs serving kids: apply to receive grant funding from resale proceeds.",
-    cta: { label: "Become a Partner", href: "/contact?intent=partner" },
+    // Routes to the dedicated application (EIN, mission, consent capture),
+    // not the generic contact form (routing fix, 9/3). /contact keeps its own
+    // partner intent option for anyone who prefers to just write in.
+    cta: { label: "Become a Partner", href: "/partner-apply" },
     variant: "secondary",
   },
   {
@@ -661,16 +668,27 @@ export const PARTNER_ACTIONS: {
 ];
 
 /**
+ * Public one-line definitions (approved 9/3; Cowork spec, corrected per the
+ * chain-of-custody ruling and the no-bare-acronym rule). "Directly" attaches
+ * ONLY to the partner organization, never to children. Neither definition
+ * implies the two roles are exclusive: an organization can be both.
+ */
+export const PARTNER_NONPROFIT_DEFINITION =
+  "Partner nonprofits are the vetted 501(c)(3) organizations already caring for children in foster care, kinship care, or crisis. The Children's Collective of Florida contributes goods and grant funding directly to them, so what the community gives reaches the children who need it most.";
+
+export const COMMUNITY_PARTNER_DEFINITION =
+  "Community Partners are the businesses, schools, and congregations who host a donation bin or drive, collecting the community's generosity for The Children's Collective of Florida to steward and put to work for local kids.";
+
+/**
  * Partner Requests — the direct, in-kind provision channel, distinct from the
  * resale-funds-grants (money) channel. Vetted, mission-aligned 501(c)(3)
- * partners request specific goods for a child in immediate need; CCOF matches
- * from donated inventory and provides the goods directly through the partner,
- * at no cost. Framed as stewardship: donated goods are directed to the children
- * who need them — nothing is sold in this channel. Copy lives here so the
+ * partners request specific goods for a child in immediate need; the goods
+ * are contributed directly to the partner organization. Framed as
+ * stewardship: nothing is sold in this channel. Copy lives here so the
  * How-It-Works card and the /partner-nonprofits page stay in sync.
  */
 export const PARTNER_REQUESTS = {
-  /** The "second path" card on How It Works. */
+  /** The FIRST path card on How It Works (partners-first ordering, 9/3). */
   card: {
     title: "Partner Requests: goods, directly",
     body: "When a partner has a child in crisis who needs clothing, shoes, or essentials now, the goods are contributed directly to them, never resold.",

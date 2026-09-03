@@ -66,14 +66,14 @@ export default function AboutPage() {
           {MISSION}
         </p>
         <p className="measure mt-5 text-lg leading-relaxed text-body">
-          Our flagship program,{" "}
+          Our storefront program,{" "}
           <strong className="font-semibold text-ink">
-            {ORG.flagshipProgram}
+            {ORG.storefrontProgram}
           </strong>
-          , is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch}, an
-          affordable community resale program for quality kids&apos; goods, open
-          to everyone, with proceeds reinvested in local programs that serve
-          children.
+          , opens in {ORG.storefrontCity} in {ORG.storefrontLaunch}: an
+          affordable community resale program for quality kids&apos; goods for
+          all families throughout the community, with proceeds reinvested in
+          local programs that serve children.
         </p>
       </Section>
 
