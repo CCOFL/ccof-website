@@ -34,7 +34,15 @@ const BANNED = [
   },
   {
     re: /late 2026|fall 2026|this fall/i,
-    why: "the storefront opens early 2027 (corrected 2026-08-19)",
+    why: "the storefront opens in 2027 (corrected 2026-08-19)",
+  },
+  {
+    re: /early 2027/i,
+    why: "the year is stated as plain '2027', never 'early 2027' (founder ruling 2026-09-03)",
+  },
+  {
+    re: /flagship/i,
+    why: "'flagship' is retired: the Closet is the storefront program, one of two sibling programs beside direct-to-partner distribution (founder ruling 2026-09-03)",
   },
   {
     re: /rolling out|bins are on their way/i,
@@ -121,12 +129,37 @@ function* codeLines(source) {
 const hits = [];
 for (const file of walk(ROOT)) {
   const source = readFileSync(file, "utf8");
+  const rel = relative(process.cwd(), file);
+  const perLineMatched = new Set();
+  const strippedLines = [];
   for (const [line, text] of codeLines(source)) {
+    strippedLines.push(text);
     for (const rule of BANNED) {
       if (rule.exempt && rule.exempt.some((frag) => file.includes(frag))) continue;
       if (rule.re.test(text)) {
-        hits.push({ file: relative(process.cwd(), file), line, text: text.trim(), why: rule.why });
+        perLineMatched.add(rule);
+        hits.push({ file: rel, line, text: text.trim(), why: rule.why });
       }
+    }
+  }
+  // Second pass on whitespace-collapsed content: JSX wraps prose across
+  // source lines, so a banned phrase can straddle a line break and evade the
+  // per-line scan ("open\n to everyone" escaped this way until 2026-09-03).
+  // Rules that already hit per-line are skipped to avoid duplicate reports.
+  const collapsed = strippedLines.join(" ").replace(/\s+/g, " ");
+  for (const rule of BANNED) {
+    if (rule.exempt && rule.exempt.some((frag) => file.includes(frag))) continue;
+    if (perLineMatched.has(rule)) continue;
+    const m = collapsed.match(rule.re);
+    if (m) {
+      const at = collapsed.indexOf(m[0]);
+      const context = collapsed.slice(Math.max(0, at - 40), at + m[0].length + 40);
+      hits.push({
+        file: rel,
+        line: "wrapped",
+        text: `…${context}…`,
+        why: `${rule.why} [phrase wraps across source lines]`,
+      });
     }
   }
 }

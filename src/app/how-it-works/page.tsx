@@ -42,26 +42,14 @@ export default function HowItWorksPage() {
         <SectionHeading
           eyebrow="Two paths, one promise"
           title="Your donation reaches a child two ways"
-          intro="The same community generosity flows through two channels: one funds local programs, the other puts goods straight into the hands of a child who needs them now."
+          intro="The same community generosity flows through two channels: one contributes goods directly to our partner nonprofits for a child who needs them now, the other funds local programs."
         />
+        {/* Partners-first ordering (founder ruling 9/3): the direct-goods
+            partner path is Path 1, resale funding is Path 2. */}
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="flex h-full flex-col rounded-2xl border border-line bg-cream p-7 shadow-card">
-            <span className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
-              Path 1 · Funding
-            </span>
-            <h3 className="mt-2 text-xl font-bold">
-              Resale that funds programs
-            </h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-              Donated goods are resold affordably through
-              Collective Kids Closet. The proceeds become grants to local
-              501(c)(3) programs serving kids in foster care, kinship homes, and
-              crisis.
-            </p>
-          </div>
           <div className="flex h-full flex-col rounded-2xl border border-sage/30 bg-cream p-7 shadow-card">
             <span className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
-              Path 2 · Direct goods
+              Path 1 · Direct goods
             </span>
             <h3 className="mt-2 text-xl font-bold">
               {PARTNER_REQUESTS.card.title}
@@ -77,6 +65,20 @@ export default function HowItWorksPage() {
                 {PARTNER_REQUESTS.cta.label}
               </LinkButton>
             </div>
+          </div>
+          <div className="flex h-full flex-col rounded-2xl border border-line bg-cream p-7 shadow-card">
+            <span className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
+              Path 2 · Funding
+            </span>
+            <h3 className="mt-2 text-xl font-bold">
+              Resale that funds programs
+            </h3>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+              Donated goods are resold affordably through
+              Collective Kids Closet. The proceeds become grants to local
+              501(c)(3) programs serving kids in foster care, kinship homes, and
+              crisis.
+            </p>
           </div>
         </div>
       </Section>

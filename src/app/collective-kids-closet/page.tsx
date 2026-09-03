@@ -11,7 +11,7 @@ import { ORG } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Collective Kids Closet",
-  description: `${ORG.flagshipProgram}, an affordable community resale program for quality kids' goods, coming to ${ORG.flagshipCity} in ${ORG.flagshipLaunch}.`,
+  description: `${ORG.storefrontProgram}, an affordable community resale program for quality kids' goods, coming to ${ORG.storefrontCity} in ${ORG.storefrontLaunch}.`,
   alternates: { canonical: "/collective-kids-closet" },
 };
 
@@ -19,9 +19,9 @@ export default function ClosetPage() {
   return (
     <>
       <PageHero
-        eyebrow={`Coming to ${ORG.flagshipCity} · ${ORG.flagshipLaunch}`}
+        eyebrow={`Coming to ${ORG.storefrontCity} · ${ORG.storefrontLaunch}`}
         title="Collective Kids Closet"
-        intro="The flagship program of The Children's Collective of Florida, an affordable community resale program providing quality kids' goods for all families throughout the community, with proceeds reinvested in local programs for children in care."
+        intro="The storefront program of The Children's Collective of Florida, opening in 2027: an affordable community resale program providing quality kids' goods for all families throughout the community, with proceeds reinvested in local 501(c)(3) programs for children in care."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
           <LinkButton href="/donate" size="lg">
@@ -83,7 +83,7 @@ export default function ClosetPage() {
           <SectionHeading
             eyebrow="Opening in Martin County"
             title="Be there on day one"
-            intro={`We're coming to ${ORG.flagshipCity} in ${ORG.flagshipLaunch}. Leave your email and we'll tell you the moment the doors open.`}
+            intro={`We're coming to ${ORG.storefrontCity} in ${ORG.storefrontLaunch}. Leave your email and we'll tell you the moment the doors open.`}
           />
           <div className="mt-7">
             <EmailCapture />

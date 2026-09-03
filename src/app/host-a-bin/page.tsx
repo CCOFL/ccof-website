@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { BinHostForm } from "@/components/BinHostForm";
+import { COMMUNITY_PARTNER_DEFINITION } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Host a Donation Bin",
@@ -20,7 +21,13 @@ export default function HostABinPage() {
       />
       <Section background="white">
         <div className="mx-auto max-w-3xl">
-          <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
+          {/* Community Partner definition (9/3): this page had no partner
+              framing at all; the definition names the role a host steps into.
+              It never implies a host cannot also be a partner nonprofit. */}
+          <p className="measure mx-auto text-center text-lg leading-relaxed text-body">
+            {COMMUNITY_PARTNER_DEFINITION}
+          </p>
+          <div className="mt-8 rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
             <BinHostForm />
           </div>
           <p className="mt-6 text-center text-sm text-muted">

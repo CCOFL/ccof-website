@@ -85,12 +85,14 @@ export default async function Home() {
                 </Link>
               </p>
               <p className="mt-6 text-sm text-muted">
-                Flagship program{" "}
                 <strong className="font-semibold text-ink">
-                  {ORG.flagshipProgram}
-                </strong>{" "}
-                is coming to {ORG.flagshipCity} in {ORG.flagshipLaunch}. The
-                goods you give now are what will fill its shelves.
+                  {ORG.storefrontProgram}
+                </strong>
+                , our storefront program, opens in {ORG.storefrontCity} in{" "}
+                {ORG.storefrontLaunch}. What you give today goes to work now:
+                goods received are prioritized for our 501(c)(3) partner
+                organizations meeting a child&apos;s need, and the rest will
+                fill the {ORG.storefrontProgram}.
               </p>
             </div>
 
@@ -228,8 +230,10 @@ export default async function Home() {
           </div>
           <div className="rounded-3xl bg-sage/15 p-8 ring-1 ring-sage/25 lg:p-10">
             <p className="text-2xl font-bold leading-snug text-cream">
-              Right now, the fastest way to help is to fill our shelves. Donate
-              the quality kids&apos; items your family has outgrown.
+              Right now, the fastest way to help is to meet a local need.
+              Donate the quality kids&apos; items your family has outgrown.
+              Goods received are prioritized for our 501(c)(3) partner
+              organizations, and the rest will fill the {ORG.storefrontProgram}.
             </p>
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <LinkButton href="/give-goods" size="lg" variant="inverse">
