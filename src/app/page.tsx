@@ -68,7 +68,7 @@ export default async function Home() {
                   Give Funds
                 </LinkButton>
               </div>
-              <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+              <p className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm">
                 <Link
                   href="/how-it-works"
                   className="font-semibold text-sage-600 underline-offset-4 hover:underline"
@@ -84,15 +84,15 @@ export default async function Home() {
                   Too much to carry? We pick up →
                 </Link>
               </p>
-              <p className="mt-6 text-sm text-muted">
+              <p className="measure mt-10 border-t border-line pt-6 text-sm leading-relaxed text-muted">
                 <strong className="font-semibold text-ink">
-                  {ORG.storefrontProgram}
+                  The {ORG.storefrontProgram}
                 </strong>
                 , our storefront program, opens in {ORG.storefrontCity} in{" "}
                 {ORG.storefrontLaunch}. What you give today goes to work now:
                 goods received are prioritized for our 501(c)(3) partner
                 organizations meeting a child&apos;s need, and the rest will
-                fill the {ORG.storefrontProgram}.
+                fill the Closet.
               </p>
             </div>
 
