@@ -161,8 +161,8 @@ export const GIVING_CYCLE: {
         body: "When one of our 501(c)(3) partners has a child who needs something now, the goods are contributed directly to them.",
       },
       {
-        title: "Onto the shelves.",
-        body: "Everything else stocks Collective Kids Closet, providing affordable goods for all families throughout the community.",
+        title: "Fills the Closet.",
+        body: "Everything else stocks the Collective Kids Closet, providing affordable goods for all families throughout the community.",
       },
     ],
   },
