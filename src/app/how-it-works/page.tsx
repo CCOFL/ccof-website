@@ -93,8 +93,9 @@ export default function HowItWorksPage() {
         <ol className="measure mt-8 space-y-5 text-lg leading-relaxed text-ink/90">
           <li>
             <strong className="font-semibold">Goods are held to our standard.</strong>{" "}
-            If we wouldn&apos;t pass it along, it doesn&apos;t reach the
-            shelves. What does is priced affordably.
+            Every item earns its place the same way, whether that place is with
+            a partner or on a hanger in the Closet. If we wouldn&apos;t pass it
+            along, it earns neither. What hangs is priced affordably.
           </li>
           <li>
             <strong className="font-semibold">Sales fund the mission.</strong>{" "}
