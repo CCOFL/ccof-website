@@ -89,8 +89,8 @@ export default async function Home() {
                   The {ORG.storefrontProgram}
                 </strong>
                 , our storefront program, opens in {ORG.storefrontCity} in{" "}
-                {ORG.storefrontLaunch}. What you give today goes to work now:
-                goods received are prioritized for our 501(c)(3) partner
+                {ORG.storefrontLaunch}. The items you donate today go to work
+                now: goods received are prioritized for our 501(c)(3) partner
                 organizations meeting a child&apos;s need, and the rest will
                 fill the Closet.
               </p>
