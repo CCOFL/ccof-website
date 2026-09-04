@@ -37,17 +37,17 @@ export const metadata: Metadata = {
 export default function PartnerPage() {
   return (
     <>
+      {/* No CTA in this hero on purpose (founder, 9/3): the page's job is
+          routing, and a hero Donate button was the third give-button in one
+          viewport, duplicating the first card below. The hero hands the
+          visitor straight to the card list. */}
       <PageHero
         eyebrow="Partner with us"
         title="Find your way to help"
         intro="Whether you give goods, host a drive, fund a child's week of school supplies, or run a program that serves kids, there's a place for you here."
-      >
-        <LinkButton href="/donate" size="lg">
-          Donate / Give Goods
-        </LinkButton>
-      </PageHero>
+      />
 
-      <Section background="white">
+      <Section background="white" className="!pt-8 sm:!pt-10 lg:!pt-12">
         <SectionHeading
           eyebrow="Ways to get involved"
           title="Pick the path that fits"
