@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "For Partner Nonprofits",
   description:
-    "Partner 501(c)(3)s serving children in foster care, kinship care, or crisis can request clothing, shoes, and essentials for a child in need, contributed directly to the partner.",
+    "Partner 501(c)(3) organizations serving children in foster care, kinship care, or crisis can request clothing, shoes, and essentials for a child in need, contributed directly to the partner.",
   alternates: { canonical: "/partner-nonprofits" },
 };
 

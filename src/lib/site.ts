@@ -633,17 +633,20 @@ export const PARTNER_ACTIONS: {
     variant: "primary",
   },
   {
-    title: "Become a partner program",
-    body: "Local 501(c)(3) programs serving kids: apply to receive grant funding from resale proceeds.",
+    // Terminology standardized 9/3 (founder): the role is "partner
+    // nonprofit" everywhere; "partner program" is retired. Never pluralize
+    // as "501(c)(3)s": write "501(c)(3) organizations".
+    title: "Become a Partner Nonprofit",
+    body: "For 501(c)(3) organizations serving children in foster care, kinship care, or crisis: receive grant funding, or request goods for a child in your care.",
     // Routes to the dedicated application (EIN, mission, consent capture),
     // not the generic contact form (routing fix, 9/3). /contact keeps its own
     // partner intent option for anyone who prefers to just write in.
-    cta: { label: "Become a Partner", href: "/partner-apply" },
+    cta: { label: "Become a Partner Nonprofit", href: "/partner-apply" },
     variant: "secondary",
   },
   {
     title: "Request goods for a child in your care",
-    body: "Partner 501(c)(3)s serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs, contributed directly to your organization.",
+    body: "Ask us for the specific clothing, shoes, and essentials a child needs, contributed directly to your organization.",
     cta: { label: "For Partner Nonprofits", href: "/partner-nonprofits" },
     variant: "secondary",
   },
