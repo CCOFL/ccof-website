@@ -51,7 +51,6 @@ export default function PartnerPage() {
         <SectionHeading
           eyebrow="Ways to get involved"
           title="Pick the path that fits"
-          intro="Each button below goes exactly where it should. No dead ends."
         />
         {/* Grouped per the 9/3 spec: the two partner-nonprofit actions and the
             bin-host action get labeled subheadings so a visitor can tell the
