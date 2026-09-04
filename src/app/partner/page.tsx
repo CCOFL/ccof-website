@@ -30,7 +30,7 @@ function ActionCard({ action }: { action: (typeof PARTNER_ACTIONS)[number] }) {
 export const metadata: Metadata = {
   title: "Partner With Us",
   description:
-    "Donate, host a bin or drive, become a partner program, volunteer, or request support. Every path to helping kids on the Treasure Coast starts here.",
+    "Donate, host a bin or drive, become a partner nonprofit, volunteer, or request support. Every path to helping kids on the Treasure Coast starts here.",
   alternates: { canonical: "/partner" },
 };
 
@@ -64,15 +64,13 @@ export default function PartnerPage() {
               <ActionCard action={action} />
             </Reveal>
           ))}
+          {/* Label only: the first card under it now carries the full
+              definition verbatim (founder, 9/3), so a description here would
+              duplicate it back to back. */}
           <div className="sm:col-span-2 mt-4">
             <h3 className="text-sm font-semibold uppercase tracking-wider text-sage-700">
               Become a Partner Nonprofit
             </h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted">
-              For 501(c)(3)s serving children in foster care, kinship care, or
-              crisis: receive grant funding, or request goods for a child in
-              your care.
-            </p>
           </div>
           {PARTNER_ACTIONS.slice(1, 3).map((action, i) => (
             <Reveal key={action.title} delay={i * 70}>
@@ -107,13 +105,13 @@ export default function PartnerPage() {
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
           <SectionHeading
             onDark
-            eyebrow="Local 501(c)(3) programs"
+            eyebrow="Local 501(c)(3) organizations"
             title="Could your program receive grant funding?"
             intro="If you run a program serving children in foster care, kinship homes, or crisis on the Treasure Coast, we'd like to hear from you."
           />
           <div className="shrink-0">
             <LinkButton href="/partner-apply" size="lg" variant="inverse">
-              Become a Partner
+              Become a Partner Nonprofit
             </LinkButton>
           </div>
         </div>
