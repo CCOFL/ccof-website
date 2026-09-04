@@ -61,6 +61,10 @@ export async function POST(request: Request) {
           currency: session.currency || "usd",
           method: "card",
           frequency: session.mode === "subscription" ? "monthly" : "one-time",
+          designation:
+            session.metadata?.designation === "partner_need"
+              ? "partner_need"
+              : "general",
           receivedAt: new Date(session.created * 1000),
           stripeSessionId: session.id,
           stripePaymentIntent:
@@ -94,6 +98,11 @@ export async function POST(request: Request) {
           currency: invoice.currency || "usd",
           method: "card",
           frequency: "monthly",
+          designation:
+            invoice.subscription_details?.metadata?.designation ===
+            "partner_need"
+              ? "partner_need"
+              : "general",
           receivedAt: new Date(invoice.created * 1000),
           stripeInvoiceId: invoice.id,
         });
