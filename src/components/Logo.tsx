@@ -8,7 +8,10 @@ import Image from "next/image";
  * The icon is decorative here — the adjacent text provides the accessible name.
  */
 export function Logo({ compact = false }: { compact?: boolean }) {
-  const size = compact ? 36 : 46;
+  // 56px (44 scrolled): the v4 mark is a thin-ring icon that carries less
+  // visual weight than its box, so it needs more size than a solid mark to
+  // balance the nav (founder call, 9/3).
+  const size = compact ? 44 : 56;
   return (
     <Link
       href="/"

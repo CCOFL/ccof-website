@@ -54,7 +54,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`nav-underline rounded-full px-3.5 py-2 text-[0.95rem] font-medium transition-colors ${
+                className={`nav-underline whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium transition-colors ${
                   active
                     ? "text-sage-600"
                     : "text-ink/80 hover:text-sage-600"
@@ -70,7 +70,7 @@ export function Header() {
           <LinkButton
             href={PRIMARY_CTA.href}
             size={compact ? "md" : "md"}
-            className="hidden sm:inline-flex"
+            className="hidden whitespace-nowrap sm:inline-flex"
           >
             {PRIMARY_CTA.label}
           </LinkButton>
