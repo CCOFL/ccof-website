@@ -99,7 +99,7 @@ export async function POST(request: Request) {
           method: "card",
           frequency: "monthly",
           designation:
-            invoice.subscription_details?.metadata?.designation ===
+            invoice.parent?.subscription_details?.metadata?.designation ===
             "partner_need"
               ? "partner_need"
               : "general",
