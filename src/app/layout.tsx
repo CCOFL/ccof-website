@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { ORG } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/JsonLd";
+
+/**
+ * GA4 measurement id (public by design). Set in Netlify's PRODUCTION context
+ * ONLY, so deploy previews, branch deploys, and local dev never pollute the
+ * data; unsetting the variable turns analytics off sitewide. Supports the
+ * Google Ad Grants application (Google for Nonprofits). Disclosed in
+ * /privacy. NOTE: this measures site traffic only; the standing no-tracking
+ * rule for receipts and statutory URLs is unaffected.
+ */
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 // Nunito Sans — LOCKED CCOF brand typeface, used throughout.
 const nunitoSans = Nunito_Sans({
@@ -58,6 +69,20 @@ export default function RootLayout({
           Skip to main content
         </a>
         <JsonLd />
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_ID}');`}
+            </Script>
+          </>
+        )}
         <Header />
         <main id="main" className="flex-1">
           {children}
