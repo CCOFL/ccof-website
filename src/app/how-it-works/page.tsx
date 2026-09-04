@@ -94,7 +94,7 @@ export default function HowItWorksPage() {
           <li>
             <strong className="font-semibold">Goods are held to our standard.</strong>{" "}
             If we wouldn&apos;t pass it along, it doesn&apos;t reach the
-            shelves. What does is priced affordably.
+            Closet. What does is priced affordably.
           </li>
           <li>
             <strong className="font-semibold">Sales fund the mission.</strong>{" "}

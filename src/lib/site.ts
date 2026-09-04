@@ -700,7 +700,7 @@ export const PARTNER_REQUESTS = {
   eyebrow: "For Partner Nonprofits",
   title: "When a child needs goods right now",
   intro:
-    "Not every need should wait for a shelf. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly, and the goods are contributed to them as an extension of the community's generosity.",
+    "Not every need should wait for the Closet. When a partner organization has a child in crisis or entering foster care who needs clothing, shoes, or everyday essentials today, they can ask us directly, and the goods are contributed to them as an extension of the community's generosity.",
   steps: [
     {
       title: "A partner reaches out",

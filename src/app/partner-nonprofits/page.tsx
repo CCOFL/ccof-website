@@ -4,11 +4,7 @@ import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { PartnerRequestForm } from "@/components/PartnerRequestForm";
-import {
-  PARTNER_REQUESTS,
-  PARTNER_NONPROFIT_DEFINITION,
-  ORG,
-} from "@/lib/site";
+import { PARTNER_REQUESTS, ORG } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "For Partner Nonprofits",
@@ -28,11 +24,10 @@ export default function PartnerNonprofitsPage() {
 
       {/* How the channel works */}
       <Section background="white">
-        {/* Partner-nonprofit definition (9/3): makes explicit what the hero
-            implies. "Directly" attaches to the partner, never to children. */}
-        <p className="measure mx-auto mb-12 text-center text-lg leading-relaxed text-body">
-          {PARTNER_NONPROFIT_DEFINITION}
-        </p>
+        {/* The Task-4 definition paragraph was removed here by founder review
+            (9/4): the hero already defines the relationship for this page's
+            partner-facing audience, and the definition is donor-facing. It
+            still renders on /partner (card) and /host-a-bin. */}
         <SectionHeading
           eyebrow="How it works"
           title="From a partner's request to a child's hands"
