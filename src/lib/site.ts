@@ -646,7 +646,7 @@ export const PARTNER_ACTIONS: {
   },
   {
     title: "Request goods for a child in your care",
-    body: "Partner 501(c)(3) organizations serving kids in crisis or foster care: ask us for the specific clothing, shoes, and essentials a child needs, contributed directly to your organization.",
+    body: "Ask us for the specific clothing, shoes, and essentials a child needs, contributed directly to your organization.",
     cta: { label: "For Partner Nonprofits", href: "/partner-nonprofits" },
     variant: "secondary",
   },
