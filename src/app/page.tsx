@@ -88,7 +88,7 @@ export default async function Home() {
                 <strong className="font-semibold text-ink">
                   The {ORG.storefrontProgram}
                 </strong>
-                , our storefront program, opens in {ORG.storefrontCity} in{" "}
+                , our nonprofit storefront program, opens in {ORG.storefrontCity} in{" "}
                 {ORG.storefrontLaunch}. The items you donate today go to work
                 now: goods received are prioritized for our 501(c)(3) partner
                 organizations meeting a child&apos;s need, and the rest will
