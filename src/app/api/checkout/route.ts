@@ -8,6 +8,7 @@ export const dynamic = "force-dynamic";
 type Body = {
   amount?: number | string;
   frequency?: "one-time" | "monthly";
+  designation?: "general" | "partner_need";
 };
 
 function baseUrl(request: Request): string {
@@ -45,6 +46,11 @@ export async function POST(request: Request) {
   }
 
   const monthly = body.frequency === "monthly";
+  // Donor designation (9/3): "partner_need" is a donor-restricted gift.
+  // Anything unrecognized falls back to general rather than erroring: the
+  // gift always goes through.
+  const designation =
+    body.designation === "partner_need" ? "partner_need" : "general";
   const unitAmount = Math.round(amount * 100); // cents
   const origin = baseUrl(request);
   const stripe = getStripe();
@@ -74,7 +80,12 @@ export async function POST(request: Request) {
       ],
       // For one-time gifts, ask Stripe to email a receipt.
       ...(monthly
-        ? {}
+        ? {
+            // Renewal invoices don't carry session metadata, so the
+            // designation rides the subscription too (read by the webhook's
+            // invoice.paid handler via subscription_details.metadata).
+            subscription_data: { metadata: { designation } },
+          }
         : { payment_intent_data: { description: `Donation to ${ORG.name}` } }),
       submit_type: monthly ? undefined : "donate",
       success_url: `${origin}/donate/thank-you?session_id={CHECKOUT_SESSION_ID}`,
@@ -82,6 +93,7 @@ export async function POST(request: Request) {
       metadata: {
         org: ORG.abbr,
         frequency: monthly ? "monthly" : "one-time",
+        designation,
       },
     });
 

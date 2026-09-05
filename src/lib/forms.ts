@@ -690,10 +690,25 @@ export type MoneyDonation = {
   currency?: string; // ISO code, default usd
   method: "card" | "cash" | "check" | "other";
   frequency?: "one-time" | "monthly";
+  /**
+   * Donor designation, chosen at checkout (9/3 build; labels are the
+   * founder's). "partner_need" is a donor-restricted gift: it must be spent
+   * on partner-requested essentials and tracked as restricted in the books.
+   * Held for Megan/CPA sign-off before shipping.
+   */
+  designation?: "general" | "partner_need";
   receivedAt?: Date;
   stripeSessionId?: string;
   stripePaymentIntent?: string;
   stripeInvoiceId?: string;
+};
+
+export const DESIGNATION_LABELS: Record<
+  NonNullable<MoneyDonation["designation"]>,
+  string
+> = {
+  general: "Wherever needed most",
+  partner_need: "A partner's specific need",
 };
 
 export const MONEY_METHOD_LABELS: Record<MoneyDonation["method"], string> = {
@@ -743,6 +758,7 @@ export function buildMoneyReceipt(
     ``,
     `Amount received: ${formatMoneyAmount(d.amountCents, d.currency)}`,
     `Method: ${MONEY_METHOD_LABELS[d.method]}`,
+    `Designation: ${DESIGNATION_LABELS[d.designation ?? "general"]}`,
   ];
   if (d.frequency === "monthly") {
     lines.push(
@@ -827,7 +843,7 @@ export async function saveMoneyDonation(
 
   let stored = false;
   if (supabase) {
-    const { error } = await supabase.from("money_donations").insert({
+    const row = {
       received_at: receivedAt.toISOString(),
       donor_name: d.donorName || null,
       donor_email: d.donorEmail,
@@ -835,12 +851,23 @@ export async function saveMoneyDonation(
       currency: (d.currency || "usd").toLowerCase(),
       method: d.method,
       frequency: d.frequency || "one-time",
+      designation: d.designation ?? "general",
       stripe_session_id: d.stripeSessionId || null,
       stripe_payment_intent: d.stripePaymentIntent || null,
       stripe_invoice_id: d.stripeInvoiceId || null,
       receipt_number: receiptNumber,
       receipt_sent_at: receipt.delivered ? new Date().toISOString() : null,
-    });
+    };
+    let { error } = await supabase.from("money_donations").insert(row);
+    if (error && /designation/.test(error.message)) {
+      // Migration 0013 not yet run: never lose the payment over the new
+      // column. Store without it and surface the miss in the notification.
+      const { designation: _omit, ...withoutDesignation } = row;
+      void _omit;
+      ({ error } = await supabase
+        .from("money_donations")
+        .insert(withoutDesignation));
+    }
     if (error && error.code === "23505") {
       // Lost a race with a concurrent webhook retry: the payment is already
       // recorded under an earlier receipt number.
@@ -877,6 +904,7 @@ export async function saveMoneyDonation(
           `Email: ${d.donorEmail}`,
           `Amount: ${formatMoneyAmount(d.amountCents, d.currency)}`,
           `Method: ${MONEY_METHOD_LABELS[d.method]}`,
+          `Designation: ${DESIGNATION_LABELS[d.designation ?? "general"]}${d.designation === "partner_need" ? " (RESTRICTED: track for partner-requested essentials)" : ""}`,
           `Frequency: ${d.frequency || "one-time"}`,
           `Date received: ${receivedAt.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "America/New_York" })}`,
           d.stripeSessionId ? `Stripe session: ${d.stripeSessionId}` : ``,

@@ -136,6 +136,7 @@ type MoneyDonationRow = {
   currency: string;
   method: string;
   frequency: string;
+  designation?: string | null; // pre-0013 rows and pre-0013 selects omit it
   receipt_number: string;
   receipt_sent_at: string | null;
 };
@@ -210,6 +211,7 @@ export function AdminPortal() {
   const [giftEmail, setGiftEmail] = useState("");
   const [giftAmount, setGiftAmount] = useState("");
   const [giftMethod, setGiftMethod] = useState("cash");
+  const [giftDesignation, setGiftDesignation] = useState("general");
   const [giftDate, setGiftDate] = useState("");
   const [giftEmailReceipt, setGiftEmailReceipt] = useState(true);
   const [recordingGift, setRecordingGift] = useState(false);
@@ -267,6 +269,7 @@ export function AdminPortal() {
           donorEmail: giftEmail,
           amount: Number(giftAmount),
           method: giftMethod,
+          designation: giftDesignation,
           receivedAt: giftDate || undefined,
           emailReceipt: giftEmailReceipt,
         }),
@@ -412,9 +415,9 @@ export function AdminPortal() {
         .limit(100),
       supabase
         .from("money_donations")
-        .select(
-          "id, received_at, donor_name, donor_email, amount_cents, currency, method, frequency, receipt_number, receipt_sent_at"
-        )
+        // select("*") on purpose: naming the designation column here would
+        // fail the whole query until migration 0013 runs.
+        .select("*")
         .order("received_at", { ascending: false })
         .limit(100),
     ]);
@@ -628,6 +631,11 @@ export function AdminPortal() {
                         monthly
                       </span>
                     )}
+                    {r.designation === "partner_need" && (
+                      <span className="ml-2 inline-block rounded-full bg-coral/15 px-2.5 py-0.5 text-xs font-semibold text-coral-deep">
+                        partner need · restricted
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-3 capitalize">{r.method}</td>
                   <td className="whitespace-nowrap px-4 py-3">
@@ -746,6 +754,25 @@ export function AdminPortal() {
                 <option value="check">Check</option>
                 <option value="card">Card</option>
                 <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="gift-designation"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Designation
+              </label>
+              <select
+                id="gift-designation"
+                value={giftDesignation}
+                onChange={(e) => setGiftDesignation(e.target.value)}
+                className="min-h-[44px] w-full rounded-xl border border-line bg-white px-4 py-2.5 text-ink focus:border-sage focus:outline-none"
+              >
+                <option value="general">Wherever needed most</option>
+                <option value="partner_need">
+                  A partner&apos;s specific need (restricted)
+                </option>
               </select>
             </div>
             <div>
