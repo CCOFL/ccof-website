@@ -86,8 +86,10 @@ export function PickupRequestForm() {
   if (status === "success") {
     return (
       <SuccessCard title="Pickup request received.">
-        Thank you! We&apos;ll reply to your email to confirm a time that works.
-        Pickups are scheduled as our volunteer capacity allows.
+        Thank you! If you are within our pickup area, we&apos;ll reply to your
+        email to confirm a time that works. Pickups run as volunteer capacity
+        allows, and every request, near or far, helps us plan where we grow
+        next.
       </SuccessCard>
     );
   }
