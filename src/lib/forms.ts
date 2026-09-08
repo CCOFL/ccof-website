@@ -240,6 +240,38 @@ export type PickupRequest = {
 };
 
 /** Persist a donor pickup request (bin QR target); degrades pre-migration. */
+/**
+ * Confirmation email to the pickup requester (added 9/8, founder-approved).
+ * Carries the same coverage contract as /pickup: in-area requests get a
+ * scheduling reply, farther-away requests are welcomed as expansion signal
+ * with nothing promised. NOT a donation receipt (no goods received yet, so
+ * no receipt number and no tax language). FDACS disclosure included per the
+ * regulator's guidance that it extends to acknowledgment emails; the URL
+ * stays plain text, never linked or tracked.
+ */
+function buildPickupConfirmation(req: PickupRequest) {
+  return [
+    `Hi ${req.name},`,
+    ``,
+    `We received your pickup request. Thank you for giving your family's outgrown things a second purpose.`,
+    ``,
+    `What you told us:`,
+    `Pickup area: ${req.pickupArea}`,
+    `Items: ${req.items}`,
+    ``,
+    `If you are within our pickup area (Martin County and neighboring communities), we will reply to this email to confirm a time that works. Pickups run as volunteer capacity allows.`,
+    ``,
+    `Farther away? Thank you all the more. We are growing, and knowing where donors are helps us decide where we go next.`,
+    ``,
+    `When we receive your goods, we will make sure you get your donation receipt.`,
+    ``,
+    FDACS_DISCLOSURE,
+    ``,
+    `The Children's Collective of Florida`,
+    `ChildrensCollectiveFL.org | (772) 202-0554 | ${ORG.email}`,
+  ].join("\n");
+}
+
 export async function savePickupRequest(req: PickupRequest) {
   let stored = false;
 
@@ -259,6 +291,21 @@ export async function savePickupRequest(req: PickupRequest) {
       throw new Error(`Supabase insert failed: ${error.message}`);
     }
     if (!error) stored = true;
+  }
+
+  // Requester confirmation is best-effort: a failed send must never fail the
+  // request (the row and the org notification are the critical path).
+  if (isEmailConfigured()) {
+    try {
+      await sendEmailTo({
+        to: req.email,
+        subject: "We received your pickup request",
+        replyTo: ORG.email,
+        text: buildPickupConfirmation(req),
+      });
+    } catch (err) {
+      console.error("[forms] Pickup confirmation email failed:", err);
+    }
   }
 
   if (isEmailConfigured()) {
