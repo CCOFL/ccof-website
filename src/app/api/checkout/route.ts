@@ -66,7 +66,7 @@ export async function POST(request: Request) {
                 ? `Monthly donation to ${ORG.name}`
                 : `Donation to ${ORG.name}`,
               description:
-                "Tax-deductible gift supporting kids in foster care, kinship homes, and crisis.",
+                "Your tax-deductible gift purchases clothing, shoes, and everyday essentials for local children and families.",
             },
             ...(monthly ? { recurring: { interval: "month" as const } } : {}),
           },
