@@ -8,6 +8,7 @@ type Status = "idle" | "submitting" | "success" | "error";
 /** "Follow our launch" email capture for visitors not ready to give (brief §5). */
 export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
@@ -18,7 +19,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, website }),
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
@@ -47,6 +48,25 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md" noValidate>
+      {/* Honeypot: off-screen, aria-hidden, untabbable — people never see or
+          reach it, so a filled value means a bot autofilled every field. The
+          API silently discards those (added 2026-09-19 after a direct-POST
+          bot signup). Do not remove or "clean up" this unused-looking field. */}
+      <div
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-px w-px overflow-hidden"
+      >
+        <label htmlFor="follow-website">Website</label>
+        <input
+          id="follow-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+        />
+      </div>
       <label htmlFor="follow-email" className={`mb-2 block text-sm ${labelColor}`}>
         Email address
       </label>
