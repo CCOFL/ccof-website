@@ -10,11 +10,20 @@ function isEmail(v: string) {
 
 export async function POST(request: Request) {
   let email = "";
+  let website = "";
   try {
-    const body = (await request.json()) as { email?: string };
+    const body = (await request.json()) as { email?: string; website?: string };
     email = (body.email ?? "").trim();
+    website = (body.website ?? "").trim();
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
+  }
+
+  // Honeypot (see EmailCapture): the field is invisible and unreachable for
+  // people, so any value means a bot filled it. Answer success and save
+  // nothing — the bot learns nothing, the list stays clean.
+  if (website) {
+    return NextResponse.json({ ok: true });
   }
 
   if (!email || !isEmail(email)) {
