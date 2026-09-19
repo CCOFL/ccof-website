@@ -5,11 +5,28 @@ import { Button } from "./Button";
 import { DONATION_PRESETS } from "@/lib/site";
 
 type Frequency = "one-time" | "monthly";
+type Designation = "general" | "partner_need";
 
 const MIN = 5;
 
+/** Founder's labels (9/3). "partner_need" is a donor-restricted gift. */
+const DESIGNATIONS: {
+  value: Designation;
+  label: string;
+  helper?: string;
+}[] = [
+  { value: "general", label: "Wherever needed most" },
+  {
+    value: "partner_need",
+    label: "A partner's specific need",
+    helper:
+      "Goes toward an immediate, named request from one of our partner nonprofits.",
+  },
+];
+
 export function DonationForm() {
   const [frequency, setFrequency] = useState<Frequency>("one-time");
+  const [designation, setDesignation] = useState<Designation>("general");
   const [selected, setSelected] = useState<number | "other">(
     DONATION_PRESETS[0].amount,
   );
@@ -38,7 +55,7 @@ export function DonationForm() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, frequency }),
+        body: JSON.stringify({ amount, frequency, designation }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (!res.ok || !data.url) {
@@ -151,6 +168,42 @@ export function DonationForm() {
             </div>
           </div>
         )}
+      </fieldset>
+
+      {/* Donor designation (9/3, founder's labels). Radio cards rather than
+          the segmented pill because the second option carries helper text. */}
+      <fieldset>
+        <legend className="mb-2 text-sm font-medium text-ink">
+          Where should your gift go?
+        </legend>
+        <div role="radiogroup" aria-label="Gift designation" className="space-y-3">
+          {DESIGNATIONS.map((option) => {
+            const active = designation === option.value;
+            return (
+              <button
+                key={option.value}
+                type="button"
+                role="radio"
+                aria-checked={active}
+                onClick={() => setDesignation(option.value)}
+                className={`w-full rounded-xl border p-4 text-left transition-all duration-200 ${
+                  active
+                    ? "border-sage-600 bg-sage/10 shadow-sm"
+                    : "border-line bg-cream hover:border-sage-light"
+                }`}
+              >
+                <span className="block text-sm font-semibold text-ink">
+                  {option.label}
+                </span>
+                {option.helper && (
+                  <span className="mt-1 block text-xs leading-relaxed text-muted">
+                    {option.helper}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
       </fieldset>
 
       {/* Outcome framing (brief priority #2) */}

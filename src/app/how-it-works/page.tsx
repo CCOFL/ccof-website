@@ -88,7 +88,7 @@ export default function HowItWorksPage() {
         <SectionHeading
           eyebrow="Where your money goes"
           title="Every gift compounds"
-          intro="During launch, your donation does double duty: it stocks the shelves and seeds the fund that supports our partner programs."
+          intro="During launch, a monetary gift goes one of two places, and you choose at checkout: general gifts build our operations and reach, including opening the Collective Kids Closet, and gifts designated for a partner's specific need fill the immediate requests our partner nonprofit organizations bring us."
         />
         <ol className="measure mt-8 space-y-5 text-lg leading-relaxed text-ink/90">
           <li>

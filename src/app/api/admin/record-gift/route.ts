@@ -55,6 +55,7 @@ export async function POST(request: Request) {
     method?: unknown;
     receivedAt?: unknown;
     emailReceipt?: unknown;
+    designation?: unknown;
   };
   try {
     body = (await request.json()) as typeof body;
@@ -121,6 +122,8 @@ export async function POST(request: Request) {
     amountCents: Math.round(amountDollars * 100),
     method: method as MoneyDonation["method"],
     frequency: "one-time",
+    designation:
+      body.designation === "partner_need" ? "partner_need" : "general",
     receivedAt,
   };
 
