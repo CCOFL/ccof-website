@@ -25,7 +25,7 @@ export const ORG = {
   // "neighboring communities" is anchored to it and absorbs partners outside
   // Martin County (Hannah's Home is in Tequesta, Palm Beach County) without
   // an edit. Body copy never names a service-area county.
-  serviceArea: "Based in Stuart, serving Martin County and neighboring communities",
+  serviceArea: "Based in Stuart, serving Martin, St. Lucie, and Palm Beach counties",
   // Workspace Super Admin contact — published per Google for Nonprofits
   // verification requirements (admin email must be visible on the site).
   adminEmail: "stephanie@ChildrensCollectiveFL.org",

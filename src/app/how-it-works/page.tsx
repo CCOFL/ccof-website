@@ -129,6 +129,10 @@ export default function HowItWorksPage() {
           </div>
         </div>
         <p className="measure mt-8 text-base text-muted">
+          Children&apos;s Collective Supply serves Martin, St. Lucie, and Palm
+          Beach counties.
+        </p>
+        <p className="measure mt-3 text-base text-muted">
           Prefer to give time? Volunteering is a way to take part in both
           programs.{" "}
           <a href="/volunteer" className="font-semibold text-sage-600 underline">
