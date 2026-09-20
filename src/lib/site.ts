@@ -161,15 +161,21 @@ export const GIVING_CYCLE: {
         body: "When one of our 501(c)(3) partners has a child who needs something now, the goods are contributed directly to them.",
       },
       {
-        title: "Fills the Closet.",
-        body: "Everything else stocks the Collective Kids Closet, providing affordable goods for all families throughout the community.",
+        // "Fills the Closet." (PR #100) retired 2026-09-20 by the program
+        // architecture's Closet rule (future tense, Martin County + 2027
+        // attached); wording matches the founder-reviewed /how-it-works steps.
+        title: "Set aside for the Closet.",
+        body: "Everything else is set aside for The Collective Kids Closet, our storefront program opening in Martin County in 2027.",
       },
     ],
   },
   {
-    step: "Programs get funded",
-    title: "Programs get funded",
-    body: "Proceeds become grants to local programs serving kids in foster care, kinship homes, and crisis.",
+    // Program 3 (Children's Collective Grants) is internal only: public copy
+    // never says "grants". The approved proceeds sentence is complete on its
+    // own; do not append to it. (Architecture pass 2026-09-20.)
+    step: "Proceeds return",
+    title: "Proceeds return",
+    body: "When The Collective Kids Closet opens in Martin County in 2027, proceeds return to the funding pool for those same 501(c)(3) partner organizations.",
   },
 ];
 
