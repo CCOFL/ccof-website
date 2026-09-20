@@ -30,7 +30,7 @@ const DETAILS: { label: string; value: string }[] = [
     label: "Business address",
     value: `${ORG.streetAddress}, ${ORG.cityStateZip}`,
   },
-  { label: "Serving", value: "Martin County, Florida, and neighboring communities" },
+  { label: "Serving", value: "Martin, St. Lucie, and Palm Beach counties, Florida" },
   {
     label: "Administrative contact",
     value: ORG.adminEmail,

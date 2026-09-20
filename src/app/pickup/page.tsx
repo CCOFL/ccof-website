@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "Schedule a Goods Pickup",
   description:
-    "Have kids' goods to donate? Request a pickup from The Children's Collective of Florida across Martin County and neighboring communities, and we'll arrange a time that works.",
+    "Have kids' goods to donate? Request a pickup from The Children's Collective of Florida across Martin, St. Lucie, and Palm Beach counties, and we'll arrange a time that works.",
   alternates: { canonical: "/pickup" },
 };
 
@@ -23,7 +23,7 @@ export default function PickupPage() {
       <PageHero
         eyebrow="Goods Pickup"
         title="Too much to carry? We'll come to you."
-        intro="Tell us what you have and where you are, and we'll reply to arrange a pickup time. Pickups are currently available across Martin County and neighboring communities. Every donated item goes toward supporting Florida children in foster care, kinship homes, and families navigating crisis."
+        intro="Tell us what you have and where you are, and we'll reply to arrange a pickup time. Pickups are currently available across Martin, St. Lucie, and Palm Beach counties. Every donated item goes toward supporting Florida children in foster care, kinship homes, and families navigating crisis."
       />
       {/* The authoritative accept/decline list. The printed bin decals
           (permanent vinyl) read "Scan the code above for our full list and to
@@ -65,8 +65,8 @@ export default function PickupPage() {
               the farther-away line turns out-of-area requests into expansion
               signal without promising bins, dates, or a scheduling reply. */}
           <p className="measure mx-auto mb-6 text-center text-base leading-relaxed text-body">
-            Pickups are currently available across Martin County and
-            neighboring communities. Farther away? Send your request anyway.
+            Pickups are currently available across Martin, St. Lucie, and
+            Palm Beach counties. Farther away? Send your request anyway.
             We are growing, and knowing where donors are helps us decide where
             we go next.
           </p>
