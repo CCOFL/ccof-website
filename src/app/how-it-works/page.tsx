@@ -60,8 +60,30 @@ export default function HowItWorksPage() {
         intro="We keep the path from your donation to the partner organizations caring for local children short, transparent, and local."
       />
 
-      {/* WHY block lands here after founder approval (drafted, not committed:
-          mission copy is the founder's voice). */}
+      {/* WHY block: founder's words, approved 2026-09-20 (hers-then-mine;
+          "pantry" kept by founder ruling: it describes the need's breadth,
+          not a service CCOF offers). Do not edit without her. */}
+      <Section background="cream">
+        <div className="measure mx-auto">
+          <p className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
+            Why we exist
+          </p>
+          <p className="mt-4 text-lg leading-relaxed text-ink/90">
+            A few miles from here, a child is arriving somewhere new with very
+            little to call their own. In our own backyard, many more children
+            have a heart full of love but a closet or pantry that is not. The
+            gap is resources, not care, and that is the gap The
+            Children&apos;s Collective of Florida exists to close. We move
+            goods through vetted 501(c)(3) partner organizations because they
+            already know each child and family, which means we never receive a
+            single identifying detail about a child. That is a deliberate
+            design decision, and it is genuinely rare. And resale is a
+            conviction rather than a convenience: a community sustaining its
+            own children, with proceeds returning to the partner organizations
+            caring for them.
+          </p>
+        </div>
+      </Section>
 
       <Section background="white">
         <ol className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
