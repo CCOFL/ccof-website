@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = {
   title: "About",
   description:
-    "The Children's Collective of Florida turns everyday community generosity into real resources for children in foster care, kinship homes, and families in crisis.",
+    "The Children's Collective of Florida turns everyday community generosity into real resources for children in foster care, kinship homes, and families in crisis. Serving Martin County, extending our reach to neighboring communities.",
   alternates: { canonical: "/about" },
 };
 
@@ -24,7 +24,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="About The Children's Collective of Florida"
-        intro="Currently serving Martin County and the Treasure Coast. Built here, building for Florida."
+        intro="Serving Martin County, extending our reach to neighboring communities. Built here, building for Florida."
       />
 
       {/* Why This Matters Here — local need (scaling/What's-Next omitted) */}

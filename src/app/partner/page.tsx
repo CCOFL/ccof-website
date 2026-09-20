@@ -30,7 +30,7 @@ function ActionCard({ action }: { action: (typeof PARTNER_ACTIONS)[number] }) {
 export const metadata: Metadata = {
   title: "Partner With Us",
   description:
-    "Donate, host a bin or drive, become a partner nonprofit, volunteer, or request support. Every path to helping kids on the Treasure Coast starts here.",
+    "Donate, host a bin or drive, become a partner nonprofit, volunteer, or request support. Serving Martin County, extending our reach to neighboring communities.",
   alternates: { canonical: "/partner" },
 };
 
@@ -44,7 +44,7 @@ export default function PartnerPage() {
       <PageHero
         eyebrow="Partner with us"
         title="Find your way to help"
-        intro="Whether you give goods, host a drive, fund a child's week of school supplies, or run a program that serves kids, there's a place for you here."
+        intro="Whether you give goods, host a drive, fund a child's week of school supplies, or run a program that serves kids, there's a place for you here. Serving Martin County, extending our reach to neighboring communities."
       />
 
       <Section background="white" className="!pt-8 sm:!pt-10 lg:!pt-12">

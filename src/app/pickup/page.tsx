@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: "Schedule a Goods Pickup",
   description:
-    "Have kids' goods to donate? Request a pickup from The Children's Collective of Florida across Martin, St. Lucie, and Palm Beach counties, and we'll arrange a time that works.",
+    "Kids' goods to donate anywhere in Martin County? Let us come to you. Outside Martin County? Write to us and we'll make arrangements whenever we can.",
   alternates: { canonical: "/pickup" },
 };
 
@@ -23,7 +23,7 @@ export default function PickupPage() {
       <PageHero
         eyebrow="Goods Pickup"
         title="Too much to carry? We'll come to you."
-        intro="Tell us what you have and where you are, and we'll reply to arrange a pickup time. Pickups are currently available across Martin, St. Lucie, and Palm Beach counties. Every donated item goes toward supporting Florida children in foster care, kinship homes, and families navigating crisis."
+        intro="Tell us what you have and where you are, and we'll reply to arrange a pickup time. Every donated item goes toward supporting Florida children in foster care, kinship homes, and families navigating crisis."
       />
       {/* The authoritative accept/decline list. The printed bin decals
           (permanent vinyl) read "Scan the code above for our full list and to
@@ -59,16 +59,23 @@ export default function PickupPage() {
 
       <Section background="white">
         <div className="mx-auto max-w-3xl">
-          {/* Coverage + out-of-area expectation (founder wording, 9/8): the
-              coverage is an operations fact (distinct from the mission-scope
-              geography rule; precedent is the /give-goods pickup card), and
-              the farther-away line turns out-of-area requests into expansion
-              signal without promising bins, dates, or a scheduling reply. */}
+          {/* Founder-authored pickup copy (Fix-7 ruling, 2026-09-20).
+              Verbatim-protected: keep the question format (it makes readers
+              check themselves against the list), keep "Let us come to you",
+              and keep the two sentences separate. The town list is
+              illustrative; the COUNTY is the boundary, so never add "and
+              surrounding areas"/"neighboring communities" here (that elastic
+              phrasing lives in the identity line only). The second line is an
+              invitation, not a commitment: never harden "whenever we can"
+              into a guarantee or soften it into a refusal. */}
+          <p className="measure mx-auto mb-3 text-center text-base leading-relaxed text-body">
+            Are you in Palm City, Port Salerno, Jensen Beach, Hobe Sound,
+            Stuart, Indiantown, or anywhere else in Martin County? Let us come
+            to you.
+          </p>
           <p className="measure mx-auto mb-6 text-center text-base leading-relaxed text-body">
-            Pickups are currently available across Martin, St. Lucie, and
-            Palm Beach counties. Farther away? Send your request anyway.
-            We are growing, and knowing where donors are helps us decide where
-            we go next.
+            Outside Martin County? Write to us and we&apos;ll make arrangements
+            whenever we can.
           </p>
           <div
             id="pickup-form"
@@ -76,10 +83,13 @@ export default function PickupPage() {
           >
             <PickupRequestForm />
           </div>
-          {/* No bins are placed and no drop-off exists yet; the old "bins
-              and drop-offs are often fastest" line claimed ahead of reality
-              and was cut 9/8. Restore a channel comparison only when those
-              channels are real. */}
+          {/* PERMANENT (founder ruling 2026-09-20): bins are NOT public
+              drop-off points. Each sits inside a host's private community and
+              is promoted at the host's discretion; publishing locations would
+              change the deal made with each host. Never add bin locations, a
+              bin map, a bin count, or a "drop at one of our bins" invitation
+              anywhere on the site. The only public intake channel is pickup;
+              drop-off routing happens privately, per conversation. */}
           <p className="mt-6 text-center text-sm text-muted">
             Pickups run as volunteer capacity allows.
           </p>

@@ -86,10 +86,9 @@ export function PickupRequestForm() {
   if (status === "success") {
     return (
       <SuccessCard title="Pickup request received.">
-        Thank you! If you are within our pickup area, we&apos;ll reply to your
-        email to confirm a time that works. Pickups run as volunteer capacity
-        allows, and every request, near or far, helps us plan where we grow
-        next.
+        Thank you! If you are in Martin County, we&apos;ll reply to your email
+        to confirm a time that works. Outside Martin County? We&apos;ll make
+        arrangements whenever we can. Pickups run as volunteer capacity allows.
       </SuccessCard>
     );
   }
