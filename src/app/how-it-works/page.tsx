@@ -7,7 +7,7 @@ import { PARTNER_REQUESTS } from "@/lib/site";
 export const metadata: Metadata = {
   title: "How It Works",
   description:
-    "You give, we steward, and donated goods reach the 501(c)(3) partner organizations caring for local children. See the transparent giving cycle behind The Children's Collective of Florida.",
+    "You give, we steward, and donated goods reach the 501(c)(3) partner organizations caring for local children. Serving Martin County, extending our reach to neighboring communities.",
   alternates: { canonical: "/how-it-works" },
 };
 
@@ -151,8 +151,8 @@ export default function HowItWorksPage() {
           </div>
         </div>
         <p className="measure mt-8 text-base text-muted">
-          Children&apos;s Collective Supply serves Martin, St. Lucie, and Palm
-          Beach counties.
+          Serving Martin County, extending our reach to neighboring
+          communities.
         </p>
         <p className="measure mt-3 text-base text-muted">
           Prefer to give time? Volunteering is a way to take part in both

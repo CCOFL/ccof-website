@@ -259,7 +259,7 @@ function buildPickupConfirmation(req: PickupRequest) {
     `Pickup area: ${req.pickupArea}`,
     `Items: ${req.items}`,
     ``,
-    `If you are within our pickup area (Martin, St. Lucie, and Palm Beach counties), we will reply to this email to confirm a time that works. Pickups run as volunteer capacity allows.`,
+    `If you are in Martin County, we will reply to this email to confirm a time that works. Outside Martin County? We'll make arrangements whenever we can. Pickups run as volunteer capacity allows.`,
     ``,
     `Farther away? Thank you all the more. We are growing, and knowing where donors are helps us decide where we go next.`,
     ``,
