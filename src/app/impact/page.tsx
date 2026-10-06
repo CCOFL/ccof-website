@@ -41,50 +41,12 @@ export default function ImpactPage() {
             />
           </div>
 
-          <h3 className="mt-14 text-xl font-bold">
-            What the community bins collected
-          </h3>
-          <div className="mt-5 overflow-x-auto">
-            <table className="w-full max-w-2xl border-collapse text-left text-sm">
-              <thead>
-                <tr className="border-b border-line text-xs uppercase tracking-wider text-muted">
-                  <th scope="col" className="py-2 pr-4 font-semibold">
-                    Category
-                  </th>
-                  <th scope="col" className="py-2 pr-4 font-semibold">
-                    Quantity
-                  </th>
-                  <th scope="col" className="py-2 text-right font-semibold">
-                    Pounds
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {period.categories.map((cat) => (
-                  <tr key={cat.name} className="border-b border-line/60">
-                    <th scope="row" className="py-2.5 pr-4 font-medium text-ink">
-                      {cat.name}
-                    </th>
-                    <td className="py-2.5 pr-4 text-muted">{cat.quantity}</td>
-                    <td className="py-2.5 text-right text-ink">
-                      {cat.pounds.toFixed(1)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th scope="row" colSpan={2} className="py-3 pr-4 font-bold">
-                    Total
-                  </th>
-                  <td className="py-3 text-right font-bold">
-                    {period.totalPounds.toFixed(1)} lbs
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <p className="measure mt-4 text-xs leading-relaxed text-muted">
+          {/* Category-level detail lives in the downloadable report only
+              (founder ruling 2026-10-06: bag counts are warehouse data, not
+              impact). The method note stays: it defines what the pound and
+              item figures count. The categories stay in the data file so the
+              build-time sum check keeps guarding the headline total. */}
+          <p className="measure mt-6 text-xs leading-relaxed text-muted">
             {period.methodNote}
           </p>
 
