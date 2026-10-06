@@ -60,13 +60,18 @@ export default function ImpactPage() {
             {period.whyMatters}
           </p>
 
-          <p className="mt-10">
+          {/* Category detail and the full monthly report are provided on
+              request, not published (founder ruling 2026-10-06). */}
+          <p className="measure mt-10 text-base leading-relaxed text-body">
+            Contact{" "}
             <a
-              href={period.reportPdf}
-              className="inline-block rounded-full border border-sage bg-sage px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-sage-600"
+              href="mailto:info@ChildrensCollectiveFL.org"
+              className="font-semibold text-sage-600 underline underline-offset-4"
             >
-              Download the {period.label.split(" ")[0]} report (PDF)
-            </a>
+              info@ChildrensCollectiveFL.org
+            </a>{" "}
+            to request the full impact report or the details of what has been
+            collected.
           </p>
         </Section>
       ))}
