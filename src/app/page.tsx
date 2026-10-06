@@ -12,7 +12,8 @@ import { EmailCapture } from "@/components/EmailCapture";
 import { SectionHeading } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { ORG, MISSION_LEAD } from "@/lib/site";
-import { getImpactStats } from "@/lib/impact";
+import { getImpactStats, impactPeriods } from "@/lib/impact";
+import { ImpactPeriodTiles } from "@/components/ImpactPeriodTiles";
 
 // Re-fetch the impact figures from Supabase daily (data changes quarterly).
 export const revalidate = 86400;
@@ -25,6 +26,7 @@ const BIN_PROGRAM_LIVE = process.env.NEXT_PUBLIC_BIN_PROGRAM_LIVE === "true";
 
 export default async function Home() {
   const impactStats = await getImpactStats();
+  const latestImpact = impactPeriods[0];
   return (
     <>
       {/* HERO — content starts in the first viewport; one primary + one secondary CTA (brief #4/#5) */}
@@ -136,6 +138,32 @@ export default async function Home() {
         <div className="mt-12">
           <GivingCycle />
         </div>
+      </Section>
+
+      {/* MONTHLY IMPACT: "by the numbers" for the newest period. Renders
+          from impactPeriods in lib/impact.ts: the monthly update is a
+          one-file data edit, never a copy change here. */}
+      <Section background="cream">
+        <SectionHeading
+          eyebrow="Our impact"
+          title={latestImpact.heading}
+          intro={latestImpact.intro}
+        />
+        <div className="mt-12">
+          <ImpactPeriodTiles tiles={latestImpact.tiles} cardBg="bg-white" />
+        </div>
+        <p className="measure mt-8 text-sm leading-relaxed text-muted">
+          Every delivery to a partner organization is documented on a signed
+          transfer acknowledgment.
+        </p>
+        <p className="mt-4">
+          <Link
+            href="/impact"
+            className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+          >
+            See the full report →
+          </Link>
+        </p>
       </Section>
 
       {/* WHAT WE COLLECT — marquee (brief §6) */}

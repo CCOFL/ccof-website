@@ -52,6 +52,7 @@ export const NAV: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "How It Works", href: "/how-it-works" },
+  { label: "Impact", href: "/impact" },
   { label: "Collective Kids Closet", href: "/collective-kids-closet" },
   { label: "Partner With Us", href: "/partner" },
   { label: "Contact", href: "/contact" },
