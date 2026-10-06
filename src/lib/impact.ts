@@ -78,8 +78,8 @@ export const impactPeriods: ImpactPeriod[] = [
     tiles: [
       { value: "262.7", unit: "pounds", caption: "collected through community bin hosts, every pound weighed" },
       { value: "7", unit: "categories", caption: "of goods gathered from bin hosts" },
-      { value: "4", unit: "partner organizations", caption: "nonprofits serving children, supplied directly" },
-      { value: "433", unit: "items", caption: "contributed directly to partner organizations" },
+      { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
+      { value: "433", unit: "items", caption: "contributed directly to partner nonprofits" },
     ],
     categories: [
       { name: "Clothing and shoes", quantity: "24 bags", pounds: 204.5 },
