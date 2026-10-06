@@ -157,7 +157,7 @@ export default async function Home() {
             href="/impact"
             className="font-semibold text-sage-600 underline-offset-4 hover:underline"
           >
-            See the full report →
+            See your impact →
           </Link>
         </p>
       </Section>
