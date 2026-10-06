@@ -14,7 +14,11 @@ export function ImpactPeriodTiles({
   cardBg?: "bg-white" | "bg-cream";
 }) {
   return (
-    <dl className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <dl
+      className={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${
+        tiles.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"
+      }`}
+    >
       {tiles.map((tile, i) => (
         <Reveal key={tile.unit} delay={i * 80}>
           <div
