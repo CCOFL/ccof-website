@@ -152,11 +152,7 @@ export default async function Home() {
         <div className="mt-12">
           <ImpactPeriodTiles tiles={latestImpact.tiles} cardBg="bg-white" />
         </div>
-        <p className="measure mt-8 text-sm leading-relaxed text-muted">
-          Every delivery to a partner organization is documented on a signed
-          transfer acknowledgment.
-        </p>
-        <p className="mt-4">
+        <p className="mt-8">
           <Link
             href="/impact"
             className="font-semibold text-sage-600 underline-offset-4 hover:underline"

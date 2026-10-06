@@ -98,7 +98,7 @@ export const impactPeriods: ImpactPeriod[] = [
     whyMatters:
       "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
     methodNote:
-      "Bin totals reflect weighed pickups from community bin hosts only. Items contributed to partners are counted by unit and include goods received from other sources, including new items provided by CCOF.",
+      "Bin totals reflect weighed pickups from community bin hosts only. Items contributed to partners are counted by unit and include goods received from other sources, including new items provided by CCOF. Every delivery to a partner nonprofit is documented on a signed transfer acknowledgment.",
     reportPdf: "/reports/CCOF_Community_Impact_Report_2026-09.pdf",
   },
 ];
