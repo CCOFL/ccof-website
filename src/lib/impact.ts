@@ -77,7 +77,7 @@ export const impactPeriods: ImpactPeriod[] = [
     intro:
       "Our community donation drive went into action in September. Neighbors gave through the bins our local hosts placed, every pound was weighed and recorded, and what came in started reaching children the same month. Here is what that looked like.",
     tiles: [
-      { value: "262.7", unit: "pounds", caption: "collected through community bin hosts, every pound weighed" },
+      { value: "262.7", unit: "pounds", caption: "collected through community bin hosts alone, every pound weighed" },
       { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
       { value: "433", unit: "items", caption: "contributed directly to partner nonprofits" },
     ],
@@ -99,7 +99,7 @@ export const impactPeriods: ImpactPeriod[] = [
     whyMatters:
       "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
     methodNote:
-      "Bin totals reflect weighed pickups from community bin hosts only. Items contributed to partners are counted by unit and include goods received from other sources, including new items provided by CCOF. Every delivery to a partner nonprofit is documented on a signed transfer acknowledgment.",
+      "Bin totals reflect weighed pickups from community bin hosts only. Goods that arrived through scheduled pickups or as direct gifts from individual donors are not included in that total. Items contributed to partners are counted by unit and include goods from all sources, including new items provided by CCOF. Every delivery to a partner nonprofit is documented on a signed transfer acknowledgment.",
   },
 ];
 
