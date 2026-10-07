@@ -11,6 +11,7 @@ type Body = {
   phone?: string;
   orgType?: string;
   location?: string;
+  requestType?: string;
   indoorOk?: boolean;
   footTraffic?: string;
   timing?: string;
@@ -52,6 +53,7 @@ export async function POST(request: Request) {
       email,
       phone: (body.phone ?? "").trim(),
       orgType: (body.orgType ?? "business").trim(),
+      requestType: body.requestType === "drive" ? "drive" : "bin",
       location,
       indoorOk: Boolean(body.indoorOk),
       footTraffic: (body.footTraffic ?? "").trim(),
