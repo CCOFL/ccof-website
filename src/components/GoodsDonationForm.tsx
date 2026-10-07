@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
 import { GOODS_CATEGORIES, GOODS_QUANTITY_BANDS } from "@/lib/forms";
+import { trackConversion } from "@/lib/analytics";
 import {
   Honeypot,
   Field,
@@ -93,6 +94,7 @@ export function GoodsDonationForm({ initialBin }: { initialBin?: string }) {
       const data = (await res.json()) as { receiptSent?: boolean };
       setReceiptSent(data.receiptSent !== false);
       setStatus("success");
+      trackConversion("goods_receipt_request");
     } catch {
       setStatus("error");
     }

@@ -3,6 +3,7 @@
 import { useId, useMemo, useState } from "react";
 import { Button } from "./Button";
 import { DONATION_PRESETS } from "@/lib/site";
+import { trackConversion } from "@/lib/analytics";
 
 type Frequency = "one-time" | "monthly";
 
@@ -44,6 +45,7 @@ export function DonationForm() {
       if (!res.ok || !data.url) {
         throw new Error(data.error || "Checkout failed.");
       }
+      trackConversion("donation_begin");
       window.location.assign(data.url);
     } catch (err) {
       setError(

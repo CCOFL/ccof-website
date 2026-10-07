@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
+import { trackConversion } from "@/lib/analytics";
 import {
   Honeypot,
   Field,
@@ -83,6 +84,7 @@ export function VolunteerForm() {
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
+      trackConversion("volunteer_signup");
     } catch {
       setStatus("error");
     }

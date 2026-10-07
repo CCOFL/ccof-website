@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
+import { trackConversion } from "@/lib/analytics";
 
 const URGENCY = [
   { value: "immediate", label: "Immediate: within 24-48 hours" },
@@ -76,6 +77,7 @@ export function PartnerRequestForm() {
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
+      trackConversion("partner_request");
     } catch {
       setStatus("error");
     }
