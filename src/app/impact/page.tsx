@@ -73,6 +73,15 @@ export default function ImpactPage() {
             to request the full impact report or the details of what has been
             collected.
           </p>
+          <p className="measure mt-4 text-base leading-relaxed text-body">
+            The story behind these numbers lives in{" "}
+            <a
+              href="/newsletter"
+              className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+            >
+              our monthly letter →
+            </a>
+          </p>
         </Section>
       ))}
     </>
