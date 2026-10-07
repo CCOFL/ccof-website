@@ -29,13 +29,18 @@ const TIMING = [
 type Errors = Partial<Record<"orgName" | "contactName" | "email" | "location", string>>;
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function BinHostForm() {
+export function BinHostForm({
+  defaultRequestType = "bin",
+}: {
+  defaultRequestType?: "bin" | "drive";
+}) {
   const [values, setValues] = useState({
     orgName: "",
     contactName: "",
     email: "",
     phone: "",
     orgType: "business",
+    requestType: defaultRequestType as string,
     location: "",
     indoorOk: false,
     footTraffic: "",
@@ -96,6 +101,51 @@ export function BinHostForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <fieldset>
+        <legend className="text-sm font-semibold text-ink">
+          How do you want to help?
+        </legend>
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
+          {[
+            {
+              value: "bin",
+              label: "Host a standing bin",
+              hint: "A donation bin at your location, serviced by us.",
+            },
+            {
+              value: "drive",
+              label: "Run a one-time drive",
+              hint: "Like Fill a Duffel. We hand you the list and collect when it wraps.",
+            },
+          ].map((opt) => (
+            <label
+              key={opt.value}
+              className={`flex cursor-pointer gap-3 rounded-xl border p-3.5 transition-colors ${
+                values.requestType === opt.value
+                  ? "border-sage bg-sage/5"
+                  : "border-line bg-white hover:border-sage-light/60"
+              }`}
+            >
+              <input
+                type="radio"
+                name="requestType"
+                value={opt.value}
+                checked={values.requestType === opt.value}
+                onChange={() => update("requestType", opt.value)}
+                className="mt-1 accent-[color:var(--color-sage,#748865)]"
+              />
+              <span>
+                <span className="block text-sm font-semibold text-ink">
+                  {opt.label}
+                </span>
+                <span className="mt-0.5 block text-xs leading-snug text-muted">
+                  {opt.hint}
+                </span>
+              </span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <Honeypot value={values.company} onChange={(v) => update("company", v)} />
       <Field
         id="orgName"
