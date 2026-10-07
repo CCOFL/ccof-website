@@ -659,7 +659,7 @@ export const PARTNER_ACTIONS: {
   },
   {
     title: "Host a bin or drive",
-    body: "Set up a donation bin or run a goods drive at your business, school, or place of worship.",
+    body: "Set up a donation bin, or run a one-time goods drive like Fill a Duffel, at your business, school, or place of worship.",
     cta: { label: "Host a Bin / Drive", href: "/host-a-bin" },
     variant: "secondary",
   },

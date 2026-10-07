@@ -168,6 +168,8 @@ export type BinHostRequest = {
   email: string;
   phone?: string;
   orgType: string;
+  /** 'bin' (standing bin) or 'drive' (one-time drive, e.g. Fill a Duffel). */
+  requestType: string;
   location: string;
   indoorOk: boolean;
   footTraffic?: string;
@@ -181,18 +183,27 @@ export async function saveBinHostRequest(req: BinHostRequest) {
 
   if (isSupabaseConfigured()) {
     const supabase = getSupabase();
-    const { error } = await supabase!.from("bin_host_requests").insert({
+    const row = {
       org_name: req.orgName,
       contact_name: req.contactName,
       email: req.email,
       phone: req.phone || null,
       org_type: req.orgType,
+      request_type: req.requestType,
       location: req.location,
       indoor_ok: req.indoorOk,
       foot_traffic: req.footTraffic || null,
       timing: req.timing || null,
       message: req.message || null,
-    });
+    };
+    let { error } = await supabase!.from("bin_host_requests").insert(row);
+    // Pre-migration-0014 fallback: retry without request_type if the column
+    // does not exist yet (same graceful pattern as the designation column).
+    if (error && /request_type/.test(error.message)) {
+      const { request_type: _omit, ...withoutType } = row;
+      void _omit;
+      ({ error } = await supabase!.from("bin_host_requests").insert(withoutType));
+    }
     if (error && !isMissingTable(error)) {
       throw new Error(`Supabase insert failed: ${error.message}`);
     }
@@ -201,10 +212,12 @@ export async function saveBinHostRequest(req: BinHostRequest) {
 
   if (isEmailConfigured()) {
     await sendNotification({
-      subject: `Bin host request · ${req.orgName} (${req.orgType})`,
+      subject: `${req.requestType === "drive" ? "Drive request" : "Bin host request"} · ${req.orgName} (${req.orgType})`,
       replyTo: req.email,
       text: [
-        `New host-a-bin request`,
+        req.requestType === "drive"
+          ? `New one-time DRIVE request`
+          : `New host-a-bin request`,
         `Organization: ${req.orgName} (${req.orgType})`,
         `Contact: ${req.contactName}`,
         `Email: ${req.email}`,
