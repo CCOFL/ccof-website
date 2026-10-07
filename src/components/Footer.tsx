@@ -50,6 +50,14 @@ export function Footer() {
               ))}
               <li>
                 <Link
+                  href="/newsletter"
+                  className="text-cream/80 transition-colors hover:text-cream"
+                >
+                  Newsletter
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/give-goods"
                   className="text-cream/80 transition-colors hover:text-cream"
                 >
