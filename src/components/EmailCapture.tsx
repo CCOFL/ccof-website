@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "./Button";
+import { trackConversion } from "@/lib/analytics";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -23,6 +24,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
       });
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
+      trackConversion("sign_up");
       setMessage("You're on the list. We'll share launch news soon.");
       setEmail("");
     } catch {

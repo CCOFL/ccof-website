@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
+import { trackConversion } from "@/lib/analytics";
 
 const INTENTS = [
   { value: "general", label: "General question" },
@@ -69,6 +70,7 @@ export function ContactForm({ initialIntent }: { initialIntent?: string }) {
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
+      trackConversion("contact_submit");
     } catch {
       setStatus("error");
     }

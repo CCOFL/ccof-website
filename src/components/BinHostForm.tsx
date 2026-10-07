@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
+import { trackConversion } from "@/lib/analytics";
 import {
   Honeypot,
   Field,
@@ -80,6 +81,7 @@ export function BinHostForm() {
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
+      trackConversion("bin_host_inquiry");
     } catch {
       setStatus("error");
     }

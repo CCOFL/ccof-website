@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
+import { trackConversion } from "@/lib/analytics";
 import {
   Honeypot,
   Field,
@@ -78,6 +79,7 @@ export function PickupRequestForm() {
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
+      trackConversion("pickup_request");
     } catch {
       setStatus("error");
     }
