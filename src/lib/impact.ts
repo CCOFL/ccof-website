@@ -77,7 +77,7 @@ export const impactPeriods: ImpactPeriod[] = [
     intro:
       "Our community donation drive went into action in September. Neighbors gave through the bins our local hosts placed, every pound was weighed and recorded, and what came in started reaching children the same month. Here is what that looked like.",
     tiles: [
-      { value: "262.7", unit: "pounds", caption: "collected through community bin hosts, every pound weighed" },
+      { value: "262.7", unit: "pounds", caption: "collected through community bin hosts alone, every pound weighed" },
       { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
       { value: "433", unit: "items", caption: "contributed directly to partner nonprofits" },
     ],
