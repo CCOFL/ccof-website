@@ -18,6 +18,13 @@ export const ORG = {
   ein: "42-2020310",
   flReg: "CH83131",
   flDoc: "N26000005374",
+  // Registered fictitious name (DBA), per CCOF_Public_Facts_Sheet_2026-10-14.
+  // A naming fact only: the storefront PROGRAM stays future tense everywhere.
+  dba: "The Collective Kids Closet",
+  // The one third-party credential we link. Footer seal and JSON-LD sameAs
+  // both read this so the two can never drift.
+  candidProfile:
+    "https://app.candid.org/profile/16616338/the-childrens-collective-of-florida-42-2020310/?pkId=9fd7c9a1-d88f-4e41-a8f4-dff9801a3d51",
   location: "Martin County, FL",
   // Geography is a site-level fact: the service area appears in the footer,
   // /contact, and /registration ONLY, all rendered from this one string

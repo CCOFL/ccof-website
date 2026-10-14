@@ -169,7 +169,7 @@ export function Footer() {
               each calendar year to keep the Seal current. Renewal reminder:
               January. Profile: https://app.candid.org/profile/16616338/edit */}
           <a
-            href="https://app.candid.org/profile/16616338/the-childrens-collective-of-florida-42-2020310/?pkId=9fd7c9a1-d88f-4e41-a8f4-dff9801a3d51"
+            href={ORG.candidProfile}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Candid Seal of Transparency: view our full Candid profile"
