@@ -75,9 +75,43 @@ export function isZip(v: string) {
   return /^\d{5}(-\d{4})?$/.test(v);
 }
 
-/** A shareable link: http(s) and at least a dotted host. */
+/**
+ * A shareable link: a dotted host with no spaces; the http(s) scheme is
+ * optional because people paste "drive.google.com/..." straight from the
+ * address bar, which is exactly what the field's hint invites.
+ */
 export function isLink(v: string) {
-  return /^https?:\/\/\S+\.\S+/.test(v);
+  // An explicit scheme must be http(s); ftp:// and friends are not links
+  // a reviewer can open in a browser.
+  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(v) && !/^https?:\/\//i.test(v)) {
+    return false;
+  }
+  return /^(https?:\/\/)?\S+\.\S+$/i.test(v);
+}
+
+/** YYYY-MM-DD, as the native date input submits (guards the date column). */
+export function isIsoDate(v: string) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v));
+}
+
+/**
+ * Blank out fields that belong to a branch the applicant did not choose, so
+ * a value typed before switching branches is never validated or stored:
+ * the FDACS pair, the related-party detail, and the media contact under
+ * do_not_name. Client and API both run this, keeping the two identical.
+ */
+export function normalizePartnerApplication(
+  v: PartnerApplicationValues,
+): PartnerApplicationValues {
+  const mayName = mayNamePublicly(v.publicityPreference);
+  return {
+    ...v,
+    fdacsReg: v.fdacsStatus === "registered" ? v.fdacsReg : "",
+    fdacsExemptionBasis: v.fdacsStatus === "exempt" ? v.fdacsExemptionBasis : "",
+    relatedPartyDetail: v.relatedParty === "yes" ? v.relatedPartyDetail : "",
+    mediaContactName: mayName ? v.mediaContactName : "",
+    mediaContactEmail: mayName ? v.mediaContactEmail : "",
+  };
 }
 
 export function mayNamePublicly(pref: string) {
@@ -107,17 +141,18 @@ export const FIELD_ORDER: (keyof PartnerApplicationValues)[] = [
   "contactTitle",
   "email",
   "needs",
+  "volumeEstimate",
   "publicityPreference",
   "mediaContactName",
   "mediaContactEmail",
   "goodsDirectAck",
   "childPrivacyAck",
+  "vettingAck",
   "relatedParty",
   "relatedPartyDetail",
   "signerName",
   "signerTitle",
   "signerDate",
-  "vettingAck",
 ];
 
 export function validatePartnerApplication(
@@ -139,9 +174,7 @@ export function validatePartnerApplication(
   else if (v.fdacsStatus === "exempt" && !v.fdacsExemptionBasis.trim())
     e.fdacsExemptionBasis = "A sentence on the basis for your exemption.";
 
-  if (!v.irsLetterUrl.trim())
-    e.irsLetterUrl = "A link to your IRS determination letter.";
-  else if (!isLink(v.irsLetterUrl.trim()))
+  if (v.irsLetterUrl.trim() && !isLink(v.irsLetterUrl.trim()))
     e.irsLetterUrl =
       "That link doesn't look right. A shared drive link is fine.";
 
@@ -180,6 +213,8 @@ export function validatePartnerApplication(
     e.signerName = "The authorized signer's full name.";
   if (!v.signerTitle.trim()) e.signerTitle = "The signer's title.";
   if (!v.signerDate.trim()) e.signerDate = "Today's date.";
+  else if (!isIsoDate(v.signerDate.trim()))
+    e.signerDate = "Date format is YYYY-MM-DD.";
   if (!v.vettingAck) e.vettingAck = "Please acknowledge the verification step.";
 
   if (!PUBLICITY_PREFS.includes(v.publicityPreference)) {

@@ -42,7 +42,7 @@ export default function PartnerApplyPage() {
               href="/partner-nonprofits"
               className="text-sage-600 underline-offset-4 hover:underline"
             >
-              submit a goods request
+              Submit a goods request
             </Link>{" "}
             and we&apos;ll verify as we go.
           </p>

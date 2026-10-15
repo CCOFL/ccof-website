@@ -184,6 +184,7 @@ export function CheckboxRow({
   error,
   id,
   disabled,
+  required,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
@@ -191,6 +192,7 @@ export function CheckboxRow({
   error?: string;
   id?: string;
   disabled?: boolean;
+  required?: boolean;
 }) {
   return (
     <div>
@@ -206,12 +208,20 @@ export function CheckboxRow({
           disabled={disabled}
           onChange={(e) => onChange(e.target.checked)}
           aria-invalid={error ? true : undefined}
+          aria-describedby={error && id ? `${id}-error` : undefined}
           className="mt-0.5 h-5 w-5 shrink-0 rounded border-line text-sage focus:ring-sage"
         />
-        <span className="text-sm leading-relaxed text-ink/90">{children}</span>
+        <span className="text-sm leading-relaxed text-ink/90">
+          {children}
+          {required && <span className="text-coral-deep"> *</span>}
+        </span>
       </label>
       {error && (
-        <p className="mt-1.5 text-sm text-red-700" role="alert">
+        <p
+          id={id ? `${id}-error` : undefined}
+          className="mt-1.5 text-sm text-red-700"
+          role="alert"
+        >
           {error}
         </p>
       )}

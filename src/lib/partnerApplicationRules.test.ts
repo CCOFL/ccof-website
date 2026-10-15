@@ -8,10 +8,12 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   validatePartnerApplication,
+  normalizePartnerApplication,
   isEin,
   isPhone,
   isZip,
   isLink,
+  isIsoDate,
   type PartnerApplicationValues,
 } from "./partnerApplicationRules.ts";
 
@@ -130,15 +132,55 @@ test("address and phone are required with format checks", () => {
   assert.ok(validatePartnerApplication({ ...makeValid(), phone: "123" }).phone);
 });
 
-test("IRS letter link is required and must look like a link", () => {
-  assert.ok(
+test("IRS letter link is optional, format-checked only when provided", () => {
+  assert.equal(
     validatePartnerApplication({ ...makeValid(), irsLetterUrl: "" })
       .irsLetterUrl,
+    undefined,
   );
   assert.ok(
     validatePartnerApplication({ ...makeValid(), irsLetterUrl: "my letter" })
       .irsLetterUrl,
   );
+  assert.equal(
+    validatePartnerApplication({
+      ...makeValid(),
+      irsLetterUrl: "drive.google.com/file/d/abc/view",
+    }).irsLetterUrl,
+    undefined,
+  );
+});
+
+test("signer date must be a real YYYY-MM-DD date", () => {
+  assert.ok(
+    validatePartnerApplication({ ...makeValid(), signerDate: "today" })
+      .signerDate,
+  );
+  assert.equal(
+    validatePartnerApplication({ ...makeValid(), signerDate: "2026-10-15" })
+      .signerDate,
+    undefined,
+  );
+});
+
+test("normalize blanks values from unchosen branches", () => {
+  const n = normalizePartnerApplication({
+    ...makeValid(),
+    fdacsStatus: "exempt",
+    fdacsReg: "CH99999",
+    fdacsExemptionBasis: "Religious institution.",
+    relatedParty: "no",
+    relatedPartyDetail: "stale text",
+    publicityPreference: "do_not_name",
+    mediaContactName: "Stale Person",
+    mediaContactEmail: "not-an-email",
+  });
+  assert.equal(n.fdacsReg, "");
+  assert.equal(n.fdacsExemptionBasis, "Religious institution.");
+  assert.equal(n.relatedPartyDetail, "");
+  assert.equal(n.mediaContactName, "");
+  assert.equal(n.mediaContactEmail, "");
+  assert.deepEqual(validatePartnerApplication(n), {});
 });
 
 test("naming permission makes the media contact required", () => {
@@ -158,5 +200,10 @@ test("format helpers", () => {
   assert.ok(isZip("34997"));
   assert.ok(!isZip("3499"));
   assert.ok(isLink("https://example.org/letter.pdf"));
+  assert.ok(isLink("HTTPS://EXAMPLE.ORG/LETTER.PDF"));
+  assert.ok(isLink("drive.google.com/file/d/abc/view"));
+  assert.ok(!isLink("https://example.org/x see attached"));
   assert.ok(!isLink("ftp://example.org"));
+  assert.ok(isIsoDate("2026-10-15"));
+  assert.ok(!isIsoDate("10/15/2026"));
 });

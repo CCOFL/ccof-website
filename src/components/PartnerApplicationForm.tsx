@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import { ORG } from "@/lib/site";
 import { trackConversion } from "@/lib/analytics";
 import {
   validatePartnerApplication,
+  normalizePartnerApplication,
   mayNamePublicly,
   FIELD_ORDER,
   type PartnerApplicationValues,
@@ -38,15 +39,12 @@ const PUBLICITY_OPTIONS = [
   },
 ] as const;
 
-/** Keys whose rendered control carries a different DOM id than the key. */
-const FOCUS_IDS: Partial<Record<keyof PartnerApplicationValues, string>> = {
-  fdacsStatus: "fdacs-registered",
-  relatedParty: "relatedParty-yes",
-  publicityPreference: "publicity-may_name",
-  goodsDirectAck: "goodsDirectAck",
-  childPrivacyAck: "childPrivacyAck",
-  vettingAck: "vettingAck",
-};
+/** Today's date in the user's own timezone (a UTC slice can be tomorrow). */
+function localToday() {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
 
 export function PartnerApplicationForm() {
   const [values, setValues] = useState({
@@ -60,7 +58,8 @@ export function PartnerApplicationForm() {
     website: "",
     streetAddress: "",
     city: "",
-    state: "",
+    // Most applicants are Florida organizations; editable like any field.
+    state: "FL",
     zip: "",
     phone: "",
     mission: "",
@@ -79,8 +78,9 @@ export function PartnerApplicationForm() {
     message: "",
     mediaContactName: "",
     mediaContactEmail: "",
-    company: "", // honeypot — kept empty by humans
+    company: "", // honeypot, kept empty by humans
   });
+  const [signerIsContact, setSignerIsContact] = useState(false);
   const [goodsDirectAck, setGoodsDirectAck] = useState(false);
   const [childPrivacyAck, setChildPrivacyAck] = useState(false);
   const [vettingAck, setVettingAck] = useState(false);
@@ -90,14 +90,38 @@ export function PartnerApplicationForm() {
   const [errors, setErrors] = useState<PartnerApplicationErrors>({});
   const [status, setStatus] = useState<Status>("idle");
 
+  // Auto-fill today's date after mount: computing it during render would
+  // make the server and browser disagree and break hydration, so this is
+  // the legitimate client-only-initialization case the lint rule allows for.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setValues((v) => (v.signerDate ? v : { ...v, signerDate: localToday() }));
+  }, []);
+
+  /** The complete, branch-normalized value set the rules validate. */
   function fullValues(): PartnerApplicationValues {
-    return {
+    return normalizePartnerApplication({
       ...values,
+      signerName: signerIsContact ? values.contactName : values.signerName,
+      signerTitle: signerIsContact ? values.contactTitle : values.signerTitle,
       goodsDirectAck,
       childPrivacyAck,
       vettingAck,
       publicityPreference,
+    });
+  }
+
+  /** Where the first-error focus lands; signer errors route to the contact
+   *  fields while "I am the authorized signer" hides the signer inputs. */
+  function focusIdFor(key: keyof PartnerApplicationValues): string {
+    if (signerIsContact && key === "signerName") return "contactName";
+    if (signerIsContact && key === "signerTitle") return "contactTitle";
+    const fixed: Partial<Record<keyof PartnerApplicationValues, string>> = {
+      fdacsStatus: "fdacs-registered",
+      relatedParty: "relatedParty-yes",
+      publicityPreference: "publicity-may_name",
     };
+    return fixed[key] ?? key;
   }
 
   function update(field: keyof typeof values, value: string) {
@@ -105,6 +129,9 @@ export function PartnerApplicationForm() {
     if (errors[field as keyof PartnerApplicationErrors]) {
       setErrors((e) => ({ ...e, [field]: undefined }));
     }
+    // In signing-as-contact mode the contact fields ARE the signature.
+    if (signerIsContact && field === "contactName") clearError("signerName");
+    if (signerIsContact && field === "contactTitle") clearError("signerTitle");
   }
 
   function clearError(field: keyof PartnerApplicationErrors) {
@@ -113,11 +140,12 @@ export function PartnerApplicationForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const found = validatePartnerApplication(fullValues());
+    const full = fullValues();
+    const found = validatePartnerApplication(full);
     setErrors(found);
     if (Object.keys(found).length > 0) {
       const first = FIELD_ORDER.find((k) => found[k]);
-      if (first) document.getElementById(FOCUS_IDS[first] ?? first)?.focus();
+      if (first) document.getElementById(focusIdFor(first))?.focus();
       return;
     }
 
@@ -127,11 +155,9 @@ export function PartnerApplicationForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...values,
-          goodsDirectAck,
-          childPrivacyAck,
-          vettingAck,
-          publicityPreference,
+          ...full,
+          message: values.message,
+          company: values.company,
           // do_not_name always submits logo permission as false.
           logoUsePermitted: mayName ? logoUsePermitted : false,
         }),
@@ -195,6 +221,9 @@ export function PartnerApplicationForm() {
                 update("fdacsStatus", "registered");
                 clearError("fdacsExemptionBasis");
               }}
+              aria-describedby={
+                errors.fdacsStatus ? "fdacsStatus-error" : undefined
+              }
               className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
             />
             <span className="text-sm leading-relaxed text-ink/90">
@@ -212,6 +241,9 @@ export function PartnerApplicationForm() {
                 update("fdacsStatus", "exempt");
                 clearError("fdacsReg");
               }}
+              aria-describedby={
+                errors.fdacsStatus ? "fdacsStatus-error" : undefined
+              }
               className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
             />
             <span className="text-sm leading-relaxed text-ink/90">
@@ -220,7 +252,11 @@ export function PartnerApplicationForm() {
           </label>
         </div>
         {errors.fdacsStatus && (
-          <p className="mt-1.5 text-sm text-red-700" role="alert">
+          <p
+            id="fdacsStatus-error"
+            className="mt-1.5 text-sm text-red-700"
+            role="alert"
+          >
             {errors.fdacsStatus}
           </p>
         )}
@@ -261,11 +297,11 @@ export function PartnerApplicationForm() {
       <Field
         id="irsLetterUrl"
         label="Link to your IRS determination letter"
-        required
+        optional
         error={errors.irsLetterUrl}
         value={values.irsLetterUrl}
         onChange={(v) => update("irsLetterUrl", v)}
-        hint="A shared link to your IRS determination letter is fine."
+        hint="A shared link to your IRS determination letter is fine. If you skip it, we verify through your EIN."
       />
       <Field
         id="website"
@@ -429,7 +465,16 @@ export function PartnerApplicationForm() {
                   setPublicityPreference(opt.value);
                   if (opt.value === "do_not_name") setLogoUsePermitted(false);
                   clearError("publicityPreference");
+                  // A media value typed under a naming option is dropped by
+                  // normalize when naming is off; clear its stale error too.
+                  clearError("mediaContactName");
+                  clearError("mediaContactEmail");
                 }}
+                aria-describedby={
+                  errors.publicityPreference
+                    ? "publicityPreference-error"
+                    : undefined
+                }
                 className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
               />
               <span className="text-sm leading-relaxed text-ink/90">
@@ -439,7 +484,11 @@ export function PartnerApplicationForm() {
           ))}
         </div>
         {errors.publicityPreference && (
-          <p className="mt-1.5 text-sm text-red-700" role="alert">
+          <p
+            id="publicityPreference-error"
+            className="mt-1.5 text-sm text-red-700"
+            role="alert"
+          >
             {errors.publicityPreference}
           </p>
         )}
@@ -499,9 +548,11 @@ export function PartnerApplicationForm() {
         </p>
       </div>
 
-      {/* Working-standard acknowledgments (form-hardening brief, 2026-10-15). */}
+      {/* Working-standard acknowledgments (form-hardening brief, 2026-10-15;
+          required markers added on founder follow-up). */}
       <CheckboxRow
         id="goodsDirectAck"
+        required
         checked={goodsDirectAck}
         onChange={(v) => {
           setGoodsDirectAck(v);
@@ -514,6 +565,7 @@ export function PartnerApplicationForm() {
       </CheckboxRow>
       <CheckboxRow
         id="childPrivacyAck"
+        required
         checked={childPrivacyAck}
         onChange={(v) => {
           setChildPrivacyAck(v);
@@ -561,6 +613,9 @@ export function PartnerApplicationForm() {
                   update("relatedParty", opt);
                   if (opt === "no") clearError("relatedPartyDetail");
                 }}
+                aria-describedby={
+                  errors.relatedParty ? "relatedParty-error" : undefined
+                }
                 className="h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
               />
               <span className="text-sm text-ink/90">
@@ -570,7 +625,11 @@ export function PartnerApplicationForm() {
           ))}
         </div>
         {errors.relatedParty && (
-          <p className="mt-1.5 text-sm text-red-700" role="alert">
+          <p
+            id="relatedParty-error"
+            className="mt-1.5 text-sm text-red-700"
+            role="alert"
+          >
             {errors.relatedParty}
           </p>
         )}
@@ -599,33 +658,76 @@ export function PartnerApplicationForm() {
           charity serving children in foster care, kinship care, or crisis.
         </p>
       </div>
-      <div className="grid gap-5 sm:grid-cols-3">
-        <Field
-          id="signerName"
-          label="Full name"
-          required
-          error={errors.signerName}
-          value={values.signerName}
-          onChange={(v) => update("signerName", v)}
-          autoComplete="name"
-        />
-        <Field
-          id="signerTitle"
-          label="Title"
-          required
-          error={errors.signerTitle}
-          value={values.signerTitle}
-          onChange={(v) => update("signerTitle", v)}
-        />
-        <Field
-          id="signerDate"
-          label="Date"
-          required
-          type="date"
-          error={errors.signerDate}
-          value={values.signerDate}
-          onChange={(v) => update("signerDate", v)}
-        />
+      <CheckboxRow
+        id="signerIsContact"
+        checked={signerIsContact}
+        onChange={(v) => {
+          setSignerIsContact(v);
+          clearError("signerName");
+          clearError("signerTitle");
+        }}
+      >
+        I am the authorized signer; use my contact name and title above as the
+        signature.
+      </CheckboxRow>
+      <div aria-live="polite">
+        {signerIsContact ? (
+          <div>
+            <p className="text-sm leading-relaxed text-ink/90">
+              Signing as:{" "}
+              <strong>
+                {values.contactName.trim() || "(your contact name above)"}
+              </strong>
+              {values.contactTitle.trim() ? `, ${values.contactTitle}` : ""}
+            </p>
+            {(errors.signerName || errors.signerTitle) && (
+              <p className="mt-1.5 text-sm text-red-700" role="alert">
+                Add your contact name and title above; they become the
+                signature.
+              </p>
+            )}
+            <div className="mt-3 sm:max-w-[33%]">
+              <Field
+                id="signerDate"
+                label="Date"
+                required
+                type="date"
+                error={errors.signerDate}
+                value={values.signerDate}
+                onChange={(v) => update("signerDate", v)}
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="grid gap-5 sm:grid-cols-3">
+            <Field
+              id="signerName"
+              label="Full name"
+              required
+              error={errors.signerName}
+              value={values.signerName}
+              onChange={(v) => update("signerName", v)}
+              autoComplete="name"
+            />
+            <Field
+              id="signerTitle"
+              label="Title"
+              required
+              error={errors.signerTitle}
+              value={values.signerTitle}
+              onChange={(v) => update("signerTitle", v)}
+            />
+            <Field
+              id="signerDate"
+              label="Date"
+              required
+              type="date"
+              error={errors.signerDate}
+              value={values.signerDate}
+              onChange={(v) => update("signerDate", v)}
+            />
+          </div>
+        )}
       </div>
 
       <TextArea

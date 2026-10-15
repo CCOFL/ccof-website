@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { savePartnerApplication } from "@/lib/forms";
 import {
   validatePartnerApplication,
+  normalizePartnerApplication,
   mayNamePublicly,
   type PartnerApplicationValues,
 } from "@/lib/partnerApplicationRules";
@@ -31,7 +32,8 @@ export async function POST(request: Request) {
   if (body.company) return NextResponse.json({ ok: true });
 
   // The same pure rules the client runs, so the two can never drift.
-  const v: PartnerApplicationValues = {
+  // normalize blanks unchosen-branch values so stale ones are never stored.
+  const v: PartnerApplicationValues = normalizePartnerApplication({
     orgLegalName: str(body.orgLegalName),
     ein: str(body.ein),
     fdacsStatus: str(body.fdacsStatus),
@@ -64,7 +66,7 @@ export async function POST(request: Request) {
     publicityPreference: str(body.publicityPreference),
     mediaContactName: str(body.mediaContactName),
     mediaContactEmail: str(body.mediaContactEmail),
-  };
+  });
 
   const errors = validatePartnerApplication(v);
   if (Object.keys(errors).length > 0) {

@@ -527,7 +527,7 @@ export async function savePartnerApplication(req: PartnerApplication) {
               ? "no"
               : "(NOT PROVIDED)"
         }`,
-        `IRS determination letter: ${req_(req.irsLetterUrl)}`,
+        `IRS determination letter: ${req.irsLetterUrl || "not provided (verify via EIN)"}`,
         `Signed: ${req_(req.signerName)}, ${req_(req.signerTitle)}, ${req_(req.signerDate)}`,
         `501(c)(3) attested: ${req.is501c3 ? "yes (typed signature)" : "NO"}`,
         `Vetting acknowledged: ${req.vettingAck ? "yes" : "NO (NOT PROVIDED)"}`,
