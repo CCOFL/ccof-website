@@ -1,42 +1,23 @@
 import { NextResponse } from "next/server";
 import { savePartnerApplication } from "@/lib/forms";
+import {
+  validatePartnerApplication,
+  mayNamePublicly,
+  type PartnerApplicationValues,
+} from "@/lib/partnerApplicationRules";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Body = {
-  orgLegalName?: string;
-  ein?: string;
-  fdacsReg?: string;
-  website?: string;
-  mission?: string;
-  counties?: string;
-  contactName?: string;
-  contactTitle?: string;
-  email?: string;
-  phone?: string;
-  is501c3?: boolean;
-  needs?: string;
-  volumeEstimate?: string;
-  vettingAck?: boolean;
-  message?: string;
-  publicityPreference?: string;
+type Body = Partial<Record<keyof PartnerApplicationValues, unknown>> & {
   logoUsePermitted?: boolean;
-  mediaContactName?: string;
-  mediaContactEmail?: string;
+  message?: string;
   // Honeypot — bots fill this; humans never see it.
   company?: string;
 };
 
-const PUBLICITY_PREFS = ["may_name", "may_name_with_review", "do_not_name"];
-
-function isEmail(v: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-}
-
-// EIN: 9 digits, with or without the XX-XXXXXXX hyphen.
-function isEin(v: string) {
-  return /^\d{2}-?\d{7}$/.test(v);
+function str(v: unknown) {
+  return typeof v === "string" ? v.trim() : "";
 }
 
 export async function POST(request: Request) {
@@ -49,78 +30,59 @@ export async function POST(request: Request) {
 
   if (body.company) return NextResponse.json({ ok: true });
 
-  const orgLegalName = (body.orgLegalName ?? "").trim();
-  const ein = (body.ein ?? "").trim();
-  const mission = (body.mission ?? "").trim();
-  const counties = (body.counties ?? "").trim();
-  const contactName = (body.contactName ?? "").trim();
-  const contactTitle = (body.contactTitle ?? "").trim();
-  const email = (body.email ?? "").trim();
-  const needs = (body.needs ?? "").trim();
+  // The same pure rules the client runs, so the two can never drift.
+  const v: PartnerApplicationValues = {
+    orgLegalName: str(body.orgLegalName),
+    ein: str(body.ein),
+    fdacsStatus: str(body.fdacsStatus),
+    fdacsReg: str(body.fdacsReg),
+    fdacsExemptionBasis: str(body.fdacsExemptionBasis),
+    sunbizDoc: str(body.sunbizDoc),
+    irsLetterUrl: str(body.irsLetterUrl),
+    website: str(body.website),
+    streetAddress: str(body.streetAddress),
+    city: str(body.city),
+    state: str(body.state),
+    zip: str(body.zip),
+    phone: str(body.phone),
+    mission: str(body.mission),
+    counties: str(body.counties),
+    referralSources: str(body.referralSources),
+    contactName: str(body.contactName),
+    contactTitle: str(body.contactTitle),
+    email: str(body.email),
+    needs: str(body.needs),
+    volumeEstimate: str(body.volumeEstimate),
+    goodsDirectAck: Boolean(body.goodsDirectAck),
+    childPrivacyAck: Boolean(body.childPrivacyAck),
+    relatedParty: str(body.relatedParty),
+    relatedPartyDetail: str(body.relatedPartyDetail),
+    signerName: str(body.signerName),
+    signerTitle: str(body.signerTitle),
+    signerDate: str(body.signerDate),
+    vettingAck: Boolean(body.vettingAck),
+    publicityPreference: str(body.publicityPreference),
+    mediaContactName: str(body.mediaContactName),
+    mediaContactEmail: str(body.mediaContactEmail),
+  };
 
-  // Publicity/media consent. Preference is required; naming permission makes
-  // the media contact required; do_not_name forces logo permission to false.
-  const publicityPreference = (body.publicityPreference ?? "").trim();
-  const mediaContactName = (body.mediaContactName ?? "").trim();
-  const mediaContactEmail = (body.mediaContactEmail ?? "").trim();
-  const mayName =
-    publicityPreference === "may_name" ||
-    publicityPreference === "may_name_with_review";
-  const logoUsePermitted = mayName ? Boolean(body.logoUsePermitted) : false;
-
-  if (
-    !PUBLICITY_PREFS.includes(publicityPreference) ||
-    (mayName &&
-      (!mediaContactName || !mediaContactEmail || !isEmail(mediaContactEmail))) ||
-    (!mayName && mediaContactEmail !== "" && !isEmail(mediaContactEmail))
-  ) {
-    return NextResponse.json(
-      { error: "Please complete the recognition and media section." },
-      { status: 400 },
-    );
-  }
-
-  if (
-    !orgLegalName ||
-    !ein ||
-    !mission ||
-    !counties ||
-    !contactName ||
-    !contactTitle ||
-    !email ||
-    !needs ||
-    !isEmail(email) ||
-    !isEin(ein) ||
-    !body.is501c3 ||
-    !body.vettingAck
-  ) {
+  const errors = validatePartnerApplication(v);
+  if (Object.keys(errors).length > 0) {
     return NextResponse.json(
       { error: "Please complete the required fields." },
       { status: 400 },
     );
   }
 
+  const mayName = mayNamePublicly(v.publicityPreference);
+
   try {
     await savePartnerApplication({
-      orgLegalName,
-      ein,
-      fdacsReg: (body.fdacsReg ?? "").trim(),
-      website: (body.website ?? "").trim(),
-      mission,
-      counties,
-      contactName,
-      contactTitle,
-      email,
-      phone: (body.phone ?? "").trim(),
+      ...v,
+      // The completed typed signature IS the 501(c)(3) attestation.
       is501c3: true,
-      needs,
-      volumeEstimate: (body.volumeEstimate ?? "").trim(),
-      vettingAck: true,
-      message: (body.message ?? "").trim(),
-      publicityPreference,
-      logoUsePermitted,
-      mediaContactName,
-      mediaContactEmail,
+      message: str(body.message),
+      logoUsePermitted: mayName ? Boolean(body.logoUsePermitted) : false,
     });
     return NextResponse.json({ ok: true });
   } catch (err) {

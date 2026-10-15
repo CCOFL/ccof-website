@@ -5,37 +5,21 @@ import { Button } from "./Button";
 import { ORG } from "@/lib/site";
 import { trackConversion } from "@/lib/analytics";
 import {
+  validatePartnerApplication,
+  mayNamePublicly,
+  FIELD_ORDER,
+  type PartnerApplicationValues,
+  type PartnerApplicationErrors,
+} from "@/lib/partnerApplicationRules";
+import {
   Honeypot,
   Field,
   TextArea,
   CheckboxRow,
   SuccessCard,
-  isValidEmail,
 } from "./FormKit";
 
-type Errors = Partial<
-  Record<
-    | "orgLegalName"
-    | "ein"
-    | "mission"
-    | "counties"
-    | "contactName"
-    | "contactTitle"
-    | "email"
-    | "needs"
-    | "is501c3"
-    | "vettingAck"
-    | "publicityPreference"
-    | "mediaContactName"
-    | "mediaContactEmail",
-    string
-  >
->;
 type Status = "idle" | "submitting" | "success" | "error";
-
-function isEin(v: string) {
-  return /^\d{2}-?\d{7}$/.test(v);
-}
 
 const PUBLICITY_OPTIONS = [
   {
@@ -54,89 +38,88 @@ const PUBLICITY_OPTIONS = [
   },
 ] as const;
 
+/** Keys whose rendered control carries a different DOM id than the key. */
+const FOCUS_IDS: Partial<Record<keyof PartnerApplicationValues, string>> = {
+  fdacsStatus: "fdacs-registered",
+  relatedParty: "relatedParty-yes",
+  publicityPreference: "publicity-may_name",
+  goodsDirectAck: "goodsDirectAck",
+  childPrivacyAck: "childPrivacyAck",
+  vettingAck: "vettingAck",
+};
+
 export function PartnerApplicationForm() {
   const [values, setValues] = useState({
     orgLegalName: "",
     ein: "",
+    fdacsStatus: "",
     fdacsReg: "",
+    fdacsExemptionBasis: "",
+    sunbizDoc: "",
+    irsLetterUrl: "",
     website: "",
+    streetAddress: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone: "",
     mission: "",
     counties: "",
+    referralSources: "",
     contactName: "",
     contactTitle: "",
     email: "",
-    phone: "",
     needs: "",
     volumeEstimate: "",
+    relatedParty: "",
+    relatedPartyDetail: "",
+    signerName: "",
+    signerTitle: "",
+    signerDate: "",
     message: "",
     mediaContactName: "",
     mediaContactEmail: "",
     company: "", // honeypot — kept empty by humans
   });
-  const [is501c3, setIs501c3] = useState(false);
+  const [goodsDirectAck, setGoodsDirectAck] = useState(false);
+  const [childPrivacyAck, setChildPrivacyAck] = useState(false);
   const [vettingAck, setVettingAck] = useState(false);
   const [publicityPreference, setPublicityPreference] = useState("");
   const [logoUsePermitted, setLogoUsePermitted] = useState(false);
-  const mayName =
-    publicityPreference === "may_name" ||
-    publicityPreference === "may_name_with_review";
-  const [errors, setErrors] = useState<Errors>({});
+  const mayName = mayNamePublicly(publicityPreference);
+  const [errors, setErrors] = useState<PartnerApplicationErrors>({});
   const [status, setStatus] = useState<Status>("idle");
 
-  function validate(): Errors {
-    const next: Errors = {};
-    if (!values.orgLegalName.trim())
-      next.orgLegalName = "Your organization's legal name.";
-    if (!values.ein.trim()) next.ein = "Your EIN helps us verify you.";
-    else if (!isEin(values.ein.trim()))
-      next.ein = "EIN format is XX-XXXXXXX (nine digits).";
-    if (!values.mission.trim())
-      next.mission = "A sentence or two about who you serve.";
-    if (!values.counties.trim())
-      next.counties = "Which Florida counties do you serve?";
-    if (!values.contactName.trim()) next.contactName = "A contact name.";
-    if (!values.contactTitle.trim())
-      next.contactTitle = "Your role at the organization.";
-    if (!values.email.trim()) next.email = "An email lets us reply.";
-    else if (!isValidEmail(values.email))
-      next.email = "That email doesn't look right.";
-    if (!values.needs.trim())
-      next.needs = "Tell us how goods would reach kids through your work.";
-    if (!is501c3)
-      next.is501c3 = "Partnership is for 501(c)(3) organizations.";
-    if (!vettingAck)
-      next.vettingAck = "Please acknowledge the verification step.";
-    if (!publicityPreference)
-      next.publicityPreference =
-        "Please choose how we may recognize your organization.";
-    if (mayName) {
-      if (!values.mediaContactName.trim())
-        next.mediaContactName = "Who should we reach about media materials?";
-      if (!values.mediaContactEmail.trim())
-        next.mediaContactEmail = "An email for media questions.";
-      else if (!isValidEmail(values.mediaContactEmail))
-        next.mediaContactEmail = "That email doesn't look right.";
-    } else if (
-      values.mediaContactEmail.trim() &&
-      !isValidEmail(values.mediaContactEmail)
-    ) {
-      next.mediaContactEmail = "That email doesn't look right.";
-    }
-    return next;
+  function fullValues(): PartnerApplicationValues {
+    return {
+      ...values,
+      goodsDirectAck,
+      childPrivacyAck,
+      vettingAck,
+      publicityPreference,
+    };
   }
 
   function update(field: keyof typeof values, value: string) {
     setValues((v) => ({ ...v, [field]: value }));
-    if (errors[field as keyof Errors]) {
+    if (errors[field as keyof PartnerApplicationErrors]) {
       setErrors((e) => ({ ...e, [field]: undefined }));
     }
   }
 
+  function clearError(field: keyof PartnerApplicationErrors) {
+    if (errors[field]) setErrors((e) => ({ ...e, [field]: undefined }));
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const found = validate();
+    const found = validatePartnerApplication(fullValues());
     setErrors(found);
-    if (Object.keys(found).length > 0) return;
+    if (Object.keys(found).length > 0) {
+      const first = FIELD_ORDER.find((k) => found[k]);
+      if (first) document.getElementById(FOCUS_IDS[first] ?? first)?.focus();
+      return;
+    }
 
     setStatus("submitting");
     try {
@@ -145,7 +128,8 @@ export function PartnerApplicationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
-          is501c3,
+          goodsDirectAck,
+          childPrivacyAck,
           vettingAck,
           publicityPreference,
           // do_not_name always submits logo permission as false.
@@ -176,7 +160,7 @@ export function PartnerApplicationForm() {
 
       <Field
         id="orgLegalName"
-        label="Organization legal name"
+        label="Legal name exactly as shown on your IRS determination letter"
         required
         error={errors.orgLegalName}
         value={values.orgLegalName}
@@ -192,14 +176,96 @@ export function PartnerApplicationForm() {
         onChange={(v) => update("ein", v)}
         placeholder="XX-XXXXXXX"
       />
+
+      {/* FDACS: registration number OR a claimed exemption; one is required. */}
+      <fieldset>
+        <legend className="mb-1.5 block text-sm font-medium text-ink">
+          Florida charitable registration (FDACS){" "}
+          <span className="text-coral-deep">*</span>
+        </legend>
+        <div className="space-y-2">
+          <label className="flex items-start gap-3 rounded-xl border border-line bg-cream px-4 py-3">
+            <input
+              id="fdacs-registered"
+              type="radio"
+              name="fdacsStatus"
+              value="registered"
+              checked={values.fdacsStatus === "registered"}
+              onChange={() => {
+                update("fdacsStatus", "registered");
+                clearError("fdacsExemptionBasis");
+              }}
+              className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
+            />
+            <span className="text-sm leading-relaxed text-ink/90">
+              We are registered with FDACS.
+            </span>
+          </label>
+          <label className="flex items-start gap-3 rounded-xl border border-line bg-cream px-4 py-3">
+            <input
+              id="fdacs-exempt"
+              type="radio"
+              name="fdacsStatus"
+              value="exempt"
+              checked={values.fdacsStatus === "exempt"}
+              onChange={() => {
+                update("fdacsStatus", "exempt");
+                clearError("fdacsReg");
+              }}
+              className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
+            />
+            <span className="text-sm leading-relaxed text-ink/90">
+              We claim an exemption from Florida charitable registration.
+            </span>
+          </label>
+        </div>
+        {errors.fdacsStatus && (
+          <p className="mt-1.5 text-sm text-red-700" role="alert">
+            {errors.fdacsStatus}
+          </p>
+        )}
+        <div aria-live="polite" className="mt-3 space-y-3">
+          {values.fdacsStatus === "registered" && (
+            <Field
+              id="fdacsReg"
+              label="FDACS registration number"
+              required
+              error={errors.fdacsReg}
+              value={values.fdacsReg}
+              onChange={(v) => update("fdacsReg", v)}
+              placeholder="CHxxxxx"
+            />
+          )}
+          {values.fdacsStatus === "exempt" && (
+            <TextArea
+              id="fdacsExemptionBasis"
+              label="Basis for the exemption"
+              required
+              error={errors.fdacsExemptionBasis}
+              rows={2}
+              value={values.fdacsExemptionBasis}
+              onChange={(v) => update("fdacsExemptionBasis", v)}
+            />
+          )}
+        </div>
+      </fieldset>
+
       <Field
-        id="fdacsReg"
-        label="Florida charitable registration # (FDACS)"
+        id="sunbizDoc"
+        label="Florida Sunbiz document number"
         optional
-        error={undefined}
-        value={values.fdacsReg}
-        onChange={(v) => update("fdacsReg", v)}
-        placeholder="CHxxxxx, if your organization solicits donations in Florida"
+        value={values.sunbizDoc}
+        onChange={(v) => update("sunbizDoc", v)}
+        hint="Helps us verify faster."
+      />
+      <Field
+        id="irsLetterUrl"
+        label="Link to your IRS determination letter"
+        required
+        error={errors.irsLetterUrl}
+        value={values.irsLetterUrl}
+        onChange={(v) => update("irsLetterUrl", v)}
+        hint="A shared link to your IRS determination letter is fine."
       />
       <Field
         id="website"
@@ -209,6 +275,56 @@ export function PartnerApplicationForm() {
         onChange={(v) => update("website", v)}
         placeholder="https://…"
       />
+
+      <Field
+        id="streetAddress"
+        label="Street address (physical or registered)"
+        required
+        error={errors.streetAddress}
+        value={values.streetAddress}
+        onChange={(v) => update("streetAddress", v)}
+        autoComplete="street-address"
+      />
+      <div className="grid gap-5 sm:grid-cols-3">
+        <Field
+          id="city"
+          label="City"
+          required
+          error={errors.city}
+          value={values.city}
+          onChange={(v) => update("city", v)}
+          autoComplete="address-level2"
+        />
+        <Field
+          id="state"
+          label="State"
+          required
+          error={errors.state}
+          value={values.state}
+          onChange={(v) => update("state", v)}
+          autoComplete="address-level1"
+        />
+        <Field
+          id="zip"
+          label="ZIP"
+          required
+          error={errors.zip}
+          value={values.zip}
+          onChange={(v) => update("zip", v)}
+          autoComplete="postal-code"
+        />
+      </div>
+      <Field
+        id="phone"
+        label="Phone"
+        required
+        type="tel"
+        error={errors.phone}
+        value={values.phone}
+        onChange={(v) => update("phone", v)}
+        autoComplete="tel"
+      />
+
       <TextArea
         id="mission"
         label="Mission & who you serve"
@@ -217,7 +333,6 @@ export function PartnerApplicationForm() {
         rows={3}
         value={values.mission}
         onChange={(v) => update("mission", v)}
-        placeholder="e.g. We support kinship families in Martin and St. Lucie counties with case management and emergency assistance."
       />
       <Field
         id="counties"
@@ -226,7 +341,15 @@ export function PartnerApplicationForm() {
         error={errors.counties}
         value={values.counties}
         onChange={(v) => update("counties", v)}
-        placeholder="e.g. Martin, St. Lucie"
+      />
+      <TextArea
+        id="referralSources"
+        label="How are children identified and referred to you? Which agencies or referral sources do you work with?"
+        required
+        error={errors.referralSources}
+        rows={3}
+        value={values.referralSources}
+        onChange={(v) => update("referralSources", v)}
       />
       <Field
         id="contactName"
@@ -244,7 +367,6 @@ export function PartnerApplicationForm() {
         error={errors.contactTitle}
         value={values.contactTitle}
         onChange={(v) => update("contactTitle", v)}
-        placeholder="e.g. Program Director"
       />
       <Field
         id="email"
@@ -255,15 +377,6 @@ export function PartnerApplicationForm() {
         value={values.email}
         onChange={(v) => update("email", v)}
         autoComplete="email"
-      />
-      <Field
-        id="phone"
-        label="Phone"
-        optional
-        type="tel"
-        value={values.phone}
-        onChange={(v) => update("phone", v)}
-        autoComplete="tel"
       />
       <TextArea
         id="needs"
@@ -307,6 +420,7 @@ export function PartnerApplicationForm() {
               className="flex items-start gap-3 rounded-xl border border-line bg-cream px-4 py-3"
             >
               <input
+                id={`publicity-${opt.value}`}
                 type="radio"
                 name="publicityPreference"
                 value={opt.value}
@@ -314,8 +428,7 @@ export function PartnerApplicationForm() {
                 onChange={() => {
                   setPublicityPreference(opt.value);
                   if (opt.value === "do_not_name") setLogoUsePermitted(false);
-                  if (errors.publicityPreference)
-                    setErrors((e) => ({ ...e, publicityPreference: undefined }));
+                  clearError("publicityPreference");
                 }}
                 className="mt-0.5 h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
               />
@@ -386,23 +499,37 @@ export function PartnerApplicationForm() {
         </p>
       </div>
 
+      {/* Working-standard acknowledgments (form-hardening brief, 2026-10-15). */}
       <CheckboxRow
-        checked={is501c3}
+        id="goodsDirectAck"
+        checked={goodsDirectAck}
         onChange={(v) => {
-          setIs501c3(v);
-          if (errors.is501c3) setErrors((e) => ({ ...e, is501c3: undefined }));
+          setGoodsDirectAck(v);
+          clearError("goodsDirectAck");
         }}
-        error={errors.is501c3}
+        error={errors.goodsDirectAck}
       >
-        Our organization is a registered <strong>501(c)(3)</strong> public
-        charity serving children in foster care, kinship care, or crisis.
+        Donated goods will be given to the children and families you serve
+        and will not be sold, traded, or exchanged.
       </CheckboxRow>
       <CheckboxRow
+        id="childPrivacyAck"
+        checked={childPrivacyAck}
+        onChange={(v) => {
+          setChildPrivacyAck(v);
+          clearError("childPrivacyAck");
+        }}
+        error={errors.childPrivacyAck}
+      >
+        We will not share a child&apos;s name or identifying details with CCOF;
+        ages and sizes are all that is needed.
+      </CheckboxRow>
+      <CheckboxRow
+        id="vettingAck"
         checked={vettingAck}
         onChange={(v) => {
           setVettingAck(v);
-          if (errors.vettingAck)
-            setErrors((e) => ({ ...e, vettingAck: undefined }));
+          clearError("vettingAck");
         }}
         error={errors.vettingAck}
       >
@@ -410,6 +537,96 @@ export function PartnerApplicationForm() {
         fulfilling requests, and that partnership doesn&apos;t guarantee
         specific goods; CCOF matches what the community has given.
       </CheckboxRow>
+
+      <fieldset>
+        <legend className="mb-1.5 block text-sm font-medium text-ink">
+          Is any officer, director, or staff member of your organization
+          related to, or financially connected with, an officer, director, or
+          staff member of The Children&apos;s Collective of Florida?{" "}
+          <span className="text-coral-deep">*</span>
+        </legend>
+        <div className="flex gap-3">
+          {(["yes", "no"] as const).map((opt) => (
+            <label
+              key={opt}
+              className="flex items-center gap-3 rounded-xl border border-line bg-cream px-4 py-3"
+            >
+              <input
+                id={`relatedParty-${opt}`}
+                type="radio"
+                name="relatedParty"
+                value={opt}
+                checked={values.relatedParty === opt}
+                onChange={() => {
+                  update("relatedParty", opt);
+                  if (opt === "no") clearError("relatedPartyDetail");
+                }}
+                className="h-5 w-5 shrink-0 border-line text-sage focus:ring-sage"
+              />
+              <span className="text-sm text-ink/90">
+                {opt === "yes" ? "Yes" : "No"}
+              </span>
+            </label>
+          ))}
+        </div>
+        {errors.relatedParty && (
+          <p className="mt-1.5 text-sm text-red-700" role="alert">
+            {errors.relatedParty}
+          </p>
+        )}
+        <div aria-live="polite" className="mt-3">
+          {values.relatedParty === "yes" && (
+            <TextArea
+              id="relatedPartyDetail"
+              label="Please describe the relationship"
+              required
+              error={errors.relatedPartyDetail}
+              rows={2}
+              value={values.relatedPartyDetail}
+              onChange={(v) => update("relatedPartyDetail", v)}
+            />
+          )}
+        </div>
+      </fieldset>
+
+      {/* Typed signature replaces the former 501(c)(3) checkbox; the
+          attestation text itself is unchanged. */}
+      <div className="border-t border-line pt-5">
+        <h3 className="text-base font-bold text-ink">Authorized signature</h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-ink/90">
+          Typing your name below acts as your signature attesting: our
+          organization is a registered <strong>501(c)(3)</strong> public
+          charity serving children in foster care, kinship care, or crisis.
+        </p>
+      </div>
+      <div className="grid gap-5 sm:grid-cols-3">
+        <Field
+          id="signerName"
+          label="Full name"
+          required
+          error={errors.signerName}
+          value={values.signerName}
+          onChange={(v) => update("signerName", v)}
+          autoComplete="name"
+        />
+        <Field
+          id="signerTitle"
+          label="Title"
+          required
+          error={errors.signerTitle}
+          value={values.signerTitle}
+          onChange={(v) => update("signerTitle", v)}
+        />
+        <Field
+          id="signerDate"
+          label="Date"
+          required
+          type="date"
+          error={errors.signerDate}
+          value={values.signerDate}
+          onChange={(v) => update("signerDate", v)}
+        />
+      </div>
 
       <TextArea
         id="message"

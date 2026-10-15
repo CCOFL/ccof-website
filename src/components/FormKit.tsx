@@ -40,6 +40,7 @@ export function Field({
   onChange,
   autoComplete,
   placeholder,
+  hint,
 }: {
   id: string;
   label: string;
@@ -51,6 +52,7 @@ export function Field({
   onChange: (v: string) => void;
   autoComplete?: string;
   placeholder?: string;
+  hint?: string;
 }) {
   return (
     <div>
@@ -69,12 +71,21 @@ export function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={error ? true : undefined}
-        aria-describedby={error ? `${id}-error` : undefined}
+        aria-describedby={
+          [error ? `${id}-error` : null, hint ? `${id}-hint` : null]
+            .filter(Boolean)
+            .join(" ") || undefined
+        }
         className="min-h-[44px] w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
       />
       {error && (
         <p id={`${id}-error`} className="mt-1.5 text-sm text-red-700" role="alert">
           {error}
+        </p>
+      )}
+      {hint && (
+        <p id={`${id}-hint`} className="mt-1.5 text-sm text-muted">
+          {hint}
         </p>
       )}
     </div>
