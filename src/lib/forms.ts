@@ -1,4 +1,5 @@
 import { getSupabase, isSupabaseConfigured } from "./supabase";
+import type { PartnerApplicationValues } from "./partnerApplicationRules";
 import { sendNotification, sendEmailTo, isEmailConfigured } from "./email";
 import { ORG, FDACS_DISCLOSURE, FL_REG_LINE, TAX_NOTE } from "./site";
 
@@ -407,28 +408,15 @@ export async function saveVolunteerSignup(req: VolunteerSignup) {
   return { stored };
 }
 
-export type PartnerApplication = {
-  orgLegalName: string;
-  ein: string;
-  fdacsReg?: string;
-  website?: string;
-  mission: string;
-  counties: string;
-  contactName: string;
-  contactTitle: string;
-  email: string;
-  phone?: string;
+/**
+ * Everything the hardened application collects (rules module shape), plus the
+ * fields the API derives: is501c3 (true once the typed signature is complete),
+ * the optional free-text message, and gated logo permission.
+ */
+export type PartnerApplication = PartnerApplicationValues & {
   is501c3: boolean;
-  needs: string;
-  volumeEstimate?: string;
-  vettingAck: boolean;
   message?: string;
-  // Publicity/media consent (migration 0008). Preference is one of
-  // may_name | may_name_with_review | do_not_name.
-  publicityPreference: string;
   logoUsePermitted: boolean;
-  mediaContactName?: string;
-  mediaContactEmail?: string;
 };
 
 const PUBLICITY_LABELS: Record<string, string> = {
@@ -443,7 +431,11 @@ export async function savePartnerApplication(req: PartnerApplication) {
 
   if (isSupabaseConfigured()) {
     const supabase = getSupabase();
-    const { error } = await supabase!.from("partner_applications").insert({
+    // Columns that existed before migration 0015. The insert retries with
+    // only these if 0015 has not run yet (PostgREST reports an unknown
+    // column), so the form never breaks while the migration is pending;
+    // the notification email below always carries every field regardless.
+    const baseRow = {
       org_legal_name: req.orgLegalName,
       ein: req.ein,
       fdacs_reg: req.fdacsReg || null,
@@ -463,7 +455,34 @@ export async function savePartnerApplication(req: PartnerApplication) {
       logo_use_permitted: req.logoUsePermitted,
       media_contact_name: req.mediaContactName || null,
       media_contact_email: req.mediaContactEmail || null,
-    });
+    };
+    const fullRow = {
+      ...baseRow,
+      fdacs_status: req.fdacsStatus || null,
+      fdacs_exemption_basis: req.fdacsExemptionBasis || null,
+      sunbiz_doc: req.sunbizDoc || null,
+      street_address: req.streetAddress || null,
+      city: req.city || null,
+      state: req.state || null,
+      zip: req.zip || null,
+      referral_sources: req.referralSources || null,
+      goods_direct_ack: req.goodsDirectAck,
+      child_privacy_ack: req.childPrivacyAck,
+      related_party: req.relatedParty === "yes",
+      related_party_detail: req.relatedPartyDetail || null,
+      irs_letter_url: req.irsLetterUrl || null,
+      signer_name: req.signerName || null,
+      signer_title: req.signerTitle || null,
+      signer_date: req.signerDate || null,
+    };
+    let { error } = await supabase!
+      .from("partner_applications")
+      .insert(fullRow);
+    if (error && /column|schema cache/i.test(error.message)) {
+      ({ error } = await supabase!
+        .from("partner_applications")
+        .insert(baseRow));
+    }
     if (error && !isMissingTable(error)) {
       throw new Error(`Supabase insert failed: ${error.message}`);
     }
@@ -471,22 +490,47 @@ export async function savePartnerApplication(req: PartnerApplication) {
   }
 
   if (isEmailConfigured()) {
+    // Field order fixed by the form-hardening brief (2026-10-15). Required
+    // values the route validated print as given; a gap that slips through a
+    // degrade path is flagged loudly, never hidden.
+    const req_ = (v: string) => v || "(NOT PROVIDED)";
+    const opt = (v: string | undefined) => v || "(not provided)";
+    const fdacsLine =
+      req.fdacsStatus === "exempt"
+        ? `Exemption claimed: ${req_(req.fdacsExemptionBasis)}`
+        : req_(req.fdacsReg);
     await sendNotification({
       subject: `Partnership APPLICATION · ${req.orgLegalName}`,
       replyTo: req.email,
       text: [
         `New 501(c)(3) partnership application`,
-        `Organization: ${req.orgLegalName}`,
-        `EIN: ${req.ein}`,
-        `FDACS reg: ${req.fdacsReg || "(not provided)"}`,
-        `Website: ${req.website || "(not provided)"}`,
-        `Counties served: ${req.counties}`,
-        `Contact: ${req.contactName} (${req.contactTitle})`,
-        `Email: ${req.email}`,
-        `Phone: ${req.phone || "(not provided)"}`,
-        `501(c)(3) attested: ${req.is501c3 ? "yes" : "no / not confirmed"}`,
-        `Vetting acknowledged: ${req.vettingAck ? "yes" : "no"}`,
-        `Volume estimate: ${req.volumeEstimate || "(not provided)"}`,
+        `Organization legal name: ${req_(req.orgLegalName)}`,
+        `EIN: ${req_(req.ein)}`,
+        `FDACS reg: ${fdacsLine}`,
+        `Sunbiz #: ${opt(req.sunbizDoc)}`,
+        `Address: ${req_(req.streetAddress)}, ${req_(req.city)}, ${req_(req.state)} ${req_(req.zip)}`,
+        `Phone: ${req_(req.phone)}`,
+        `Website: ${opt(req.website)}`,
+        `Counties served: ${req_(req.counties)}`,
+        `Contact: ${req_(req.contactName)} (${req_(req.contactTitle)})`,
+        `Email: ${req_(req.email)}`,
+        ``,
+        `Referral sources: ${req_(req.referralSources)}`,
+        ``,
+        `Volume estimate: ${opt(req.volumeEstimate)}`,
+        `Goods given to children/families, never sold/traded/exchanged: ${req.goodsDirectAck ? "yes" : "NO (NOT PROVIDED)"}`,
+        `Child privacy (ages and sizes only): ${req.childPrivacyAck ? "yes" : "NO (NOT PROVIDED)"}`,
+        `Related party: ${
+          req.relatedParty === "yes"
+            ? `YES: ${req_(req.relatedPartyDetail)}`
+            : req.relatedParty === "no"
+              ? "no"
+              : "(NOT PROVIDED)"
+        }`,
+        `IRS determination letter: ${req.irsLetterUrl || "not provided (verify via EIN)"}`,
+        `Signed: ${req_(req.signerName)}, ${req_(req.signerTitle)}, ${req_(req.signerDate)}`,
+        `501(c)(3) attested: ${req.is501c3 ? "yes (typed signature)" : "NO"}`,
+        `Vetting acknowledged: ${req.vettingAck ? "yes" : "NO (NOT PROVIDED)"}`,
         ``,
         `Publicity: ${PUBLICITY_LABELS[req.publicityPreference] || req.publicityPreference}`,
         `Logo use permitted: ${req.logoUsePermitted ? "yes" : "no"}`,
@@ -496,9 +540,9 @@ export async function savePartnerApplication(req: PartnerApplication) {
             : "(not provided)"
         }`,
         ``,
-        `Mission & population: ${req.mission}`,
+        `Mission & population: ${req_(req.mission)}`,
         ``,
-        `Needs: ${req.needs}`,
+        `Needs: ${req_(req.needs)}`,
         ``,
         req.message || "(no additional message)",
       ].join("\n"),

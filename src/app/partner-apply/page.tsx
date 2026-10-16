@@ -4,6 +4,14 @@ import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { PartnerApplicationForm } from "@/components/PartnerApplicationForm";
 
+/**
+ * Review-process line (form-hardening brief, 2026-10-15): one constant so it
+ * is easy to edit. Onboarding is OPEN; never describe it as paused or closed,
+ * and never state a response timeframe here.
+ */
+const PROCESS_LINE =
+  "Every application is reviewed and verified before a partnership begins. We will be in touch to request any additional information and to talk through next steps.";
+
 export const metadata: Metadata = {
   title: "Apply to Become a Partner Nonprofit",
   description:
@@ -21,6 +29,9 @@ export default function PartnerApplyPage() {
       />
       <Section background="white">
         <div className="mx-auto max-w-3xl">
+          <p className="measure mx-auto mb-8 text-center text-base leading-relaxed text-ink/80">
+            {PROCESS_LINE}
+          </p>
           <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
             <PartnerApplicationForm />
           </div>
@@ -31,7 +42,7 @@ export default function PartnerApplyPage() {
               href="/partner-nonprofits"
               className="text-sage-600 underline-offset-4 hover:underline"
             >
-              submit a goods request
+              Submit a goods request
             </Link>{" "}
             and we&apos;ll verify as we go.
           </p>

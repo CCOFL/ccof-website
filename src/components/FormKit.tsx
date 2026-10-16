@@ -40,6 +40,7 @@ export function Field({
   onChange,
   autoComplete,
   placeholder,
+  hint,
 }: {
   id: string;
   label: string;
@@ -51,6 +52,7 @@ export function Field({
   onChange: (v: string) => void;
   autoComplete?: string;
   placeholder?: string;
+  hint?: string;
 }) {
   return (
     <div>
@@ -69,12 +71,21 @@ export function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={error ? true : undefined}
-        aria-describedby={error ? `${id}-error` : undefined}
+        aria-describedby={
+          [error ? `${id}-error` : null, hint ? `${id}-hint` : null]
+            .filter(Boolean)
+            .join(" ") || undefined
+        }
         className="min-h-[44px] w-full rounded-xl border border-line bg-cream px-4 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
       />
       {error && (
         <p id={`${id}-error`} className="mt-1.5 text-sm text-red-700" role="alert">
           {error}
+        </p>
+      )}
+      {hint && (
+        <p id={`${id}-hint`} className="mt-1.5 text-sm text-muted">
+          {hint}
         </p>
       )}
     </div>
@@ -173,6 +184,7 @@ export function CheckboxRow({
   error,
   id,
   disabled,
+  required,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
@@ -180,6 +192,7 @@ export function CheckboxRow({
   error?: string;
   id?: string;
   disabled?: boolean;
+  required?: boolean;
 }) {
   return (
     <div>
@@ -195,12 +208,20 @@ export function CheckboxRow({
           disabled={disabled}
           onChange={(e) => onChange(e.target.checked)}
           aria-invalid={error ? true : undefined}
+          aria-describedby={error && id ? `${id}-error` : undefined}
           className="mt-0.5 h-5 w-5 shrink-0 rounded border-line text-sage focus:ring-sage"
         />
-        <span className="text-sm leading-relaxed text-ink/90">{children}</span>
+        <span className="text-sm leading-relaxed text-ink/90">
+          {children}
+          {required && <span className="text-coral-deep"> *</span>}
+        </span>
       </label>
       {error && (
-        <p className="mt-1.5 text-sm text-red-700" role="alert">
+        <p
+          id={id ? `${id}-error` : undefined}
+          className="mt-1.5 text-sm text-red-700"
+          role="alert"
+        >
           {error}
         </p>
       )}
