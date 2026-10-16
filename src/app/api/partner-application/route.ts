@@ -64,8 +64,6 @@ export async function POST(request: Request) {
     signerDate: str(body.signerDate),
     vettingAck: Boolean(body.vettingAck),
     publicityPreference: str(body.publicityPreference),
-    mediaContactName: str(body.mediaContactName),
-    mediaContactEmail: str(body.mediaContactEmail),
   });
 
   const errors = validatePartnerApplication(v);

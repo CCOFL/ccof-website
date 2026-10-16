@@ -49,8 +49,6 @@ function makeValid(): PartnerApplicationValues {
     signerDate: "2026-10-15",
     vettingAck: true,
     publicityPreference: "do_not_name",
-    mediaContactName: "",
-    mediaContactEmail: "",
   };
 }
 
@@ -172,22 +170,16 @@ test("normalize blanks values from unchosen branches", () => {
     relatedParty: "no",
     relatedPartyDetail: "stale text",
     publicityPreference: "do_not_name",
-    mediaContactName: "Stale Person",
-    mediaContactEmail: "not-an-email",
   });
   assert.equal(n.fdacsReg, "");
   assert.equal(n.fdacsExemptionBasis, "Religious institution.");
   assert.equal(n.relatedPartyDetail, "");
-  assert.equal(n.mediaContactName, "");
-  assert.equal(n.mediaContactEmail, "");
   assert.deepEqual(validatePartnerApplication(n), {});
 });
 
-test("naming permission makes the media contact required", () => {
+test("naming permission needs no separate media contact (signer approves)", () => {
   const v = { ...makeValid(), publicityPreference: "may_name" };
-  const e = validatePartnerApplication(v);
-  assert.ok(e.mediaContactName);
-  assert.ok(e.mediaContactEmail);
+  assert.deepEqual(validatePartnerApplication(v), {});
 });
 
 test("format helpers", () => {

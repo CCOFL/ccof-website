@@ -76,8 +76,6 @@ export function PartnerApplicationForm() {
     signerTitle: "",
     signerDate: "",
     message: "",
-    mediaContactName: "",
-    mediaContactEmail: "",
     company: "", // honeypot, kept empty by humans
   });
   const [signerIsContact, setSignerIsContact] = useState(false);
@@ -465,10 +463,6 @@ export function PartnerApplicationForm() {
                   setPublicityPreference(opt.value);
                   if (opt.value === "do_not_name") setLogoUsePermitted(false);
                   clearError("publicityPreference");
-                  // A media value typed under a naming option is dropped by
-                  // normalize when naming is off; clear its stale error too.
-                  clearError("mediaContactName");
-                  clearError("mediaContactEmail");
                 }}
                 aria-describedby={
                   errors.publicityPreference
@@ -504,32 +498,6 @@ export function PartnerApplicationForm() {
       >
         You may also use our organization&apos;s logo in those materials.
       </CheckboxRow>
-
-      <div aria-live="polite" className="space-y-5">
-        {mayName && (
-          <>
-            <Field
-              id="mediaContactName"
-              label="Media contact name"
-              required
-              error={errors.mediaContactName}
-              value={values.mediaContactName}
-              onChange={(v) => update("mediaContactName", v)}
-              autoComplete="name"
-            />
-            <Field
-              id="mediaContactEmail"
-              label="Media contact email"
-              type="email"
-              required
-              error={errors.mediaContactEmail}
-              value={values.mediaContactEmail}
-              onChange={(v) => update("mediaContactEmail", v)}
-              autoComplete="email"
-            />
-          </>
-        )}
-      </div>
 
       <div className="space-y-3 rounded-xl border border-line bg-cream p-4 text-sm leading-relaxed text-muted">
         <p>

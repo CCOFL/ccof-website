@@ -42,8 +42,6 @@ export type PartnerApplicationValues = {
   signerDate: string;
   vettingAck: boolean;
   publicityPreference: string;
-  mediaContactName: string;
-  mediaContactEmail: string;
 };
 
 export type PartnerApplicationErrors = Partial<
@@ -103,14 +101,11 @@ export function isIsoDate(v: string) {
 export function normalizePartnerApplication(
   v: PartnerApplicationValues,
 ): PartnerApplicationValues {
-  const mayName = mayNamePublicly(v.publicityPreference);
   return {
     ...v,
     fdacsReg: v.fdacsStatus === "registered" ? v.fdacsReg : "",
     fdacsExemptionBasis: v.fdacsStatus === "exempt" ? v.fdacsExemptionBasis : "",
     relatedPartyDetail: v.relatedParty === "yes" ? v.relatedPartyDetail : "",
-    mediaContactName: mayName ? v.mediaContactName : "",
-    mediaContactEmail: mayName ? v.mediaContactEmail : "",
   };
 }
 
@@ -143,8 +138,6 @@ export const FIELD_ORDER: (keyof PartnerApplicationValues)[] = [
   "needs",
   "volumeEstimate",
   "publicityPreference",
-  "mediaContactName",
-  "mediaContactEmail",
   "goodsDirectAck",
   "childPrivacyAck",
   "vettingAck",
@@ -217,18 +210,11 @@ export function validatePartnerApplication(
     e.signerDate = "Date format is YYYY-MM-DD.";
   if (!v.vettingAck) e.vettingAck = "Please acknowledge the verification step.";
 
+  // Media approvals go through the authorized signer (founder ruling
+  // 2026-10-16): no separate media contact is collected.
   if (!PUBLICITY_PREFS.includes(v.publicityPreference)) {
     e.publicityPreference =
       "Please choose how we may recognize your organization.";
-  } else if (mayNamePublicly(v.publicityPreference)) {
-    if (!v.mediaContactName.trim())
-      e.mediaContactName = "Who should we reach about media materials?";
-    if (!v.mediaContactEmail.trim())
-      e.mediaContactEmail = "An email for media questions.";
-    else if (!isValidEmail(v.mediaContactEmail))
-      e.mediaContactEmail = "That email doesn't look right.";
-  } else if (v.mediaContactEmail.trim() && !isValidEmail(v.mediaContactEmail)) {
-    e.mediaContactEmail = "That email doesn't look right.";
   }
 
   return e;

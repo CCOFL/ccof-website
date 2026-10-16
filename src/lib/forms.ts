@@ -453,8 +453,8 @@ export async function savePartnerApplication(req: PartnerApplication) {
       message: req.message || null,
       publicity_preference: req.publicityPreference,
       logo_use_permitted: req.logoUsePermitted,
-      media_contact_name: req.mediaContactName || null,
-      media_contact_email: req.mediaContactEmail || null,
+      // Media approvals go through the authorized signer (founder ruling
+      // 2026-10-16); the 0008 media_contact columns stay for legacy rows.
     };
     const fullRow = {
       ...baseRow,
@@ -534,11 +534,7 @@ export async function savePartnerApplication(req: PartnerApplication) {
         ``,
         `Publicity: ${PUBLICITY_LABELS[req.publicityPreference] || req.publicityPreference}`,
         `Logo use permitted: ${req.logoUsePermitted ? "yes" : "no"}`,
-        `Media contact: ${
-          req.mediaContactName || req.mediaContactEmail
-            ? `${req.mediaContactName || "(no name)"} <${req.mediaContactEmail || "(no email)"}>`
-            : "(not provided)"
-        }`,
+        `Media approvals: the authorized signer (see Signed line)`,
         ``,
         `Mission & population: ${req_(req.mission)}`,
         ``,
