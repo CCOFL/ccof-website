@@ -48,7 +48,7 @@ export const newsletterEditions: NewsletterEdition[] = [
     // Founder ruling 2026-10-18: the kinship example stays general (no
     // child count, relative broadened) so no real family is identifiable.
     opening:
-      "That is why we exist. A grandparent or a family member gets a call that children will be at their door by nightfall. A mother is due this week and has nowhere to put the car seat she does not have. A teenager arrives at a shelter with what fits in a bag. A child arrives at a new foster home, and the family's budget was already stretched before the knock on the door. Love is there. Stability is being rebuilt. What is missing is the basics, and the dignity of having something of your own. That is something a community can supply.",
+      "That is why we exist. A grandparent or a family member gets a call that children will be at their door by nightfall. A mother is due this week and has no car seat and no stroller. A teenager arrives at a shelter with what fits in a bag. A child arrives at a new foster home, and the family's budget was already stretched before the knock on the door. Love is there. Stability is being rebuilt. What is missing is the basics, and the dignity of having something of your own. That is something a community can supply.",
     whoWeAre:
       "We are The Children's Collective of Florida, a 501(c)(3) public charity of Martin County, led by a founding board of five women who show up.",
     whatWeDo:
