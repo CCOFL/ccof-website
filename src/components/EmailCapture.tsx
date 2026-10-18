@@ -6,7 +6,7 @@ import { trackConversion } from "@/lib/analytics";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-/** "Follow our launch" email capture for visitors not ready to give (brief §5). */
+/** "Follow our progress" email capture for visitors not ready to give (brief §5; reframed 2026-10-17 once the monthly letter existed). */
 export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
@@ -25,7 +25,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
       if (!res.ok) throw new Error("Request failed");
       setStatus("success");
       trackConversion("sign_up");
-      setMessage("You're on the list. We'll share launch news soon.");
+      setMessage("You're on the list. The next monthly letter will find you.");
       setEmail("");
     } catch {
       setStatus("error");
@@ -85,7 +85,7 @@ export function EmailCapture({ onDark = false }: { onDark?: boolean }) {
           className="min-h-[44px] flex-1 rounded-full border border-line bg-cream px-5 py-2.5 text-ink placeholder:text-muted/60 focus:border-sage focus:outline-none"
         />
         <Button type="submit" disabled={status === "submitting"}>
-          {status === "submitting" ? "Joining…" : "Follow our launch"}
+          {status === "submitting" ? "Joining…" : "Follow our progress"}
         </Button>
       </div>
       {status === "error" && (

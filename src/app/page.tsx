@@ -241,14 +241,22 @@ export default async function Home() {
             <SectionHeading
               onDark
               eyebrow="Stay close"
-              title="Follow our launch."
-              intro="Be the first to know when Collective Kids Closet opens its doors in Martin County."
+              title="Follow our progress."
+              intro="Our monthly letter shares what the community gave, where it went, and what comes next. You'll also be the first to know when the Collective Kids Closet opens its doors in Martin County in 2027."
             />
             <div className="mt-7">
               <EmailCapture onDark />
             </div>
             <p className="mt-4 text-sm text-cream/70">
-              Volunteer service is in development. Follow our launch to hear
+              <Link
+                href="/newsletter"
+                className="font-semibold text-cream/90 underline-offset-4 hover:underline"
+              >
+                Read the latest letter &rarr;
+              </Link>
+            </p>
+            <p className="mt-2 text-sm text-cream/70">
+              Volunteer service is in development. Follow our progress to hear
               when it opens.
             </p>
           </div>
