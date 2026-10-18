@@ -63,7 +63,10 @@ export const newsletterEditions: NewsletterEdition[] = [
     letterParagraphs: [
       "Dear friends,",
       "September is the month everything we had been building went into action. The trust you placed in us, as board members, as partners, as hosts and as neighbors, turned into clothes in a child's exact size, packed into a bag they could call their own.",
-      "I am writing to say thank you, and to show you what your generosity did. The numbers are the honest record. They are small because we are new, and every one of them was weighed, counted and signed for. What the numbers cannot hold is what it felt like to hand grandparents five duffel bags the day after their lives changed. You did that.",
+      // Founder ruling 2026-10-18 (second pass): her letter's delivery
+      // moment is generalized the same way as the opening, no count, no
+      // specific relative, no case timing.
+      "I am writing to say thank you, and to show you what your generosity did. The numbers are the honest record. They are small because we are new, and every one of them was weighed, counted and signed for. What the numbers cannot hold is what it felt like to hand a family duffel bags, packed one for each child arriving in their care. You did that.",
       "God's work is underway here, and it is a welcome stewardship. We are grateful, we are only getting started, and we are so glad you are part of it.",
     ],
     letterSignoffName: "Stephanie Haskins",
