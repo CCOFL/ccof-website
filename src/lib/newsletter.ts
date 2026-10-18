@@ -19,7 +19,12 @@ export type NewsletterEdition = {
   whoWeAre: string;
   whatWeDo: string;
   howWeDoIt: string;
-  letterHeading: string;
+  /**
+   * Optional heading above the letter. Founder ruling 2026-10-18: the
+   * September edition carries none; the letter is the Collective's, not
+   * hers, and her typed signature is the attribution.
+   */
+  letterHeading?: string;
   letterParagraphs: string[];
   letterSignoffName: string;
   letterSignoffTitle: string;
@@ -59,7 +64,6 @@ export const newsletterEditions: NewsletterEdition[] = [
     // vocabulary (quality-warranty ruling: no process verbs in site copy).
     howWeDoIt:
       "We work closely with the nonprofit organizations already caring for those children, and we do more than answer the phone. We walk their shelters, sit with their teams, and learn what their children need to thrive. Then we work behind the scenes to stock their supply rooms with necessities and a few smiles, so the goods are there before the need arrives. Our community fills the bins. We hold everything to one standard, pack by exact size, and deliver. Every transfer is recorded in writing and signed by both organizations. They call. We supply.",
-    letterHeading: "A letter from Stephanie",
     letterParagraphs: [
       "Dear friends,",
       "September is the month everything we had been building went into action. The trust you placed in us, as board members, as partners, as hosts and as neighbors, turned into clothes in a child's exact size, packed into a bag they could call their own.",

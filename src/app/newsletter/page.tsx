@@ -64,10 +64,14 @@ export default function NewsletterPage() {
               </div>
             </div>
 
-            <h3 className="mt-14 text-2xl font-bold text-sage-600">
-              {ed.letterHeading}
-            </h3>
-            <div className="measure mt-4 space-y-4 text-base leading-relaxed text-body">
+            {ed.letterHeading && (
+              <h3 className="mt-14 text-2xl font-bold text-sage-600">
+                {ed.letterHeading}
+              </h3>
+            )}
+            <div
+              className={`measure ${ed.letterHeading ? "mt-4" : "mt-14"} space-y-4 text-base leading-relaxed text-body`}
+            >
               {ed.letterParagraphs.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>
               ))}
