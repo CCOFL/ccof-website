@@ -103,10 +103,13 @@ export default function PartnerPage() {
 
       <Section background="sage">
         <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
+          {/* "Could your program receive grant funding?" retired 2026-10-20:
+              no public grant language until the storefront launches. The
+              public offer is supply: they call, we supply. */}
           <SectionHeading
             onDark
             eyebrow="Local 501(c)(3) organizations"
-            title="Could your program receive grant funding?"
+            title="Could we supply your program?"
             intro="If you run a program serving children in foster care, kinship homes, or crisis on the Treasure Coast, we'd like to hear from you."
           />
           <div className="shrink-0">

@@ -78,7 +78,11 @@ export const FOUNDER_QUOTE = {
   // certifies no outcome (insurance binding condition; see the quality-
   // warranty ticket of 2026-08-24). Do not reintroduce process verbs
   // (inspected/cleaned/checked) here or anywhere on the site.
-  text: "If I wouldn't give it to my child, or the children closest to my heart, we won't pass it along. The proceeds are reinvested right here in our community, supporting local children in foster care, kinship homes, crisis, and mentoring. We'll show you exactly where it goes.",
+  // Middle sentence realigned 2026-10-20 (founder): present-tense goods per
+  // the locked partner definition (foster, kinship, crisis). The June-2026
+  // "proceeds ... and mentoring" framing predates the Sept-4 architecture;
+  // proceeds language belongs with the Closet, future tense, only.
+  text: "If I wouldn't give it to my child, or the children closest to my heart, we won't pass it along. What the community gives goes to the organizations already caring for local children in foster care, kinship care, or crisis. We'll show you exactly where it goes.",
   name: "Stephanie Haskins",
   title: "Founder & President",
 } as const;
@@ -94,8 +98,12 @@ export const FOUNDER = {
     "Guided by her Christian faith and a heart for children, Stephanie has spent years supporting organizations focused on foster care, family support, youth development, and community outreach. After becoming a mother to her daughter, Summer, she became even more aware of how quickly children outgrow clothing, toys, and essentials, and how many families could benefit from those same resources.",
     "That realization inspired the creation of The Children's Collective of Florida and its first program, The Collective Kids Closet. Stephanie's vision is to create a clear, trusted place where families can donate gently used children's items, shop affordable quality goods, and support programs serving children throughout Florida.",
   ],
+  // Realigned 2026-10-20 with FOUNDER_QUOTE (one promise, two lengths):
+  // Closet proceeds go future tense with the Martin County + 2027 anchor, and
+  // the circumstances are the locked three (foster, kinship, crisis). Not
+  // rendered anywhere yet; this is the paste-ready master.
   promisePrimary:
-    "I started The Children's Collective of Florida as a mother, not an institution. So let me make you a promise you can hold me to. If I wouldn't give it to my child, or the children closest to my heart, we won't pass it along, and nothing that reaches a Treasure Coast family will be disposable surplus. The proceeds from The Collective Kids Closet are reinvested in our community, supporting local programs that serve children in foster care, crisis, and mentoring. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
+    "I started The Children's Collective of Florida as a mother, not an institution. So let me make you a promise you can hold me to. If I wouldn't give it to my child, or the children closest to my heart, we won't pass it along, and nothing that reaches a Treasure Coast family will be disposable surplus. When The Collective Kids Closet opens in Martin County in 2027, its proceeds will be reinvested in our community, supporting the organizations already caring for local children in foster care, kinship care, or crisis. And we will show you where it goes. We're starting small, on purpose, because trust is built one honored donation and one well-served family at a time.",
 } as const;
 
 /**
@@ -239,8 +247,11 @@ export const WHY_THIS_MATTERS = {
       label: "of children in care placed in group homes, nearly double the state rate",
     },
   ],
+  // "and grant funding" removed 2026-10-20: the corrected partner definition
+  // is goods only (donations are never re-granted as cash), and grant
+  // language stays out of public copy until the storefront launches.
   closing:
-    "No single organization can meet all of this alone. The Children's Collective of Florida strengthens the local network already doing the work: goods and grant funding contributed directly to our 501(c)(3) partners, and the Collective Kids Closet, our storefront program coming to Martin County in 2027.",
+    "No single organization can meet all of this alone. The Children's Collective of Florida strengthens the local network already doing the work: goods contributed directly to our 501(c)(3) partners, and the Collective Kids Closet, our storefront program coming to Martin County in 2027.",
 } as const;
 
 /**
@@ -651,7 +662,9 @@ export const PARTNER_ACTIONS: {
     // nonprofit" everywhere; "partner program" is retired. Never pluralize
     // as "501(c)(3)s": write "501(c)(3) organizations".
     title: "Become a Partner Nonprofit",
-    body: "For 501(c)(3) organizations serving children in foster care, kinship care, or crisis: receive grant funding, or request goods for a child in your care.",
+    // "receive grant funding, or" removed 2026-10-20: grants stay internal
+    // until the storefront launches; the public offer is goods.
+    body: "For 501(c)(3) organizations serving children in foster care, kinship care, or crisis: request goods for a child in your care.",
     // Routes to the dedicated application (EIN, mission, consent capture),
     // not the generic contact form (routing fix, 9/3). /contact keeps its own
     // partner intent option for anyone who prefers to just write in.
@@ -689,9 +702,12 @@ export const PARTNER_ACTIONS: {
  * chain-of-custody ruling and the no-bare-acronym rule). "Directly" attaches
  * ONLY to the partner organization, never to children. Neither definition
  * implies the two roles are exclusive: an organization can be both.
+ * 2026-10-20: "and grant funding" removed per the corrected partner
+ * definition in the program architecture; donations are never re-granted as
+ * cash, and grant language stays internal until the storefront launches.
  */
 export const PARTNER_NONPROFIT_DEFINITION =
-  "Partner nonprofits are the vetted 501(c)(3) organizations already caring for children in foster care, kinship care, or crisis. The Children's Collective of Florida contributes goods and grant funding directly to them, so what the community gives reaches the children who need it most.";
+  "Partner nonprofits are the vetted 501(c)(3) organizations already caring for children in foster care, kinship care, or crisis. The Children's Collective of Florida contributes donated goods directly to them, so what the community gives reaches the children who need it most.";
 
 export const COMMUNITY_PARTNER_DEFINITION =
   "Community Partners are the businesses, schools, and congregations who host a donation bin or drive, collecting the community's generosity for The Children's Collective of Florida to steward and put to work for local kids.";

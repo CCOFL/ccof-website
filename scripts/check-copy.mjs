@@ -89,6 +89,10 @@ const BANNED = [
     re: /—/,
     why: "no em dashes anywhere on the site (PR #77); use commas, colons, or restructure",
   },
+  {
+    re: /\bgrant(s|making|\s+funding|\s+program)?\b/i,
+    why: "program 3 stays internal until the storefront launches: no public grant language (architecture 2026-09-04; sweep 2026-10-20)",
+  },
 ];
 
 function walk(dir, out = []) {

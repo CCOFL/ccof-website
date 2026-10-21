@@ -86,16 +86,11 @@ export default async function Home() {
                   Too much to carry? We pick up →
                 </Link>
               </p>
-              <p className="measure mt-10 border-t border-line pt-6 text-sm leading-relaxed text-muted">
-                <strong className="font-semibold text-ink">
-                  The {ORG.storefrontProgram}
-                </strong>
-                , our nonprofit storefront program, opens in {ORG.storefrontCity} in{" "}
-                {ORG.storefrontLaunch}. The items you donate today go to work
-                now: goods received are prioritized for our 501(c)(3) partner
-                organizations meeting a child&apos;s need, and the rest will
-                fill the Closet.
-              </p>
+              {/* No Closet paragraph in the hero (founder ruling 2026-10-20):
+                  the hero stays mission + ask. The giving cycle below carries
+                  the storefront anchor and the donate-today expectation, so a
+                  hero mention would introduce the storefront only to caveat
+                  it, and would repeat the cycle's own steps. */}
             </div>
 
             <Reveal>
@@ -133,7 +128,7 @@ export default async function Home() {
         <SectionHeading
           eyebrow="The model"
           title="The giving cycle"
-          intro="Our community's generosity funds local programs, and the proceeds cycle right back to the neighbors who gave."
+          intro="Our community's generosity fuels the Children's Collective Supply, and what you give cycles right back to local children through the organizations caring for them."
         />
         <div className="mt-12">
           <GivingCycle />
@@ -265,7 +260,8 @@ export default async function Home() {
               Right now, the fastest way to help is to meet a local need.
               Donate the quality kids&apos; items your family has outgrown.
               Goods received are prioritized for our 501(c)(3) partner
-              organizations, and the rest will fill the {ORG.storefrontProgram}.
+              organizations, and the rest will fill the {ORG.storefrontProgram},
+              opening in {ORG.storefrontCity} in {ORG.storefrontLaunch}.
             </p>
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <LinkButton href="/give-goods" size="lg" variant="inverse">
