@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
+import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
-import { PartnerRequestForm } from "@/components/PartnerRequestForm";
 import { PARTNER_REQUESTS, ORG } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -99,14 +99,29 @@ export default function PartnerNonprofitsPage() {
                 . One application starts the verification conversation.
               </p>
             </div>
+          </div>
+
+          {/* The on-page Supabase form was replaced per the founder's
+              2026-10-21 brief: requests now go through the Goods Request
+              Google Form behind /request (redirect in next.config.ts), and
+              approved partners get pre-filled personal links by email.
+              Rollback: restore <PartnerRequestForm /> (component kept,
+              dormant) and drop the redirect. The api route, the
+              partner_requests table, and /admin's view of past rows all
+              remain untouched. */}
+          <div className="flex flex-col justify-center rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
+            <p className="text-lg leading-relaxed text-ink/90">
+              {PARTNER_REQUESTS.duffelStandard}
+            </p>
+            <div className="mt-7">
+              <LinkButton href={PARTNER_REQUESTS.requestCta.href} size="lg">
+                {PARTNER_REQUESTS.requestCta.label}
+              </LinkButton>
+            </div>
             <p className="mt-6 text-sm text-muted">
               Please don&apos;t include a child&apos;s name or identifying
               details. Ages and sizes are all we need.
             </p>
-          </div>
-
-          <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
-            <PartnerRequestForm />
           </div>
         </div>
       </Section>
