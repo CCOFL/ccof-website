@@ -757,6 +757,12 @@ export const PARTNER_REQUESTS = {
   // Urgent-need channel: the official line plus email.
   urgentIntro:
     "Have an urgent need right now? Call us at (772) 202-0554, or email us and we'll respond as fast as we can:",
+  // Founder brief 2026-10-21: requests moved to the Goods Request Google
+  // Form. /request (redirect in next.config.ts) always reaches the current
+  // form; approved partners also get pre-filled personal links by email.
+  duffelStandard:
+    "Every request is filled as a standard duffel bag: 4 tops, 4 bottoms, pajamas, gently used shoes, new socks, new underwear, and a special toy or book.",
+  requestCta: { label: "Request goods", href: "/request" },
   cta: { label: "Request goods for a child", href: "/partner-nonprofits" },
 } as const;
 

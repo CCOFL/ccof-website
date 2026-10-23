@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        // Stable address for the partner Goods Request Google Form (founder
+        // brief 2026-10-21). 307 on purpose: the destination changes if the
+        // form is ever replaced. Canonical /d/e/ respondent URL rather than
+        // the editor-derived /d/<id>/viewform, skipping Google's extra hop.
+        source: "/request",
+        destination:
+          "https://docs.google.com/forms/d/e/1FAIpQLSc_x4MjtUECrMW3T3hYxQyzHpFYXwxBzmEJDQT3l3rdPoNcSA/viewform",
+        permanent: false,
+      },
     ];
   },
 };
