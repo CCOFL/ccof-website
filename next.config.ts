@@ -24,6 +24,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // Stable QR address for the NEED NOW list (founder, 2026-10-27):
+        // printed codes point here and never go stale if the section moves.
+        source: "/needs",
+        destination: "/give-goods#need-now",
+        permanent: false,
+      },
+      {
         // Stable address for the partner Goods Request Google Form (founder
         // brief 2026-10-21). 307 on purpose: the destination changes if the
         // form is ever replaced. Canonical /d/e/ respondent URL rather than
