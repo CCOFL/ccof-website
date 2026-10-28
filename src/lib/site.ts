@@ -475,7 +475,10 @@ export const DONOR_CONDITION_REQUEST =
  */
 export const NEEDED_NOW = {
   heading: "Needed now",
-  updated: "Updated October 27, 2026",
+  // Month only, no day (founder ruling 2026-10-28): the list can grow
+  // mid-month without a stale-looking date; the reader just needs to know
+  // it is current this month. Roll the month when the list is revised.
+  updated: "Updated October 2026",
   items: [
     "New underwear, kids' sizes 2T to 16 (sealed)",
     "New socks, all kids' sizes",
