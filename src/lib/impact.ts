@@ -87,7 +87,10 @@ export const impactPeriods: ImpactPeriod[] = [
     tiles: [
       { value: "678.3", unit: "pounds", caption: "weighed and recorded, September 1 to October 27" },
       { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
-      { value: "600+", unit: "items", caption: "delivered to partner nonprofits, September 1 to October 27" },
+      // "caring for children" added on the founder's wording, 2026-10-27:
+      // the caption carries the why (goods reach children through partners);
+      // the neighboring tile carries the full locked three circumstances.
+      { value: "600+", unit: "items", caption: "delivered to partner nonprofits caring for children, September 1 to October 27" },
     ],
     categories: [
       { name: "September", quantity: "monthly total", pounds: 193.9 },
