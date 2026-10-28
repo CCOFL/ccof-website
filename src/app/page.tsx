@@ -147,6 +147,11 @@ export default async function Home() {
         <div className="mt-12">
           <ImpactPeriodTiles tiles={latestImpact.tiles} cardBg="bg-white" />
         </div>
+        {/* Founder brief 2026-10-27: the method footnote renders under the
+            stats here as well as on /impact (same data field). */}
+        <p className="measure mt-6 text-xs leading-relaxed text-muted">
+          {latestImpact.methodNote}
+        </p>
         <p className="mt-8">
           <Link
             href="/impact"
