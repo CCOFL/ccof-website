@@ -462,6 +462,34 @@ export function declinedSentence(): string {
 export const DONOR_CONDITION_REQUEST =
   "Please give used items that are clean, complete, and in good condition.";
 
+/**
+ * NEED NOW — the current-needs list on /give-goods (anchor #need-now; the
+ * stable QR address /needs redirects there, next.config.ts). Founder list,
+ * Cowork-drafted, supplied 2026-10-27. Screen applied and flagged to her:
+ * "like new" → "nearly new" (condition-claim ban, insurance ruling
+ * 2026-08-24) and "(sealed)" added to the hygiene line (sealed-items
+ * policy). Her can't-accept line is NOT repeated here: the master decline
+ * sentence (byte-identical rule) renders in What we collect just below,
+ * and the section links to it. Updating the list = edit items and the
+ * updated date; real current needs only, nothing from ACCEPTED_GOODS.declined.
+ */
+export const NEEDED_NOW = {
+  heading: "Needed now",
+  updated: "Updated October 27, 2026",
+  items: [
+    "New underwear, kids' sizes 2T to 16 (sealed)",
+    "New socks, all kids' sizes",
+    "Pull-Ups, sizes 4T-5T and 5T-6T",
+    "Overnight underwear (like Goodnites), sizes S to L",
+    "Shoes, new or gently worn, kids' and youth sizes",
+    "Kids' toothbrushes, toothpaste and travel-size deodorant (sealed)",
+    "Pajamas, kids' sizes 4 to 16",
+    "Duffel bags and backpacks, new or nearly new",
+  ],
+  fundsLine: "Rather give funds? We'll buy what's on this list.",
+  elseLine: "Have something else? See everything we accept.",
+} as const;
+
 /** Approved lead-ins (eight words max, no headings). They describe the goods
  *  or the handoff, never the existence of bins: CCOF has none placed yet.
  *  /pickup's bin lead-in adds "Also welcome" because a pickup takes

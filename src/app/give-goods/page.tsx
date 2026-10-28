@@ -10,6 +10,7 @@ import {
   GIVE_GOODS,
   FDACS_DISCLOSURE,
   GOODS_LEAD_INS,
+  NEEDED_NOW,
   binDroppableGoods,
   controlledChannelGoods,
   declinedSentence,
@@ -43,8 +44,49 @@ export default function GiveGoodsPage() {
         </div>
       </PageHero>
 
+      {/* NEED NOW (founder + Cowork list, 2026-10-27): the current-needs
+          list. /needs (next.config.ts) is its stable QR address; updating
+          it = NEEDED_NOW in site.ts (items + updated date). The master
+          decline sentence renders in What we collect just below, so it is
+          not repeated here; the "What we collect" link lands on it. */}
+      <Section background="cream" id="need-now" className="scroll-mt-24">
+        <SectionHeading eyebrow={NEEDED_NOW.updated} title={NEEDED_NOW.heading} />
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          {NEEDED_NOW.items.map((item) => (
+            <li
+              key={item.slice(0, 40)}
+              className="flex items-start gap-3 rounded-2xl border border-line bg-white p-4 text-base leading-relaxed text-body"
+            >
+              <span
+                aria-hidden
+                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-coral-deep"
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 text-base text-body">
+          {NEEDED_NOW.fundsLine}{" "}
+          <Link
+            href="/donate"
+            className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+          >
+            Give funds →
+          </Link>
+        </p>
+        <p className="mt-3 text-base text-body">
+          {NEEDED_NOW.elseLine}{" "}
+          <Link
+            href="#collect"
+            className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+          >
+            What we collect →
+          </Link>
+        </p>
+      </Section>
+
       {/* What we collect */}
-      <Section background="white">
+      <Section background="white" id="collect" className="scroll-mt-24">
         <SectionHeading
           eyebrow="What we collect"
           title="Quality kids' goods, ready for a second home"
