@@ -70,6 +70,42 @@ export type ImpactPeriod = {
 
 export const impactPeriods: ImpactPeriod[] = [
   {
+    // Launch-to-date totals from the CCOF Public Facts Sheet, section 7
+    // (updated 2026-10-28). Founder ruling 2026-10-27: this cumulative
+    // period leads the homepage and /impact; the September period below
+    // stays as the published monthly record (and the September letter's
+    // tiles). Items display as "600+", never an exact count (her rule).
+    // The categories here hold the monthly pounds breakdown (not rendered
+    // anywhere, per the skip-the-breakdown call): they exist so the
+    // build-time sum check guards the 678.3 headline.
+    slug: "launch-to-2026-10",
+    label: "Launch to date",
+    periodText: "September 1 to October 27, 2026",
+    heading: "Since our launch, by the numbers",
+    intro:
+      "Our community donation drive went into action in September. Every pound was weighed and recorded, and what came in started reaching children the same month.",
+    tiles: [
+      { value: "678.3", unit: "pounds", caption: "weighed and recorded, September 1 to October 27" },
+      { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
+      { value: "600+", unit: "items", caption: "delivered to partner nonprofits, September 1 to October 27" },
+    ],
+    categories: [
+      { name: "September", quantity: "monthly total", pounds: 193.9 },
+      { name: "October 1 to 27", quantity: "monthly total", pounds: 484.4 },
+    ],
+    totalPounds: 678.3,
+    // Reused verbatim from the September period (founder-approved 2026-10-27:
+    // numbers and labels only, no new prose).
+    whereNext:
+      "Goods are already reaching children and families. What remains is sorted for the next partner delivery and, once it opens in Martin County in 2027, The Collective Kids Closet, our nonprofit storefront program offering quality children's goods at affordable prices for all families throughout the community, with proceeds returning to the funding pool for those same 501(c)(3) partner organizations.",
+    whyMatters:
+      "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
+    // The founder's footnote, verbatim (brief of 2026-10-27). Renders in the
+    // small-type method-note slot on /impact and under the homepage tiles.
+    methodNote:
+      "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods.",
+  },
+  {
     slug: "2026-09",
     label: "September 2026",
     periodText: "September 1 to October 1, 2026",
