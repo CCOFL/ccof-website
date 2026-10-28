@@ -49,6 +49,10 @@ const BANNED = [
     why: "no bin count, date, or location claims until host agreements are signed (founder ruling 2026-08-19)",
   },
   {
+    re: /neighborhood drop-?off|drop-?off point/i,
+    why: "bins are never public drop-off points: hosts invite their own community, and 'not a public drop-off' is the only approved framing (founder ruling 2026-09-20, wording applied 2026-10-28)",
+  },
+  {
     re: /cribs & bassinets|cribs and bassinets/i,
     why: "declined items are never solicited (safety policy 2026-08-18)",
   },
