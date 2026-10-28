@@ -713,6 +713,49 @@ export const COMMUNITY_PARTNER_DEFINITION =
   "Community Partners are the businesses, schools, and congregations who host a donation bin or drive, collecting the community's generosity for The Children's Collective of Florida to steward and put to work for local kids.";
 
 /**
+ * 30 Days of Giving — the bin-host recruitment campaign page
+ * (/30-days-of-giving) and its doorway callout on /host-a-bin. Founder
+ * decisions 2026-10-27: the page is linked + unindexed (noindex, no nav,
+ * no sitemap entry); content is the public-facing screen of the one-pager
+ * v14 (2026-10-28): no cost-framing (2026-08-19 ruling), no host photos or
+ * locations, no sample social post, no direct-contact block. The
+ * hosting-is-private lines are the founder's words, verbatim. Stats on the
+ * page derive from impactPeriods, never from copy here.
+ */
+export const THIRTY_DAYS = {
+  eyebrow: "30 Days of Giving",
+  title: "A child is arriving somewhere new with very little to call their own.",
+  intro:
+    "Many outgrown children's clothing, toys, and games still have plenty of love left in them. Your community can connect the two.",
+  invitationHeading: "An invitation",
+  invitation:
+    "We are inviting a few local businesses to join 30 Days of Giving. You host one small indoor bin and share it with your own team, clients, and customers, encouraging them to give what their children have outgrown. We handle everything else. Every pound is weighed, and the goods go to local children in foster care, kinship homes and crisis.",
+  involvesHeading: "What hosting involves",
+  involves: [
+    "One bin, in a spot you choose. No staff time needed: we handle the bin, the pickups, and the thank-yous.",
+    "Weekly service on a day you choose, and additional service within 2 business days of reporting a full bin.",
+    "Removed within 48 hours of any request.",
+    "Signage and a QR receipt sign are provided.",
+    "You choose 30, 60, or 90 days. It never renews on its own.",
+  ],
+  privacyLine:
+    "Hosting is private and at your discretion. This is an invitation to your own community, not a public drop-off. We do not list or map host locations.",
+  acceptLine:
+    "We accept children's clothing and shoes, books, toys, games and school supplies. We cannot accept cribs, bassinets, pack-and-plays, crib mattresses or car seats.",
+  ctaHeading: "Ready to host?",
+  ctaBody:
+    "Tell us about your spot and we'll schedule a quick conversation before any placement.",
+  cta: { label: "Request your bin", href: "/host-a-bin#bin-form" },
+  /** The doorway on /host-a-bin: one attention element, brand coral. */
+  callout: {
+    eyebrow: "Now inviting local businesses",
+    title: "Participate in 30 Days of Giving",
+    body: "Host one small indoor bin for 30, 60, or 90 days and invite your own team, clients, and customers to give. We handle everything else.",
+    cta: { label: "See how it works", href: "/30-days-of-giving" },
+  },
+} as const;
+
+/**
  * Partner Requests — the direct, in-kind provision channel, distinct from the
  * resale-funds-grants (money) channel. Vetted, mission-aligned 501(c)(3)
  * partners request specific goods for a child in immediate need; the goods
