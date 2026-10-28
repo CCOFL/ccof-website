@@ -3,7 +3,7 @@ import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { BinHostForm } from "@/components/BinHostForm";
 import { LinkButton } from "@/components/Button";
-import { COMMUNITY_PARTNER_DEFINITION } from "@/lib/site";
+import { COMMUNITY_PARTNER_DEFINITION, THIRTY_DAYS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Host a Donation Bin",
@@ -26,6 +26,27 @@ export default async function HostABinPage({
         title="Put your foot traffic to work for local kids."
         intro="Our indoor donation bins let your customers, students, or congregation give quality kids' goods right where they already are. We handle the bin, the pickups, and the thank-yous. You provide the spot."
       />
+      {/* 30 Days of Giving doorway (founder, 2026-10-27): one attention
+          element, brand coral, directly under the hero. The campaign page
+          it opens is linked + unindexed. */}
+      <Section background="white" className="!pb-0">
+        <div className="rounded-3xl border-2 border-coral bg-coral/10 p-7 text-center sm:p-9">
+          <p className="text-sm font-bold uppercase tracking-wider text-coral-deep">
+            {THIRTY_DAYS.callout.eyebrow}
+          </p>
+          <h2 className="mt-2 text-2xl font-extrabold sm:text-3xl">
+            {THIRTY_DAYS.callout.title}
+          </h2>
+          <p className="measure mx-auto mt-3 text-base leading-relaxed text-body">
+            {THIRTY_DAYS.callout.body}
+          </p>
+          <div className="mt-6">
+            <LinkButton href={THIRTY_DAYS.callout.cta.href} size="lg">
+              {THIRTY_DAYS.callout.cta.label} →
+            </LinkButton>
+          </div>
+        </div>
+      </Section>
       {/* Three doors (founder, 2026-10-06): rising commitment, all true
           today. Drives are the low-commitment on-ramp and the bin-host
           funnel; Fill a Duffel is the signature drive format. */}

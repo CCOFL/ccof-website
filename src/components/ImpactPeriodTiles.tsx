@@ -20,7 +20,9 @@ export function ImpactPeriodTiles({
       }`}
     >
       {tiles.map((tile, i) => (
-        <Reveal key={tile.unit} delay={i * 80}>
+        // Value+unit as the key: a band can repeat a unit (e.g. three
+        // "pounds" tiles on /30-days-of-giving), never a value+unit pair.
+        <Reveal key={`${tile.value}-${tile.unit}`} delay={i * 80}>
           <div
             className={`flex h-full flex-col rounded-2xl border border-line ${cardBg} p-6 shadow-card`}
           >
