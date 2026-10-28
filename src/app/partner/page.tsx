@@ -82,8 +82,8 @@ export default function PartnerPage() {
               Host a Bin or Drive
             </h3>
             <p className="mt-1 text-sm leading-relaxed text-muted">
-              Set up a donation bin or run a goods drive as a neighborhood
-              drop-off point. Any business, school, congregation, or
+              Set up a donation bin or run a goods drive and invite your own
+              community to give. Any business, school, congregation, or
               organization can host, including current partner nonprofits.
             </p>
           </div>

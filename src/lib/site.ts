@@ -584,7 +584,7 @@ export const GIVE_GOODS = {
     },
     {
       title: "Host a donation bin",
-      body: "Host one at your business, school, or place of worship and become a neighborhood drop-off point.",
+      body: "Host one at your business, school, or place of worship. Your community gives right where they already are.",
       cta: { label: "Host a bin", href: "/host-a-bin" },
     },
     {
