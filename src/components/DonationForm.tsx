@@ -2,17 +2,20 @@
 
 import { useId, useMemo, useState } from "react";
 import { Button } from "./Button";
-import { DONATION_PRESETS } from "@/lib/site";
+import {
+  GIVING_TIERS,
+  GIVING_OTHER,
+  GREATEST_NEED_LINE,
+  type GiftFrequency,
+} from "@/lib/giving";
 import { trackConversion } from "@/lib/analytics";
-
-type Frequency = "one-time" | "monthly";
 
 const MIN = 5;
 
 export function DonationForm() {
-  const [frequency, setFrequency] = useState<Frequency>("one-time");
+  const [frequency, setFrequency] = useState<GiftFrequency>("one-time");
   const [selected, setSelected] = useState<number | "other">(
-    DONATION_PRESETS[0].amount,
+    GIVING_TIERS[0].amount,
   );
   const [custom, setCustom] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,10 +25,10 @@ export function DonationForm() {
   const amount = selected === "other" ? Number(custom) : selected;
   const validAmount = Number.isFinite(amount) && amount >= MIN;
 
-  const outcome = useMemo(() => {
-    const preset = DONATION_PRESETS.find((p) => p.amount === selected);
-    return preset?.outcome ?? null;
-  }, [selected]);
+  const tierCopy = useMemo(() => {
+    const tier = GIVING_TIERS.find((t) => t.amount === selected);
+    return tier?.copy[frequency] ?? null;
+  }, [selected, frequency]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -69,7 +72,7 @@ export function DonationForm() {
           aria-label="Gift frequency"
           className="grid grid-cols-2 gap-1 rounded-full border border-line bg-cream p-1"
         >
-          {(["one-time", "monthly"] as Frequency[]).map((f) => {
+          {(["one-time", "monthly"] as GiftFrequency[]).map((f) => {
             const active = frequency === f;
             return (
               <button
@@ -97,21 +100,21 @@ export function DonationForm() {
           Choose an amount
         </legend>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {DONATION_PRESETS.map((preset) => {
-            const active = selected === preset.amount;
+          {GIVING_TIERS.map((tier) => {
+            const active = selected === tier.amount;
             return (
               <button
-                key={preset.amount}
+                key={tier.amount}
                 type="button"
                 aria-pressed={active}
-                onClick={() => setSelected(preset.amount)}
+                onClick={() => setSelected(tier.amount)}
                 className={`min-h-[52px] rounded-xl border text-lg font-semibold transition-all duration-200 ${
                   active
                     ? "border-sage-600 bg-sage-600 text-cream shadow-card"
                     : "border-line bg-cream text-ink hover:border-sage-light"
                 }`}
               >
-                ${preset.amount}
+                ${tier.amount}
               </button>
             );
           })}
@@ -155,21 +158,23 @@ export function DonationForm() {
         )}
       </fieldset>
 
-      {/* Outcome framing (brief priority #2) */}
-      <p
-        className="min-h-[1.5rem] text-sm text-muted"
-        aria-live="polite"
-      >
-        {outcome && (
-          <>
-            <strong className="font-semibold text-sage-600">
-              ${selected as number}
-            </strong>{" "}
-            helps provide {outcome}
-            {frequency === "monthly" ? ", every month" : ""}.
-          </>
-        )}
-      </p>
+      {/* Impact sentence per tier and frequency, each its own string
+          (founder brief 2026-11-01), with the greatest-need caveat beneath. */}
+      <div>
+        <p className="min-h-[1.5rem] text-sm text-muted" aria-live="polite">
+          {selected === "other" ? (
+            GIVING_OTHER[frequency]
+          ) : tierCopy ? (
+            <>
+              <strong className="font-semibold text-sage-600">
+                {tierCopy.lead}
+              </strong>{" "}
+              {tierCopy.rest}
+            </>
+          ) : null}
+        </p>
+        <p className="mt-1.5 text-xs text-muted">{GREATEST_NEED_LINE}</p>
+      </div>
 
       {error && (
         <p className="text-sm text-red-700" role="alert">

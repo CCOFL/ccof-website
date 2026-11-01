@@ -602,12 +602,9 @@ export const GIVE_GOODS = {
     "In-kind donations are tax-deductible. We'll acknowledge what you give; you determine its value for your records.",
 } as const;
 
-/** Donation presets with outcome framing (brief priority #2). */
-export const DONATION_PRESETS: { amount: number; outcome: string }[] = [
-  { amount: 25, outcome: "a welcome bag of essentials for a child entering care" },
-  { amount: 50, outcome: "a backpack and school supplies for the school year" },
-  { amount: 100, outcome: "a season of clothing for a growing child" },
-];
+/* Donation tier copy moved to src/lib/giving.ts (founder brief 2026-11-01):
+   full per-frequency sentences replaced the outcome fragments that lived here
+   as DONATION_PRESETS. */
 
 /**
  * THE single sitewide FDACS disclosure (F.S. §496.411; registration number

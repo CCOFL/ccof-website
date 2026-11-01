@@ -4,6 +4,7 @@ import { Container, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { DonationForm } from "@/components/DonationForm";
 import { ORG, FDACS_DISCLOSURE, TAX_NOTE } from "@/lib/site";
+import { MOST_NEEDED } from "@/lib/giving";
 
 export const metadata: Metadata = {
   title: "Donate",
@@ -84,6 +85,25 @@ export default async function DonatePage({
 
           {/* Right: the working donation form */}
           <div>
+            {/* Most-needed card above the gift form (founder brief 2026-11-01).
+                Give Goods is its own page, so this ships on the Give Funds
+                column only. */}
+            <div className="mb-6 rounded-2xl border-l-4 border-sage bg-sage-tint p-6 shadow-card">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-sage-600">
+                {MOST_NEEDED.heading}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-ink/90">
+                {MOST_NEEDED.body} {MOST_NEEDED.cta.pre}
+                <Link
+                  href={MOST_NEEDED.cta.href}
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  {MOST_NEEDED.cta.linkText}
+                </Link>
+                {MOST_NEEDED.cta.post}
+              </p>
+            </div>
+
             <div
               id="give-funds"
               className="scroll-mt-24 rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8"
