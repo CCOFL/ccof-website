@@ -471,7 +471,7 @@ required flag must match. The PDF is regenerated from the same module, so if thi
 file is current, the PDF matches too.
 
 **Form title:** ${R.formTitle}
-**Form settings:** collect email addresses ON · send responders a copy of their response: Always · new-response email notifications ON.
+**Form settings:** collect email addresses ON · send responders a copy of their response: Always · Google's built-in new-response notification OFF by founder ruling 2026-11-01 (the Tracker Apps Script's GR-numbered email to info@ + stephanie@ is the notifier).
 
 | Question | Type | Required | Where | Options | Helper text |
 |---|---|---|---|---|---|
