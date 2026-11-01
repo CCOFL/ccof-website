@@ -145,7 +145,7 @@ export const GOODS_REQUEST = {
  * pdfOnly rows exist on paper but not on the form.
  */
 export const FORM_QUESTIONS = [
-  { q: "Your email", type: "Short answer (the form's collect-email setting)", required: true },
+  { q: "Email", type: "Short answer (the form's collect-email setting; placeholder reads Your email)", required: true },
   { q: "Requesting organization name", type: "Short answer", required: true },
   { q: "Your name and title", type: "Short answer", required: true },
   { q: "Your phone", type: "Short answer", required: true },

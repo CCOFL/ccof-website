@@ -11,7 +11,7 @@ file is current, the PDF matches too.
 
 | Question | Type | Required | Where | Options | Helper text |
 |---|---|---|---|---|---|
-| Your email | Short answer (the form's collect-email setting) | REQUIRED | Form + PDF |  |  |
+| Email | Short answer (the form's collect-email setting; placeholder reads Your email) | REQUIRED | Form + PDF |  |  |
 | Requesting organization name | Short answer | REQUIRED | Form + PDF |  |  |
 | Your name and title | Short answer | REQUIRED | Form + PDF |  |  |
 | Your phone | Short answer | REQUIRED | Form + PDF |  |  |

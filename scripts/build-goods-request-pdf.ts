@@ -318,7 +318,7 @@ async function main() {
     c.y = Math.max(endLeft, c.y) + 2;
   };
   row("Requesting organization name", true, "org_name", "Date of request", true, "request_date");
-  row("Your name and title", true, "name_title", "Your email", true, "email");
+  row("Your name and title", true, "name_title", "Email", true, "email");
   // phone + approved-by (helper under the right column)
   {
     const startY = c.y;
