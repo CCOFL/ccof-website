@@ -2,6 +2,7 @@
  * Single source of truth for site content & config.
  * All organizational copy is preserved verbatim from the brief (§1).
  */
+import { GOODS_REQUEST } from "./partnerRequest";
 
 export const ORG = {
   name: "The Children's Collective of Florida",
@@ -834,8 +835,9 @@ export const PARTNER_REQUESTS = {
   // Founder brief 2026-10-21: requests moved to the Goods Request Google
   // Form. /request (redirect in next.config.ts) always reaches the current
   // form; approved partners also get pre-filled personal links by email.
-  duffelStandard:
-    "Every request is filled as a standard duffel bag: 4 tops, 4 bottoms, pajamas, gently used shoes, new socks, new underwear, and a special toy or book.",
+  // Since 2026-11-01 the sentence lives in partnerRequest.ts, THE source of
+  // truth shared with the printable PDF and the form-parity checklist.
+  duffelStandard: GOODS_REQUEST.duffelStandard,
   requestCta: { label: "Request goods", href: "/request" },
   cta: { label: "Request goods for a child", href: "/partner-nonprofits" },
 } as const;

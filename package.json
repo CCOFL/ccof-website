@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "check:copy": "node scripts/check-copy.mjs",
-    "test": "node --test src/lib/partnerApplicationRules.test.ts"
+    "test": "node --test src/lib/partnerApplicationRules.test.ts",
+    "build:pdf": "node scripts/build-goods-request-pdf.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",
@@ -20,12 +21,14 @@
     "stripe": "^22.3.0"
   },
   "devDependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "pdf-lib": "^1.17.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
