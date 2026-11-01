@@ -5,6 +5,7 @@ import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { PARTNER_REQUESTS, ORG } from "@/lib/site";
+import { GOODS_REQUEST } from "@/lib/partnerRequest";
 
 export const metadata: Metadata = {
   title: "For Partner Nonprofits",
@@ -118,9 +119,36 @@ export default function PartnerNonprofitsPage() {
                 {PARTNER_REQUESTS.requestCta.label}
               </LinkButton>
             </div>
+            {/* Response promise + secondary paths (founder brief 2026-11-01):
+                the Google Form behind /request stays primary; the printable
+                PDF and email are the keep-print-share paths partner case
+                managers asked for. All wording from partnerRequest.ts. */}
+            <p className="mt-3 text-sm text-muted">
+              {GOODS_REQUEST.responsePromise}
+            </p>
+            <p className="mt-5 text-sm text-ink/90">
+              Prefer paper?{" "}
+              <a
+                href="/forms/partner-goods-request.pdf"
+                target="_blank"
+                rel="noopener"
+                download
+                className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+              >
+                Download a printable copy (PDF)
+              </a>
+            </p>
+            <p className="mt-2 text-sm text-ink/90">
+              Prefer to email? Please email{" "}
+              <a
+                href={GOODS_REQUEST.submit.emailMailto}
+                className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+              >
+                {GOODS_REQUEST.submit.emailDisplay}
+              </a>
+            </p>
             <p className="mt-6 text-sm text-muted">
-              Please don&apos;t include a child&apos;s name or identifying
-              details. Ages and sizes are all we need.
+              {GOODS_REQUEST.privacyLine}
             </p>
           </div>
         </div>
