@@ -64,6 +64,13 @@ export type ImpactPeriod = {
   /** "Why this matters" paragraph (period-specific). */
   whyMatters: string;
   methodNote: string;
+  /**
+   * Optional small italic line under the method note on /impact: a
+   * restatement disclosure when a period's published figures were later
+   * restated (founder ruling 2026-11-01). The original figures may appear
+   * only inside this line.
+   */
+  restatementNote?: string;
   /** Optional: only when a report is published publicly. */
   reportPdf?: string;
 };
@@ -148,27 +155,33 @@ export const impactPeriods: ImpactPeriod[] = [
       "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per CCOF's item rule.",
   },
   {
+    // September restated at the October close (founder ruling 2026-11-01,
+    // team-review R1): calendar-month figures under the one counting rule,
+    // mirroring the October block exactly (three tiles, same caption forms,
+    // same footnote). The original bins-only first report (262.7 lbs / 433
+    // items, September 1 to October 1) survives only in restatementNote
+    // below. 470 items = 969 since launch minus 499 October (founder
+    // figure; facts sheet row added at the close). Children: 7 = 23 since
+    // launch minus 16 October.
     slug: "2026-09",
     label: "September 2026",
-    periodText: "September 1 to October 1, 2026",
+    periodText: "September 2026",
     heading: "September, by the numbers",
     intro:
-      "Our community donation drive went into action in September. Neighbors gave through the bins our local hosts placed, every pound was weighed and recorded, and what came in started reaching children the same month. Here is what that looked like.",
+      "Our first month. Every pound was weighed and recorded, and the first bags went to children within days.",
     tiles: [
-      { value: "262.7", unit: "pounds", caption: "collected through community bin hosts alone, every pound weighed" },
-      { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
-      { value: "433", unit: "items", caption: "contributed directly to partner nonprofits" },
+      { value: "193.9", unit: "pounds", caption: "weighed and recorded, Month of September" },
+      { value: "470", unit: "items", caption: "delivered to partner nonprofits, many packed in a duffel bag for one child, Month of September" },
+      { value: "7", unit: "children", caption: "received individual packages, Month of September" },
     ],
+    // Category detail lives in the downloadable report only (founder ruling
+    // 2026-10-06); the single monthly-total row keeps the build-time sum
+    // check guarding the 193.9 headline, which must tie to the launch
+    // period's September row above (193.9 + 594.0 = 787.9).
     categories: [
-      { name: "Clothing and shoes", quantity: "24 bags", pounds: 204.5 },
-      { name: "Toys and games", quantity: "5 bags", pounds: 34.2 },
-      { name: "Stuffed animals", quantity: "2 bags", pounds: 7.6 },
-      { name: "Books", quantity: "1 bag", pounds: 7.3 },
-      { name: "Baby gear", quantity: "1 item", pounds: 4.5 },
-      { name: "School supplies", quantity: "1 bag", pounds: 2.8 },
-      { name: "Hygiene products", quantity: "27 toothbrushes", pounds: 1.8 },
+      { name: "September", quantity: "monthly total", pounds: 193.9 },
     ],
-    totalPounds: 262.7,
+    totalPounds: 193.9,
     // Closet sentence follows the program-architecture rules (future tense,
     // Martin County + 2027 attached, approved access phrasing, approved
     // proceeds sentence), flagged to the founder as a delta from her draft.
@@ -177,7 +190,10 @@ export const impactPeriods: ImpactPeriod[] = [
     whyMatters:
       "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
     methodNote:
-      "Bin totals reflect weighed pickups from community bin hosts only. Goods that arrived through scheduled pickups or as direct gifts from individual donors are not included in that total.",
+      "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per CCOF's item rule.",
+    // The founder's restatement disclosure, verbatim (ruling 2026-11-01).
+    restatementNote:
+      "Restated November 1, 2026 to calendar months and one counting rule. Our first report covered September 1 to October 1 and showed 262.7 lbs and 433 items.",
   },
 ];
 

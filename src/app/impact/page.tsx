@@ -49,6 +49,13 @@ export default function ImpactPage() {
           <p className="measure mt-6 text-xs leading-relaxed text-muted">
             {period.methodNote}
           </p>
+          {/* Restatement disclosure (founder ruling 2026-11-01): the one
+              place a period's original, superseded figures may appear. */}
+          {period.restatementNote && (
+            <p className="measure mt-2 text-xs italic leading-relaxed text-muted">
+              {period.restatementNote}
+            </p>
+          )}
 
           <h3 className="mt-12 text-xl font-bold">Where it goes next</h3>
           <p className="measure mt-3 text-base leading-relaxed text-body">
