@@ -48,7 +48,9 @@ export default function ThirtyDaysOfGivingPage() {
       unit: "pounds",
       caption: launch.tiles[0].caption,
     },
-    launch.tiles[2],
+    // Items tile: index 1 since the partner-count tile was removed from the
+    // launch band (founder ruling 2026-11-02).
+    launch.tiles[1],
   ];
 
   return (
