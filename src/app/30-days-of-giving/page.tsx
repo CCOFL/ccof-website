@@ -29,19 +29,22 @@ export default function ThirtyDaysOfGivingPage() {
     impactPeriods[0];
   // The one-pager's four-stat band: the two monthly figures live in the
   // launch period's categories (they also feed the build-time sum check).
+  // toFixed(1) keeps the weighed pounds exactly as the facts sheet states
+  // them (594.0 must not display as 594). "Month of ..." labels are the
+  // founder's exact wording (addendum of 2026-11-01).
   const band = [
     {
-      value: String(launch.categories[0].pounds),
+      value: launch.categories[0].pounds.toFixed(1),
       unit: "pounds",
-      caption: `weighed, ${launch.categories[0].name}`,
+      caption: `Month of ${launch.categories[0].name}, weighed`,
     },
     {
-      value: String(launch.categories[1].pounds),
+      value: launch.categories[1].pounds.toFixed(1),
       unit: "pounds",
-      caption: `weighed, ${launch.categories[1].name}`,
+      caption: `Month of ${launch.categories[1].name}, weighed`,
     },
     {
-      value: String(launch.totalPounds),
+      value: launch.totalPounds.toFixed(1),
       unit: "pounds",
       caption: launch.tiles[0].caption,
     },
