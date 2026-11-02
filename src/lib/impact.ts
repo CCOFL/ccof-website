@@ -80,17 +80,17 @@ export const impactPeriods: ImpactPeriod[] = [
     // check guards the 787.9 headline.
     slug: "launch-to-2026-10",
     label: "Launch to date",
-    periodText: "September 1 to October 31, 2026",
+    periodText: "September 1 through October 31, 2026",
     heading: "Since our launch, by the numbers",
     intro:
       "Our community donation drive went into action in September. Every pound was weighed and recorded, and what came in started reaching children the same month.",
     tiles: [
-      { value: "787.9", unit: "pounds", caption: "weighed and recorded, September 1 to October 31" },
+      { value: "787.9", unit: "pounds", caption: "weighed and recorded, September 1 through October 31, 2026" },
       { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
       // "caring for children" added on the founder's wording, 2026-10-27:
       // the caption carries the why (goods reach children through partners);
       // the neighboring tile carries the full locked three circumstances.
-      { value: "900+", unit: "items", caption: "delivered to partner nonprofits caring for children, September 1 to October 31" },
+      { value: "900+", unit: "items", caption: "delivered to partner nonprofits caring for children, September 1 through October 31, 2026" },
       // Fourth tile added at the October close (facts sheet section 7). The
       // tile grid renders four across on desktop by design, so it ships per
       // the brief's "only if the layout takes it cleanly" condition.
@@ -107,30 +107,31 @@ export const impactPeriods: ImpactPeriod[] = [
       "Goods are already reaching children and families. What remains is sorted for the next partner delivery and, once it opens in Martin County in 2027, The Collective Kids Closet, our nonprofit storefront program offering quality children's goods at affordable prices for all families throughout the community, with proceeds returning to the funding pool for those same 501(c)(3) partner organizations.",
     whyMatters:
       "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
-    // The founder's footnotes (briefs of 2026-10-27 and 2026-11-01). Renders
-    // in the small-type method-note slot on /impact, under the homepage
-    // tiles, and on /30-days-of-giving. The item-rule sentence says "our"
-    // where the brief drafted the bare acronym (locked no-acronym rule;
-    // flagged to the founder in the PR).
+    // The founder's footnotes, verbatim (briefs of 2026-10-27 and 2026-11-01,
+    // addendum 2). Renders in the small-type method-note slot on /impact,
+    // under the homepage tiles, and on /30-days-of-giving. "CCOF's item rule"
+    // is an explicit founder override of the no-bare-acronym rule, ruled
+    // 2026-11-01 with the conflict flagged (addendum 2, item 4).
     methodNote:
-      "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per our item rule.",
+      "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per CCOF's item rule.",
   },
   {
     // October monthly record from the CCOF Public Facts Sheet, section 12
-    // (October close, approved by the founder 2026-11-01). Intro, whereNext,
-    // and whyMatters reuse founder-approved sentences verbatim (no new
-    // prose); figures are exactly the brief's, nothing derived or added.
+    // (October close, approved by the founder 2026-11-01). Tile copy and the
+    // intro are the founder's exact wording (addendum 2 of 2026-11-01):
+    // three tiles in the order pounds, items, children; the partners tile
+    // lives only in the since-launch section above. whereNext and whyMatters
+    // reuse the approved paragraphs verbatim.
     slug: "2026-10",
     label: "October 2026",
-    periodText: "October 1 to 31, 2026",
+    periodText: "October 2026",
     heading: "October, by the numbers",
     intro:
-      "Every pound was weighed and recorded, and what came in started reaching children the same month.",
+      "Every pound was weighed and recorded, and much of it reached children within weeks.",
     tiles: [
-      { value: "594.0", unit: "pounds", caption: "weighed and recorded, October 1 to 31" },
-      { value: "3", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
-      { value: "499", unit: "items", caption: "delivered to partner nonprofits caring for children, October 1 to 31" },
-      { value: "16", unit: "children", caption: "received individual packages" },
+      { value: "594.0", unit: "pounds", caption: "weighed and recorded, Month of October" },
+      { value: "499", unit: "items", caption: "delivered to partner nonprofits, many packed in a duffel bag for one child, Month of October" },
+      { value: "16", unit: "children", caption: "received individual packages, Month of October" },
     ],
     // Category detail lives in the downloadable report only (founder ruling
     // 2026-10-06); the single monthly-total row keeps the build-time sum
@@ -144,7 +145,7 @@ export const impactPeriods: ImpactPeriod[] = [
     whyMatters:
       "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
     methodNote:
-      "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per our item rule.",
+      "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per CCOF's item rule.",
   },
   {
     slug: "2026-09",
