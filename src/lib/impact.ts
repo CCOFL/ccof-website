@@ -92,15 +92,13 @@ export const impactPeriods: ImpactPeriod[] = [
     intro:
       "Our community donation drive went into action in September. Every pound was weighed and recorded, and what came in started reaching children the same month.",
     tiles: [
+      // Three equal tiles since the founder ruling of 2026-11-02 (addendum
+      // 4): no partner-count tile or figure anywhere on the public site.
+      // Captions unchanged; "caring for children" is the founder's wording
+      // of 2026-10-27 (goods reach children through partners).
       { value: "787.9", unit: "pounds", caption: "weighed and recorded, September 1 through October 31, 2026" },
-      { value: "4", unit: "partner nonprofits", caption: "serving children in foster care, kinship care, or crisis, supplied directly" },
-      // "caring for children" added on the founder's wording, 2026-10-27:
-      // the caption carries the why (goods reach children through partners);
-      // the neighboring tile carries the full locked three circumstances.
       { value: "900+", unit: "items", caption: "delivered to partner nonprofits caring for children, September 1 through October 31, 2026" },
-      // Fourth tile added at the October close (facts sheet section 7). The
-      // tile grid renders four across on desktop by design, so it ships per
-      // the brief's "only if the layout takes it cleanly" condition.
+      // Children tile added at the October close (facts sheet section 7).
       { value: "23", unit: "children", caption: "received individual packages" },
     ],
     categories: [
@@ -126,9 +124,9 @@ export const impactPeriods: ImpactPeriod[] = [
     // October monthly record from the CCOF Public Facts Sheet, section 12
     // (October close, approved by the founder 2026-11-01). Tile copy and the
     // intro are the founder's exact wording (addendum 2 of 2026-11-01):
-    // three tiles in the order pounds, items, children; the partners tile
-    // lives only in the since-launch section above. whereNext and whyMatters
-    // reuse the approved paragraphs verbatim.
+    // three tiles in the order pounds, items, children; partner counts
+    // appear nowhere on the site (founder ruling 2026-11-02). whereNext and
+    // whyMatters reuse the approved paragraphs verbatim.
     slug: "2026-10",
     label: "October 2026",
     periodText: "October 2026",

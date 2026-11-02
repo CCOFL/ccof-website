@@ -4,7 +4,8 @@ import { Reveal } from "./Reveal";
 /**
  * Stat tiles for a monthly impact period (home "by the numbers" section and
  * /impact). Real text, never images; follows the ImpactStats dl pattern and
- * the site's card style. Four across on desktop, two on tablet, one on phone.
+ * the site's card style. Three or four across on desktop (by tile count),
+ * two on tablet, one on phone.
  */
 export function ImpactPeriodTiles({
   tiles,
