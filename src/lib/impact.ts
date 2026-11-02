@@ -71,6 +71,13 @@ export type ImpactPeriod = {
    * only inside this line.
    */
   restatementNote?: string;
+  /**
+   * Optional short stories behind the period's numbers, rendered as the
+   * "Behind the numbers" list on /impact (founder brief 2026-11-02).
+   * Generalized per the standing rulings: describe, never name a partner,
+   * host, or person. Periods without stories render no block.
+   */
+  stories?: string[];
   /** Optional: only when a report is published publicly. */
   reportPdf?: string;
 };
@@ -151,6 +158,20 @@ export const impactPeriods: ImpactPeriod[] = [
       "A bag of outgrown clothes or a toy that is no longer played with can be exactly what another family needs this month. Reuse keeps goods out of the waste stream, and it keeps generosity close to home. This is a community supporting its own families.",
     methodNote:
       "Pounds are weighed community donations, not including individual donors or home pickups. Items include donated and purchased goods. Items counted per CCOF's item rule.",
+    // "Behind the numbers" stories, verbatim from the founder brief of
+    // 2026-11-02: generalized throughout (no partner, host, or person
+    // names; no children's names or case details).
+    stories: [
+      "A welcome bag. A young child arrived at a youth shelter with very little in the bag that came with them. Within days, they had a welcome bag of their own.",
+      "Seven bags in one morning. Seven children at a children's shelter each received a duffel bag packed to their sizes.",
+      "Two families, four children. A partner that serves families asked on a Wednesday. By Friday, all four children had a bag packed in their own sizes.",
+      "Warmth for teens. As the nights turned cool, teens at a youth shelter received hoodies, new pillows and warm socks.",
+      "Room to play. Puzzles, card games and books went to a family shelter, because a shelter should still be a place where kids get to play.",
+    ],
+    // The October public report (founder brief 2026-11-02): the first
+    // period published as a PDF; /impact swaps the request-by-email line
+    // for a download link whenever reportPdf is set.
+    reportPdf: "/reports/CCOF_Community_Impact_Report_2026-10.pdf",
   },
   {
     // September restated at the October close (founder ruling 2026-11-01,
