@@ -57,6 +57,29 @@ export default function ImpactPage() {
             </p>
           )}
 
+          {/* Behind the numbers (founder brief 2026-11-02): short stories
+              from the data file, generalized per the standing rulings.
+              Periods without stories render no block. */}
+          {period.stories && period.stories.length > 0 && (
+            <>
+              <h3 className="mt-12 text-xl font-bold">Behind the numbers</h3>
+              <ul className="measure mt-4 space-y-3">
+                {period.stories.map((story) => (
+                  <li
+                    key={story.slice(0, 40)}
+                    className="flex gap-3 text-base leading-relaxed text-body"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-coral-deep"
+                    />
+                    {story}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
           <h3 className="mt-12 text-xl font-bold">Where it goes next</h3>
           <p className="measure mt-3 text-base leading-relaxed text-body">
             {period.whereNext}
@@ -68,18 +91,35 @@ export default function ImpactPage() {
           </p>
 
           {/* Category detail and the full monthly report are provided on
-              request, not published (founder ruling 2026-10-06). */}
-          <p className="measure mt-10 text-base leading-relaxed text-body">
-            Contact{" "}
-            <a
-              href="mailto:info@ChildrensCollectiveFL.org"
-              className="font-semibold text-sage-600 underline underline-offset-4"
-            >
-              info@ChildrensCollectiveFL.org
-            </a>{" "}
-            to request the full impact report or the details of what has been
-            collected.
-          </p>
+              request, not published (founder ruling 2026-10-06), unless the
+              period has a published public report (founder brief 2026-11-02):
+              then reportPdf is set and the download link renders instead.
+              The label derives from the period label ("October 2026" →
+              "October"), so future months publish with no code change. */}
+          {period.reportPdf ? (
+            <p className="measure mt-10 text-base leading-relaxed text-body">
+              <a
+                href={period.reportPdf}
+                target="_blank"
+                rel="noopener"
+                className="font-semibold text-sage-600 underline underline-offset-4"
+              >
+                Download the {period.label.replace(/ \d{4}$/, "")} report (PDF)
+              </a>
+            </p>
+          ) : (
+            <p className="measure mt-10 text-base leading-relaxed text-body">
+              Contact{" "}
+              <a
+                href="mailto:info@ChildrensCollectiveFL.org"
+                className="font-semibold text-sage-600 underline underline-offset-4"
+              >
+                info@ChildrensCollectiveFL.org
+              </a>{" "}
+              to request the full impact report or the details of what has been
+              collected.
+            </p>
+          )}
           <p className="measure mt-4 text-base leading-relaxed text-body">
             The story behind these numbers lives in{" "}
             <a
