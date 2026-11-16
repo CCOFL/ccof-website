@@ -34,3 +34,10 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Unlisted media for approved Instagram posts (fetched by the publishing tool).
+# Not linked from any page or the sitemap; keep it out of search and image indexes.
+[[headers]]
+  for = "/ig/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, noimageindex"
