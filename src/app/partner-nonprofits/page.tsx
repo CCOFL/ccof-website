@@ -124,7 +124,10 @@ export default function PartnerNonprofitsPage() {
                 PDF and email are the keep-print-share paths partner case
                 managers asked for. All wording from partnerRequest.ts. */}
             <p className="mt-3 text-sm text-muted">
-              {GOODS_REQUEST.responsePromise}
+              {GOODS_REQUEST.responsePromise} {GOODS_REQUEST.weeklyLine}
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              {GOODS_REQUEST.serviceAreaLine}
             </p>
             <p className="mt-5 text-sm text-ink/90">
               Prefer paper?{" "}
