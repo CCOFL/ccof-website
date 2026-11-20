@@ -461,10 +461,10 @@ export function declinedSentence(): string {
  *  bought new for CCOF, for example through the Walmart registry. The
  *  used-donation rule is unchanged, and nothing else in ACCEPTED_GOODS.declined
  *  (cribs, car seats, bunk beds, sleep products) gains an exception.
- *  "for us" rather than "for CCOF": public copy does not use the bare
- *  acronym. Insurance and counsel confirmation requested 2026-11-19. */
+ *  Founder wording 2026-11-19: the full name, never the acronym or "us".
+ *  Insurance and counsel confirmation requested 2026-11-19. */
 export const SEALED_MATTRESS_EXCEPTION =
-  "New, factory-sealed crib and toddler mattresses purchased new for us may be accepted.";
+  "New, factory-sealed crib and toddler mattresses purchased new for The Children's Collective of Florida may be accepted.";
 
 /** Walmart Spark Good registry ("Everyday Essentials for Local Children").
  *  One link, rendered on /give-goods and /donate. Amazon is not listed yet
