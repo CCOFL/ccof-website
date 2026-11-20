@@ -25,6 +25,7 @@
  *     approvalSource: "MOU Section 8",     // or "Consent email reply"
  *     logo: { src: "/partners/file.svg", alt: "Organization name" }, // only if logo approved
  *     url: "https://example.org",          // only if they want a link
+ *     programs: ["Program A", "Program B"], // programs we supply, if any
  *     wording: true,                        // only if they approved the sentence
  *   },
  */
@@ -36,6 +37,10 @@ export type ServedPartner = {
   approvalSource: "MOU Section 8" | "Consent email reply";
   logo?: { src: string; alt: string; width?: number; height?: number };
   url?: string;
+  /** Programs within the organization that we supply, listed under the
+   *  name so the parent organization and each program show honestly (for
+   *  example a shelter and an advocacy center run by one agency). */
+  programs?: readonly string[];
   /** They approved: "We supply [name] with clothing and essentials for the
    *  children and families they serve." */
   wording?: boolean;

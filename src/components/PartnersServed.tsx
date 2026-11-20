@@ -40,6 +40,9 @@ export function PartnersServed() {
                 </span>
               )}
               <span className="mt-4 block text-lg font-bold text-sage-600">{p.name}</span>
+              {p.programs && p.programs.length > 0 && (
+                <span className="mt-1 block text-sm text-body">{p.programs.join(" · ")}</span>
+              )}
             </>
           );
           return (
