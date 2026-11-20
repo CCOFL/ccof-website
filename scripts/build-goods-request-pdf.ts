@@ -299,7 +299,10 @@ async function main() {
   text(c, R.privacyPanelHeading.toUpperCase(), { font: bold, size: 8.6, color: CORAL_DEEP, x: MARGIN + 12, maxW: CONTENT_W - 24 });
   c.y += 1;
   text(c, R.privacyPanelBody, { size: 8.8, x: MARGIN + 12, maxW: CONTENT_W - 24 });
-  c.y = privTop + privH + 16;
+  c.y = privTop + privH + 8;
+  // Service area + weekly cadence (MOU brief 2026-11-19), one line under the panel.
+  text(c, `${R.serviceAreaLine}  ${R.weeklyLine}`, { size: 8.6, color: DEEP_SAGE, maxW: CONTENT_W });
+  c.y += 10;
 
   sectionHead(c, "A.  About your request");
   c.y += 2;
@@ -360,6 +363,16 @@ async function main() {
     const endLeft = c.y;
     c.y = startY + 1;
     text(c, R.childCountHelper, { size: 7.2, color: DEEP_SAGE, x: MARGIN + 240, maxW: CONTENT_W - 240 });
+    c.y = Math.max(endLeft, c.y);
+  }
+  c.y += 4;
+  {
+    const startY = c.y;
+    label(c, R.familyLocationLabel, true);
+    textField(c, "family_location", { w: 220 });
+    const endLeft = c.y;
+    c.y = startY + 1;
+    text(c, R.familyLocationHelper, { size: 7.2, color: DEEP_SAGE, x: MARGIN + 240, maxW: CONTENT_W - 240 });
     c.y = Math.max(endLeft, c.y);
   }
 
@@ -482,7 +495,7 @@ ${rows}
 **Confirmation message (after submit):**
 > ${R.formConfirmation}
 
-**Form description must carry:** the duffel-standard sentence, partner-organizations-only eligibility with the /partner-apply link, the age-gender-size privacy line, the email option ("Prefer to email? Please email ${R.submit.emailDisplay}") as the last line before the tagline, and zero bare instances of the organizational acronym anywhere on the form (title included).
+**Form description must carry:** the duffel-standard sentence, partner-organizations-only eligibility with the /partner-apply link, the service-area line ("${R.serviceAreaLine}"), the weekly line ("${R.weeklyLine}"), the privacy line ("${R.privacyLine}"), the email option ("Prefer to email? Please email ${R.submit.emailDisplay}") as the last line before the tagline, and zero bare instances of the organizational acronym anywhere on the form (title included).
 `;
   mkdirSync(dirname(OUT_PARITY), { recursive: true });
   writeFileSync(OUT_PARITY, parity);
