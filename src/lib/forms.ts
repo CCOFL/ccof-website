@@ -1007,3 +1007,86 @@ export async function saveMoneyDonation(
     receiptSent: receipt.delivered,
   };
 }
+
+export type PartnerMouSignature = {
+  mouVersion: string;
+  orgLegalName: string;
+  ein: string;
+  signerName: string;
+  signerTitle: string;
+  email: string;
+  signedDate: string; // YYYY-MM-DD
+  recognizeName: boolean;
+  recognizeLogo: boolean;
+  recognizeWording: boolean;
+  website?: string;
+  signatureIntent: boolean;
+};
+
+/**
+ * Persist a signed partner MOU (migration 0016). Same graceful pattern as
+ * every form: a missing table is a soft miss, and the notification email to
+ * info@ (which forwards to Stephanie) always carries every field, so no
+ * signature is lost before the migration runs.
+ */
+export async function savePartnerMouSignature(req: PartnerMouSignature) {
+  let stored = false;
+
+  if (isSupabaseConfigured()) {
+    const supabase = getSupabase();
+    const { error } = await supabase!.from("partner_mou_signatures").insert({
+      mou_version: req.mouVersion,
+      org_legal_name: req.orgLegalName,
+      ein: req.ein,
+      signer_name: req.signerName,
+      signer_title: req.signerTitle,
+      email: req.email,
+      signed_date: req.signedDate,
+      recognize_name: req.recognizeName,
+      recognize_logo: req.recognizeLogo,
+      recognize_wording: req.recognizeWording,
+      website: req.website || null,
+      signature_intent: req.signatureIntent,
+    });
+    if (error && !isMissingTable(error)) {
+      throw new Error(`Supabase insert failed: ${error.message}`);
+    }
+    if (!error) stored = true;
+  }
+
+  const yn = (b: boolean) => (b ? "YES" : "no");
+  if (isEmailConfigured()) {
+    await sendNotification({
+      subject: `Partner MOU signed · ${req.orgLegalName}`,
+      replyTo: req.email,
+      text: [
+        `A partner signed the MOU online.`,
+        `MOU version: ${req.mouVersion}`,
+        ``,
+        `Organization (legal name): ${req.orgLegalName}`,
+        `EIN: ${req.ein}`,
+        `Signed by: ${req.signerName}, ${req.signerTitle}`,
+        `Email: ${req.email}`,
+        `Date signed: ${req.signedDate}`,
+        `Electronic signature attestation: ${yn(req.signatureIntent)}`,
+        ``,
+        `Section 8 recognition choices:`,
+        `  Name us publicly: ${yn(req.recognizeName)}`,
+        `  Display our logo: ${yn(req.recognizeLogo)}`,
+        `  Relationship wording: ${yn(req.recognizeWording)}`,
+        `Website: ${req.website || "(not provided)"}`,
+        ``,
+        `Next: confirm this organization is board-approved, countersign, and email them a copy.`,
+        req.recognizeLogo ? `They approved logo use: watch for the logo file at info@.` : ``,
+      ].join("\n"),
+    });
+    stored = true;
+  }
+
+  if (!stored) {
+    console.warn(
+      `[forms] Partner MOU signature not persisted: logged only:\n${JSON.stringify(req, null, 2)}`,
+    );
+  }
+  return { stored };
+}

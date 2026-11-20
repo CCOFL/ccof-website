@@ -28,7 +28,8 @@ export type ConversionEvent =
   | "volunteer_signup"
   | "bin_host_inquiry"
   | "goods_receipt_request"
-  | "donation_begin";
+  | "donation_begin"
+  | "partner_mou_signed";
 
 export function trackConversion(event: ConversionEvent) {
   try {
