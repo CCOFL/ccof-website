@@ -453,8 +453,27 @@ export function declinedSentence(): string {
     d.toLowerCase().replace(/ & /g, " and "),
   );
   const list = `${items.slice(0, -1).join(", ")}, or ${items[items.length - 1]}`;
-  return `We cannot accept ${list}. ${DONOR_CONDITION_REQUEST}`;
+  return `We cannot accept ${list} as used donations. ${SEALED_MATTRESS_EXCEPTION} ${DONOR_CONDITION_REQUEST}`;
 }
+
+/** The one exception to the decline list (Public Facts Sheet §4, founder
+ *  approved 2026-11-19): new, factory-sealed crib and toddler mattresses
+ *  bought new for CCOF, for example through the Walmart registry. The
+ *  used-donation rule is unchanged, and nothing else in ACCEPTED_GOODS.declined
+ *  (cribs, car seats, bunk beds, sleep products) gains an exception.
+ *  "for us" rather than "for CCOF": public copy does not use the bare
+ *  acronym. Insurance and counsel confirmation requested 2026-11-19. */
+export const SEALED_MATTRESS_EXCEPTION =
+  "New, factory-sealed crib and toddler mattresses purchased new for us may be accepted.";
+
+/** Walmart Spark Good registry ("Everyday Essentials for Local Children").
+ *  One link, rendered on /give-goods and /donate. Amazon is not listed yet
+ *  (founder, 2026-11-19). */
+export const WALMART_REGISTRY = {
+  lead: "Prefer to give an item?",
+  label: "Shop our Walmart registry",
+  href: "https://www.walmart.com/registry/RR/c6c3e14c-4359-4b93-81df-a57b2c0dfd68",
+} as const;
 
 /** The single donor condition request: a request CCOF makes of donors, never
  *  a promise CCOF makes about outcomes (that distinction is the entire point
