@@ -181,8 +181,8 @@ export const GIVING_CYCLE: {
         // "Fills the Closet." (PR #100) retired 2026-09-20 by the program
         // architecture's Closet rule (future tense, Martin County + 2027
         // attached); wording matches the founder-reviewed /how-it-works steps.
-        title: "Set aside for the Closet.",
-        body: "Everything else is set aside for The Collective Kids Closet, our storefront program opening in Martin County in 2027.",
+        title: "Everything else, for the Closet.",
+        body: "Partners always come first. Everything else will fill The Collective Kids Closet, our nonprofit storefront coming to Martin County in 2027, with quality, affordable children's goods for all families throughout the community.",
       },
     ],
   },

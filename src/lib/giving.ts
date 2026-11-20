@@ -88,7 +88,7 @@ export const GREATEST_NEED_LINE =
  */
 export const MOST_NEEDED = {
   heading: "Most needed right now",
-  body: "New underwear, new socks, pajamas, hygiene products, and Pull-Ups. Underwear and socks must always be brand-new, so they're the first things to run short. A gift of any amount lets us buy exactly the sizes our partners request.",
+  body: "New underwear, new socks, new sports bras, pajamas, hygiene products, and Pull-Ups. Underwear, socks, and sports bras must always be brand-new, so they're the first things to run short. A gift of any amount lets us buy exactly the sizes our partners request.",
   cta: {
     pre: "You can also ",
     linkText: "include new, unopened packages",
