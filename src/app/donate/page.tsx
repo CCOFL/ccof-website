@@ -4,7 +4,7 @@ import { Container, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { DonationForm } from "@/components/DonationForm";
 import { ORG, FDACS_DISCLOSURE, TAX_NOTE, WALMART_REGISTRY } from "@/lib/site";
-import { MOST_NEEDED } from "@/lib/giving";
+import { EVERY_GIFT_LINE, MOST_NEEDED } from "@/lib/giving";
 
 export const metadata: Metadata = {
   title: "Donate",
@@ -131,7 +131,11 @@ export default async function DonatePage({
               <h2 className="text-2xl font-bold text-sage">
                 Make your gift
               </h2>
-              <p className="mt-1 text-sm text-muted">
+              {/* Standing founder line (2026-11-17): permanent, not campaign copy. */}
+              <p className="mt-3 text-base font-semibold leading-snug text-ink">
+                {EVERY_GIFT_LINE}
+              </p>
+              <p className="mt-2 text-sm text-muted">
                 One-time or monthly. Choose an amount to begin.
               </p>
               <div className="mt-6">
