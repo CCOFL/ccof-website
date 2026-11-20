@@ -3,6 +3,7 @@ import { Section, Eyebrow } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
+import { PartnersServed } from "@/components/PartnersServed";
 import { WHERE_IT_GOES, FDACS_DISCLOSURE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -85,6 +86,10 @@ export default function WhereItGoesPage() {
           </ul>
         </div>
       </Section>
+
+      {/* Partner recognition: renders only when a partner has given a
+          written yes (src/lib/partners.ts). Empty list, no section. */}
+      <PartnersServed />
 
       {/* Closing commitment + CTA */}
       <Section background="sage">
