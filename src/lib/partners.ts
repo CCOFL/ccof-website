@@ -100,7 +100,7 @@ export const SERVED_PARTNERS: readonly ServedPartner[] = [
     },
     url: "https://chsfl.org/service/wavecrest-shelter/",
     description:
-      "WaveCREST provides short-term emergency shelter for youth in crisis, offering safety, assessments, counseling, and basic necessities.",
+      "WaveCREST provides short-term emergency shelter for youth in crisis.",
   },
   {
     name: "Child Advocacy Center",
@@ -114,7 +114,7 @@ export const SERVED_PARTNERS: readonly ServedPartner[] = [
     },
     url: "https://chsfl.org/location/greater-treasure-coast/",
     description:
-      "The Child Advocacy Center provides a safe, supportive environment where children who have experienced abuse or neglect can share their stories and begin healing. The center offers counseling, medical care, and crisis intervention in a child-friendly setting.",
+      "The Child Advocacy Center provides a safe, supportive environment where children who have experienced abuse or neglect can share their stories and begin healing.",
   },
 ];
 
