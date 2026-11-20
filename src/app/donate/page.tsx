@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Container, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { DonationForm } from "@/components/DonationForm";
-import { ORG, FDACS_DISCLOSURE, TAX_NOTE } from "@/lib/site";
+import { ORG, FDACS_DISCLOSURE, TAX_NOTE, WALMART_REGISTRY } from "@/lib/site";
 import { EVERY_GIFT_LINE, MOST_NEEDED } from "@/lib/giving";
 
 export const metadata: Metadata = {
@@ -58,6 +58,17 @@ export default async function DonatePage({
                   Give Funds
                 </LinkButton>
               </div>
+              <p className="mt-4 text-sm text-ink/90">
+                {WALMART_REGISTRY.lead}{" "}
+                <a
+                  href={WALMART_REGISTRY.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  {WALMART_REGISTRY.label} →
+                </a>
+              </p>
             </div>
 
             {/* Trust signals */}

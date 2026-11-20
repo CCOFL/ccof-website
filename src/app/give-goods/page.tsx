@@ -14,6 +14,7 @@ import {
   binDroppableGoods,
   controlledChannelGoods,
   declinedSentence,
+  WALMART_REGISTRY,
 } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -41,6 +42,14 @@ export default function GiveGoodsPage() {
           >
             Prefer to give funds? →
           </Link>
+          <a
+            href={WALMART_REGISTRY.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-semibold text-sage-600 underline-offset-4 hover:underline"
+          >
+            {WALMART_REGISTRY.lead} {WALMART_REGISTRY.label} →
+          </a>
         </div>
       </PageHero>
 
