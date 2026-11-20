@@ -23,10 +23,10 @@ export function PartnersServed() {
         title={SERVED_PARTNERS_COPY.title}
         intro={SERVED_PARTNERS_COPY.intro}
       />
-      {/* Organization cards sit three across on desktop; the two CHS
-          program cards each take half the row beneath, so the pair match
-          each other's height and width (founder 2026-11-20). */}
-      <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-6">
+      {/* Every card shares one size in a uniform three-across desktop grid,
+          so no partner stands out and an open slot in the last row simply
+          shows room for the next one (founder 2026-11-20). */}
+      <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {partners.map((p) => {
           const inner = (
             <>
@@ -57,9 +57,7 @@ export function PartnersServed() {
           return (
             <li
               key={p.name}
-              className={`flex flex-col rounded-2xl border border-line bg-cream p-6 shadow-card ${
-                p.parentOrg ? "sm:col-span-2 lg:col-span-3" : "lg:col-span-2"
-              }`}
+              className="flex flex-col rounded-2xl border border-line bg-cream p-6 shadow-card"
             >
               {p.url ? (
                 <a
