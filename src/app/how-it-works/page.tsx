@@ -40,8 +40,8 @@ const STEPS: {
         body: "When one of our 501(c)(3) partners has a child who needs something now, the goods are contributed directly to them.",
       },
       {
-        title: "Set aside for the Closet.",
-        body: "Everything else is set aside for The Collective Kids Closet, our storefront program opening in Martin County in 2027.",
+        title: "Everything else, for the Closet.",
+        body: "Partners always come first. Everything else will fill The Collective Kids Closet, our nonprofit storefront coming to Martin County in 2027, with quality, affordable children's goods for all families throughout the community.",
       },
     ],
   },

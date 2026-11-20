@@ -47,9 +47,24 @@ export const GOODS_REQUEST = {
   responsePromise:
     "We contact you within one business day to confirm your request and schedule delivery.",
 
-  /** Privacy: short site line (ruling 11/01) + the PDF's expanded panel. */
+  /** Privacy: short site line + the PDF's expanded panel. The site and form
+      line is founder verbatim (MOU brief 2026-11-19), replacing the 11/01
+      wording. */
   privacyLine:
-    "Describe children by age, gender and size only. Never a name or identifying detail.",
+    "Please list only each child's age, gender and sizes. No names, phone numbers or addresses.",
+
+  /** One combined request per week (MOU brief 2026-11-19; MOU Section 3). */
+  weeklyLine: "Please send one combined request per week.",
+
+  /** Service area, Public Facts Sheet section 1 identity line, verbatim. */
+  serviceAreaLine:
+    "Serving Martin County, extending our reach to neighboring communities.",
+
+  /** Where the family lives (MOU Section 3). City or county only: a street
+      address would identify a family. */
+  familyLocationLabel: "City or county where the family lives",
+  familyLocationHelper:
+    "City or county only, never a street address. If this request covers more than one family, list each city or county.",
   privacyPanelHeading: "Privacy: describe children by age, gender and size only.",
   privacyPanelBody:
     "Never include a name, date of birth, address, photo, diagnosis, or any detail that could identify a child or family.",
@@ -154,6 +169,7 @@ export const FORM_QUESTIONS = [
   { q: "Who is this request for?", type: "Multiple choice", required: true, options: GOODS_REQUEST.whoFor },
   { q: "How urgent is this request?", type: "Multiple choice", required: true, options: GOODS_REQUEST.urgency },
   { q: "Number of children this request serves", type: "Short answer", required: true, helper: GOODS_REQUEST.childCountHelper },
+  { q: GOODS_REQUEST.familyLocationLabel, type: "Short answer", required: true, helper: GOODS_REQUEST.familyLocationHelper },
   { q: "Item categories", type: "Checkboxes", required: true, helper: GOODS_REQUEST.categoriesHelper, options: [...GOODS_REQUEST.categories, GOODS_REQUEST.otherOptionForm] },
   { q: "Child details: gender, age, clothing size, shoe size, special requests or restrictions", type: "Paragraph", required: true, helper: GOODS_REQUEST.childDetailsHelper },
   { q: "Bulk request only: briefly describe what you need", type: "Paragraph", required: false, helper: GOODS_REQUEST.bulkHelper },

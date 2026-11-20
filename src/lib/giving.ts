@@ -13,6 +13,14 @@
  * remainder of the sentence. Rendered together they read as one sentence.
  */
 
+/**
+ * Standing line under the "Make your gift" heading on /donate. Founder-approved
+ * verbatim 2026-11-17 as a permanent fixture of the page (not campaign copy):
+ * it stays after Giving Tuesday and carries no dollar figures.
+ */
+export const EVERY_GIFT_LINE =
+  "Every gift, at every size, extends the path from our community's generosity to the kids who need it most.";
+
 export type GiftFrequency = "one-time" | "monthly";
 
 export type GiftTierCopy = {
@@ -88,7 +96,7 @@ export const GREATEST_NEED_LINE =
  */
 export const MOST_NEEDED = {
   heading: "Most needed right now",
-  body: "New underwear, new socks, pajamas, hygiene products, and Pull-Ups. Underwear and socks must always be brand-new, so they're the first things to run short. A gift of any amount lets us buy exactly the sizes our partners request.",
+  body: "New underwear, new socks, new sports bras, pajamas, hygiene products, and Pull-Ups. Underwear, socks, and sports bras must always be brand-new, so they're the first things to run short. A gift of any amount lets us buy exactly the sizes our partners request.",
   cta: {
     pre: "You can also ",
     linkText: "include new, unopened packages",
