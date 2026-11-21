@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  env: {
+    // Partner MOU flow review switch (src/lib/partnerMou.ts). Inlined at build
+    // time: "1" only on Netlify deploy previews (CONTEXT is set by Netlify's
+    // build) or locally with MOU_PREVIEW=1. Production builds get "", so the
+    // flow stays off there until PARTNER_MOU_LIVE is set to true.
+    NEXT_PUBLIC_MOU_PREVIEW:
+      process.env.CONTEXT === "deploy-preview" || process.env.MOU_PREVIEW === "1"
+        ? "1"
+        : "",
+  },
   images: {
     formats: ["image/avif", "image/webp"],
   },

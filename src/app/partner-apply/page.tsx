@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Section } from "@/components/Section";
 import { PageHero } from "@/components/PageHero";
 import { PartnerApplicationForm } from "@/components/PartnerApplicationForm";
+import { isMouFlowEnabled, MOU_COPY } from "@/lib/partnerMou";
 
 /**
  * Review-process line (form-hardening brief, 2026-10-15): one constant so it
@@ -32,6 +33,23 @@ export default function PartnerApplyPage() {
           <p className="measure mx-auto mb-8 text-center text-base leading-relaxed text-ink/80">
             {PROCESS_LINE}
           </p>
+          {/* MOU notice: hidden until the MOU is approved (src/lib/partnerMou.ts). */}
+          {isMouFlowEnabled() && (
+            <div className="mb-8 rounded-2xl border border-sage/40 bg-sage/5 p-5">
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-sage-600">
+                {MOU_COPY.applyNotice.heading}
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-ink/90">
+                {MOU_COPY.applyNotice.body}{" "}
+                <Link
+                  href={MOU_COPY.applyNotice.href}
+                  className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                >
+                  {MOU_COPY.applyNotice.linkLabel}
+                </Link>
+              </p>
+            </div>
+          )}
           <div className="rounded-3xl border border-line bg-cream p-6 shadow-card sm:p-8">
             <PartnerApplicationForm />
           </div>
