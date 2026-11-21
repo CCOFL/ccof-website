@@ -84,7 +84,7 @@ export default function SourcesPage() {
           <p>
             Figures reflect the most recent data available at the time of
             publication and are used to describe local need, not to represent
-            outcomes of {ORG.abbr}&apos;s own programs (we are pre-launch). As
+            outcomes of {ORG.abbr}&apos;s own programs. As
             newer data is released, and once {ORG.storefrontProgram} is
             operating, we will update these numbers and publish our own
             program results

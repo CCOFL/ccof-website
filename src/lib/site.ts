@@ -664,7 +664,7 @@ export const TAX_NOTE =
  */
 export const WHERE_IT_GOES = {
   intro:
-    "We're a new organization, and we believe trust is earned, not assumed. Until we have years of numbers to show you, here is what we promise, and what we will report the moment we open.",
+    "We're a new organization, and we believe trust is earned, not assumed. Here is what we promise, in writing, and the partners your giving already reaches.",
   pledges: [
     {
       title: "We honor what you give.",
@@ -679,6 +679,8 @@ export const WHERE_IT_GOES = {
       body: "Starting with our very first season, we will publish a simple, public account of what we collected, what we provided, and where proceeds went. No fine print.",
     },
   ],
+  // Not rendered since 2026-11-20 (founder): returns as the impact report
+  // when there is a season of data.
   reportTitle: "What we'll report, starting with our first season",
   reportItems: [
     "Items collected and stewarded for Treasure Coast families.",

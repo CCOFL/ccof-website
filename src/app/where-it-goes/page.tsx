@@ -9,7 +9,7 @@ import { WHERE_IT_GOES, FDACS_DISCLOSURE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Where It Goes",
   description:
-    "Our transparency commitment. What you give is honored, local dollars kept local, and a public account of what we collect and where proceeds go, starting with our first season.",
+    "Our transparency commitment. What you give is honored, local dollars kept local, and the vetted nonprofit partners we currently serve.",
   alternates: { canonical: "/where-it-goes" },
 };
 
@@ -49,43 +49,9 @@ export default function WhereItGoesPage() {
         </div>
       </Section>
 
-      {/* What we'll report */}
-      <Section background="cream">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
-          <SectionHeading
-            eyebrow="Accountability"
-            title={WHERE_IT_GOES.reportTitle}
-            intro="Pre-launch, this is our credibility. The moment we open, it becomes our impact report."
-          />
-          <ul className="space-y-4">
-            {WHERE_IT_GOES.reportItems.map((item, i) => (
-              <Reveal as="li" key={item.slice(0, 24)} delay={i * 70}>
-                <div className="flex gap-3 rounded-xl border border-line bg-white p-4">
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    aria-hidden
-                    className="mt-0.5 shrink-0 text-sage"
-                  >
-                    <path
-                      d="M5 12.5l4 4 10-10"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-base leading-relaxed text-body">
-                    {item}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </Section>
+      {/* "What we'll report" section removed 2026-11-20 (founder): returns as
+          the real impact report once there is a season of data. Copy kept in
+          WHERE_IT_GOES.reportTitle/reportItems. */}
 
       {/* Partner recognition: renders only when a partner has given a
           written yes (src/lib/partners.ts). Empty list, no section. */}
