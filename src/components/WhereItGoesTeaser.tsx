@@ -18,9 +18,9 @@ export function WhereItGoesTeaser() {
           Where everything you give goes
         </h2>
         <p className="measure mt-4 text-base leading-relaxed text-cream/80">
-          We&apos;re a new organization, so we put our commitments in writing
-          from day one, and we&apos;ll report against them starting with our
-          first season.
+          We put our commitments in writing from day one, and what our
+          community gives is already reaching the local nonprofit partners we
+          serve.
         </p>
         <Link
           href="/where-it-goes"

@@ -17,7 +17,7 @@ export function PartnersServed() {
   if (partners.length === 0) return null;
 
   return (
-    <Section background="white" id="partners" className="scroll-mt-24">
+    <Section background="cream" id="partners" className="scroll-mt-24">
       <SectionHeading
         eyebrow={SERVED_PARTNERS_COPY.eyebrow}
         title={SERVED_PARTNERS_COPY.title}
@@ -57,7 +57,7 @@ export function PartnersServed() {
           return (
             <li
               key={p.name}
-              className="flex flex-col rounded-2xl border border-line bg-cream p-6 shadow-card"
+              className="flex flex-col rounded-2xl border border-line bg-white p-6 shadow-card"
             >
               {p.url ? (
                 <a
