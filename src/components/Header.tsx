@@ -77,13 +77,14 @@ export function Header() {
           >
             {PRIMARY_CTA.label}
           </LinkButton>
-          {/* 1024-1279 is the one band where nav + logo + two buttons cannot
-              all fit, so the funds button yields there (goods-first ruling);
-              the mobile menu and ≥1280 always carry the pair. */}
+          {/* xl-only: at 640-1279 the second button crushes the wordmark's
+              two-line lockup (and 1024-1279 cannot fit nav + logo + both
+              buttons at all), so those bands keep today's goods-only header
+              and the pair lives in the menu and the page CTAs. */}
           <LinkButton
             href={SECONDARY_CTA.href}
             variant="secondary"
-            className="hidden whitespace-nowrap sm:inline-flex lg:hidden xl:inline-flex"
+            className="hidden whitespace-nowrap xl:inline-flex"
           >
             {SECONDARY_CTA.label}
           </LinkButton>
