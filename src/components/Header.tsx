@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV, PRIMARY_CTA } from "@/lib/site";
+import { NAV, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/site";
 import { LinkButton } from "./Button";
 import { Logo } from "./Logo";
 
@@ -36,8 +36,11 @@ export function Header() {
           : "border-transparent bg-cream"
       }`}
     >
+      {/* max-w-7xl, wider than the page's max-w-6xl bands: with BOTH CTA
+          buttons beside the full nav, a 6xl row is too narrow at ≥1280 and
+          crushes the wordmark past its two-line lockup. */}
       <div
-        className={`mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-5 transition-all duration-300 sm:px-8 ${
+        className={`mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 transition-all duration-300 sm:px-8 ${
           compact ? "py-2" : "py-3.5"
         }`}
       >
@@ -74,6 +77,16 @@ export function Header() {
           >
             {PRIMARY_CTA.label}
           </LinkButton>
+          {/* 1024-1279 is the one band where nav + logo + two buttons cannot
+              all fit, so the funds button yields there (goods-first ruling);
+              the mobile menu and ≥1280 always carry the pair. */}
+          <LinkButton
+            href={SECONDARY_CTA.href}
+            variant="secondary"
+            className="hidden whitespace-nowrap sm:inline-flex lg:hidden xl:inline-flex"
+          >
+            {SECONDARY_CTA.label}
+          </LinkButton>
 
           {/* Mobile menu toggle */}
           <button
@@ -109,7 +122,9 @@ export function Header() {
       <div
         id="mobile-nav"
         className={`overflow-hidden border-t border-line bg-cream transition-[max-height] duration-300 lg:hidden ${
-          menuOpen ? "max-h-96" : "max-h-0"
+          // Open bound must exceed 7 nav links + BOTH CTA buttons, or the
+          // bottom of the menu is clipped (max-h only caps the animation).
+          menuOpen ? "max-h-[36rem]" : "max-h-0"
         }`}
       >
         <nav aria-label="Mobile" className="flex flex-col px-5 py-3 sm:px-8">
@@ -130,6 +145,15 @@ export function Header() {
             onClick={closeMenu}
           >
             {PRIMARY_CTA.label}
+          </LinkButton>
+          <LinkButton
+            href={SECONDARY_CTA.href}
+            variant="secondary"
+            size="lg"
+            className="mb-2 mt-3"
+            onClick={closeMenu}
+          >
+            {SECONDARY_CTA.label}
           </LinkButton>
         </nav>
       </div>

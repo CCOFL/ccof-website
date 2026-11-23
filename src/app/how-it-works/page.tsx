@@ -245,7 +245,7 @@ export default function HowItWorksPage() {
           published here once our first full cycle of data is available.
         </p>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <LinkButton href="/donate">Donate</LinkButton>
+          <LinkButton href="/donate">Give Funds</LinkButton>
           <LinkButton href="/partner" variant="secondary">
             Become a Partner Nonprofit
           </LinkButton>
