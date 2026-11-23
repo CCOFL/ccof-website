@@ -19,7 +19,7 @@ export default function NotFound() {
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <LinkButton href="/">Back to home</LinkButton>
             <LinkButton href="/donate" variant="secondary">
-              Donate
+              Give Funds
             </LinkButton>
           </div>
         </div>

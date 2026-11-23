@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import { PageHero, SectionHeading } from "@/components/PageHero";
 import { CollectMarquee } from "@/components/CollectMarquee";
@@ -24,13 +25,21 @@ export default function ClosetPage() {
         intro="The storefront program of The Children's Collective of Florida, opening in 2027: an affordable community resale program providing quality kids' goods for all families throughout the community, with proceeds reinvested in local 501(c)(3) programs for children in care."
       >
         <div className="flex flex-col gap-3 sm:flex-row">
-          <LinkButton href="/donate" size="lg">
-            Donate / Give Goods
+          <LinkButton href="/give-goods" size="lg">
+            Give Goods
           </LinkButton>
-          <LinkButton href="#follow" variant="secondary" size="lg">
-            Get launch updates
+          <LinkButton href="/donate" variant="secondary" size="lg">
+            Give Funds
           </LinkButton>
         </div>
+        <p className="mt-5 text-sm">
+          <Link
+            href="#follow"
+            className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+          >
+            Get launch updates →
+          </Link>
+        </p>
       </PageHero>
 
       <Section background="white">

@@ -64,7 +64,7 @@ export default async function Home() {
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <LinkButton href="/give-goods" size="lg">
-                  Donate Goods
+                  Give Goods
                 </LinkButton>
                 <LinkButton href="/donate" variant="secondary" size="lg">
                   Give Funds
@@ -175,7 +175,7 @@ export default async function Home() {
         </div>
         <div className="mt-10 text-center">
           <LinkButton href="/give-goods">
-            Donate these goods
+            Give these goods
           </LinkButton>
         </div>
       </Section>
@@ -270,7 +270,7 @@ export default async function Home() {
             </p>
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <LinkButton href="/give-goods" size="lg" variant="inverse">
-                Donate goods
+                Give Goods
               </LinkButton>
               <Link
                 href="/donate"

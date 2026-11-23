@@ -178,8 +178,11 @@ export default function AboutPage() {
             </div>
           ))}
         </dl>
-        <div className="mt-10">
-          <LinkButton href="/donate">Support our mission</LinkButton>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <LinkButton href="/give-goods">Give Goods</LinkButton>
+          <LinkButton href="/donate" variant="secondary">
+            Support our mission
+          </LinkButton>
         </div>
       </Section>
     </>

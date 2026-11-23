@@ -70,6 +70,14 @@ export const NAV: { label: string; href: string }[] = [
 export const PRIMARY_CTA = { label: "Give Goods", href: "/give-goods" } as const;
 
 /**
+ * The funds companion, rendered beside PRIMARY_CTA in the header (founder,
+ * 2026-11-22, for Giving Tuesday). Goods-first ruling: goods stays the filled
+ * primary and always comes first; funds is the outline secondary. Never
+ * reorder or promote this one above PRIMARY_CTA.
+ */
+export const SECONDARY_CTA = { label: "Give Funds", href: "/donate" } as const;
+
+/**
  * Founder's Promise — short version, for the Home pull-quote where space is
  * tight (per CCOF_Founders_Promise_and_Where_It_Goes, June 2026).
  */
