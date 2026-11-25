@@ -70,24 +70,29 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <LinkButton
-            href={PRIMARY_CTA.href}
-            size={compact ? "md" : "md"}
-            className="hidden whitespace-nowrap sm:inline-flex"
-          >
-            {PRIMARY_CTA.label}
-          </LinkButton>
+          {/* Breakpoint visibility must live on these wrappers, never on the
+              buttons: LinkButton's base class sets inline-flex, and Tailwind
+              v4 emits .inline-flex after .hidden, so a hidden put on the
+              button itself is overridden and the pill renders at every
+              width (the 2026-11-23 mobile header overlap). */}
+          <div className="hidden sm:block">
+            <LinkButton href={PRIMARY_CTA.href} className="whitespace-nowrap">
+              {PRIMARY_CTA.label}
+            </LinkButton>
+          </div>
           {/* xl-only: at 640-1279 the second button crushes the wordmark's
               two-line lockup (and 1024-1279 cannot fit nav + logo + both
-              buttons at all), so those bands keep today's goods-only header
+              buttons at all), so those bands keep the goods-only header
               and the pair lives in the menu and the page CTAs. */}
-          <LinkButton
-            href={SECONDARY_CTA.href}
-            variant="secondary"
-            className="hidden whitespace-nowrap xl:inline-flex"
-          >
-            {SECONDARY_CTA.label}
-          </LinkButton>
+          <div className="hidden xl:block">
+            <LinkButton
+              href={SECONDARY_CTA.href}
+              variant="secondary"
+              className="whitespace-nowrap"
+            >
+              {SECONDARY_CTA.label}
+            </LinkButton>
+          </div>
 
           {/* Mobile menu toggle */}
           <button
