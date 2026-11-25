@@ -4,7 +4,8 @@ import { Container, Eyebrow } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { DonationForm } from "@/components/DonationForm";
 import { ORG, FDACS_DISCLOSURE, TAX_NOTE, WALMART_REGISTRY } from "@/lib/site";
-import { EVERY_GIFT_LINE, MOST_NEEDED } from "@/lib/giving";
+import { EVERY_GIFT_LINE, MOST_NEEDED, PAYPAL_MATCH } from "@/lib/giving";
+import { isDecemberMatchWindow } from "@/lib/decemberMatch";
 
 export const metadata: Metadata = {
   title: "Donate",
@@ -17,9 +18,12 @@ export const metadata: Metadata = {
 export default async function DonatePage({
   searchParams,
 }: {
-  searchParams: Promise<{ canceled?: string }>;
+  searchParams: Promise<{ canceled?: string; previewMatchNote?: string }>;
 }) {
-  const { canceled } = await searchParams;
+  const { canceled, previewMatchNote } = await searchParams;
+  // ?previewMatchNote=1 exists so the founder can review the December card on
+  // a deploy preview before December; the copy is truthful whenever shown.
+  const showMatchNote = isDecemberMatchWindow() || previewMatchNote === "1";
 
   return (
     <section className="bg-cream">
@@ -151,6 +155,40 @@ export default async function DonatePage({
                 </Link>
               </p>
             </div>
+
+            {/* December 2026 PayPal match note: self-gating (decemberMatch.ts
+                keeps it to December 2026 Eastern), and deliberately OUTSIDE
+                the Stripe card above, because gifts made on this page are not
+                part of PayPal's match. */}
+            {showMatchNote && (
+              <div className="mt-6 rounded-2xl border border-sage/30 bg-sage/5 p-6 shadow-card">
+                <h2 className="text-sm font-semibold uppercase tracking-wider text-coral-deep">
+                  {PAYPAL_MATCH.heading}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-ink/90">
+                  {PAYPAL_MATCH.bodyBeforeTerms}
+                  <a
+                    href={PAYPAL_MATCH.termsHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                  >
+                    {PAYPAL_MATCH.termsLinkText}
+                  </a>
+                  {PAYPAL_MATCH.bodyAfterTerms}
+                </p>
+                <p className="mt-4 text-sm">
+                  <a
+                    href={PAYPAL_MATCH.ctaHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-sage-600 underline-offset-4 hover:underline"
+                  >
+                    {PAYPAL_MATCH.ctaText} →
+                  </a>
+                </p>
+              </div>
+            )}
 
             {/* Required legal disclosures (brief §1) */}
             <div className="mt-6 space-y-3 text-xs leading-relaxed text-muted">

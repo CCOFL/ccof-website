@@ -104,3 +104,28 @@ export const MOST_NEEDED = {
     post: " with your goods donation.",
   },
 } as const;
+
+/**
+ * December 2026 PayPal match note, rendered on /donate between the gift form
+ * and the legal disclosures ONLY while isDecemberMatchWindow() is true.
+ * Campaign copy with a built-in expiry (unlike EVERY_GIFT_LINE above);
+ * founder-approved verbatim 2026-11-24. Link rulings of the same date: the
+ * CTA targets CCOF's charity page INSIDE PayPal's campaign (the
+ * match-eligible path per PayPal's terms), and the terms link targets the
+ * campaign page that carries PayPal's T&Cs. Dollar figures are PayPal's own;
+ * "may be matched" is the required phrasing, never "will be doubled". The
+ * Stripe sentence is load-bearing for solicitation accuracy: gifts made on
+ * the page itself are not part of PayPal's match.
+ */
+export const PAYPAL_MATCH = {
+  heading: "Giving in December?",
+  bodyBeforeTerms:
+    "Through December 31, eligible donations made in the PayPal app or on PayPal's campaign page may be matched by PayPal, up to $250 per donor, while its $1 million matching pool lasts. Matching is first come, first served, and ",
+  termsLinkText: "PayPal's terms apply",
+  bodyAfterTerms:
+    ". Gifts made here on this page reach us directly through Stripe and are not part of PayPal's match.",
+  termsHref: "https://www.paypal.com/fundraiser/128347937940251433",
+  ctaText: "Give on PayPal's campaign page",
+  ctaHref:
+    "https://www.paypal.com/fundraiser/128347937940251433/charity/5984032",
+} as const;

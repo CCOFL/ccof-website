@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "check:copy": "node scripts/check-copy.mjs",
-    "test": "node --test src/lib/partnerApplicationRules.test.ts",
+    "test": "node --test src/lib/partnerApplicationRules.test.ts src/lib/decemberMatch.test.ts",
     "build:pdf": "node scripts/build-goods-request-pdf.ts"
   },
   "dependencies": {
