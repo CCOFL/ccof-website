@@ -19,6 +19,9 @@ const BANNED = [
   {
     re: /at no cost|free of charge/i,
     why: "partner path reads as a contribution between peers: use 'contributed directly to' (founder ruling 2026-08-19)",
+    // The draft MOU's legal wording uses "free of charge" (Sections 4, 6);
+    // agreement text is rendered verbatim, never rewritten for site copy.
+    exempt: ["content/partnerMouText"],
   },
   {
     re: /open to everyone|open to all|open to anyone|any family can shop|no income requirements/i,
@@ -79,7 +82,7 @@ const BANNED = [
   {
     re: /\bguaranteed?\b|warrant(y|ies|ed)/i,
     why: "no warranty or guarantee language; disclaimers of warranties/guarantees are the opposite and are exempted where they live",
-    exempt: ["app/terms/", "app/privacy/", "PartnerApplicationForm"],
+    exempt: ["app/terms/", "app/privacy/", "PartnerApplicationForm", "content/partnerMouText"],
   },
   {
     re: /like new|perfect condition/i,
@@ -96,6 +99,9 @@ const BANNED = [
   {
     re: /\bgrant(s|making|\s+funding|\s+program)?\b/i,
     why: "program 3 stays internal until the storefront launches: no public grant language (architecture 2026-09-04; sweep 2026-10-20)",
+    // MOU Section 8 names "grant applications" as a place CCOF may name a
+    // consenting partner; agreement text is rendered verbatim.
+    exempt: ["content/partnerMouText"],
   },
 ];
 
